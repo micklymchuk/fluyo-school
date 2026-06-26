@@ -1,0 +1,62 @@
+project:
+  name: fluyo-school
+  type: landing_page
+  status: planning
+
+config:
+  brief_level: complete
+  methodology_version: wds-v6
+  product_complexity: simple
+  tech_stack: Vue/Nuxt
+  component_library: null
+  strategic_analysis: full
+  root_folder: _bmad-output
+
+phases:
+  phase_1_product_brief:
+    folder: "_bmad-output/A-Product-Brief/"
+    name: "Product Brief"
+    status: complete
+    artifacts:
+      - project-brief.md
+      - project-brief-addendum.md
+      - validation-report.md
+  phase_2_trigger_mapping:
+    folder: "_bmad-output/B-Trigger-Map/"
+    name: "Trigger Mapping"
+    status: complete
+    artifacts:
+      - 00-trigger-map.md
+      - trigger-map.md
+      - 01-Business-Goals.md
+      - 02-Target-Groups.md
+      - 02-Danylo-the-Exam-Student.md
+      - 03-Driving-Forces.md
+      - 03-Olena-the-Observant-Parent.md
+      - 04-Prioritization.md
+      - 04-Marta-the-Adult-Learner.md
+      - 05-Key-Insights.md
+      - 06-Feature-Impact.md
+      - feature-impact-analysis.md
+      - personas/index.md
+  phase_3_scenarios:
+    folder: "_bmad-output/C-UX-Scenarios/"
+    name: "UX Scenarios"
+    status: not_started
+    artifacts: []
+  phase_4_ux_design:
+    folder: "_bmad-output/D-UX-Design/"
+    name: "UX Design"
+    status: not_started
+    artifacts: []
+
+languages:
+  specification_language: en
+  product_languages:
+    - uk
+    - en
+
+design_system:
+  enabled: false
+  mode: none
+  library: null
