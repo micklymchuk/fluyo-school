@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fluyo School Page Layout Schemas</title>
+    <style>
+      :root {
+        --ink: #1d1d1f;
+        --muted: #676b73;
+        --line: #cfd4dc;
+        --page: #ffffff;
+        --canvas: #f4f6f8;
+        --section: #eef2f6;
+        --section-alt: #e7edf4;
+        --accent: #2f5f73;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--canvas);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+      }
+
+      main {
+        width: min(1400px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 32px 0 48px;
+      }
+
+      .document-title {
+        margin: 0 0 6px;
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      .document-note {
+        margin: 0 0 24px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .schema-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+        align-items: start;
+      }
+
+      .page-schema {
+        background: var(--page);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 12px 28px rgba(24, 34, 45, 0.08);
+      }
+
+      .page-schema.wide {
+        grid-column: 1 / -1;
+      }
+
+      .page-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px 18px;
+        border-bottom: 1px solid var(--line);
+        background: #fafbfc;
+      }
+
+      .page-heading h2 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      .route {
+        color: var(--accent);
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .wireframe {
+        display: grid;
+        gap: 12px;
+        padding: 16px;
+      }
+
+      .section {
+        min-height: 72px;
+        display: grid;
+        place-items: center;
+        padding: 16px;
+        border: 1px dashed #8f9cab;
+        border-radius: 6px;
+        background: var(--section);
+        color: #26323f;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1.25;
+      }
+
+      .section.compact {
+        min-height: 48px;
+      }
+
+      .section.hero {
+        min-height: 132px;
+        background: var(--section-alt);
+      }
+
+      .section.tall {
+        min-height: 116px;
+      }
+
+      .section.primary {
+        min-height: 96px;
+        border-style: solid;
+        border-color: #7f9bac;
+        background: #e2ebf0;
+      }
+
+      .columns {
+        display: grid;
+        gap: 12px;
+      }
+
+      .columns.two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .columns.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .columns.four {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .columns .section {
+        min-height: 92px;
+      }
+
+      .home-layout {
+        grid-template-areas:
+          "header header header"
+          "hero hero hero"
+          "paths paths paths"
+          "proof proof proof"
+          "price price price"
+          "footer footer footer";
+      }
+
+      .route-layout {
+        grid-template-areas:
+          "header header"
+          "intro intro"
+          "main main"
+          "support support"
+          "cta cta"
+          "footer footer";
+      }
+
+      .paths-layout {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-areas:
+          "header header header"
+          "intro intro intro"
+          "exam kids adults"
+          "price price price"
+          "cta cta cta"
+          "footer footer footer";
+      }
+
+      .area-header {
+        grid-area: header;
+      }
+
+      .area-hero {
+        grid-area: hero;
+      }
+
+      .area-intro {
+        grid-area: intro;
+      }
+
+      .area-paths {
+        grid-area: paths;
+      }
+
+      .area-exam {
+        grid-area: exam;
+      }
+
+      .area-kids {
+        grid-area: kids;
+      }
+
+      .area-adults {
+        grid-area: adults;
+      }
+
+      .area-proof {
+        grid-area: proof;
+      }
+
+      .area-price {
+        grid-area: price;
+      }
+
+      .area-main {
+        grid-area: main;
+      }
+
+      .area-support {
+        grid-area: support;
+      }
+
+      .area-cta {
+        grid-area: cta;
+      }
+
+      .area-footer {
+        grid-area: footer;
+      }
+
+      @media (max-width: 980px) {
+        .schema-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        main {
+          width: min(100% - 20px, 1400px);
+          padding-top: 20px;
+        }
+
+        .document-title {
+          font-size: 23px;
+        }
+
+        .page-heading {
+          display: block;
+        }
+
+        .route {
+          display: block;
+          margin-top: 4px;
+        }
+
+        .columns.two,
+        .columns.three,
+        .columns.four {
+          grid-template-columns: 1fr;
+        }
+
+        .paths-layout {
+          grid-template-areas:
+            "header"
+            "intro"
+            "exam"
+            "kids"
+            "adults"
+            "price"
+            "cta"
+            "footer";
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 class="document-title">Fluyo School Page Layout Schemas</h1>
+      <p class="document-note">
+        Section schemas for the current page grouping. Blocks intentionally
+        contain only section titles.
+      </p>
+
+      <section class="schema-grid" aria-label="Page layout schemas">
+        <article class="page-schema">
+          <header class="page-heading">
+            <h2>Home</h2>
+            <span class="route">/</span>
+          </header>
+          <div class="wireframe home-layout">
+            <div class="section compact area-header">Global Header</div>
+            <div class="section hero area-hero">Hero</div>
+            <div class="columns three area-paths">
+              <div class="section">Exam Path Card</div>
+              <div class="section">Kids Path Card</div>
+              <div class="section">Adults Path Card</div>
+            </div>
+            <div class="columns three area-proof">
+              <div class="section">Teacher-Led Proof</div>
+              <div class="section">Progress Proof</div>
+              <div class="section">Trial Step Proof</div>
+            </div>
+            <div class="section primary area-price">Trial &amp; Prices Preview</div>
+            <div class="section compact area-footer">Footer / Contact Strip</div>
+          </div>
+        </article>
+
+        <article class="page-schema">
+          <header class="page-heading">
+            <h2>Learning Paths</h2>
+            <span class="route">/programs</span>
+          </header>
+          <div class="wireframe paths-layout">
+            <div class="section compact area-header">Global Header</div>
+            <div class="section hero area-intro">Learning Paths Header</div>
+            <div class="section tall primary area-exam">Exam Preparation</div>
+            <div class="section tall primary area-kids">Kids &amp; Parents</div>
+            <div class="section tall primary area-adults">Adults Speaking</div>
+            <div class="section area-price">Path Price Hints</div>
+            <div class="section compact area-cta">Learning Paths CTA Strip</div>
+            <div class="section compact area-footer">Footer / Contact Strip</div>
+          </div>
+        </article>
+
+        <article class="page-schema">
+          <header class="page-heading">
+            <h2>Teachers &amp; Proof</h2>
+            <span class="route">/teachers</span>
+          </header>
+          <div class="wireframe route-layout">
+            <div class="section compact area-header">Global Header</div>
+            <div class="section hero area-intro">Trust Header</div>
+            <div class="columns three area-main">
+              <div class="section tall">Teacher Cards</div>
+              <div class="section tall">Credentials Proof</div>
+              <div class="section tall">Lesson Proof</div>
+            </div>
+            <div class="section primary area-support">Results And Testimonials</div>
+            <div class="section compact area-cta">Trust CTA Strip</div>
+            <div class="section compact area-footer">Footer / Contact Strip</div>
+          </div>
+        </article>
+
+        <article class="page-schema">
+          <header class="page-heading">
+            <h2>Trial &amp; Pricing</h2>
+            <span class="route">/pricing</span>
+          </header>
+          <div class="wireframe route-layout">
+            <div class="section compact area-header">Global Header</div>
+            <div class="section hero area-intro">Trial First Step</div>
+            <div class="columns three area-main">
+              <div class="section tall">Individual Format</div>
+              <div class="section tall">Pair Format</div>
+              <div class="section tall">Mini-Group Format</div>
+            </div>
+            <div class="columns two area-support">
+              <div class="section tall">What Is Included</div>
+              <div class="section tall">Practical FAQ</div>
+            </div>
+            <div class="section compact area-cta">Final Booking CTA</div>
+            <div class="section compact area-footer">Footer / Contact Strip</div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

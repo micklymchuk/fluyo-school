@@ -12,7 +12,11 @@
 - [x] Create user scenarios - Phase 3
 - [x] Create UX specifications - Phase 4
 - [x] Mock launch content gaps for implementation preview
+- [x] Redesign information architecture into smaller multi-page site
+- [x] Finalize UX planning source of truth from HTML layout schema
 - [ ] Replace mock launch content before public launch: exact pricing, trial duration, teacher bios, testimonials, lesson screenshots, and approved results
+- [ ] Create production design system from finalized four-page UX layout
+- [ ] Create production architecture before implementation
 
 ---
 
@@ -24,6 +28,8 @@
 
 **Rules:** Mark what you start. Complete it when done (move to Log). One task at a time per agent.
 
+**Current note:** Complete 11-page-spec landing prototype built and agent-verified on 2026-07-06; superseded for production development by the finalized 2026-07-07 four-page UX layout schema.
+
 ---
 
 ## Design Loop Status
@@ -31,6 +37,7 @@
 | Scenario | Step | Page | Status | Updated |
 |----------|------|------|--------|---------|
 | 01-danylo-exam-trial-booking | 01.1 | Landing Page / Hero | specified | 2026-06-26 |
+| 01-danylo-exam-trial-booking | 01.1 | Landing Page / Hero | building | 2026-06-26 |
 | 01-danylo-exam-trial-booking | 01.2 | Exam Preparation Path | specified | 2026-06-26 |
 | 01-danylo-exam-trial-booking | 01.3 | How Learning Works | specified | 2026-06-26 |
 | 01-danylo-exam-trial-booking | 01.4 | Programs And Pricing | specified | 2026-06-26 |
@@ -41,8 +48,39 @@
 | 03-marta-adult-speaking-fit | 03.1 | Audience Paths | specified | 2026-06-26 |
 | 03-marta-adult-speaking-fit | 03.2 | Adults Path | specified | 2026-06-26 |
 | 03-marta-adult-speaking-fit | 03.3 | Why Fluyo | specified | 2026-06-26 |
+| 01-danylo-exam-trial-booking | 01.2 | Exam Preparation Path | building | 2026-07-06 |
+| 01-danylo-exam-trial-booking | 01.3 | How Learning Works | building | 2026-07-06 |
+| 01-danylo-exam-trial-booking | 01.4 | Programs And Pricing | building | 2026-07-06 |
+| 02-olena-parent-trust-check | 02.1 | Kids / Parents Path | building | 2026-07-06 |
+| 02-olena-parent-trust-check | 02.2 | Teachers | building | 2026-07-06 |
+| 02-olena-parent-trust-check | 02.3 | Lesson Experience | building | 2026-07-06 |
+| 02-olena-parent-trust-check | 02.4 | Results / Testimonials / FAQ / Final CTA | building | 2026-07-06 |
+| 03-marta-adult-speaking-fit | 03.1 | Audience Paths | building | 2026-07-06 |
+| 03-marta-adult-speaking-fit | 03.2 | Adults Path | building | 2026-07-06 |
+| 03-marta-adult-speaking-fit | 03.3 | Why Fluyo | building | 2026-07-06 |
+| 01-danylo-exam-trial-booking | 01.1 | Landing Page / Hero | built | 2026-07-06 |
+| 01-danylo-exam-trial-booking | 01.2 | Exam Preparation Path | built | 2026-07-06 |
+| 01-danylo-exam-trial-booking | 01.3 | How Learning Works | built | 2026-07-06 |
+| 01-danylo-exam-trial-booking | 01.4 | Programs And Pricing | built | 2026-07-06 |
+| 02-olena-parent-trust-check | 02.1 | Kids / Parents Path | built | 2026-07-06 |
+| 02-olena-parent-trust-check | 02.2 | Teachers | built | 2026-07-06 |
+| 02-olena-parent-trust-check | 02.3 | Lesson Experience | built | 2026-07-06 |
+| 02-olena-parent-trust-check | 02.4 | Results / Testimonials / FAQ / Final CTA | built | 2026-07-06 |
+| 03-marta-adult-speaking-fit | 03.1 | Audience Paths | built | 2026-07-06 |
+| 03-marta-adult-speaking-fit | 03.2 | Adults Path | built | 2026-07-06 |
+| 03-marta-adult-speaking-fit | 03.3 | Why Fluyo | built | 2026-07-06 |
+| 00-multi-page-ia-redesign | 00.1 | Home route | specified | 2026-07-07 |
+| 00-multi-page-ia-redesign | 00.2 | Exam Preparation route | specified | 2026-07-07 |
+| 00-multi-page-ia-redesign | 00.3 | Kids & Parents route | specified | 2026-07-07 |
+| 00-multi-page-ia-redesign | 00.4 | Adults Speaking route | specified | 2026-07-07 |
+| 00-multi-page-ia-redesign | 00.5 | Teachers & Proof route | specified | 2026-07-07 |
+| 00-multi-page-ia-redesign | 00.6 | Trial & Pricing route | specified | 2026-07-07 |
+| 00-final-ux-layout | 00.1 | Home page | finalized | 2026-07-07 |
+| 00-final-ux-layout | 00.2 | Learning Paths page | finalized | 2026-07-07 |
+| 00-final-ux-layout | 00.3 | Teachers & Proof page | finalized | 2026-07-07 |
+| 00-final-ux-layout | 00.4 | Trial & Pricing page | finalized | 2026-07-07 |
 
-**Status values:** `discussed` -> `wireframed` -> `specified` -> `explored` -> `building` -> `built` -> `approved` | `removed`
+**Status values:** `discussed` -> `wireframed` -> `specified` -> `finalized` -> `explored` -> `building` -> `built` -> `approved` | `removed`
 
 ---
 
@@ -58,10 +96,79 @@
 | 2026-06-25 | Phase 3 will use three persona-named screen-flow scenarios for a small presentation site | Phase 3: Scenarios | Codex / Saga + king |
 | 2026-06-25 | Page ownership assigned across scenarios: Danylo covers conversion spine, Olena covers trust proof, Marta covers adult recognition | Phase 3: Scenarios | Codex / Saga + king |
 | 2026-06-25 | Phase 4 design intent set to Later for all three UX scenarios | Phase 3: Handover | Codex / Saga + king |
+| 2026-07-07 | Interim IA explored six focused routes instead of one overloaded 11-section page; later superseded by final four-page layout | Phase 4: Multi-page IA redesign | Codex / Freya + king |
+| 2026-07-07 | Final UX planning source is the four-page HTML layout schema: Home, Learning Paths, Teachers & Proof, Trial & Pricing | Phase 4: UX planning finalization | Codex / Freya + king |
 
 ---
 
 ## Log
+
+### 2026-07-07 - Phase 4: UX Planning Finalized From Layout Schema
+
+**Agent:** Codex / Freya  
+**Status:** finalized; production design system and architecture pending  
+
+**Artifacts Updated:**
+- `_bmad-output/planning-artifacts/fluyo-school-page-layout-schemas.html`
+- `_bmad-output/C-UX-Scenarios/00-multi-page-ia-redesign.md`
+- `_bmad-output/C-UX-Scenarios/00-ux-scenarios.md`
+- `_bmad-output/C-UX-Scenarios/01-danylo-exam-trial-booking/01-danylo-exam-trial-booking.md`
+- `_bmad-output/C-UX-Scenarios/02-olena-parent-trust-check/02-olena-parent-trust-check.md`
+- `_bmad-output/C-UX-Scenarios/03-marta-adult-speaking-fit/03-marta-adult-speaking-fit.md`
+- Relevant source-module IA notes across the 11 detailed page specs
+- `_bmad-output/planning-artifacts/fluyo-school-landing-visual-schema.md`
+- `_bmad-output/_progress/00-design-log.md`
+
+**Summary:** Finalized UX planning around the HTML layout schema as source of truth. The final site structure is four pages: Home, Learning Paths, Teachers & Proof, and Trial & Pricing. Exam Preparation, Kids & Parents, and Adults Speaking are gathered inside Learning Paths. Home includes Trial & Prices Preview, and Learning Paths includes Path Price Hints so price clarity appears before Telegram without turning Home into a full pricing table. Persona journeys and production implementation planning now route through `/programs` rather than separate `/exams`, `/kids`, and `/adults` pages.
+
+**Open Items:** Create the production design system, create the production architecture, decide final production slug for Learning Paths (`/programs` vs alternatives), define prepared Telegram messages, and replace mock launch content before public launch.
+
+**Next:** Production design system from `_bmad-output/planning-artifacts/fluyo-school-page-layout-schemas.html` and `_bmad-output/C-UX-Scenarios/00-multi-page-ia-redesign.md`, then production architecture.
+
+### 2026-07-07 - Phase 4: Multi-Page IA Redesign Specified
+
+**Agent:** Codex / Freya  
+**Status:** specified; superseded by final four-page layout  
+
+**Artifacts Updated:**
+- `_bmad-output/C-UX-Scenarios/00-multi-page-ia-redesign.md`
+- `_bmad-output/C-UX-Scenarios/00-ux-scenarios.md`
+- `_bmad-output/C-UX-Scenarios/01-danylo-exam-trial-booking/01-danylo-exam-trial-booking.md`
+- `_bmad-output/C-UX-Scenarios/02-olena-parent-trust-check/02-olena-parent-trust-check.md`
+- `_bmad-output/C-UX-Scenarios/03-marta-adult-speaking-fit/03-marta-adult-speaking-fit.md`
+- All 11 existing detailed page specs under `_bmad-output/C-UX-Scenarios/`
+- `_bmad-output/implementation-artifacts/01-danylo-exam-trial-booking-Prototype/work/Logical-View-Map.md`
+- `_bmad-output/implementation-artifacts/01-danylo-exam-trial-booking-Prototype/PROTOTYPE-ROADMAP.md`
+- `_bmad-output/implementation-artifacts/01-danylo-exam-trial-booking-Prototype/work/Complete-Landing-Prototype-Work.yaml`
+- `_bmad-output/implementation-artifacts/01-danylo-exam-trial-booking-Prototype/work/Landing-Page-Conversion-Spine-Work.yaml`
+- `_bmad-output/planning-artifacts/fluyo-school-landing-visual-schema.md`
+- `_bmad-output/_progress/00-design-log.md`
+
+**Summary:** Replaced the active one-page IA with an interim six-route site model: Home, Exam Preparation, Kids & Parents, Adults Speaking, Teachers & Proof, and Trial & Pricing. This interim decision was later superseded the same day by the finalized four-page UX layout.
+
+**Open Items:** Superseded by the later four-page layout; carry forward exact Telegram prepared messages, route slug decisions, and launch-content replacement.
+
+**Next:** Superseded by the later 2026-07-07 UX Planning Finalized entry above.
+
+### 2026-07-06 - Phase 5: Complete Landing Prototype Built
+
+**Agent:** Codex / WDS Prototyping  
+**Status:** built and agent-verified  
+
+**Artifacts Updated:**
+- `_bmad-output/implementation-artifacts/01-danylo-exam-trial-booking-Prototype/01-danylo-exam-trial-booking.html`
+- `_bmad-output/implementation-artifacts/01-danylo-exam-trial-booking-Prototype/work/Complete-Landing-Prototype-Work.yaml`
+- `_bmad-output/implementation-artifacts/01-danylo-exam-trial-booking-Prototype/stories/Complete-Landing-Prototype.*.md`
+- `_bmad-output/implementation-artifacts/01-danylo-exam-trial-booking-Prototype/PROTOTYPE-ROADMAP.md`
+- `_bmad-output/_progress/00-design-log.md`
+
+**Summary:** Built a complete single-page gray-model landing prototype from all 11 WDS page specs across Danylo, Olena, and Marta scenarios. The prototype includes the hero, exam path, learning flow, pricing, kids/parents path, teachers, lesson experience, results/testimonials/FAQ/final CTA, audience paths, adults path, and Why Fluyo sections. Telegram and Instagram links use confirmed destinations; exam selection, lesson tabs, testimonial filters, FAQ expansion, and anchor navigation are wired.
+
+**Verification:** Playwright Chromium passed required section/control checks, 382 unique WDS object IDs, no duplicate DOM IDs, safe external-link checks, core interactions, no horizontal overflow at 375x667, 428x926, 768x1024, 1440x900, and 1920x1080, and no console/page errors.
+
+**Follow-up Visual QA:** User screenshot review and a Chrome DevTools Protocol audit without Playwright found and resolved spacing/menu/path-card issues plus a tablet certificate-chip grid issue. The follow-up audit covered 375, 428, 768, 1440, and 1920 widths, including open-menu state; no horizontal overflow, duplicate IDs, card/note overlaps, or menu clipping remain. The only overflow candidates are intentional `.sr-only` labels.
+
+**Open Items:** Mock prices, teachers, proof, testimonials, lesson visuals, certificate placeholders, and policy-sensitive FAQ details remain preview-only and must be replaced before public launch.
 
 ### 2026-06-26 - Phase 6: Mock Launch Content Pack Created
 

@@ -7,6 +7,7 @@ design_status: not-started
 
 **Project:** fluyo-school
 **Created:** 2026-06-25
+**IA Revision:** 2026-07-07
 **Method:** Whiteport Design Studio (WDS)
 
 ---
@@ -63,9 +64,9 @@ Fluyo earns adult audience-path engagement and a qualified speaking-focused tria
 
 ## Shortest Path (Q8)
 
-1. **Audience Paths** — Marta sees Adults as one of the three clear launch paths and chooses it without feeling the site is only for exams or children.
-2. **Adults Path** — She recognizes her speaking anxiety and sees practical situations like work, travel, study, and everyday conversation.
-3. **Why Fluyo** — She sees supportive teachers, speaking focus, personalized path, flexible formats, and modern materials as reasons this can be manageable. ✓
+1. **Home (`/`)** — Marta sees Adults as one of the three launch paths and chooses it without feeling the site is only for exams or children.
+2. **Learning Paths (`/programs#adults-speaking`)** — She recognizes her speaking anxiety, sees practical situations, and understands the supportive speaking method inside the gathered paths page.
+3. **Trial & Pricing (`/pricing?path=adult`)** — She checks flexible formats, then opens Telegram with a real-life speaking goal. ✓
 
 ---
 
@@ -83,13 +84,13 @@ Fluyo earns adult audience-path engagement and a qualified speaking-focused tria
 
 ## Scenario Steps
 
-Steps are outlined one at a time after scenario creation. The first step is processed automatically.
+Route-level steps for the multi-page IA. Existing detailed page specs remain source modules, not one-page scroll sections.
 
-| Step | Folder | Purpose | Exit Action |
-|------|--------|---------|-------------|
-| 03.1 | `03.1-audience-paths/` | See Adults as one of the three clear launch paths and choose it without feeling the site is only for exams or children. | Select the adult path. |
-| 03.2 | `03.2-adults-path/` | Recognize her speaking anxiety and see practical situations like work, travel, study, and everyday conversation. | Continue to Why Fluyo. |
-| 03.3 | `03.3-why-fluyo/` | See supportive teachers, speaking focus, personalized path, flexible formats, and modern materials as reasons this can be manageable. | Continue toward Telegram with a real-life speaking goal. ✓ |
+| Step | Route | Source Modules | Purpose | Exit Action |
+|------|-------|----------------|---------|-------------|
+| 03.1 | `/` | selected `01.1-landing-page-hero/`, `03.1-audience-paths/`, selected `01.4-programs-and-pricing/` | See Adults as a first-class path and choose it quickly after basic price clarity. | Navigate to `/programs#adults-speaking`. |
+| 03.2 | `/programs#adults-speaking` | `03.2-adults-path/`, selected `03.3-why-fluyo/`, selected `01.4-programs-and-pricing/` | Recognize the speaking-confidence problem, practical situations, supportive method, and adult-path price shape. | Open Telegram with speaking goal or continue to `/pricing?path=adult`. |
+| 03.3 | `/pricing?path=adult` | selected `01.4-programs-and-pricing/`, selected `03.3-why-fluyo/` | Check flexible formats and make the first paid step feel manageable. | Final Telegram booking click. ✓ |
 
-**First step** (03.1) includes full entry context (Q3 + Q4 + Q5 + Q6).
-**On-step interactions** (that don't leave the step) are documented as storyboard items within each page spec.
+**Adults block** (`/programs#adults-speaking`) carries the full Marta entry context (Q3 + Q4 + Q5 + Q6).
+**Decision budget:** Marta should not be asked to read exam, parent, or generic Why Fluyo content before seeing a speaking-specific trial path.

@@ -7,6 +7,7 @@ design_status: not-started
 
 **Project:** fluyo-school
 **Created:** 2026-06-25
+**IA Revision:** 2026-07-07
 **Method:** Whiteport Design Studio (WDS)
 
 ---
@@ -63,10 +64,10 @@ Fluyo receives a parent-funded Telegram inquiry with child-specific context, str
 
 ## Shortest Path (Q8)
 
-1. **Kids / Parents Path** — Olena sees that Fluyo speaks directly to parents choosing lessons for children 6+ and understands child motivation.
-2. **Teachers** — She sees real teacher portraits, credentials, child-teaching experience, and warm teaching style.
-3. **Lesson Experience** — She reviews screenshots or examples showing interactive online lessons and parent-visible feedback.
-4. **Results / Testimonials / FAQ / Final CTA** — She reads parent/student proof, resolves practical questions, then clicks Telegram ready to book. ✓
+1. **Home (`/`)** — Olena sees that kids are a first-class path and chooses it without reading exam or adult detail.
+2. **Learning Paths (`/programs#kids-parents`)** — She confirms Fluyo understands child motivation, parent visibility, and a gentle first trial inside the gathered paths page.
+3. **Teachers & Proof (`/teachers`)** — She verifies teacher warmth, credentials, lesson examples, and concise proof.
+4. **Trial & Pricing (`/pricing?path=kids`)** — She resolves practical trial/format questions, then opens Telegram with child context. ✓
 
 ---
 
@@ -84,14 +85,14 @@ Fluyo receives a parent-funded Telegram inquiry with child-specific context, str
 
 ## Scenario Steps
 
-Steps are outlined one at a time after scenario creation. The first step is processed automatically.
+Route-level steps for the multi-page IA. Existing detailed page specs remain source modules, not one-page scroll sections.
 
-| Step | Folder | Purpose | Exit Action |
-|------|--------|---------|-------------|
-| 02.1 | `02.1-kids-parents-path/` | See that Fluyo speaks directly to parents choosing lessons for children 6+ and understands child motivation. | Continue to teacher proof. |
-| 02.2 | `02.2-teachers/` | See real teacher portraits, credentials, child-teaching experience, and warm teaching style. | Continue to lesson experience proof. |
-| 02.3 | `02.3-lesson-experience/` | Review screenshots or examples showing interactive online lessons and parent-visible feedback. | Continue to results, testimonials, FAQ, and final CTA. |
-| 02.4 | `02.4-results-testimonials-faq-final-cta/` | Read parent/student proof, resolve practical questions, then click Telegram ready to book. | Final Telegram booking click. ✓ |
+| Step | Route | Source Modules | Purpose | Exit Action |
+|------|-------|----------------|---------|-------------|
+| 02.1 | `/` | selected `01.1-landing-page-hero/`, selected `03.1-audience-paths/`, selected `01.4-programs-and-pricing/` | Recognize that Fluyo has a dedicated kids path and visible price preview. | Navigate to `/programs#kids-parents`. |
+| 02.2 | `/programs#kids-parents` | `02.1-kids-parents-path/`, selected `02.2-teachers/`, selected `02.3-lesson-experience/`, selected `01.4-programs-and-pricing/` | Confirm parent reassurance, child engagement, progress visibility, and child-path price hints. | Open Telegram with child context or continue to `/teachers`. |
+| 02.3 | `/teachers` | `02.2-teachers/`, `02.3-lesson-experience/`, selected `02.4-results-testimonials-faq-final-cta/` | Verify real teachers, credentials, lesson proof, and concise parent/student proof. | Continue to `/pricing?path=kids` or open Telegram. |
+| 02.4 | `/pricing?path=kids` | selected `01.4-programs-and-pricing/`, selected `02.4-results-testimonials-faq-final-cta/` | Resolve practical paid-trial, schedule, format, and payment questions. | Final Telegram booking click. ✓ |
 
-**First step** (02.1) includes full entry context (Q3 + Q4 + Q5 + Q6).
-**On-step interactions** (that don't leave the step) are documented as storyboard items within each page spec.
+**Kids block** (`/programs#kids-parents`) carries the full Olena entry context (Q3 + Q4 + Q5 + Q6).
+**Decision budget:** Olena should get teacher and lesson proof without a long marketplace, testimonial wall, or exam/adult content.

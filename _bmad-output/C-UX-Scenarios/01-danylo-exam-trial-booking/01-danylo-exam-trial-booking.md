@@ -7,6 +7,7 @@ design_status: not-started
 
 **Project:** fluyo-school
 **Created:** 2026-06-25
+**IA Revision:** 2026-07-07
 **Method:** Whiteport Design Studio (WDS)
 
 ---
@@ -63,10 +64,9 @@ Fluyo receives a qualified Telegram inquiry that can convert into a paid trial b
 
 ## Shortest Path (Q8)
 
-1. **Landing Page / Hero** — Danylo recognizes Fluyo as a serious teacher-led English school and sees the trial CTA plus a trust signal.
-2. **Exam Preparation Path** — He confirms his exam is covered and sees that exam preparation is structured, not generic.
-3. **How Learning Works** — He understands the paid trial as a diagnostic first step that clarifies level, goal, weak spots, and format.
-4. **Programs And Pricing** — He compares the trial, individual, pair, and mini-group options, then clicks Telegram ready to book. ✓
+1. **Home (`/`)** — Danylo recognizes Fluyo as a serious teacher-led English school and chooses the exam path without scanning kids or adult detail.
+2. **Learning Paths (`/programs#exam-preparation`)** — He confirms his exam is covered inside the gathered paths page, sees that preparation is structured, and understands the paid trial as a diagnostic first step.
+3. **Trial & Pricing (`/pricing?path=exam`)** — He compares the trial, individual, pair, and mini-group options, then opens Telegram with exam context. ✓
 
 ---
 
@@ -84,14 +84,13 @@ Fluyo receives a qualified Telegram inquiry that can convert into a paid trial b
 
 ## Scenario Steps
 
-Steps are outlined one at a time after scenario creation. The first step is processed automatically.
+Route-level steps for the multi-page IA. Existing detailed page specs remain source modules, not one-page scroll sections.
 
-| Step | Folder | Purpose | Exit Action |
-|------|--------|---------|-------------|
-| 01.1 | `01.1-landing-page-hero/` | Recognize Fluyo as a serious teacher-led English school and see the trial CTA plus a trust signal. | Select the exam preparation path or scroll to the exam section. |
-| 01.2 | `01.2-exam-preparation-path/` | Confirm the exact exam is covered and that preparation is structured, not generic. | Continue to the learning process section. |
-| 01.3 | `01.3-how-learning-works/` | Understand the paid trial as a diagnostic first step that clarifies level, goal, weak spots, and format. | Continue to programs and pricing. |
-| 01.4 | `01.4-programs-and-pricing/` | Compare the trial, individual, pair, and mini-group options, then click Telegram ready to book. | Final Telegram booking click. ✓ |
+| Step | Route | Source Modules | Purpose | Exit Action |
+|------|-------|----------------|---------|-------------|
+| 01.1 | `/` | `01.1-landing-page-hero/`, selected `03.1-audience-paths/`, selected `01.4-programs-and-pricing/` | Recognize Fluyo, see compact proof and price preview, then choose the exam path. | Navigate to `/programs#exam-preparation`. |
+| 01.2 | `/programs#exam-preparation` | `01.2-exam-preparation-path/`, selected `01.3-how-learning-works/`, selected `01.4-programs-and-pricing/` | Confirm exact exam coverage, structured preparation, diagnostic trial value, and price shape. | Open Telegram with exam context or continue to `/pricing?path=exam`. |
+| 01.3 | `/pricing?path=exam` | selected `01.3-how-learning-works/`, `01.4-programs-and-pricing/` | Compare trial and lesson formats without unrelated kids/adult content. | Final Telegram booking click. ✓ |
 
-**First step** (01.1) includes full entry context (Q3 + Q4 + Q5 + Q6).
-**On-step interactions** (that don't leave the step) are documented as storyboard items within each page spec.
+**First route** (`/`) includes full entry context (Q3 + Q4 + Q5 + Q6).
+**Decision budget:** Danylo should see exam fit first within Learning Paths and should not need to read parent or adult detail before reaching exam trial/pricing.
