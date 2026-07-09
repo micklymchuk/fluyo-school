@@ -14,9 +14,11 @@
 - [x] Mock launch content gaps for implementation preview
 - [x] Redesign information architecture into smaller multi-page site
 - [x] Finalize UX planning source of truth from HTML layout schema
+- [x] Create visual UI elements review board before formal design-system files
+- [x] Create implementation stories from DD-001
 - [ ] Replace mock launch content before public launch: exact pricing, trial duration, teacher bios, testimonials, lesson screenshots, and approved results
-- [ ] Create production design system from finalized four-page UX layout
-- [ ] Create production architecture before implementation
+- [ ] Create implementation-led production design system during development from finalized four-page UX layout
+- [x] Create production architecture before implementation
 
 ---
 
@@ -24,7 +26,7 @@
 
 | Task | Started | Agent |
 |------|---------|-------|
-| - | - | - |
+| Launch-content approval matrix created; production content inputs still pending | 2026-07-08 | Codex / Freya |
 
 **Rules:** Mark what you start. Complete it when done (move to Log). One task at a time per agent.
 
@@ -98,10 +100,138 @@
 | 2026-06-25 | Phase 4 design intent set to Later for all three UX scenarios | Phase 3: Handover | Codex / Saga + king |
 | 2026-07-07 | Interim IA explored six focused routes instead of one overloaded 11-section page; later superseded by final four-page layout | Phase 4: Multi-page IA redesign | Codex / Freya + king |
 | 2026-07-07 | Final UX planning source is the four-page HTML layout schema: Home, Learning Paths, Teachers & Proof, Trial & Pricing | Phase 4: UX planning finalization | Codex / Freya + king |
+| 2026-07-08 | Design-system creation starts with a standalone visual UI elements review board before formal component files and docs | Phase 7: Design System | Codex + king |
+| 2026-07-08 | Formal standalone design-system generation is deferred; production tokens and components will be created during development from real page implementation | Phase 4: Design Delivery readiness | Codex / Freya + king |
 
 ---
 
 ## Log
+
+### 2026-07-09 - Phase 5: DD-001 Implementation Stories Created
+
+**Agent:** Codex / WDS Development  
+**Status:** story package ready; production code not started  
+
+**Artifacts Updated:**
+- `_bmad-output/implementation-artifacts/DD-001-fluyo-production-site/IMPLEMENTATION-STORIES.md`
+- `_bmad-output/implementation-artifacts/DD-001-fluyo-production-site/stories/`
+- `_bmad-output/deliveries/design-deliveries-tracker.md`
+- `_bmad-output/_progress/00-design-log.md`
+
+**Summary:** Created implementation-ready stories from DD-001 and TS-001. The package follows the required sequence: Epic 0 UI foundation, Epic 1 typed content/locale/CTA/tracking/content gates, Epic 2 Home and Learning Paths, Epic 3 Teachers & Proof and Trial & Pricing, and Epic 4 responsive/accessibility/content/analytics validation. Stories preserve the four-route production IA, launch-sensitive content gates, centralized Telegram and tracking contracts, and Cloudflare/Nuxt verification requirements.
+
+**Next:** Start `DD-001.0.1` UI tokens and global styles, then continue the story sequence through `DD-001.4.2`.
+
+### 2026-07-08 - Phase 4-5: Launch Content Approval Matrix Created
+
+**Agent:** Codex / Freya  
+**Status:** readiness matrix created; actual production content replacement still pending  
+
+**Artifacts Updated:**
+- `_bmad-output/E-Assets/content/launch-content-approval-matrix.md`
+- `_bmad-output/deliveries/design-deliveries-tracker.md`
+- `_bmad-output/_progress/00-design-log.md`
+
+**Summary:** Created a launch-content approval matrix mapped to DD-001 content models and the mock launch-content pack. The matrix defines source-status values, release gates, route/model mapping, commercial terms, teacher profiles, credential proof, lesson proof, testimonials, results/proof claims, FAQ/policy-sensitive answers, Telegram prepared messages, social/contact placement, production rendering rules, and immediate input checklist for king. It explicitly keeps mock content preview-only and requires approved, hidden, or blocked handling before public launch.
+
+**Next:** Fill approved production prices, teacher/proof assets, testimonials/results, operational FAQ answers, and Telegram message behavior, or mark affected sections hidden for launch.
+
+### 2026-07-08 - Phase 4: Next Parallel Work Identified
+
+**Agent:** Codex / Freya  
+**Status:** next work identified; awaiting user routing choice  
+
+**Artifacts Updated:**
+- `_bmad-output/deliveries/design-deliveries-tracker.md`
+- `_bmad-output/_progress/00-design-log.md`
+
+**Summary:** Completed the Handover Step 06 continuation check. DD-001 covers the full route-level production site, so the next useful parallel work is not another page-flow design. The recommended next work is launch-content readiness: exact prices, trial duration, teacher bios/assets, testimonials, results, lesson screenshots, proof assets, policy-sensitive FAQ answers, and prepared Telegram messages. Implementation validation should wait until DD-001 has a running build. Production architecture is already available at `_bmad-output/planning-artifacts/architecture/architecture-fluyo-school-2026-07-08/ARCHITECTURE-SPINE.md`.
+
+**Next:** Choose whether to return to Phase 4-5 for launch-content readiness work, wait for implementation validation, or return to the activity menu.
+
+### 2026-07-08 - Phase 4: DD-001 Officially Handed Off
+
+**Agent:** Codex / Freya  
+**Status:** handed off for implementation planning; direct architect acknowledgement pending outside this chat  
+
+**Artifacts Updated:**
+- `_bmad-output/deliveries/DD-001-official-handoff.md`
+- `_bmad-output/deliveries/design-deliveries-tracker.md`
+- `_bmad-output/deliveries/DD-001-fluyo-production-site.yaml`
+- `_bmad-output/deliveries/DD-001-handoff-log.md`
+- `_bmad-output/test-scenarios/TS-001-fluyo-production-site.yaml`
+- `_bmad-output/_progress/00-design-log.md`
+
+**Summary:** Official handoff issued for DD-001, the Fluyo School production four-page site. The delivery is now marked `in_development` for implementation planning. The handoff uses verified artifacts: final UX source, layout schema, architecture spine, scenario specs, TS-001, and raw design-reference folders. The previously logged UI elements review board HTML is missing from the current worktree and is not used as a required handoff artifact.
+
+**Next:** Confirm BMad Architect acknowledgement, create implementation stories from DD-001, and start Epic 0: in-code UI foundation.
+
+### 2026-07-08 - Phase 4: DD-001 Handoff Dialog Documented
+
+**Agent:** Codex / Freya  
+**Status:** handoff dialog documented; official handoff pending  
+
+**Artifacts Updated:**
+- `_bmad-output/deliveries/DD-001-handoff-log.md`
+- `_bmad-output/deliveries/DD-001-fluyo-production-site.yaml`
+- `_bmad-output/_progress/00-design-log.md`
+
+**Summary:** Documented the structured 10-phase handoff packet for DD-001. The packet covers introduction, user value, scenario walkthrough, technical requirements, implementation-led design-system components, acceptance criteria, testing approach, complexity estimate, special considerations, and confirmation/next steps. Because no separate BMad Architect acknowledged the handoff inside this chat, DD-001 is marked `handoff_dialog_documented` with architect acknowledgement pending rather than `in_development`.
+
+**Next:** If king accepts this documented packet as sufficient, continue to official handoff and mark DD-001 ready for implementation.
+
+### 2026-07-08 - Phase 4: Test Scenario TS-001 Draft Created
+
+**Agent:** Codex / Freya  
+**Status:** draft test scenario created; handoff dialog still pending  
+
+**Artifacts Updated:**
+- `_bmad-output/test-scenarios/TS-001-fluyo-production-site.yaml`
+- `_bmad-output/_progress/00-design-log.md`
+
+**Summary:** Created the validation test scenario for adapted Design Delivery DD-001. TS-001 covers the Danylo, Olena, and Marta happy paths; unknown path, locale, CTA, and launch-content error states; anchor/query/mobile/content edge cases; implementation-led design-system validation; accessibility; responsive checks; build checks; analytics event contract; content integrity gates; and sign-off criteria.
+
+**Next:** Run the structured handoff dialog and document the handoff log.
+
+### 2026-07-08 - Phase 4: Adapted Design Delivery DD-001 Draft Created
+
+**Agent:** Codex / Freya  
+**Status:** draft delivery created; test scenario and handoff still pending  
+
+**Artifacts Updated:**
+- `_bmad-output/deliveries/DD-001-fluyo-production-site.yaml`
+- `_bmad-output/_progress/00-design-log.md`
+
+**Summary:** Created an adapted Design Delivery for the production four-page Fluyo School site. The delivery packages the finalized Home, Learning Paths, Teachers & Proof, and Trial & Pricing UX into an implementation contract. Because standalone design-system generation was intentionally deferred, the delivery includes Epic 0 for extracting the in-code production UI foundation during development before route implementation.
+
+**Next:** Create `TS-001` test scenario for this delivery, then run the structured handoff dialog.
+
+### 2026-07-08 - Phase 4: Implementation-Led Design System Decision
+
+**Agent:** Codex / Freya  
+**Status:** design-system prerequisite intentionally deferred into development  
+
+**Artifacts Updated:**
+- `_bmad-output/_progress/00-design-log.md`
+
+**Summary:** User decided not to continue forcing standalone design-system generation after repeated attempts produced poor design tokens and system artifacts. The production design system will instead be created during development from the finalized four-page UX layout schema and the UI elements review board. Design handoff must treat tokens, component primitives, component variants, and implementation guidelines as an explicit development workstream rather than a completed Phase 5 prerequisite.
+
+**Handoff Impact:** A standard WDS Design Delivery remains blocked if it requires a completed `_bmad-output/D-Design-System/` package. An adapted implementation handoff can proceed only if the first implementation epic includes extracting and stabilizing the production design system before building the four production pages.
+
+### 2026-07-08 - Phase 7: UI Elements Review Board Created
+
+**Agent:** Codex / Design System Architect
+**Status:** review board ready; formal component files and docs intentionally deferred
+
+**Artifacts Updated:**
+- `_bmad-output/design-reviews/fluyo-ui-elements-review.html`
+- `_bmad-output/_progress/00-design-log.md`
+
+**Summary:** Created a standalone HTML UI elements review board for Fluyo School outside production app sources. The page shows the first visual pass for foundations, buttons, language switching, path selectors, program panels, teacher/proof panels, lesson proof, testimonials, pricing panels, FAQ rows, and final CTA patterns. The style direction was revised toward luxury minimalism: editorial spacing, square geometry, hairline borders, black/ivory/deep burgundy, no border radius, and no box-shadow.
+
+**Verification:** `npm run build` passed after restoring production app code. Playwright screenshots of the standalone HTML were captured at 1440x1000, 768x1024, and 390x844 with no obvious overlap or responsive layout failure. CSS scan confirmed no `box-shadow`, no `border-radius`, no viewport-scaled font sizes, and no negative letter spacing in the review artifact.
+
+**Next:** Review each UI element visually, decide what to keep/change, then generate formal design-system component files, token docs, and catalog.
 
 ### 2026-07-07 - Phase 4: UX Planning Finalized From Layout Schema
 

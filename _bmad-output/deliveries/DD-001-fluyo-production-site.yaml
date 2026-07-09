@@ -1,0 +1,297 @@
+delivery:
+  id: DD-001
+  name: Fluyo School Production Four-Page Site
+  status: in_development
+  created: 2026-07-08
+  handoff_dialog_documented_at: 2026-07-08T21:12:40+0300
+  handed_off_at: 2026-07-08T21:15:52+0300
+  assigned_to: bmad-architect
+  handoff_confirmed_by: king
+  architect_acknowledgement: pending_direct_acknowledgement
+  handoff_log: _bmad-output/deliveries/DD-001-handoff-log.md
+  official_handoff_notification: _bmad-output/deliveries/DD-001-official-handoff.md
+  tracker: _bmad-output/deliveries/design-deliveries-tracker.md
+  designer: king
+  method: Whiteport Design Studio
+  delivery_type: adapted_implementation_handoff
+  priority: high
+  adaptation_reason: Standalone design-system generation was deferred after repeated poor token/system outputs. Production UI tokens and components will be extracted during implementation from the approved UX, verified layout schema, and available design reference assets.
+
+scope:
+  included_routes:
+    - route: /
+      page: Home
+      purpose: Establish Fluyo, route visitors into the right learning path, show compact proof, and provide enough price clarity to continue.
+    - route: /programs
+      page: Learning Paths
+      purpose: Gather Exam Preparation, Kids & Parents, and Adults Speaking into one comparison page.
+    - route: /teachers
+      page: Teachers & Proof
+      purpose: Show teacher, credential, lesson, and outcome proof before deeper pricing or booking.
+    - route: /pricing
+      page: Trial & Pricing
+      purpose: Clarify paid trial, lesson formats, included value, practical FAQ, and Telegram booking.
+  excluded:
+    - Rebuilding the historical 11-section single-page prototype.
+    - Splitting exam, kids, and adults into separate v1 routes.
+    - Shipping mock proof, mock prices, mock testimonials, or generated teacher claims as approved launch content.
+    - Creating a standalone WDS design-system package before implementation.
+
+user_value:
+  problem: Visitors need to quickly understand whether Fluyo fits their exam, child, or adult speaking goal, trust the teacher-led model, see practical price clarity, and contact Telegram with useful context.
+  solution: Build the finalized four-page public site with path routing, trust proof, pricing clarity, bilingual content, and centralized Telegram CTA context.
+  success_criteria:
+    - Visitors can choose Exam, Kids & Parents, or Adults Speaking from Home and continue to the relevant Learning Paths section.
+    - Visitors can reach full pricing and open Telegram with preserved path or format context.
+    - Trust-sensitive visitors can inspect teachers, credentials, lesson proof, results, testimonials, and practical FAQ before booking.
+    - Ukrainian and English content have equivalent structure and do not break responsive layouts.
+    - Launch-sensitive content is hidden or clearly blocked until approved.
+
+business_value:
+  primary_outcome: Qualified paid-trial Telegram inquiries.
+  supporting_outcomes:
+    - Higher audience-path engagement from Home.
+    - Reduced manager back-and-forth through prepared inquiry context.
+    - Better trust before price comparison through teacher and proof visibility.
+    - Safer public launch by preventing mock content from shipping as truth.
+  measurement_events:
+    - path_card_click
+    - program_path_view
+    - price_preview_view
+    - pricing_view
+    - teacher_proof_view
+    - telegram_click
+    - telegram_context
+
+design_artifacts:
+  ux_source_of_truth:
+    - path: _bmad-output/C-UX-Scenarios/00-multi-page-ia-redesign.md
+      role: Final four-page UX layout source.
+    - path: _bmad-output/planning-artifacts/fluyo-school-page-layout-schemas.html
+      role: Canonical visual page layout schema.
+    - path: _bmad-output/planning-artifacts/fluyo-school-landing-visual-schema.md
+      role: Compact route and source-module visual map.
+  scenario_index:
+    - path: _bmad-output/C-UX-Scenarios/00-ux-scenarios.md
+      role: Persona journey index and route coverage matrix.
+  scenarios:
+    - id: 01-danylo-exam-trial-booking
+      path: _bmad-output/C-UX-Scenarios/01-danylo-exam-trial-booking/01-danylo-exam-trial-booking.md
+      route_flow: Home -> Learning Paths -> Trial & Pricing -> Telegram
+    - id: 02-olena-parent-trust-check
+      path: _bmad-output/C-UX-Scenarios/02-olena-parent-trust-check/02-olena-parent-trust-check.md
+      route_flow: Home -> Learning Paths -> Teachers & Proof -> Trial & Pricing -> Telegram
+    - id: 03-marta-adult-speaking-fit
+      path: _bmad-output/C-UX-Scenarios/03-marta-adult-speaking-fit/03-marta-adult-speaking-fit.md
+      route_flow: Home -> Learning Paths -> Trial & Pricing -> Telegram
+  source_modules:
+    - _bmad-output/C-UX-Scenarios/01-danylo-exam-trial-booking/01.1-landing-page-hero/01.1-landing-page-hero.md
+    - _bmad-output/C-UX-Scenarios/01-danylo-exam-trial-booking/01.2-exam-preparation-path/01.2-exam-preparation-path.md
+    - _bmad-output/C-UX-Scenarios/01-danylo-exam-trial-booking/01.3-how-learning-works/01.3-how-learning-works.md
+    - _bmad-output/C-UX-Scenarios/01-danylo-exam-trial-booking/01.4-programs-and-pricing/01.4-programs-and-pricing.md
+    - _bmad-output/C-UX-Scenarios/02-olena-parent-trust-check/02.1-kids-parents-path/02.1-kids-parents-path.md
+    - _bmad-output/C-UX-Scenarios/02-olena-parent-trust-check/02.2-teachers/02.2-teachers.md
+    - _bmad-output/C-UX-Scenarios/02-olena-parent-trust-check/02.3-lesson-experience/02.3-lesson-experience.md
+    - _bmad-output/C-UX-Scenarios/02-olena-parent-trust-check/02.4-results-testimonials-faq-final-cta/02.4-results-testimonials-faq-final-cta.md
+    - _bmad-output/C-UX-Scenarios/03-marta-adult-speaking-fit/03.1-audience-paths/03.1-audience-paths.md
+    - _bmad-output/C-UX-Scenarios/03-marta-adult-speaking-fit/03.2-adults-path/03.2-adults-path.md
+    - _bmad-output/C-UX-Scenarios/03-marta-adult-speaking-fit/03.3-why-fluyo/03.3-why-fluyo.md
+  visual_reference:
+    - path: _bmad-output/planning-artifacts/fluyo-school-page-layout-schemas.html
+      role: Verified visual route layout schema for the four production pages.
+    - path: docs/design-ref/design-els/
+      role: Raw visual reference assets for design element direction.
+    - path: docs/design-ref/design-instagram-elements/
+      role: Raw visual reference assets for social/Instagram-adjacent visual direction.
+  historical_missing_reference:
+    - path: _bmad-output/design-reviews/fluyo-ui-elements-review.html
+      status: missing_from_worktree
+      role: Previously logged review-board artifact; not available for official handoff verification.
+  technical_reference:
+    - path: _bmad-output/planning-artifacts/architecture/architecture-fluyo-school-2026-07-08/ARCHITECTURE-SPINE.md
+      role: Final production architecture spine.
+  content_reference:
+    - path: _bmad-output/E-Assets/content/mock-launch-content.md
+      role: Preview-only content pack; cannot be treated as public launch truth.
+
+implementation_workstreams:
+  - id: epic-0-ui-foundation
+    name: Extract in-code UI foundation
+    required: true
+    description: Create CSS custom-property tokens, base UI primitives, shared layout primitives, and section patterns inside the Nuxt app before building route surfaces.
+    outputs:
+      - app/assets/css/tokens.css
+      - app/assets/css/main.css
+      - app/components/ui/
+      - app/components/navigation/
+      - app/components/sections/
+    acceptance:
+      - Tokens cover color, type scale, spacing, borders, z-index, and motion used by the four-page site.
+      - UI primitives do not hard-code route-specific copy.
+      - Premium minimal visual direction is preserved: editorial spacing, square geometry, hairline borders, restrained black/ivory/deep burgundy palette, no decorative shadows, and no rounded-card language unless deliberately changed.
+      - Text does not use viewport-width font scaling or negative letter spacing.
+  - id: epic-1-content-and-routing
+    name: Content model, locale, routing, and CTA contracts
+    required: true
+    description: Create route structure, typed bilingual content, launch-sensitive source status, locale helper, Telegram CTA helper, and tracking adapter.
+  - id: epic-2-home-and-learning-paths
+    name: Home and Learning Paths implementation
+    required: true
+    description: Build Home and Learning Paths from the finalized page schemas and persona route flows.
+  - id: epic-3-proof-and-pricing
+    name: Teachers & Proof and Trial & Pricing implementation
+    required: true
+    description: Build proof, testimonial, FAQ, trial, pricing, and final Telegram booking surfaces with launch-content safeguards.
+  - id: epic-4-quality-and-launch-gates
+    name: Responsive, accessibility, analytics, and launch-content verification
+    required: true
+    description: Verify layout quality, accessibility, event contract, bilingual behavior, and content approval status before public deployment.
+
+technical_requirements:
+  platform:
+    frontend: Nuxt 4.4.8 with Vue 3.5.x
+    router: Vue Router 5.1.x through Nuxt pages
+    deployment: Cloudflare Pages through Nuxt Nitro cloudflare-pages preset
+    package_manager: npm with package-lock
+  routes:
+    - /
+    - /programs
+    - /teachers
+    - /pricing
+  architecture_rules:
+    - Pages compose sections and shared layout only.
+    - Section components may consume typed content, UI primitives, and composables.
+    - UI primitives consume only framework primitives and CSS tokens.
+    - Public copy lives in typed content records with matching uk and en fields.
+    - Telegram CTA URLs and prepared messages are built through one helper.
+    - Tracking events are emitted through one adapter.
+    - No global store is required for v1; use route, query, hash, and local component state.
+  integrations:
+    - name: Telegram
+      purpose: Primary paid-trial inquiry channel through https://t.me/fluyo_manager.
+    - name: Analytics adapter
+      purpose: Emit stable UX event names before the concrete vendor is selected.
+    - name: Cloudflare Pages
+      purpose: Static/edge deployment boundary.
+  data_models:
+    - name: PageContent
+      purpose: Route-level localized content, SEO metadata, and section order.
+    - name: LearningPath
+      purpose: Exam, kids, and adult path copy, proof cues, price hints, and CTA context.
+    - name: PriceItem
+      purpose: Trial and lesson format pricing with approval status.
+    - name: TeacherProfile
+      purpose: Teacher bio, audience fit, portrait, credentials, and source status.
+    - name: ProofAsset
+      purpose: Certificate, screenshot, lesson material, or result asset with approval and privacy metadata.
+    - name: Testimonial
+      purpose: Quote/result record with source and approval status.
+    - name: FaqItem
+      purpose: Practical FAQ answer with locale and approval status.
+    - name: CtaIntent
+      purpose: Typed Telegram message context including path, format, route, locale, and message intent.
+  performance_requirements:
+    - npm run build must pass.
+    - No route should introduce horizontal overflow at 375px, 428px, 768px, 1440px, or 1920px viewport widths.
+    - Public pages should avoid unnecessary client-side state and heavy runtime dependencies.
+    - Images must include stable dimensions or aspect ratios to prevent layout shift.
+  content_integrity_requirements:
+    - Launch-sensitive records must be marked mock, approved, or hidden.
+    - Mock records must not render as public launch truth.
+    - A release check must fail or block if required public pricing/proof records remain mock.
+
+acceptance_criteria:
+  functional:
+    - Header navigation exposes Home, Learning Paths, Teachers & Proof, Trial & Pricing, language control, Instagram, and Telegram CTA.
+    - Mobile navigation exposes the same route order and preserves Telegram as a distinct primary action.
+    - Home path cards navigate to /programs anchors or equivalent path context for exam, kids, and adult paths.
+    - Learning Paths contains Exam Preparation, Kids & Parents, Adults Speaking, Path Price Hints, and CTA strip.
+    - Teachers & Proof contains teacher cards, credentials proof, lesson proof, concise results/testimonials, and trust CTA strip.
+    - Trial & Pricing contains paid trial first step, individual/pair/mini-group formats, included items, practical FAQ, and final Telegram CTA.
+    - /pricing adapts heading/helper state when path=exam, path=kids, or path=adult is present.
+    - Telegram links include prepared message context when available and fall back to a generic paid-trial message when context is missing.
+    - Ukrainian is the default visible language and English can be selected without changing page structure.
+  non_functional:
+    - Components follow the in-code UI foundation rather than one-off route styling.
+    - Layout is responsive across mobile, tablet, laptop, and wide desktop.
+    - Text remains readable and does not overlap, clip, or overflow its controls.
+    - Interactive targets meet minimum 44px touch area where practical.
+    - Public content and SEO metadata are localized.
+    - The implementation remains compatible with Cloudflare Pages.
+  edge_cases:
+    - Missing or unknown pricing path query falls back to generic pricing content.
+    - Missing approved teacher/proof/testimonial content renders a safe placeholder, hidden section, or launch blocker rather than fake proof.
+    - Unsupported locale falls back to Ukrainian.
+    - Telegram helper handles missing path, format, and message intent gracefully.
+    - Rapid CTA clicks do not create inconsistent tracking payloads.
+    - Long Ukrainian and English strings wrap without overlapping controls.
+
+testing_guidance:
+  user_testing:
+    target_users:
+      - Exam student or applicant similar to Danylo.
+      - Parent evaluating lessons for a child similar to Olena.
+      - Adult speaking learner similar to Marta.
+    observations:
+      - Can they choose the right path from Home without confusion?
+      - Do they understand the paid trial and format options before Telegram?
+      - Do proof and teacher sections answer trust concerns?
+      - Do they understand what context Telegram will send?
+  qa_testing:
+    commands:
+      - npm run build
+    browsers:
+      - Chromium
+      - WebKit or Safari
+      - Firefox
+    viewports:
+      - 375x667
+      - 428x926
+      - 768x1024
+      - 1440x900
+      - 1920x1080
+    checks:
+      - No horizontal overflow.
+      - No console or page errors.
+      - Header and mobile menu remain usable.
+      - All public routes load directly.
+      - Anchor and query-state navigation works.
+  design_validation:
+    - Compare route screenshots against _bmad-output/planning-artifacts/fluyo-school-page-layout-schemas.html.
+    - Compare component direction against docs/design-ref/design-els/ and docs/design-ref/design-instagram-elements/.
+    - Verify no accidental one-page-prototype rebuild.
+    - Verify no separate exam, kids, or adult route split.
+  accessibility:
+    - Logical heading order.
+    - Keyboard reachable navigation, controls, accordion rows, and CTA links.
+    - Visible focus states.
+    - Alt text for meaningful assets.
+    - WCAG AA color contrast for text.
+
+complexity:
+  size: large
+  estimated_effort: 2-4 implementation weeks for first production pass, depending on final content availability and QA depth.
+  risk: medium
+  risk_rationale:
+    - The UX and architecture are mature, but final commercial/proof content is still unresolved.
+    - The design system is intentionally created in code during implementation, which requires discipline in Epic 0.
+    - Bilingual responsive content can expose layout issues if not tested early.
+  dependencies:
+    - Approved prices and trial duration before public launch.
+    - Approved teacher bios, portraits, credentials, testimonials, proof assets, and lesson screenshots before public launch.
+    - Final prepared Telegram messages before launch or a safe generic fallback.
+    - Analytics vendor selection can remain deferred if event adapter contract is implemented.
+  assumptions:
+    - Nuxt 4 and Cloudflare Pages remain the production stack.
+    - Telegram remains the primary paid-trial booking channel.
+    - The four-page IA remains final for v1.
+    - Ukrainian and English are the only launch languages.
+
+validation:
+  delivery_id_unique: true
+  all_required_fields_filled: true
+  scenarios_referenced: true
+  components_listed: adapted_as_implementation_workstream
+  technical_requirements_clear: true
+  acceptance_criteria_testable: true
+  complexity_estimate_realistic: true

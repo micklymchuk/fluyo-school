@@ -1,0 +1,351 @@
+test_scenario:
+  id: TS-001
+  delivery_id: DD-001
+  name: Fluyo School Production Four-Page Site Validation
+  status: draft
+  created: 2026-07-08
+  delivery_reference: _bmad-output/deliveries/DD-001-fluyo-production-site.yaml
+  objectives:
+    - Validate that the finalized four-page UX is implemented as Home, Learning Paths, Teachers & Proof, and Trial & Pricing.
+    - Validate that the three approved persona journeys can reach Telegram with useful inquiry context.
+    - Validate that the implementation-led UI foundation is consistent, reusable, responsive, and faithful to the verified layout schema and available visual reference assets.
+    - Validate bilingual structure, content integrity gates, accessibility, and Cloudflare-compatible build behavior.
+
+happy_path_tests:
+  - id: HP-001
+    name: Danylo exam trial booking path
+    persona: Danylo the Deadline-Driven Exam Student
+    design_reference:
+      - _bmad-output/C-UX-Scenarios/01-danylo-exam-trial-booking/01-danylo-exam-trial-booking.md
+      - _bmad-output/C-UX-Scenarios/00-multi-page-ia-redesign.md
+    steps:
+      - action: Open Home route at /.
+        expected: Home loads with global header, hero, three path cards, compact proof, trial and prices preview, and footer/contact strip.
+      - action: Select the Exam path card.
+        expected: Visitor lands on /programs#exam-preparation or equivalent exam-context position on Learning Paths.
+      - action: Review Exam Preparation content and path price hint.
+        expected: Exam fit, structured preparation, diagnostic trial cue, and path-specific price signal are visible without requiring kids or adult detail.
+      - action: Continue to /pricing?path=exam.
+        expected: Pricing page reflects exam context in heading/helper copy or selected CTA context.
+      - action: Activate final Telegram CTA.
+        expected: Telegram opens with a paid-trial inquiry message that includes exam context when prepared messages are configured, or a safe generic paid-trial fallback.
+      - action: Inspect tracking payloads or adapter calls for the journey.
+        expected: path_card_click, program_path_view, pricing_view, telegram_click, and telegram_context are emitted with route and exam context where available.
+
+  - id: HP-002
+    name: Olena parent trust path
+    persona: Olena the Observant Parent
+    design_reference:
+      - _bmad-output/C-UX-Scenarios/02-olena-parent-trust-check/02-olena-parent-trust-check.md
+      - _bmad-output/C-UX-Scenarios/00-multi-page-ia-redesign.md
+    steps:
+      - action: Open Home route at /.
+        expected: Kids & Parents is visible as a first-class path, with compact proof and price preview available before deep comparison.
+      - action: Select the Kids & Parents path card.
+        expected: Visitor lands on /programs#kids-parents or equivalent kids-context position.
+      - action: Review Kids & Parents content.
+        expected: Parent reassurance, child engagement, progress visibility, and child-path price hint are visible.
+      - action: Continue to /teachers.
+        expected: Teachers & Proof page loads with teacher cards, credentials proof, lesson proof, concise results/testimonials, and trust CTA strip.
+      - action: Continue to /pricing?path=kids.
+        expected: Pricing page preserves kids context and shows practical trial, format, payment, schedule, online format, and language FAQ content.
+      - action: Activate final Telegram CTA.
+        expected: Telegram opens with child or parent inquiry context when configured, or a safe generic paid-trial fallback.
+      - action: Inspect tracking payloads or adapter calls for the journey.
+        expected: path_card_click, program_path_view, teacher_proof_view, pricing_view, telegram_click, and telegram_context are emitted with route and kids context where available.
+
+  - id: HP-003
+    name: Marta adult speaking path
+    persona: Marta the Momentum-Seeking Adult
+    design_reference:
+      - _bmad-output/C-UX-Scenarios/03-marta-adult-speaking-fit/03-marta-adult-speaking-fit.md
+      - _bmad-output/C-UX-Scenarios/00-multi-page-ia-redesign.md
+    steps:
+      - action: Open Home route at /.
+        expected: Adults Speaking is visible as a first-class path, not secondary to exams or children.
+      - action: Select the Adults Speaking path card.
+        expected: Visitor lands on /programs#adults-speaking or equivalent adult-context position.
+      - action: Review Adults Speaking content and path price hint.
+        expected: Speaking anxiety recognition, practical adult situations, supportive method cue, and adult-path price signal are visible.
+      - action: Continue to /pricing?path=adult.
+        expected: Pricing page preserves adult context and makes flexible formats understandable.
+      - action: Activate final Telegram CTA.
+        expected: Telegram opens with adult speaking goal context when configured, or a safe generic paid-trial fallback.
+      - action: Inspect tracking payloads or adapter calls for the journey.
+        expected: path_card_click, program_path_view, pricing_view, telegram_click, and telegram_context are emitted with route and adult context where available.
+
+  - id: HP-004
+    name: English locale parity
+    design_reference:
+      - _bmad-output/planning-artifacts/architecture/architecture-fluyo-school-2026-07-08/ARCHITECTURE-SPINE.md
+    steps:
+      - action: Open each route in the default Ukrainian locale.
+        expected: All pages render localized Ukrainian content and localized SEO metadata.
+      - action: Switch to English using the language control.
+        expected: The same route structure and section order remain available in English.
+      - action: Navigate across /, /programs, /teachers, and /pricing while English is active.
+        expected: English content remains active according to the chosen locale strategy, and no translated text overlaps or breaks controls.
+
+error_state_tests:
+  - id: ER-001
+    name: Unknown pricing path query
+    trigger: Open /pricing?path=unknown.
+    expected_error_message: No visible error is required.
+    expected_behavior: Pricing page falls back to generic paid-trial and lesson-format content without broken state.
+    recovery_path: Visitor can choose a format, navigate to Learning Paths, or open generic Telegram CTA.
+    graceful_degradation: Tracking emits pricing_view and telegram_context with generic or unknown-safe context.
+
+  - id: ER-002
+    name: Missing path context before Telegram
+    trigger: Activate a Telegram CTA from a generic state with no path, format, or message intent.
+    expected_error_message: No visible error is required.
+    expected_behavior: Telegram helper creates a generic paid-trial inquiry link instead of failing.
+    recovery_path: Visitor can still complete contact through Telegram.
+    graceful_degradation: telegram_click remains measurable with generic context.
+
+  - id: ER-003
+    name: Unsupported locale request
+    trigger: Open a route with an unsupported locale query or manually corrupt locale state.
+    expected_error_message: No visible error is required.
+    expected_behavior: Site falls back to Ukrainian.
+    recovery_path: Visitor can select Ukrainian or English through the language control.
+    graceful_degradation: Page content and SEO metadata remain valid.
+
+  - id: ER-004
+    name: Missing approved launch proof content
+    trigger: Required teacher, testimonial, proof, price, trial, or lesson screenshot record is missing or marked mock where public launch requires approval.
+    expected_error_message: Implementation may show an internal release-check failure or a safe hidden/placeholder state; public fake proof must not render.
+    expected_behavior: Mock launch content is blocked, hidden, or explicitly preview-only according to implementation mode.
+    recovery_path: Replace the record with approved content or mark the section intentionally hidden before launch.
+    graceful_degradation: Page remains usable, but public launch is blocked if required claims are not approved.
+
+edge_case_tests:
+  - id: EC-001
+    name: Direct deep links to Learning Paths anchors
+    scenarios:
+      - /programs#exam-preparation
+      - /programs#kids-parents
+      - /programs#adults-speaking
+    expected_behavior: The correct section is reachable, readable after header offset, and emits program_path_view when observed or activated.
+
+  - id: EC-002
+    name: Direct query links to Pricing
+    scenarios:
+      - /pricing?path=exam
+      - /pricing?path=kids
+      - /pricing?path=adult
+      - /pricing
+    expected_behavior: Pricing page adapts path helper state for known contexts and falls back safely for generic state.
+
+  - id: EC-003
+    name: Rapid CTA activation
+    trigger: Click a Telegram CTA repeatedly or quickly across multiple CTA surfaces.
+    expected_behavior: Links remain valid, no visual state becomes stuck, and tracking payloads remain well-formed.
+
+  - id: EC-004
+    name: Long localized text
+    trigger: Use the longest Ukrainian and English labels, headings, FAQ answers, teacher titles, and pricing strings available in content records.
+    expected_behavior: Text wraps cleanly without overlapping buttons, cards, tables, nav items, or adjacent sections.
+
+  - id: EC-005
+    name: Reduced or missing visual assets
+    trigger: Hide optional proof images, teacher portraits, or lesson screenshots while content records remain valid.
+    expected_behavior: Layout keeps stable dimensions, alt text remains accurate for rendered assets, and empty visual gaps do not damage the route.
+
+  - id: EC-006
+    name: Mobile menu state across route navigation
+    trigger: Open the mobile menu, navigate to another route, switch language, and return through browser history.
+    expected_behavior: Menu does not cover content unexpectedly, focus remains manageable, and route changes do not leave duplicate active states.
+
+design_system_validation:
+  status: adapted_implementation_led
+  source_references:
+    - _bmad-output/planning-artifacts/fluyo-school-page-layout-schemas.html
+    - _bmad-output/planning-artifacts/architecture/architecture-fluyo-school-2026-07-08/ARCHITECTURE-SPINE.md
+    - docs/design-ref/design-els/
+    - docs/design-ref/design-instagram-elements/
+  components_to_validate:
+    - Global header
+    - Mobile navigation
+    - Footer/contact strip
+    - Language control
+    - Telegram CTA button and secondary links
+    - Path card
+    - Proof snapshot item
+    - Program section panel
+    - Price hint
+    - Teacher card
+    - Credential/proof item
+    - Lesson proof preview
+    - Testimonial/result item
+    - Pricing format block
+    - FAQ accordion row
+    - CTA strip
+  token_verification:
+    colors: Components use CSS custom properties from app/assets/css/tokens.css, not scattered raw brand values outside token definitions.
+    typography: Type scale is stable and does not use viewport-width font scaling.
+    spacing: Section and component spacing follow reusable custom properties or shared layout primitives.
+    borders: Hairline borders and square geometry match the approved visual direction unless a documented implementation decision changes it.
+    shadows: Decorative box shadows are absent unless explicitly approved for a functional overlay or focus treatment.
+    motion: Motion is restrained, respects reduced-motion preferences, and is not required for understanding content.
+  pattern_checks:
+    - UI primitives do not own route-specific public prose.
+    - Section components consume typed content records.
+    - Route pages compose sections; they do not duplicate component styling.
+    - No standalone WDS design-system package is required for v1.
+
+accessibility_tests:
+  - id: AX-001
+    name: Keyboard navigation
+    checks:
+      - Header links, mobile menu trigger, language control, path cards, CTA links, FAQ controls, and footer links are reachable by Tab.
+      - Enter or Space activates button-like controls.
+      - Focus order follows visible reading order.
+      - Focus indicators are visible against the page background.
+
+  - id: AX-002
+    name: Screen reader structure
+    checks:
+      - Each page has one clear h1.
+      - Headings descend logically.
+      - Mobile menu and FAQ accordions expose expanded/collapsed state where applicable.
+      - Icon-only controls have accessible names.
+      - Telegram and Instagram links have clear accessible labels.
+
+  - id: AX-003
+    name: Color contrast
+    checks:
+      - Body text meets WCAG AA contrast.
+      - Button and link text meets WCAG AA contrast.
+      - Large display text meets at least the large-text contrast threshold.
+      - Focus outlines remain visible in both light and dark sections.
+
+  - id: AX-004
+    name: Touch targets
+    checks:
+      - Primary navigation actions, language controls, path cards, CTA buttons, and FAQ controls provide at least 44x44px practical hit area.
+      - Adjacent touch targets have enough spacing to avoid accidental activation.
+
+  - id: AX-005
+    name: Meaningful media alternatives
+    checks:
+      - Teacher portraits, credential proofs, lesson screenshots, and result images have accurate alt text when rendered.
+      - Decorative imagery is hidden from assistive technology.
+      - Missing approved assets do not leave unlabeled interactive placeholders.
+
+responsive_tests:
+  viewports:
+    - 375x667
+    - 428x926
+    - 768x1024
+    - 1440x900
+    - 1920x1080
+  checks:
+    - No horizontal overflow.
+    - Header and mobile navigation remain usable.
+    - Hero, path cards, proof, pricing, teachers, lesson proof, FAQ, and CTA sections do not overlap.
+    - Text inside buttons, cards, tabs, labels, and pricing blocks wraps cleanly.
+    - Images and proof assets reserve stable dimensions or aspect ratios.
+    - A hint of following content is visible below first-viewport hero composition where applicable.
+
+performance_and_build_tests:
+  - id: PB-001
+    name: Production build
+    command: npm run build
+    expected_behavior: Nuxt build succeeds with Cloudflare Pages Nitro preset.
+  - id: PB-002
+    name: Route direct loads
+    routes:
+      - /
+      - /programs
+      - /teachers
+      - /pricing
+    expected_behavior: Each route loads directly without client-only navigation dependency.
+  - id: PB-003
+    name: Runtime console health
+    expected_behavior: No uncaught console errors, hydration errors, or page errors during initial load and core interactions.
+  - id: PB-004
+    name: Asset stability
+    expected_behavior: Rendered public assets are optimized, privacy-safe, and do not cause visible layout shift from missing dimensions.
+
+content_integrity_tests:
+  - id: CI-001
+    name: Launch-sensitive source status
+    records:
+      - prices
+      - trial duration
+      - teacher profiles
+      - teacher portraits
+      - credentials
+      - testimonials
+      - results
+      - lesson screenshots
+      - policy-sensitive FAQ answers
+      - prepared Telegram messages
+    expected_behavior: Every launch-sensitive record is marked mock, approved, or hidden.
+
+  - id: CI-002
+    name: Public launch blocker
+    trigger: Required public claim remains mock.
+    expected_behavior: Release check fails, section is hidden, or the claim is visibly excluded from production launch; fake public proof is never shown.
+
+  - id: CI-003
+    name: Preview content safety
+    trigger: Use mock-launch-content.md during implementation preview.
+    expected_behavior: Preview-only content cannot be confused with approved launch truth in production mode.
+
+analytics_tests:
+  - id: AN-001
+    name: Event contract
+    required_events:
+      - path_card_click
+      - program_path_view
+      - price_preview_view
+      - pricing_view
+      - teacher_proof_view
+      - telegram_click
+      - telegram_context
+    expected_behavior: Components emit only these stable event names through one tracking adapter.
+
+  - id: AN-002
+    name: Context payloads
+    expected_fields:
+      - route
+      - locale
+      - path
+      - format
+      - sourceRoute
+      - messageIntent
+    expected_behavior: Payloads include available context and omit or safely null missing context without throwing.
+
+sign_off_criteria:
+  pass_threshold: 100 percent of must-pass tests and at least 90 percent of non-blocking validation checks pass before design sign-off.
+  must_fix:
+    - Any broken route among /, /programs, /teachers, and /pricing.
+    - Telegram CTA does not open or loses required available context.
+    - Home path cards cannot route to the correct Learning Paths context.
+    - Public launch renders mock proof, mock teacher claims, mock testimonials, or mock prices as approved truth.
+    - Mobile layout has horizontal overflow or incoherent overlap at tested widths.
+    - Keyboard navigation cannot reach primary navigation or CTA controls.
+    - Build fails.
+    - Implementation violates the four-page IA by rebuilding the 11-section prototype or creating separate exam, kids, or adult routes.
+  nice_to_fix:
+    - Minor visual differences from the verified layout schema or raw design references that do not affect comprehension or consistency.
+    - Non-critical animation polish.
+    - Copy refinements that do not change route structure or conversion logic.
+    - Analytics payload enrichment beyond the required event contract.
+  approval_process:
+    - Developer completes implementation and runs build plus responsive QA.
+    - Designer reviews route screenshots against UX layout schema and available raw design references.
+    - Content owner confirms launch-sensitive records are approved, hidden, or blocked before launch.
+    - Final approval is recorded in the WDS design log.
+
+validation:
+  test_scenario_id_matches_delivery_id: true
+  all_test_types_defined: true
+  happy_path_tests_defined: true
+  error_state_tests_defined: true
+  edge_case_tests_defined: true
+  design_system_validation_defined: true
+  accessibility_tests_included: true
+  sign_off_criteria_clear: true
