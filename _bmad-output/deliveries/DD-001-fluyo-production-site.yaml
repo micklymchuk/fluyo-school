@@ -118,15 +118,15 @@ implementation_workstreams:
   - id: epic-0-ui-foundation
     name: Extract in-code UI foundation
     required: true
-    description: Create CSS custom-property tokens, base UI primitives, shared layout primitives, and section patterns inside the Nuxt app before building route surfaces.
+    description: Create Tailwind theme tokens, SCSS base styles, base UI primitives, shared layout primitives, and section patterns inside the Nuxt app before building route surfaces.
     outputs:
-      - app/assets/css/tokens.css
-      - app/assets/css/main.css
+      - app/assets/css/tailwind.css
+      - app/assets/scss/main.scss
       - app/components/ui/
       - app/components/navigation/
       - app/components/sections/
     acceptance:
-      - Tokens cover color, type scale, spacing, borders, z-index, and motion used by the four-page site.
+      - Tailwind theme tokens cover color, type scale, spacing, borders, z-index, and motion used by the four-page site.
       - UI primitives do not hard-code route-specific copy.
       - Premium minimal visual direction is preserved: editorial spacing, square geometry, hairline borders, restrained black/ivory/deep burgundy palette, no decorative shadows, and no rounded-card language unless deliberately changed.
       - Text does not use viewport-width font scaling or negative letter spacing.

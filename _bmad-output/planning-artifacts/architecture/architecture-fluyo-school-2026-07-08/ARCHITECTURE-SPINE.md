@@ -7,7 +7,7 @@ paradigm: Layered Nuxt Presentation Architecture
 scope: Production architecture for the bilingual Fluyo School website on Nuxt and Cloudflare Pages
 status: final
 created: 2026-07-08
-updated: 2026-07-08
+updated: 2026-07-09
 binds:
   - production-site
   - home-page
@@ -51,14 +51,14 @@ flowchart TD
   Sections --> Cta["app/composables/useTelegramCta.ts"]
   Sections --> Tracking["app/composables/useTracking.ts"]
   Pages --> Locale["app/composables/useLocale.ts"]
-  Ui --> Tokens["app/assets/css/tokens.css"]
+  Ui --> Tokens["Tailwind theme tokens + SCSS base styles"]
   Content --> Assets["public/assets + asset metadata"]
   Cta --> Telegram["Telegram external URL"]
   Tracking --> Analytics["Analytics provider adapter"]
   Server["server/api only when needed"] --> Cloudflare["Cloudflare bindings/runtime"]
 ```
 
-Routes compose sections. Sections consume typed content, UI primitives, and composables. UI primitives consume only tokens. Platform code stays in Nitro/server or Cloudflare config. No lower layer imports a route.
+Routes compose sections. Sections consume typed content, UI primitives, and composables. UI primitives consume Tailwind utilities backed by project theme tokens. Platform code stays in Nitro/server or Cloudflare config. No lower layer imports a route.
 
 ## Invariants & Rules
 
@@ -66,7 +66,7 @@ Routes compose sections. Sections consume typed content, UI primitives, and comp
 
 - **Binds:** all app source.
 - **Prevents:** independently built pages creating incompatible content access, UI primitives, CTA behavior, or platform assumptions.
-- **Rule:** `app/pages` and layouts may compose sections; `app/components/sections` may consume typed content, UI primitives, and composables; `app/components/ui` may consume only CSS tokens and framework primitives; `server/` may not import Vue UI; `app/data` may not import routes or components.
+- **Rule:** `app/pages` and layouts may compose sections; `app/components/sections` may consume typed content, UI primitives, and composables; `app/components/ui` may consume only Tailwind utilities backed by project theme tokens plus framework primitives; `server/` may not import Vue UI; `app/data` may not import routes or components.
 
 ### AD-2 - Four-route production information architecture [ADOPTED]
 
@@ -102,7 +102,7 @@ Routes compose sections. Sections consume typed content, UI primitives, and comp
 
 - **Binds:** in-code-ui-foundation, visual consistency, future section implementation.
 - **Prevents:** a standalone WDS design-system project, duplicated button/card/section styling, and one-off route visuals that break the premium brand direction.
-- **Rule:** UI foundation lives inside this Nuxt app: CSS custom-property tokens, base UI components, and section primitives under `app/`. There is no separate design-system package or WDS runtime artifact for v1.
+- **Rule:** UI foundation lives inside this Nuxt app: Tailwind CSS theme tokens, SCSS-authored base styles, base UI components, and section primitives under `app/`. There is no separate design-system package or WDS runtime artifact for v1.
 
 ### AD-8 - Asset metadata and privacy boundary
 
@@ -139,7 +139,7 @@ Routes compose sections. Sections consume typed content, UI primitives, and comp
 | Source status | `mock`, `approved`, `hidden`; launch-sensitive records cannot omit status. |
 | CTA context | `path`, `format`, `sourceRoute`, `locale`, `messageIntent`. |
 | Events | Use the seven UX event names in AD-9; event payloads include route and context when available. |
-| Styling | CSS custom properties for color, type scale, spacing, radii, shadows, z-index, and motion; components reference tokens, not raw brand values except inside token definitions. |
+| Styling | Tailwind CSS theme variables for color, type scale, spacing, radii, z-index, and motion; authored global defaults in SCSS; components use Tailwind utilities backed by project tokens, not raw brand values. |
 | SEO | Use one helper fed by page content metadata; do not duplicate title/description logic in pages. |
 | Config | Runtime/deploy behavior belongs in `nuxt.config.ts` and `wrangler.jsonc`; no secrets in source. |
 | Verification | `npm run build` is the baseline production verification until a test runner is intentionally added. |
@@ -151,6 +151,9 @@ Routes compose sections. Sections consume typed content, UI primitives, and comp
 | Nuxt | 4.4.8 |
 | Vue | 3.5.39 |
 | Vue Router | 5.1.0 |
+| Tailwind CSS | 4.3.2 |
+| @tailwindcss/vite | 4.3.2 |
+| Sass | 1.101.0 |
 | Wrangler | 4.105.0 locked; registry latest checked 4.108.0 |
 | nitro-cloudflare-dev | 0.2.2 |
 | @types/node | 26.0.1 locked; registry latest checked 26.1.1 |
@@ -183,8 +186,9 @@ app/
     site-content.ts            # typed bilingual content and launch-sensitive status
     asset-manifest.ts          # metadata for proof/media assets
   assets/css/
-    tokens.css                 # minimal in-code UI foundation tokens
-    main.css                   # global app styles wired from nuxt.config.ts
+    tailwind.css               # Tailwind import and project @theme tokens
+  assets/scss/
+    main.scss                  # authored global base styles wired from nuxt.config.ts
 server/
   api/                         # only Cloudflare-compatible Nitro endpoints when needed
 public/
@@ -236,7 +240,7 @@ erDiagram
 | Ukrainian/English content | `app/data/site-content.ts`, `useLocale.ts` | AD-3, AD-6 |
 | Localized SEO metadata | page content metadata, SEO helper | AD-3, AD-11 |
 | Telegram booking | `useTelegramCta.ts`, CTA UI components | AD-5, AD-9 |
-| Minimal UI foundation | `app/assets/css/tokens.css`, `app/components/ui` | AD-7 |
+| Minimal UI foundation | `app/assets/css/tailwind.css`, `app/assets/scss/main.scss`, `app/components/ui` | AD-7 |
 | Measurement | `useTracking.ts` | AD-9 |
 | Cloudflare deployment | `nuxt.config.ts`, `wrangler.jsonc`, npm scripts | AD-10 |
 

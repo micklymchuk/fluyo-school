@@ -109,8 +109,8 @@ Do not rebuild the historical 11-section landing prototype. Do not split exam, k
 The design system is implementation-led and must be extracted as Epic 0.
 
 **Required Outputs:**
-- `app/assets/css/tokens.css`
-- `app/assets/css/main.css`
+- `app/assets/css/tailwind.css`
+- `app/assets/scss/main.scss`
 - `app/components/ui/`
 - `app/components/navigation/`
 - `app/components/sections/`

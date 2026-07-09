@@ -1,7 +1,7 @@
 ---
 project_name: 'fluyo-school'
 user_name: 'king'
-date: '2026-06-25'
+date: '2026-07-09'
 sections_completed: ['technology_stack', 'language_rules', 'framework_rules', 'testing_rules', 'quality_rules', 'workflow_rules', 'anti_patterns']
 existing_patterns_found: 4
 status: 'complete'
@@ -18,6 +18,8 @@ _This file contains critical rules and patterns that AI agents must follow when 
 ## Technology Stack & Versions
 
 - Nuxt `4.4.8` with Vue `3.5.39` and Vue Router `5.1.0`.
+- Tailwind CSS `4.3.2` is wired through `@tailwindcss/vite` and Nuxt/Vite.
+- SCSS is enabled through Dart Sass `1.101.0`.
 - Project uses ESM (`"type": "module"` in `package.json`).
 - TypeScript is managed through Nuxt-generated tsconfig references under `.nuxt/`.
 - Deployment target is Cloudflare Pages via Nitro `cloudflare-pages`.
@@ -42,6 +44,7 @@ _This file contains critical rules and patterns that AI agents must follow when 
 
 - Follow Nuxt 4 conventions: app code belongs under `app/`, server code under `server/`, and static public assets under `public/`.
 - Keep `nuxt.config.ts` as the source of runtime/deployment behavior; Cloudflare Pages is configured through Nitro `preset: "cloudflare-pages"`.
+- Keep Tailwind wired through `@tailwindcss/vite` in `nuxt.config.ts`; do not switch to another Tailwind integration without an explicit architecture/product decision.
 - Preserve the `nitro-cloudflare-dev` module while local Cloudflare runtime behavior is needed.
 - Use Vue single-file components for UI. The current app entry is `app/app.vue`; replace `NuxtWelcome` when building the real application surface.
 - Keep `NuxtRouteAnnouncer` in the root app unless there is a deliberate accessibility replacement.
@@ -51,6 +54,7 @@ _This file contains critical rules and patterns that AI agents must follow when 
 ### Testing Rules
 
 - No test runner or test directory is configured yet; do not assume Vitest, Jest, or Playwright without adding the dependency and config intentionally.
+- `npm run test:ui-foundation` is a dependency-free verification script for the Tailwind/SCSS UI foundation; it is not a general test runner.
 - When adding tests for Nuxt/Vue code, colocate or organize them consistently with the first chosen project test convention and document that convention here.
 - For Cloudflare/Nitro server behavior, prefer tests that exercise Nitro handlers with Cloudflare-compatible request/context assumptions.
 - Do not treat generated `.nuxt`, `dist`, `.wrangler`, or Cloudflare type output as test targets.
@@ -59,6 +63,8 @@ _This file contains critical rules and patterns that AI agents must follow when 
 ### Code Quality & Style Rules
 
 - No ESLint, Prettier, Biome, or style config is present yet; preserve surrounding file style instead of inventing a new formatter convention.
+- Custom visual tokens belong in Tailwind `@theme` variables in `app/assets/css/tailwind.css`; Vue components should consume Tailwind utilities backed by those tokens instead of raw brand literals.
+- Authored global base styles belong in `app/assets/scss/main.scss`; keep them small and use Tailwind theme variables for token values.
 - Keep generated/build artifacts out of source edits: `.nuxt`, `.output`, `.nitro`, `.cache`, `dist`, `.wrangler`, and `node_modules` are ignored outputs.
 - Do not commit local secrets: `.env`, `.env.*`, and `.dev.vars*` are ignored except example files.
 - Prefer small, conventional Nuxt/Vue files over broad abstractions while the app is still starter-level.
@@ -81,6 +87,7 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Do not edit generated Nuxt or Cloudflare output files (`.nuxt`, `dist`, `.wrangler`, `worker-configuration.d.ts`) as source-of-truth code.
 - Do not remove Cloudflare compatibility settings casually; both Nuxt Nitro and Wrangler currently enable Node compatibility.
 - Do not introduce dependencies that require unsupported runtime APIs without validating Cloudflare Pages compatibility.
+- Do not reintroduce `app/assets/css/tokens.css` or `app/assets/css/main.css` as parallel token/global-style sources; Tailwind theme CSS plus SCSS are the styling substrate.
 - Do not hardcode secrets or environment-specific values into app/server code; use environment bindings or ignored local env files.
 - Do not claim test coverage exists until a test runner and test scripts are actually added.
 - Do not leave `NuxtWelcome` in place when implementing real product UI; it is only the starter placeholder.
@@ -104,4 +111,4 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Review periodically for outdated rules.
 - Remove rules that become obvious over time.
 
-Last Updated: 2026-06-25
+Last Updated: 2026-07-09

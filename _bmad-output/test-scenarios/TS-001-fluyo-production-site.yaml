@@ -182,9 +182,9 @@ design_system_validation:
     - FAQ accordion row
     - CTA strip
   token_verification:
-    colors: Components use CSS custom properties from app/assets/css/tokens.css, not scattered raw brand values outside token definitions.
+    colors: Components use Tailwind utilities backed by app/assets/css/tailwind.css theme tokens, not scattered raw brand values outside token definitions.
     typography: Type scale is stable and does not use viewport-width font scaling.
-    spacing: Section and component spacing follow reusable custom properties or shared layout primitives.
+    spacing: Section and component spacing follow Tailwind theme spacing tokens or shared layout primitives.
     borders: Hairline borders and square geometry match the approved visual direction unless a documented implementation decision changes it.
     shadows: Decorative box shadows are absent unless explicitly approved for a functional overlay or focus treatment.
     motion: Motion is restrained, respects reduced-motion preferences, and is not required for understanding content.

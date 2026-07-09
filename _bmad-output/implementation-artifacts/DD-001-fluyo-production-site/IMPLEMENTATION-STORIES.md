@@ -42,7 +42,7 @@ No feature branch was created for this planning-only artifact. Create the implem
 
 ## Work Item Inventory
 
-- Create `app/assets/css/tokens.css` and `app/assets/css/main.css`.
+- Create the Tailwind/SCSS UI foundation with `app/assets/css/tailwind.css` for Tailwind `@theme` tokens and `app/assets/scss/main.scss` for authored global base styles.
 - Replace starter `NuxtWelcome` with a real Nuxt app shell while preserving `NuxtRouteAnnouncer`.
 - Add default layout, global header, mobile navigation, language control, Telegram CTA, and footer/contact strip.
 - Add route-agnostic UI primitives and section primitives under `app/components/ui/`, `app/components/navigation/`, and `app/components/sections/`.
@@ -63,7 +63,7 @@ No feature branch was created for this planning-only artifact. Create the implem
 - [ ] Telegram CTA links are built through one helper and preserve available `path`, `format`, `sourceRoute`, `locale`, and `messageIntent` context.
 - [ ] Analytics events use only `path_card_click`, `program_path_view`, `price_preview_view`, `pricing_view`, `teacher_proof_view`, `telegram_click`, and `telegram_context`.
 - [ ] Launch-sensitive records have explicit source status and mock records cannot ship as approved public truth.
-- [ ] UI uses the in-code foundation: tokens, primitives, section patterns, square geometry, hairline borders, restrained palette, no decorative shadows.
+- [ ] UI uses the in-code foundation: Tailwind theme tokens, SCSS base styles, primitives, section patterns, square geometry, hairline borders, restrained palette, no decorative shadows.
 - [ ] Text uses stable type sizes, no viewport-width font scaling, and no negative letter spacing.
 - [ ] Routes have no horizontal overflow at 375, 428, 768, 1440, or 1920 widths.
 - [ ] `npm run build` passes with the Cloudflare Pages Nitro preset.
