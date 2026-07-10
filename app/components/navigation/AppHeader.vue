@@ -1,0 +1,120 @@
+<script setup lang="ts">
+import { Instagram, Telegram } from '@iconoir/vue'
+import { computed } from 'vue'
+import HeaderLink from '~/components/navigation/HeaderLink.vue'
+import LanguageControl from '~/components/navigation/LanguageControl.vue'
+import MobileNav from '~/components/navigation/MobileNav.vue'
+import UiIconButton from '~/components/ui/UiIconButton.vue'
+import UiLogo from '~/components/ui/UiLogo.vue'
+import { instagramAction, primaryNavigationLinks, telegramAction } from './navigationLinks'
+
+const props = withDefaults(defineProps<{
+  instagramHref?: string
+  instagramLabel?: string
+  telegramHref?: string
+  telegramLabel?: string
+}>(), {
+  instagramHref: instagramAction.href,
+  instagramLabel: instagramAction.label,
+  telegramHref: telegramAction.href,
+  telegramLabel: telegramAction.label
+})
+
+const telegramTarget = computed(() => props.telegramHref)
+const instagramTarget = computed(() => props.instagramHref)
+const instagramLabel = computed(() => props.instagramLabel)
+</script>
+
+<template>
+  <header class="app-header">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="header-inner">
+      <UiLogo class="brand-logo brand-logo--short" to="/" variant="short" size="compact" />
+      <UiLogo class="brand-logo brand-logo--full" to="/" variant="full" size="compact" />
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <HeaderLink
+          v-for="link in primaryNavigationLinks"
+          :key="link.to"
+          :to="link.to"
+          :label="link.label"
+          display="desktop"
+        />
+      </nav>
+
+      <div class="header-actions">
+        <slot name="language-control">
+          <LanguageControl />
+        </slot>
+        <UiIconButton
+          class="instagram-link"
+          :href="instagramTarget"
+          :icon="Instagram"
+          :label="instagramLabel"
+          external
+          size="compact"
+          variant="ghost"
+        />
+        <UiIconButton
+          class="telegram-cta"
+          :href="telegramTarget"
+          :icon="Telegram"
+          :label="telegramLabel"
+          external
+          size="compact"
+          variant="primary"
+        />
+      </div>
+
+      <MobileNav
+        class="mobile-nav-shell"
+        :instagram-href="instagramTarget"
+        :instagram-label="instagramLabel"
+        :telegram-href="telegramTarget"
+        :telegram-label="telegramLabel"
+      >
+        <template #language-control>
+          <slot name="language-control">
+            <LanguageControl />
+          </slot>
+        </template>
+      </MobileNav>
+    </div>
+  </header>
+</template>
+
+<style scoped>
+@reference "~/assets/css/tailwind.css";
+
+.app-header {
+  @apply sticky top-0 z-header bg-page text-text;
+}
+
+.skip-link {
+  @apply sr-only focus:not-sr-only focus:absolute focus:left-page-gutter focus:top-page-gutter focus:z-overlay focus:rounded-control focus:bg-surface focus:px-4 focus:py-3 focus:text-text;
+}
+
+.header-inner {
+  @apply mx-auto flex min-h-16 w-full max-w-6xl items-center gap-component-gap px-page-gutter;
+}
+
+.brand-logo--short {
+  @apply inline-flex sm:hidden;
+}
+
+.brand-logo--full {
+  @apply hidden sm:inline-flex;
+}
+
+.desktop-nav {
+  @apply ml-auto hidden items-center gap-4 lg:flex;
+}
+
+.header-actions {
+  @apply ml-auto hidden items-center gap-2 lg:flex;
+}
+
+.mobile-nav-shell {
+  @apply ml-auto lg:hidden;
+}
+</style>

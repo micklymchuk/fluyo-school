@@ -10,9 +10,11 @@
     "postinstall": "nuxt prepare",
     "deploy": "npm run build && wrangler pages deploy",
     "cf-typegen": "wrangler types",
-    "test:ui-foundation": "node scripts/verify-ui-foundation.mjs"
+    "test:ui-foundation": "node scripts/verify-ui-foundation.mjs",
+    "test:app-shell": "node scripts/verify-ui-primitives-and-app-shell.mjs"
   },
   "dependencies": {
+    "@iconoir/vue": "^7.11.1",
     "nuxt": "^4.4.8",
     "vue": "^3.5.38",
     "vue-router": "^5.1.0"

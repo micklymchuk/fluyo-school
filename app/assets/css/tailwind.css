@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme static {
-  --color-page: #fbfaf7;
+  --color-page: #ffffff;
   --color-surface: #ffffff;
-  --color-surface-muted: #f1eee8;
+  --color-surface-muted: #fbfaf7;
   --color-surface-inverse: #14110f;
   --color-text: #191715;
   --color-text-muted: #625c54;
@@ -39,6 +39,7 @@
   --spacing-page-gutter: 1rem;
   --spacing-section: 4rem;
   --spacing-section-compact: 2.5rem;
+  --spacing-section-spacious: 5.5rem;
   --spacing-component-gap: 1.25rem;
   --spacing-card-padding: 1.25rem;
   --spacing-control-compact: 0.75rem;
