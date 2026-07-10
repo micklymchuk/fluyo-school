@@ -63,7 +63,9 @@ _This file contains critical rules and patterns that AI agents must follow when 
 ### Code Quality & Style Rules
 
 - No ESLint, Prettier, Biome, or style config is present yet; preserve surrounding file style instead of inventing a new formatter convention.
-- Custom visual tokens belong in Tailwind `@theme` variables in `app/assets/css/tailwind.css`; Vue components should consume Tailwind utilities backed by those tokens instead of raw brand literals.
+- Global custom Tailwind tokens are allowed and expected: visual tokens belong in Tailwind `@theme` variables in `app/assets/css/tailwind.css`.
+- Vue component style should stay readable: prefer named component-local classes such as `section-header` or `header-link` in templates, then define those classes in the same Vue SFC `<style>` block with Tailwind `@apply`.
+- Component `<style>` blocks should use `@apply` with utilities backed by the global Tailwind tokens; do not dump long Tailwind utility strings into templates and do not hard-code raw brand values in component CSS.
 - Authored global base styles belong in `app/assets/scss/main.scss`; keep them small and use Tailwind theme variables for token values.
 - Keep generated/build artifacts out of source edits: `.nuxt`, `.output`, `.nitro`, `.cache`, `dist`, `.wrangler`, and `node_modules` are ignored outputs.
 - Do not commit local secrets: `.env`, `.env.*`, and `.dev.vars*` are ignored except example files.
