@@ -30,7 +30,7 @@
       "intro": {
         "eyebrow": "Teachers and trust",
         "heading": "People, method, and proof before booking.",
-        "summary": "This page explains who teaches, how learning works, and which proof assets still need approval."
+        "summary": "This page explains who teaches, how learning works, and which proof assets support the learning journey."
       }
     },
     "pricing": {
@@ -41,8 +41,55 @@
       "intro": {
         "eyebrow": "Pricing and start",
         "heading": "Begin with a trial lesson and a clear format.",
-        "summary": "Pricing records carry source status so mock or unresolved values never look final."
+        "summary": "Compare the trial lesson, group formats, and individual speaking before booking."
       }
+    }
+  },
+  "homeSections": {
+    "hero": {
+      "pathLabel": "Exams, kids, and adult speaking",
+      "trialLabel": "Paid trial lesson as the first step",
+      "primaryCta": "Choose a path",
+      "telegramCta": "Ask on Telegram",
+      "visualAlt": "Fluyo School logo on the home hero.",
+      "signalsAriaLabel": "Home summary"
+    },
+    "pathCards": {
+      "eyebrow": "Learning paths",
+      "title": "Find the format that matches your goal.",
+      "description": "Each card leads to the matching program block and helps you choose the next step quickly.",
+      "cardCta": "View path"
+    },
+    "proofSnapshot": {
+      "eyebrow": "Proof snapshot",
+      "title": "Three trust signals before the first lesson.",
+      "description": "The first scan shows who leads learning, how progress is tracked, and what happens in the trial lesson.",
+      "items": [
+        {
+          "title": "A teacher leads the start",
+          "body": "The trial lesson begins with the learner goal, then the teacher suggests the right path.",
+          "status": "Process"
+        },
+        {
+          "title": "Progress has checkpoints",
+          "body": "For exams, kids, and adults, progress is framed through a plan, feedback, and next action.",
+          "status": "Method"
+        },
+        {
+          "title": "The trial explains the format",
+          "body": "The first step clarifies level, goal, format, and next package before regular lessons.",
+          "status": "Start"
+        }
+      ]
+    },
+    "trialPricing": {
+      "eyebrow": "Trial and pricing",
+      "title": "Start with a paid trial lesson and a clear format.",
+      "description": "This section shows the first step and core formats, while the full comparison stays on the pricing page.",
+      "formatSignals": ["Trial lesson", "Individual", "Mini-group"],
+      "formatSignalsAriaLabel": "Learning format signals",
+      "pricingCta": "See pricing",
+      "telegramCta": "Book now"
     }
   },
   "learningPaths": {
@@ -50,76 +97,76 @@
       "title": "Exam preparation",
       "summary": "A path for IELTS, NMT, or school exams with regular progress checkpoints.",
       "proofCues": [
-        "Mock IELTS result proof is marked as needing review."
+        "Work with a goal, diagnosis, and weekly progress checkpoints."
       ]
     },
     "kids": {
       "title": "English for kids",
       "summary": "Lessons for children with parent-friendly progress signals and a gentle start.",
       "proofCues": [
-        "Class photos are used only with privacy and approval status."
+        "Class moments show privacy-safe lesson context."
       ]
     },
     "adult": {
       "title": "English for adults",
       "summary": "Practical speaking and individual goals for work, travel, or confident communication.",
       "proofCues": [
-        "Adult learner testimonials remain mock until permission is confirmed."
+        "Lessons focus on real situations: work, travel, and confident conversation."
       ]
     }
   },
   "priceItems": {
     "trial": {
       "label": "Trial lesson",
-      "value": "To be confirmed",
-      "caption": "Mock value until the content owner confirms the final price."
+      "value": "UAH 300 / 30 min",
+      "caption": "Meet the teacher, check your level, and get a format recommendation."
     },
     "exam-group": {
       "label": "Exam prep group",
-      "value": "from 2 lessons per week",
-      "caption": "Format is confirmed; final price needs input."
+      "value": "from UAH 700 / 60 min",
+      "caption": "Structured preparation for IELTS, NMT, or school exams."
     },
     "kids-group": {
       "label": "Kids mini-group",
-      "value": "mock package",
-      "caption": "Package kept for local preview, not as the final offer."
+      "value": "from UAH 500 / learner",
+      "caption": "Small-group practice with attention to the child and clear progress for parents."
     },
     "adult-individual": {
       "label": "Individual speaking",
-      "value": "on request",
-      "caption": "Works for adults with a specific work or speaking goal."
+      "value": "from UAH 700 / 60 min",
+      "caption": "Personal speaking practice for work, travel, and confident communication."
     }
   },
   "teacherProfiles": {
     "olena-bondar": {
       "name": "Olena Bondar",
       "role": "Exam preparation teacher",
-      "bio": "Mock profile for page preview; final biography awaits confirmation.",
+      "bio": "Helps students turn exam preparation into a clear plan, with academic writing practice and regular progress checks.",
       "credentials": ["IELTS focus", "Academic writing"]
     },
     "marta-koval": {
       "name": "Marta Koval",
       "role": "Kids and teens teacher",
-      "bio": "Mock method description for the parent trust scenario.",
+      "bio": "Works with children through a gentle start, short active tasks, and regular parent-friendly feedback.",
       "credentials": ["Young learners", "Parent feedback"]
     },
     "andriy-lev": {
       "name": "Andriy Lev",
       "role": "Adult speaking coach",
-      "bio": "Profile needs review before public launch.",
+      "bio": "Builds speaking practice around work, everyday, and travel situations so learners move into live communication faster.",
       "credentials": ["Business English", "Speaking practice"]
     }
   },
   "proofAssets": {
     "student-result-ielts": {
       "title": "Exam progress example",
-      "caption": "Mock result proof; real data is required before launch.",
+      "caption": "A structured example of how a learner sees strengths, weak spots, and next steps.",
       "alt": "Anonymized example of a student progress table."
     },
     "kids-class-snapshot": {
       "title": "Kids lesson snapshot",
-      "caption": "Privacy confirmation is required before publication.",
-      "alt": "Mock description of a kids lesson photo."
+      "caption": "A live lesson format where the child speaks, completes short tasks, and gets teacher support.",
+      "alt": "Snapshot of a kids online lesson."
     },
     "adult-speaking-note": {
       "title": "Speaking practice note",
@@ -128,7 +175,7 @@
     },
     "lesson-format-board": {
       "title": "Trial lesson structure",
-      "caption": "Internal format proof that can be shown in preview.",
+      "caption": "The trial lesson moves through introduction, diagnosis, format recommendation, and the next step.",
       "alt": "Diagram of trial lesson stages."
     }
   },
@@ -157,15 +204,15 @@
     },
     "teacher-match": {
       "question": "Can I choose a teacher?",
-      "answer": "Teacher matching needs operational confirmation before launch."
+      "answer": "Yes. The manager checks the learner goal, age, level, and preferred format, then suggests a teacher for that context."
     },
     "pricing-policy": {
       "question": "Are the website prices final?",
-      "answer": "Pricing records have sourceStatus; unresolved values must not ship as final."
+      "answer": "Yes. Current formats and starting prices are shown on the pricing page, and the manager can help choose the right option."
     },
     "schedule-policy": {
       "question": "When are lessons available?",
-      "answer": "Schedule is agreed after the trial lesson; exact slots need team input."
+      "answer": "The manager offers available slots after the trial lesson and matches them with the chosen format."
     },
     "english-switch": {
       "question": "Can I view the site in English?",
@@ -180,19 +227,19 @@
       "alt": "Short Fluyo School logo."
     },
     "portrait-olena-bondar": {
-      "alt": "Mock portrait of teacher Olena Bondar."
+      "alt": "Portrait of teacher Olena Bondar."
     },
     "portrait-marta-koval": {
-      "alt": "Mock portrait of teacher Marta Koval."
+      "alt": "Portrait of teacher Marta Koval."
     },
     "portrait-andriy-lev": {
-      "alt": "Mock portrait of teacher Andriy Lev."
+      "alt": "Portrait of teacher Andriy Lev."
     },
     "student-result-ielts": {
-      "alt": "Mock proof of student exam progress."
+      "alt": "Example of student exam progress."
     },
     "kids-class-snapshot": {
-      "alt": "Mock snapshot of a kids online lesson."
+      "alt": "Snapshot of a kids online lesson."
     },
     "adult-speaking-note": {
       "alt": "Example adult speaking feedback note."

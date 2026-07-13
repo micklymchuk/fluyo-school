@@ -4,8 +4,6 @@ export type Locale = (typeof SUPPORTED_LOCALES)[number]
 export const DEFAULT_LOCALE = 'uk' satisfies Locale
 
 export type LocalizedString = Record<Locale, string>
-export type SourceStatus = 'approved' | 'mock' | 'hidden' | 'needs_input' | 'needs_review'
-export type RenderMode = 'preview' | 'production'
 
 export type PageRouteId = 'home' | 'programs' | 'teachers' | 'pricing'
 export type PagePath = '/' | '/programs' | '/teachers' | '/pricing'
@@ -61,7 +59,6 @@ export type CtaIntent = {
   path: PagePath
   format: CtaFormat
   sourceRoute: PageRouteId
-  locale: Locale
   messageIntent: MessageIntent
 }
 
@@ -69,7 +66,7 @@ export type LearningPath = {
   id: LearningPathId
   anchorId: string
   priceHintIds: readonly PriceItemId[]
-  ctaIntent: Record<Locale, CtaIntent>
+  ctaIntent: CtaIntent
 }
 
 export type PriceFormat = 'trial' | 'group' | 'individual'
@@ -77,37 +74,25 @@ export type PriceFormat = 'trial' | 'group' | 'individual'
 export type PriceItem = {
   id: PriceItemId
   format: PriceFormat
-  sourceStatus: SourceStatus
-  requiredForLaunch: boolean
 }
 
 export type TeacherProfile = {
   id: TeacherProfileId
   audienceFit: readonly LearningPathId[]
   portraitAssetId: string
-  sourceStatus: SourceStatus
 }
 
 export type ProofKind = 'result' | 'classroom' | 'method' | 'format'
-export type ApprovalStatus = 'approved' | 'pending' | 'blocked'
-export type PrivacyStatus = 'public' | 'anonymized' | 'withheld'
 
 export type ProofAsset = {
   id: ProofAssetId
   kind: ProofKind
-  approvalStatus: ApprovalStatus
-  privacyStatus: PrivacyStatus
   usageContext: readonly PageRouteId[]
-  sourceStatus: SourceStatus
 }
-
-export type PermissionStatus = 'approved' | 'pending' | 'not_requested'
 
 export type Testimonial = {
   id: TestimonialId
   audience: LearningPathId
-  permissionStatus: PermissionStatus
-  sourceStatus: SourceStatus
 }
 
 export type PolicySensitivity = 'standard' | 'policy_sensitive'
@@ -115,5 +100,4 @@ export type PolicySensitivity = 'standard' | 'policy_sensitive'
 export type FaqItem = {
   id: FaqItemId
   policySensitivity: PolicySensitivity
-  sourceStatus: SourceStatus
 }

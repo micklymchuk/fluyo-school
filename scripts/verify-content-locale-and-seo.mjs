@@ -5,12 +5,9 @@ const root = process.cwd()
 const files = {
   packageJson: resolve(root, 'package.json'),
   nuxtConfig: resolve(root, 'nuxt.config.ts'),
-  i18nConfig: resolve(root, 'i18n/i18n.config.ts'),
-  messageAdapter: resolve(root, 'app/i18n/messages.ts'),
-  ukMessages: resolve(root, 'i18n/locales/uk.json'),
-  enMessages: resolve(root, 'i18n/locales/en.json'),
-  pageContentAdapter: resolve(root, 'app/data/page-content-adapter.ts'),
-  localizedContentAdapter: resolve(root, 'app/data/localized-content-adapter.ts'),
+  i18nConfig: resolve(root, 'app/i18n/i18n.config.ts'),
+  ukMessages: resolve(root, 'app/i18n/locales/uk.json'),
+  enMessages: resolve(root, 'app/i18n/locales/en.json'),
   siteContent: resolve(root, 'app/data/site-content.ts'),
   contentIndex: resolve(root, 'app/data/content/index.ts'),
   contentTypes: resolve(root, 'app/data/content/types.ts'),
@@ -32,7 +29,6 @@ const files = {
 
 const requiredTypes = [
   'LocalizedString',
-  'SourceStatus',
   'PageContent',
   'LearningPath',
   'PriceItem',
@@ -67,13 +63,12 @@ const requiredAssetIds = [
   'adult-speaking-note',
   'lesson-format-board'
 ]
-const launchSensitiveCollections = [
-  { sourceKey: 'contentPricing', exportName: 'priceItems', label: 'content/pricing.ts' },
-  { sourceKey: 'contentTeachers', exportName: 'teacherProfiles', label: 'content/teachers.ts' },
-  { sourceKey: 'contentProof', exportName: 'proofAssets', label: 'content/proof.ts' },
-  { sourceKey: 'contentTestimonials', exportName: 'testimonials', label: 'content/testimonials.ts' },
-  { sourceKey: 'contentFaq', exportName: 'faqItems', label: 'content/faq.ts' },
-  { sourceKey: 'assetManifest', exportName: 'assetManifest', label: 'asset-manifest.ts' }
+const requiredHomeSectionIds = ['hero', 'pathCards', 'proofSnapshot', 'trialPricing']
+
+const forbiddenRuntimeI18nAdapters = [
+  resolve(root, 'app/i18n/messages.ts'),
+  resolve(root, 'app/data/localized-content-adapter.ts'),
+  resolve(root, 'app/data/page-content-adapter.ts')
 ]
 
 function fail(message) {
@@ -88,6 +83,10 @@ function assert(condition, message) {
 
 function assertFile(path) {
   assert(existsSync(path), `Missing required file: ${relative(root, path)}`)
+}
+
+function assertMissingFile(path) {
+  assert(!existsSync(path), `Custom runtime i18n adapter must not exist: ${relative(root, path)}`)
 }
 
 function read(path) {
@@ -215,19 +214,6 @@ function getTopLevelObjectRecords(arrayBody, label) {
   return records
 }
 
-function assertEveryArrayRecordHasSourceStatus(source, exportName, label) {
-  const arrayBody = getExportedArrayBody(source, exportName, label)
-  const records = getTopLevelObjectRecords(arrayBody, label)
-
-  records.forEach((record, index) => {
-    assertPattern(
-      record,
-      /sourceStatus:\s*'(approved|mock|hidden|needs_input|needs_review)'/,
-      `${label} ${exportName}[${index}] must include an allowed sourceStatus`
-    )
-  })
-}
-
 function listFiles(path) {
   if (!existsSync(path)) {
     return []
@@ -247,6 +233,17 @@ function listFiles(path) {
 function assertNoInlineLocalizedCopy(source, label) {
   assert(!source.includes('defineLocalized'), `${label} must not define inline localized copy`)
   assert(!/[А-Яа-яІіЇїЄєҐґ]/.test(source), `${label} must not contain Ukrainian public copy`)
+}
+
+function assertAssetManifestSrcFilesExist(source) {
+  const srcValues = [...source.matchAll(/src:\s*['"]([^'"]+)['"]/g)].map((match) => match[1])
+
+  assert(srcValues.length > 0, 'asset-manifest.ts must list public asset files')
+
+  for (const src of srcValues) {
+    assert(src.startsWith('/'), `asset-manifest.ts src must use an absolute public path: ${src}`)
+    assertFile(resolve(root, 'public', src.slice(1)))
+  }
 }
 
 function assertLocaleMessageTree(messages, locale) {
@@ -302,10 +299,70 @@ function assertArrayMessageRecords(messages, locale, section, ids, fields) {
   }
 }
 
+function getMessageShape(value) {
+  if (Array.isArray(value)) {
+    return value.map((item) => getMessageShape(item))
+  }
+
+  if (typeof value === 'object' && value !== null) {
+    return Object.fromEntries(
+      Object.keys(value)
+        .sort()
+        .map((key) => [key, getMessageShape(value[key])])
+    )
+  }
+
+  return typeof value
+}
+
+function assertEquivalentMessageShape(left, right, leftLabel, rightLabel) {
+  assert(
+    JSON.stringify(getMessageShape(left)) === JSON.stringify(getMessageShape(right)),
+    `${leftLabel} and ${rightLabel} must keep equivalent message structure`
+  )
+}
+
+function assertHomeSectionMessages(messages, locale) {
+  assert(typeof messages.homeSections === 'object' && messages.homeSections !== null, `${locale}.json must contain homeSections messages`)
+
+  for (const id of requiredHomeSectionIds) {
+    assert(messages.homeSections[id], `${locale}.json homeSections.${id} must exist`)
+  }
+
+  const hero = messages.homeSections.hero
+  for (const field of ['pathLabel', 'trialLabel', 'primaryCta', 'telegramCta', 'visualAlt', 'signalsAriaLabel']) {
+    assert(typeof hero[field] === 'string' && hero[field].length > 0, `${locale}.json homeSections.hero.${field} must be a non-empty string`)
+  }
+
+  const pathCards = messages.homeSections.pathCards
+  for (const field of ['eyebrow', 'title', 'description', 'cardCta']) {
+    assert(typeof pathCards[field] === 'string' && pathCards[field].length > 0, `${locale}.json homeSections.pathCards.${field} must be a non-empty string`)
+  }
+
+  const proofSnapshot = messages.homeSections.proofSnapshot
+  for (const field of ['eyebrow', 'title', 'description']) {
+    assert(typeof proofSnapshot[field] === 'string' && proofSnapshot[field].length > 0, `${locale}.json homeSections.proofSnapshot.${field} must be a non-empty string`)
+  }
+
+  assert(Array.isArray(proofSnapshot.items) && proofSnapshot.items.length === 3, `${locale}.json homeSections.proofSnapshot.items must contain three items`)
+  for (const item of proofSnapshot.items) {
+    for (const field of ['title', 'body', 'status']) {
+      assert(typeof item[field] === 'string' && item[field].length > 0, `${locale}.json homeSections.proofSnapshot.items.${field} must be a non-empty string`)
+    }
+  }
+
+  const trialPricing = messages.homeSections.trialPricing
+  for (const field of ['eyebrow', 'title', 'description', 'formatSignalsAriaLabel', 'pricingCta', 'telegramCta']) {
+    assert(typeof trialPricing[field] === 'string' && trialPricing[field].length > 0, `${locale}.json homeSections.trialPricing.${field} must be a non-empty string`)
+  }
+
+  assert(Array.isArray(trialPricing.formatSignals) && trialPricing.formatSignals.length === 3, `${locale}.json homeSections.trialPricing.formatSignals must contain three signals`)
+  assert(trialPricing.formatSignals.every((item) => typeof item === 'string' && item.length > 0), `${locale}.json homeSections.trialPricing.formatSignals must contain only non-empty strings`)
+}
+
 function assertNoPrimitiveRouteCopy() {
   const primitiveFiles = [
-    ...listFiles(resolve(root, 'app/components/ui')),
-    ...listFiles(resolve(root, 'app/components/sections'))
+    ...listFiles(resolve(root, 'app/components/ui'))
   ].filter((path) => /\.(?:vue|ts)$/.test(path))
 
   for (const path of primitiveFiles) {
@@ -373,11 +430,8 @@ assert(
 
 const nuxtConfig = read(files.nuxtConfig)
 const i18nConfig = read(files.i18nConfig)
-const messageAdapter = read(files.messageAdapter)
 const ukMessages = readJson(files.ukMessages)
 const enMessages = readJson(files.enMessages)
-const pageContentAdapter = read(files.pageContentAdapter)
-const localizedContentAdapter = read(files.localizedContentAdapter)
 const siteContent = read(files.siteContent)
 const contentIndex = read(files.contentIndex)
 const contentTypes = read(files.contentTypes)
@@ -396,37 +450,22 @@ assertPattern(nuxtConfig, /modules:\s*\[[\s\S]*['"]@nuxtjs\/i18n['"]/, 'nuxt.con
 assertPattern(nuxtConfig, /i18n:\s*\{[\s\S]*defaultLocale:\s*['"]uk['"]/, 'Nuxt i18n defaultLocale must be uk')
 assertPattern(nuxtConfig, /i18n:\s*\{[\s\S]*strategy:\s*['"]no_prefix['"]/, 'Nuxt i18n must preserve route structure with no_prefix strategy')
 assertPattern(nuxtConfig, /i18n:\s*\{[\s\S]*detectBrowserLanguage:\s*false/, 'Nuxt i18n browser detection must be disabled so uk stays the default')
-assertPattern(nuxtConfig, /i18n:\s*\{[\s\S]*langDir:\s*['"]locales['"]/, 'Nuxt i18n must load locale files from i18n/locales')
+assertPattern(nuxtConfig, /i18n:\s*\{[\s\S]*restructureDir:\s*['"]app\/i18n['"]/, 'Nuxt i18n must keep i18n files under app/i18n')
+assertPattern(nuxtConfig, /i18n:\s*\{[\s\S]*langDir:\s*['"]locales['"]/, 'Nuxt i18n must load locale files from app/i18n/locales')
 assertPattern(nuxtConfig, /code:\s*['"]uk['"][\s\S]*code:\s*['"]en['"]/, 'Nuxt i18n locales must include uk and en')
 assertPattern(nuxtConfig, /code:\s*['"]uk['"][\s\S]*file:\s*['"]uk\.json['"]/, 'Nuxt i18n must load Ukrainian messages from uk.json')
 assertPattern(nuxtConfig, /code:\s*['"]en['"][\s\S]*file:\s*['"]en\.json['"]/, 'Nuxt i18n must load English messages from en.json')
 assertPattern(i18nConfig, /locale:\s*['"]uk['"]/, 'i18n config must initialize locale as uk')
 assertPattern(i18nConfig, /fallbackLocale:\s*['"]uk['"]/, 'i18n config must fall back to uk')
 assert(!/messages\s*:/.test(i18nConfig), 'i18n config should not inline messages when locale JSON files are configured')
-assertPattern(messageAdapter, /uk\.json/, 'message adapter must import uk.json')
-assertPattern(messageAdapter, /en\.json/, 'message adapter must import en.json')
-assertPattern(messageAdapter, /export const localeMessages\b/, 'message adapter must expose localeMessages')
-assertPattern(messageAdapter, /getRouteMessage/, 'message adapter must expose route message lookup')
-assertPattern(messageAdapter, /getLearningPathMessage/, 'message adapter must expose learning path message lookup')
-assertPattern(messageAdapter, /getPriceItemMessage/, 'message adapter must expose price item message lookup')
-assertPattern(messageAdapter, /getTeacherProfileMessage/, 'message adapter must expose teacher profile message lookup')
-assertPattern(messageAdapter, /getProofAssetMessage/, 'message adapter must expose proof asset message lookup')
-assertPattern(messageAdapter, /getTestimonialMessage/, 'message adapter must expose testimonial message lookup')
-assertPattern(messageAdapter, /getFaqItemMessage/, 'message adapter must expose FAQ message lookup')
-assertPattern(messageAdapter, /getAssetMessage/, 'message adapter must expose asset message lookup')
+for (const path of forbiddenRuntimeI18nAdapters) {
+  assertMissingFile(path)
+}
 assertLocaleMessageTree(ukMessages, 'uk')
 assertLocaleMessageTree(enMessages, 'en')
-assertPattern(pageContentAdapter, /getRouteMessage/, 'page content adapter must be backed by locale JSON messages')
-assertPattern(pageContentAdapter, /getLocalizedPageContent/, 'page content adapter must expose localized page content')
-assertPattern(pageContentAdapter, /getPageSeo/, 'page content adapter must expose a pure SEO metadata reader')
-assertPattern(pageContentAdapter, /throw new Error\(`Missing page content for path:/, 'page content adapter must fail explicitly for unknown paths')
-assertPattern(localizedContentAdapter, /getLocalizedLearningPaths/, 'localized content adapter must expose localized learning paths')
-assertPattern(localizedContentAdapter, /getLocalizedPriceItems/, 'localized content adapter must expose localized price items')
-assertPattern(localizedContentAdapter, /getLocalizedTeacherProfiles/, 'localized content adapter must expose localized teacher profiles')
-assertPattern(localizedContentAdapter, /getLocalizedProofAssets/, 'localized content adapter must expose localized proof assets')
-assertPattern(localizedContentAdapter, /getLocalizedTestimonials/, 'localized content adapter must expose localized testimonials')
-assertPattern(localizedContentAdapter, /getLocalizedFaqItems/, 'localized content adapter must expose localized FAQ items')
-assertPattern(localizedContentAdapter, /getLocalizedAssetManifest/, 'localized content adapter must expose localized asset metadata')
+assertHomeSectionMessages(ukMessages, 'uk')
+assertHomeSectionMessages(enMessages, 'en')
+assertEquivalentMessageShape(ukMessages.homeSections, enMessages.homeSections, 'uk.json homeSections', 'en.json homeSections')
 
 assert(siteContent.trim() === "export * from './content'", 'site-content.ts must stay a tiny compatibility barrel')
 assertPattern(contentIndex, /export \* from ['"]\.\/types['"]/, 'content index must export types')
@@ -437,10 +476,15 @@ assertPattern(contentIndex, /export \* from ['"]\.\/teachers['"]/, 'content inde
 assertPattern(contentIndex, /export \* from ['"]\.\/proof['"]/, 'content index must export proof')
 assertPattern(contentIndex, /export \* from ['"]\.\/testimonials['"]/, 'content index must export testimonials')
 assertPattern(contentIndex, /export \* from ['"]\.\/faq['"]/, 'content index must export FAQ')
+assert(!contentIndex.includes('source-' + 'status'), 'content index must not export removed status helpers')
 
 assertPattern(contentTypes, /export const SUPPORTED_LOCALES\s*=\s*\[\s*'uk'\s*,\s*'en'\s*\]/, 'Supported locales must be uk and en')
 assertPattern(contentTypes, /export const DEFAULT_LOCALE\s*=\s*'uk'/, 'Ukrainian must be the default locale')
-assertPattern(contentTypes, /export type SourceStatus\s*=[\s\S]*'approved'[\s\S]*'mock'[\s\S]*'hidden'[\s\S]*'needs_input'[\s\S]*'needs_review'/, 'SourceStatus must include every allowed launch status')
+assert(!new RegExp(`Source${'Status'}|Render${'Mode'}`).test(contentTypes), 'content types must not include removed status or mode types')
+assertPattern(contentTypes, /export type CtaIntent = \{[\s\S]*path: PagePath[\s\S]*format: CtaFormat[\s\S]*sourceRoute: PageRouteId[\s\S]*messageIntent: MessageIntent[\s\S]*\}/, 'CtaIntent must keep locale-neutral structural CTA metadata')
+assert(!/export type CtaIntent = \{[\s\S]*locale: Locale[\s\S]*\}/.test(contentTypes), 'CtaIntent must not store locale-specific values')
+assertPattern(contentTypes, /ctaIntent: CtaIntent/, 'LearningPath must reference a single locale-neutral CtaIntent')
+assert(!/ctaIntent: Record<Locale, CtaIntent>/.test(contentTypes), 'LearningPath must not store per-locale CTA intent records')
 assertPattern(contentPages, /findPageContentByPath[\s\S]*sitePages\.find/, 'pages.ts must resolve dynamic route paths without unsafe key casts')
 assertPattern(contentPages, /getPageContentByPath/, 'pages.ts must expose exact PagePath lookup for known paths')
 assert(!contentPages.includes('Object.fromEntries'), 'pages.ts must not build casted page lookup objects')
@@ -457,23 +501,10 @@ for (const pagePath of requiredPagePaths) {
 }
 
 assertPattern(contentLearningPaths, /export const learningPaths\b/, 'learning-paths.ts must export learningPaths')
-
-const launchSensitiveSources = {
-  contentPricing,
-  contentTeachers,
-  contentProof,
-  contentTestimonials,
-  contentFaq,
-  assetManifest
-}
-
-for (const collection of launchSensitiveCollections) {
-  assertEveryArrayRecordHasSourceStatus(
-    launchSensitiveSources[collection.sourceKey],
-    collection.exportName,
-    collection.label
-  )
-}
+assertPattern(contentLearningPaths, /ctaIntent\('\/programs', 'programs', 'ask_program'\)/, 'learning-paths.ts must keep exam/adult CTA intent locale-neutral')
+assertPattern(contentLearningPaths, /ctaIntent\('\/programs', 'programs', 'book_trial'\)/, 'learning-paths.ts must keep kids CTA intent locale-neutral')
+assert(!/ctaIntent:\s*\{[\s\S]*(?:uk|en):/.test(contentLearningPaths), 'learning-paths.ts must not store per-locale CTA intent branches')
+assert(!/locale:\s*['"](?:uk|en)['"]/.test(contentLearningPaths), 'learning-paths.ts must not hard-code CTA locales')
 
 assertNoInlineLocalizedCopy(siteContent, 'site-content.ts')
 assertNoInlineLocalizedCopy(contentTypes, 'content/types.ts')
@@ -486,10 +517,32 @@ assertNoInlineLocalizedCopy(contentTestimonials, 'content/testimonials.ts')
 assertNoInlineLocalizedCopy(contentFaq, 'content/faq.ts')
 assertNoInlineLocalizedCopy(assetManifest, 'asset-manifest.ts')
 
-assertPattern(assetManifest, /import type \{[\s\S]*SourceStatus[\s\S]*\} from ['"]~\/data\/content['"]/, 'asset-manifest.ts must reuse SourceStatus from content types')
+const blockedMetadataTokens = [
+  'source' + 'Status',
+  'required' + 'ForLaunch',
+  'needs' + '_input',
+  'needs' + '_review',
+  'mo' + 'ck',
+  'approval' + 'Status',
+  'privacy' + 'Status',
+  'permission' + 'Status'
+]
+const assertNoRemovedMetadata = (source, label) => {
+  for (const token of blockedMetadataTokens) {
+    assert(!source.includes(token), `${label} must use production records without removed metadata`)
+  }
+}
+
+assertNoRemovedMetadata(contentPricing, 'content/pricing.ts')
+assertNoRemovedMetadata(contentTeachers, 'content/teachers.ts')
+assertNoRemovedMetadata(contentProof, 'content/proof.ts')
+assertNoRemovedMetadata(contentTestimonials, 'content/testimonials.ts')
+assertNoRemovedMetadata(contentFaq, 'content/faq.ts')
+assertNoRemovedMetadata(assetManifest, 'asset-manifest.ts')
 assertPattern(assetManifest, /export type AssetManifestEntry\b/, 'asset-manifest.ts must export AssetManifestEntry')
 assertPattern(assetManifest, /export const assetManifest\b/, 'asset-manifest.ts must export assetManifest')
 assert(!/alt:\s*['"]/.test(assetManifest), 'Asset manifest public alt text must live in locale JSON files')
+assertAssetManifestSrcFilesExist(assetManifest)
 
 assertPattern(useLocale, /resolveLocale/, 'useLocale.ts must export a locale resolver')
 assertPattern(useLocale, /DEFAULT_LOCALE/, 'useLocale.ts must use the default locale constant')
@@ -501,9 +554,11 @@ assertPattern(useLocale, /setLocale|setI18nLocale/, 'useLocale.ts must update lo
 assertPattern(useLocale, /path:\s*route\.path/, 'useLocale.ts must preserve route path when switching language')
 
 assertPattern(useSeo, /useSeoMeta|useHead/, 'useSeo.ts must call one Nuxt SEO helper')
-assertPattern(useSeo, /getPageSeo/, 'useSeo.ts must expose a pure SEO metadata reader')
 assertPattern(useSeo, /useLocale/, 'useSeo.ts must follow the active locale')
-assertPattern(useSeo, /page-content-adapter/, 'useSeo.ts must read metadata through the i18n-backed page adapter')
+assertPattern(useSeo, /useI18n/, 'useSeo.ts must use Nuxt i18n directly')
+assertPattern(useSeo, /t\(`pages\.\$\{routeKey\}\.seo\.title`\)/, 'useSeo.ts must read SEO title through t()')
+assertPattern(useSeo, /t\(`pages\.\$\{routeKey\}\.seo\.description`\)/, 'useSeo.ts must read SEO description through t()')
+assert(!/page-content-adapter|localized-content-adapter|i18n\/messages|getLocalized|getPageSeo|localeMessages/.test(useSeo), 'useSeo.ts must not use custom i18n adapters')
 
 const pageSeoCalls = [
   [files.indexPage, "\\/"],
