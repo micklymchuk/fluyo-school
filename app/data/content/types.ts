@@ -5,6 +5,7 @@ export const DEFAULT_LOCALE = 'uk' satisfies Locale
 
 export type LocalizedString = Record<Locale, string>
 export type SourceStatus = 'approved' | 'mock' | 'hidden' | 'needs_input' | 'needs_review'
+export type RenderMode = 'preview' | 'production'
 
 export type PageRouteId = 'home' | 'programs' | 'teachers' | 'pricing'
 export type PagePath = '/' | '/programs' | '/teachers' | '/pricing'

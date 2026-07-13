@@ -1,5 +1,6 @@
 import { assetManifest, type AssetManifestEntry } from './asset-manifest'
 import {
+  filterRenderableContentRecords,
   faqItems,
   learningPaths,
   priceItems,
@@ -11,6 +12,7 @@ import {
   type Locale,
   type PriceItem,
   type ProofAsset,
+  type RenderMode,
   type TeacherProfile,
   type Testimonial
 } from './content'
@@ -46,43 +48,43 @@ export const getLocalizedLearningPaths = (locale: Locale): readonly LocalizedLea
   }))
 }
 
-export const getLocalizedPriceItems = (locale: Locale): readonly LocalizedPriceItem[] => {
-  return priceItems.map((item) => ({
+export const getLocalizedPriceItems = (locale: Locale, renderMode: RenderMode = 'production'): readonly LocalizedPriceItem[] => {
+  return filterRenderableContentRecords(priceItems, renderMode).map((item) => ({
     ...item,
     ...getPriceItemMessage(locale, item.id)
   }))
 }
 
-export const getLocalizedTeacherProfiles = (locale: Locale): readonly LocalizedTeacherProfile[] => {
-  return teacherProfiles.map((item) => ({
+export const getLocalizedTeacherProfiles = (locale: Locale, renderMode: RenderMode = 'production'): readonly LocalizedTeacherProfile[] => {
+  return filterRenderableContentRecords(teacherProfiles, renderMode).map((item) => ({
     ...item,
     ...getTeacherProfileMessage(locale, item.id)
   }))
 }
 
-export const getLocalizedProofAssets = (locale: Locale): readonly LocalizedProofAsset[] => {
-  return proofAssets.map((item) => ({
+export const getLocalizedProofAssets = (locale: Locale, renderMode: RenderMode = 'production'): readonly LocalizedProofAsset[] => {
+  return filterRenderableContentRecords(proofAssets, renderMode).map((item) => ({
     ...item,
     ...getProofAssetMessage(locale, item.id)
   }))
 }
 
-export const getLocalizedTestimonials = (locale: Locale): readonly LocalizedTestimonial[] => {
-  return testimonials.map((item) => ({
+export const getLocalizedTestimonials = (locale: Locale, renderMode: RenderMode = 'production'): readonly LocalizedTestimonial[] => {
+  return filterRenderableContentRecords(testimonials, renderMode).map((item) => ({
     ...item,
     ...getTestimonialMessage(locale, item.id)
   }))
 }
 
-export const getLocalizedFaqItems = (locale: Locale): readonly LocalizedFaqItem[] => {
-  return faqItems.map((item) => ({
+export const getLocalizedFaqItems = (locale: Locale, renderMode: RenderMode = 'production'): readonly LocalizedFaqItem[] => {
+  return filterRenderableContentRecords(faqItems, renderMode).map((item) => ({
     ...item,
     ...getFaqItemMessage(locale, item.id)
   }))
 }
 
-export const getLocalizedAssetManifest = (locale: Locale): readonly LocalizedAssetManifestEntry[] => {
-  return assetManifest.map((item) => ({
+export const getLocalizedAssetManifest = (locale: Locale, renderMode: RenderMode = 'production'): readonly LocalizedAssetManifestEntry[] => {
+  return filterRenderableContentRecords(assetManifest, renderMode).map((item) => ({
     ...item,
     ...getAssetMessage(locale, item.id)
   }))
