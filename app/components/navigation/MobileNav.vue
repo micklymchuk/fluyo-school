@@ -4,17 +4,18 @@ import { computed, nextTick, ref, watch } from 'vue'
 import HeaderLink from '~/components/navigation/HeaderLink.vue'
 import LanguageControl from '~/components/navigation/LanguageControl.vue'
 import UiIconButton from '~/components/ui/UiIconButton.vue'
+import type { CtaContext } from '~/data/content'
 import { instagramAction, primaryNavigationLinks, telegramAction } from './navigationLinks'
 
 const props = withDefaults(defineProps<{
   instagramHref?: string
   instagramLabel?: string
-  telegramHref?: string
+  telegramContext?: CtaContext
   telegramLabel?: string
 }>(), {
   instagramHref: instagramAction.href,
   instagramLabel: instagramAction.label,
-  telegramHref: telegramAction.href,
+  telegramContext: undefined,
   telegramLabel: telegramAction.label
 })
 
@@ -22,9 +23,15 @@ const route = useRoute()
 const isOpen = ref(false)
 const panel = ref<HTMLElement | null>(null)
 
-const telegramTarget = computed(() => props.telegramHref)
 const instagramTarget = computed(() => props.instagramHref)
 const instagramLabel = computed(() => props.instagramLabel)
+const { locale } = useLocale()
+const telegramContext = computed<CtaContext>(() => ({
+  ...(props.telegramContext ?? {}),
+  sourceRoute: 'header',
+  locale: locale.value
+}))
+const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramContext)
 
 watch(() => route.fullPath, () => {
   isOpen.value = false
@@ -139,6 +146,7 @@ function handlePanelTab(event: KeyboardEvent) {
               :label="telegramLabel"
               external
               variant="primary"
+              @click="trackTelegramClick"
             />
           </div>
         </div>

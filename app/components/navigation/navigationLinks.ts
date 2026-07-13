@@ -8,11 +8,15 @@ export type ContactAction = {
   href: string
 }
 
+export type LabeledAction = {
+  label: string
+}
+
 export const primaryNavigationLinks = [
   { label: 'Home', to: '/' },
-  { label: 'Learning Paths', to: '/learning-paths' },
-  { label: 'Teachers & Proof', to: '/teachers-proof' },
-  { label: 'Trial & Pricing', to: '/trial-pricing' }
+  { label: 'Learning Paths', to: '/programs' },
+  { label: 'Teachers & Proof', to: '/teachers' },
+  { label: 'Trial & Pricing', to: '/pricing' }
 ] as const satisfies readonly PrimaryNavigationLink[]
 
 export const instagramAction = {
@@ -21,6 +25,5 @@ export const instagramAction = {
 } as const satisfies ContactAction
 
 export const telegramAction = {
-  label: 'Telegram',
-  href: 'https://t.me/fluyo_school'
-} as const satisfies ContactAction
+  label: 'Telegram'
+} as const satisfies LabeledAction

@@ -3,24 +3,31 @@ import { Instagram, Telegram } from '@iconoir/vue'
 import { computed } from 'vue'
 import UiIconButton from '~/components/ui/UiIconButton.vue'
 import UiLogo from '~/components/ui/UiLogo.vue'
+import type { CtaContext } from '~/data/content'
 import { instagramAction, primaryNavigationLinks, telegramAction } from './navigationLinks'
 
 const props = withDefaults(defineProps<{
   instagramHref?: string
   instagramLabel?: string
-  telegramHref?: string
+  telegramContext?: CtaContext
   telegramLabel?: string
 }>(), {
   instagramHref: instagramAction.href,
   instagramLabel: instagramAction.label,
-  telegramHref: telegramAction.href,
+  telegramContext: undefined,
   telegramLabel: telegramAction.label
 })
 
 const instagramTarget = computed(() => props.instagramHref)
 const instagramLabel = computed(() => props.instagramLabel)
-const telegramTarget = computed(() => props.telegramHref)
 const telegramLabel = computed(() => props.telegramLabel)
+const { locale } = useLocale()
+const telegramContext = computed<CtaContext>(() => ({
+  ...(props.telegramContext ?? {}),
+  sourceRoute: 'footer',
+  locale: locale.value
+}))
+const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramContext)
 </script>
 
 <template>
@@ -55,6 +62,7 @@ const telegramLabel = computed(() => props.telegramLabel)
           external
           size="compact"
           variant="primary"
+          @click="trackTelegramClick"
         />
       </div>
     </div>

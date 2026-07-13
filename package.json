@@ -11,7 +11,9 @@
     "deploy": "npm run build && wrangler pages deploy",
     "cf-typegen": "wrangler types",
     "test:ui-foundation": "node scripts/verify-ui-foundation.mjs",
-    "test:app-shell": "node scripts/verify-ui-primitives-and-app-shell.mjs"
+    "test:app-shell": "node scripts/verify-ui-primitives-and-app-shell.mjs",
+    "test:content-locale": "node scripts/verify-content-locale-and-seo.mjs",
+    "test:telegram-cta": "node scripts/verify-telegram-cta-and-tracking.mjs"
   },
   "dependencies": {
     "@iconoir/vue": "^7.11.1",
@@ -20,6 +22,7 @@
     "vue-router": "^5.1.0"
   },
   "devDependencies": {
+    "@nuxtjs/i18n": "^10.4.1",
     "@tailwindcss/vite": "^4.3.2",
     "@types/node": "^26.0.1",
     "nitro-cloudflare-dev": "^0.2.2",

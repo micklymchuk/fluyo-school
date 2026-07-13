@@ -1,3 +1,7 @@
+<script setup lang="ts">
+useSeo('/teachers')
+</script>
+
 <template>
   <div class="route-shell-anchor" aria-hidden="true" />
 </template>

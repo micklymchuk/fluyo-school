@@ -6,23 +6,35 @@ import LanguageControl from '~/components/navigation/LanguageControl.vue'
 import MobileNav from '~/components/navigation/MobileNav.vue'
 import UiIconButton from '~/components/ui/UiIconButton.vue'
 import UiLogo from '~/components/ui/UiLogo.vue'
+import type { CtaContext } from '~/data/content'
+import type { Locale } from '~/data/content'
 import { instagramAction, primaryNavigationLinks, telegramAction } from './navigationLinks'
 
 const props = withDefaults(defineProps<{
   instagramHref?: string
   instagramLabel?: string
-  telegramHref?: string
+  telegramContext?: CtaContext
   telegramLabel?: string
 }>(), {
   instagramHref: instagramAction.href,
   instagramLabel: instagramAction.label,
-  telegramHref: telegramAction.href,
+  telegramContext: undefined,
   telegramLabel: telegramAction.label
 })
 
-const telegramTarget = computed(() => props.telegramHref)
 const instagramTarget = computed(() => props.instagramHref)
 const instagramLabel = computed(() => props.instagramLabel)
+const { locale, setLocale } = useLocale()
+const telegramContext = computed<CtaContext>(() => ({
+  ...(props.telegramContext ?? {}),
+  sourceRoute: 'header',
+  locale: locale.value
+}))
+const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramContext)
+
+function handleLocaleChange(nextLocale: Locale) {
+  void setLocale(nextLocale)
+}
 </script>
 
 <template>
@@ -44,7 +56,7 @@ const instagramLabel = computed(() => props.instagramLabel)
 
       <div class="header-actions">
         <slot name="language-control">
-          <LanguageControl />
+          <LanguageControl :model-value="locale" @change="handleLocaleChange" />
         </slot>
         <UiIconButton
           class="instagram-link"
@@ -63,6 +75,7 @@ const instagramLabel = computed(() => props.instagramLabel)
           external
           size="compact"
           variant="primary"
+          @click="trackTelegramClick"
         />
       </div>
 
@@ -70,12 +83,12 @@ const instagramLabel = computed(() => props.instagramLabel)
         class="mobile-nav-shell"
         :instagram-href="instagramTarget"
         :instagram-label="instagramLabel"
-        :telegram-href="telegramTarget"
+        :telegram-context="telegramContext"
         :telegram-label="telegramLabel"
       >
         <template #language-control>
           <slot name="language-control">
-            <LanguageControl />
+            <LanguageControl :model-value="locale" @change="handleLocaleChange" />
           </slot>
         </template>
       </MobileNav>

@@ -6,9 +6,9 @@ const files = {
   packageJson: resolve(root, 'package.json'),
   appVue: resolve(root, 'app/app.vue'),
   indexPage: resolve(root, 'app/pages/index.vue'),
-  learningPathsPage: resolve(root, 'app/pages/learning-paths.vue'),
-  teachersProofPage: resolve(root, 'app/pages/teachers-proof.vue'),
-  trialPricingPage: resolve(root, 'app/pages/trial-pricing.vue'),
+  programsPage: resolve(root, 'app/pages/programs.vue'),
+  teachersPage: resolve(root, 'app/pages/teachers.vue'),
+  pricingPage: resolve(root, 'app/pages/pricing.vue'),
   defaultLayout: resolve(root, 'app/layouts/default.vue'),
   uiButton: resolve(root, 'app/components/ui/UiButton.vue'),
   uiIconButton: resolve(root, 'app/components/ui/UiIconButton.vue'),
@@ -199,9 +199,9 @@ function verifyNavigation() {
   const approvedOrder = ['Home', 'Learning Paths', 'Teachers & Proof', 'Trial & Pricing']
   const approvedRoutePages = [
     files.indexPage,
-    files.learningPathsPage,
-    files.teachersProofPage,
-    files.trialPricingPage
+    files.programsPage,
+    files.teachersPage,
+    files.pricingPage
   ]
 
   for (const path of approvedRoutePages) {
@@ -209,13 +209,21 @@ function verifyNavigation() {
   }
 
   assertOrder(navigationLinks, approvedOrder, 'primary navigation')
+  assertPattern(navigationLinks, /to:\s*'\/programs'/, 'primary navigation must link to /programs')
+  assertPattern(navigationLinks, /to:\s*'\/teachers'/, 'primary navigation must link to /teachers')
+  assertPattern(navigationLinks, /to:\s*'\/pricing'/, 'primary navigation must link to /pricing')
+  assertNotIncludes(navigationLinks, '/learning-paths', 'primary navigation')
+  assertNotIncludes(navigationLinks, '/teachers-proof', 'primary navigation')
+  assertNotIncludes(navigationLinks, '/trial-pricing', 'primary navigation')
   assertPattern(appHeader, /primaryNavigationLinks/, 'AppHeader must use shared primary navigation links')
   assertPattern(appHeader, /<UiLogo[\s\S]*variant="short"[\s\S]*<UiLogo[\s\S]*variant="full"/, 'AppHeader must use UiLogo for short and full logo variants')
   assertPattern(appHeader, /<HeaderLink[\s\S]*display="desktop"/, 'AppHeader must use HeaderLink for desktop nav links')
   assertPattern(appHeader, /@iconoir\/vue[\s\S]*Instagram[\s\S]*Telegram|Instagram[\s\S]*Telegram[\s\S]*@iconoir\/vue/, 'AppHeader must import Iconoir Instagram and Telegram icons')
   assertPattern(appHeader, /<UiIconButton[\s\S]*:icon="Instagram"[\s\S]*<UiIconButton[\s\S]*:icon="Telegram"/, 'AppHeader social actions must render as icon buttons')
-  assertPattern(appHeader, /<MobileNav[\s\S]*:instagram-href="instagramTarget"[\s\S]*:telegram-href="telegramTarget"/, 'AppHeader must pass configurable contact links into MobileNav')
+  assertPattern(appHeader, /<MobileNav[\s\S]*:instagram-href="instagramTarget"[\s\S]*:telegram-context="telegramContext"/, 'AppHeader must pass configurable contact links into MobileNav')
   assertPattern(appHeader, /#language-control[\s\S]*<slot name="language-control"/, 'AppHeader must pass the language-control slot into MobileNav')
+  assertPattern(appHeader, /useLocale\(\)/, 'AppHeader must use shared locale state')
+  assertPattern(appHeader, /<LanguageControl[\s\S]*:model-value="locale"[\s\S]*@change="handleLocaleChange"/, 'AppHeader must wire LanguageControl to shared locale state')
   assertPattern(mobileNav, /primaryNavigationLinks/, 'MobileNav must use shared primary navigation links')
   assertPattern(mobileNav, /instagramHref/, 'MobileNav must accept configurable Instagram hrefs')
   assertPattern(mobileNav, /<HeaderLink[\s\S]*display="mobile"/, 'MobileNav must use the shared HeaderLink component')
@@ -240,7 +248,7 @@ function verifyNavigation() {
   assert(!/(?<!no-)underline/.test(headerLink), 'HeaderLink must not use underline styling')
   assertNotIncludes(headerLink, 'bg-surface-muted', 'HeaderLink active and hover states must not use a background fill')
   assertPattern(footer, /primaryNavigationLinks/, 'FooterContactStrip must use shared primary navigation links')
-  assertPattern(footer, /defineProps<[\s\S]*instagramHref[\s\S]*telegramHref/, 'FooterContactStrip must accept configurable contact hrefs')
+  assertPattern(footer, /defineProps<[\s\S]*instagramHref[\s\S]*telegramContext/, 'FooterContactStrip must accept configurable contact context')
   assertPattern(footer, /<UiLogo[\s\S]*variant="full"/, 'FooterContactStrip must use UiLogo for the footer logo')
   assertPattern(footer, /<UiIconButton[\s\S]*:icon="Instagram"[\s\S]*<UiIconButton[\s\S]*:icon="Telegram"/, 'FooterContactStrip social actions must render as icon buttons')
   assertPattern(footer, /font-medium/, 'FooterContactStrip nav links must use medium weight for lighter base navigation text')
