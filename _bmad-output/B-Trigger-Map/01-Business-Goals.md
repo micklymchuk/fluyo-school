@@ -149,8 +149,8 @@ Audience recognition
 
 ## Assumptions To Confirm
 
-- Exact paid trial lesson price and duration remain unresolved.
-- Exact prices for individual, pair, and mini-group lessons remain unresolved.
+- Exact paid trial lesson price and duration are defined in production content.
+- Exact prices for individual, pair, and mini-group lessons are defined in production content.
 - Traffic baseline is not available yet, so targets are proposed starting targets.
 - Analytics events need to be defined during implementation to measure CTA clicks, audience-path engagement, proof-section engagement, and inquiry quality.
 - Telegram is treated as the primary contact channel unless a secondary channel is later confirmed.

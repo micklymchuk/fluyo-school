@@ -4,7 +4,7 @@ export const sitePages = [
   {
     routeId: 'home',
     path: '/',
-    sectionOrder: ['hero', 'learning-paths', 'teachers-proof', 'pricing-preview', 'faq', 'final-cta'],
+    sectionOrder: ['hero', 'learning-paths', 'teachers-proof', 'pricing-summary', 'faq', 'final-cta'],
     messageKey: 'home'
   },
   {

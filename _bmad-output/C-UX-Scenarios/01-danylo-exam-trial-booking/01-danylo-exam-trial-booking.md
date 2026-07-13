@@ -88,7 +88,7 @@ Route-level steps for the multi-page IA. Existing detailed page specs remain sou
 
 | Step | Route | Source Modules | Purpose | Exit Action |
 |------|-------|----------------|---------|-------------|
-| 01.1 | `/` | `01.1-landing-page-hero/`, selected `03.1-audience-paths/`, selected `01.4-programs-and-pricing/` | Recognize Fluyo, see compact proof and price preview, then choose the exam path. | Navigate to `/programs#exam-preparation`. |
+| 01.1 | `/` | `01.1-landing-page-hero/`, selected `03.1-audience-paths/`, selected `01.4-programs-and-pricing/` | Recognize Fluyo, see compact proof and price review, then choose the exam path. | Navigate to `/programs#exam-preparation`. |
 | 01.2 | `/programs#exam-preparation` | `01.2-exam-preparation-path/`, selected `01.3-how-learning-works/`, selected `01.4-programs-and-pricing/` | Confirm exact exam coverage, structured preparation, diagnostic trial value, and price shape. | Open Telegram with exam context or continue to `/pricing?path=exam`. |
 | 01.3 | `/pricing?path=exam` | selected `01.3-how-learning-works/`, `01.4-programs-and-pricing/` | Compare trial and lesson formats without unrelated kids/adult content. | Final Telegram booking click. ✓ |
 

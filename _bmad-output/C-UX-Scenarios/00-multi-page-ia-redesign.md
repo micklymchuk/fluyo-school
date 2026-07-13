@@ -28,7 +28,7 @@ The approved strategy remains unchanged:
 - **Primary conversion engine:** confident paid trial bookings through Telegram.
 - **Trust goal:** show proof before deep price comparison.
 - **Audience goal:** exams, kids, and adults are recognized quickly.
-- **Price clarity rule:** Home gets a compact price preview; Learning Paths gets path price hints; full comparison stays on Trial & Pricing.
+- **Price clarity rule:** Home gets a compact price review; Learning Paths gets path price hints; full comparison stays on Trial & Pricing.
 
 The previous 11 detailed page specs remain valid as source modules. They should be composed into these four page schemas, not rebuilt as an 11-section landing page and not split into separate `/exams`, `/kids`, or `/adults` routes.
 
@@ -57,7 +57,7 @@ The previous 11 detailed page specs remain valid as source modules. They should 
 2. **Hero:** first-screen Fluyo promise and primary next step.
 3. **Path Cards:** Exam Path Card, Kids Path Card, Adults Path Card. Cards lead to `/programs` or anchors inside `/programs`.
 4. **Proof Snapshot:** Teacher-Led Proof, Progress Proof, Trial Step Proof.
-5. **Trial & Prices Preview:** compact price preview for paid trial and lesson formats. No full pricing table.
+5. **Trial & Prices review:** compact price review for paid trial and lesson formats. No full pricing table.
 6. **Footer / Contact Strip:** repeated contact and key route navigation.
 
 **Do Not Include:** full teacher gallery, long FAQ, full testimonials, detailed methodology, full pricing comparison.
@@ -109,7 +109,7 @@ The previous 11 detailed page specs remain valid as source modules. They should 
 **Sections:**
 
 1. **Global Header:** shared navigation.
-2. **Trial First Step:** paid trial price/duration placeholder and what the trial includes.
+2. **Trial First Step:** paid trial price/duration final content and what the trial includes.
 3. **Individual Format:** individual lesson pricing/fit block.
 4. **Pair Format:** pair lesson pricing/fit block.
 5. **Mini-Group Format:** mini-group lesson pricing/fit block.
@@ -145,7 +145,7 @@ The previous 11 detailed page specs remain valid as source modules. They should 
 | 01.1 Landing Page / Hero | Home header, hero, path cards, proof snapshot, global navigation. |
 | 01.2 Exam Preparation Path | Learning Paths / Exam Preparation block. |
 | 01.3 How Learning Works | Learning Paths diagnostic-trial cue and Pricing trial-first-step explanation. |
-| 01.4 Programs And Pricing | Home price preview, Learning Paths price hints, and full Pricing page. |
+| 01.4 Programs And Pricing | Home price review, Learning Paths price hints, and full Pricing page. |
 | 02.1 Kids / Parents Path | Learning Paths / Kids & Parents block. |
 | 02.2 Teachers | Teachers & Proof page; compact teacher cue if needed inside Kids & Parents block. |
 | 02.3 Lesson Experience | Teachers & Proof page; compact lesson cue if needed inside Kids & Parents block. |
@@ -162,7 +162,7 @@ The previous 11 detailed page specs remain valid as source modules. They should 
 |-------|---------|
 | `path_card_click` | Measures audience-path engagement from Home. |
 | `program_path_view` | Measures which Learning Paths block receives attention. |
-| `price_preview_view` | Measures whether visitors see compact price clarity before deeper pricing. |
+| `pricing_summary_view` | Measures whether visitors see compact price clarity before deeper pricing. |
 | `pricing_view` | Measures whether visitors reach full pricing after path recognition or proof. |
 | `teacher_proof_view` | Measures trust-section engagement. |
 | `telegram_click` | Measures primary conversion CTA engagement. |
@@ -177,7 +177,7 @@ The previous 11 detailed page specs remain valid as source modules. They should 
 - Do not rebuild the 11-section single HTML page.
 - Do not split Exam, Kids, and Adults into separate routes unless this planning decision is reopened.
 - Preserve bilingual production requirements.
-- Keep mock prices, testimonials, teacher bios, proof, lesson screenshots, and policy-sensitive FAQ content marked as preview-only until replaced.
+- Keep Production prices, testimonials, teacher bios, proof, lesson screenshots, and policy-sensitive FAQ content marked as production-facing until replaced.
 - Create the production design system and architecture before implementation starts.
 
 ---
@@ -187,9 +187,9 @@ The previous 11 detailed page specs remain valid as source modules. They should 
 | # | Question | Context | Status |
 |---|----------|---------|--------|
 | 1 | Should the Learning Paths route slug be `/programs`, `/paths`, or `/learning-paths` in production? | Current schema uses `/programs`. | Open |
-| 2 | What exact prices and trial duration should fill Home preview and Pricing page? | Current commercial terms are mock. | Open |
+| 2 | What exact prices and trial duration should fill Home review and Pricing page? | Current commercial terms are production. | Open |
 | 3 | What exact prepared Telegram messages should each path generate? | Context preservation improves qualified inquiry quality. | Open |
-| 4 | Which proof assets are approved for launch? | Current proof/testimonial/teacher material is mock. | Open |
+| 4 | Which proof assets are approved for launch? | Current proof/testimonial/teacher material is production. | Open |
 
 ---
 

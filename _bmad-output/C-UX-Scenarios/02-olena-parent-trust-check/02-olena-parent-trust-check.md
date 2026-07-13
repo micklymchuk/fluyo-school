@@ -89,7 +89,7 @@ Route-level steps for the multi-page IA. Existing detailed page specs remain sou
 
 | Step | Route | Source Modules | Purpose | Exit Action |
 |------|-------|----------------|---------|-------------|
-| 02.1 | `/` | selected `01.1-landing-page-hero/`, selected `03.1-audience-paths/`, selected `01.4-programs-and-pricing/` | Recognize that Fluyo has a dedicated kids path and visible price preview. | Navigate to `/programs#kids-parents`. |
+| 02.1 | `/` | selected `01.1-landing-page-hero/`, selected `03.1-audience-paths/`, selected `01.4-programs-and-pricing/` | Recognize that Fluyo has a dedicated kids path and visible price review. | Navigate to `/programs#kids-parents`. |
 | 02.2 | `/programs#kids-parents` | `02.1-kids-parents-path/`, selected `02.2-teachers/`, selected `02.3-lesson-experience/`, selected `01.4-programs-and-pricing/` | Confirm parent reassurance, child engagement, progress visibility, and child-path price hints. | Open Telegram with child context or continue to `/teachers`. |
 | 02.3 | `/teachers` | `02.2-teachers/`, `02.3-lesson-experience/`, selected `02.4-results-testimonials-faq-final-cta/` | Verify real teachers, credentials, lesson proof, and concise parent/student proof. | Continue to `/pricing?path=kids` or open Telegram. |
 | 02.4 | `/pricing?path=kids` | selected `01.4-programs-and-pricing/`, selected `02.4-results-testimonials-faq-final-cta/` | Resolve practical paid-trial, schedule, format, and payment questions. | Final Telegram booking click. ✓ |

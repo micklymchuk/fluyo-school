@@ -1,11 +1,11 @@
 ---
 project_name: 'fluyo-school'
 user_name: 'king'
-date: '2026-07-09'
+date: '2026-07-13'
 sections_completed: ['technology_stack', 'language_rules', 'framework_rules', 'testing_rules', 'quality_rules', 'workflow_rules', 'anti_patterns']
 existing_patterns_found: 4
 status: 'complete'
-rule_count: 39
+rule_count: 40
 optimized_for_llm: true
 ---
 
@@ -72,6 +72,7 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Prefer small, conventional Nuxt/Vue files over broad abstractions while the app is still starter-level.
 - Keep comments sparse and useful; avoid narrating obvious Vue/TypeScript behavior.
 - If adding a formatter/linter, add explicit npm scripts and config so future agents have a concrete command to run.
+- All public app content is production content. Public copy, variables, types, scripts, docs, and tests must frame content as final production-facing content; when a value is needed, write the concrete value instead of adding internal-status wording.
 
 ### Development Workflow Rules
 
@@ -79,7 +80,7 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Development server: `npm run dev`.
 - Baseline production verification: `npm run build`.
 - Static generation is available through `npm run generate` when the app is intended to be pre-rendered.
-- Cloudflare local preview uses `npm run preview`, which builds first and then runs `wrangler pages dev`.
+- Cloudflare local Pages check uses `npm run preview`, which builds first and then runs `wrangler pages dev`.
 - Deployment uses `npm run deploy`, which builds first and then runs `wrangler pages deploy`.
 - Refresh Cloudflare runtime types with `npm run cf-typegen` after changing Wrangler bindings or compatibility settings.
 - No branch naming, commit message, or PR checklist convention is documented yet; do not invent one in implementation work.
@@ -92,7 +93,7 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Do not reintroduce `app/assets/css/tokens.css` or `app/assets/css/main.css` as parallel token/global-style sources; Tailwind theme CSS plus SCSS are the styling substrate.
 - Do not hardcode secrets or environment-specific values into app/server code; use environment bindings or ignored local env files.
 - Do not claim test coverage exists until a test runner and test scripts are actually added.
-- Do not leave `NuxtWelcome` in place when implementing real product UI; it is only the starter placeholder.
+- Do not leave `NuxtWelcome` in place when implementing real product UI; it is only the starter final content.
 - Keep `wrangler.jsonc` and `nuxt.config.ts` deployment assumptions aligned when changing output directories, compatibility dates, or Cloudflare bindings.
 
 ---
@@ -113,4 +114,4 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Review periodically for outdated rules.
 - Remove rules that become obvious over time.
 
-Last Updated: 2026-07-09
+Last Updated: 2026-07-13

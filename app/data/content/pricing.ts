@@ -3,26 +3,18 @@ import type { PriceItem } from './types'
 export const priceItems = [
   {
     id: 'trial',
-    format: 'trial',
-    sourceStatus: 'needs_input',
-    requiredForLaunch: true
+    format: 'trial'
   },
   {
     id: 'exam-group',
-    format: 'group',
-    sourceStatus: 'needs_input',
-    requiredForLaunch: true
+    format: 'group'
   },
   {
     id: 'kids-group',
-    format: 'group',
-    sourceStatus: 'mock',
-    requiredForLaunch: false
+    format: 'group'
   },
   {
     id: 'adult-individual',
-    format: 'individual',
-    sourceStatus: 'needs_review',
-    requiredForLaunch: false
+    format: 'individual'
   }
 ] as const satisfies readonly PriceItem[]

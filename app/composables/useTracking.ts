@@ -3,7 +3,7 @@ import type { TrackingPayload } from '~/data/content'
 export const TRACKING_EVENT_NAMES = [
   'path_card_click',
   'program_path_view',
-  'price_preview_view',
+  'pricing_summary_view',
   'pricing_view',
   'teacher_proof_view',
   'telegram_click',

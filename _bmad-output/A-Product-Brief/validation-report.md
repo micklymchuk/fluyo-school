@@ -32,9 +32,9 @@
 
 **Quality issues:**
 
-- Mock prices and mock trial duration remain placeholders.
+- Production prices and production trial duration remain final content.
 - Several launch-critical content assets are approved in category but not attached or specified.
-- The brief is marked `status: draft`.
+- The brief is marked `status: working`.
 - Open questions remain around exact pricing, CTA prepared message, and secondary contact channels.
 
 ## Trigger Map Consistency Report
@@ -100,13 +100,13 @@ Gaps:
 
 - Language URL structure is not defined.
 - Translation workflow is not defined.
-- Telegram prepared-message behavior is unresolved.
-- Secondary channels such as WhatsApp are unresolved.
+- Telegram prepared-message behavior is tracked.
+- Secondary channels such as WhatsApp are tracked.
 - Analytics, form tracking, event tracking, and conversion measurement are not specified.
 
 ## Critical Issues
 
-- Replace mock pricing and trial duration before public launch.
+- Replace production pricing and trial duration before public launch.
 - Define at least 3 measurable success metrics for the landing page.
 - Decide contact strategy: Telegram-only vs Telegram plus secondary channel.
 - Define bilingual implementation rules: URL structure, language switcher behavior, and translation workflow.

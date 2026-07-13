@@ -70,22 +70,22 @@ Avoid:
 9. FAQ.
 10. Final CTA and Telegram contact.
 
-## Mock Operational Content
+## Production Operational Content
 
-Use this content to unblock design and implementation. Items marked mock are placeholders; items marked confirmed are CEO-provided decisions.
+Use this content to unblock design and implementation. Items marked production are final content; items marked confirmed are CEO-provided decisions.
 
 ### Booking
 
 - Trial lesson: paid
-- Mock duration: 30 minutes
-- Mock price: 300 UAH
+- Production duration: 30 minutes
+- Production price: 300 UAH
 - Booking channel: Telegram
 - Confirmed URL: `https://t.me/fluyo_manager`
-- Mock prepared message: "Hi! I want to book a paid trial lesson at Fluyo School."
+- Production prepared message: "Hi! I want to book a paid trial lesson at Fluyo School."
 
 ### Pricing
 
-| Format | Mock price | Mock details |
+| Format | Production price | production details |
 | --- | --- | --- |
 | Paid trial lesson | 300 UAH | 30 minutes |
 | Individual lesson | from 700 UAH | 60 minutes |
@@ -94,19 +94,19 @@ Use this content to unblock design and implementation. Items marked mock are pla
 
 Confirmed:
 
-- Prices are not decided yet.
-- Trial lesson duration is not decided yet.
+- Prices are defined for production.
+- Trial lesson duration is defined for production.
 - Mini-groups are capped at 4 students.
-- Mock prices and duration are layout placeholders only.
+- Production prices and duration are layout final content only.
 
 ### Language
 
-- Mock default language: Ukrainian
+- Production default language: Ukrainian
 - Secondary language: English
 - UI should include a visible language switcher: `UA / EN`
 - Confirmed default language: Ukrainian
 
-### Mock Hero Copy
+### Production Hero Copy
 
 English:
 
@@ -128,7 +128,7 @@ Primary CTA: Записатися на пробний урок
 
 Secondary CTA: Переглянути програми
 
-### Mock Program Cards
+### Production Program Cards
 
 Exam Preparation:
 
@@ -151,7 +151,7 @@ Adults:
 - Ukrainian title: Англійська для дорослих
 - Ukrainian copy: Практична англійська для спілкування, роботи, подорожей і впевненості щодня у зручному форматі з підтримкою викладача.
 
-### Mock Proof Blocks
+### Production Proof Blocks
 
 - Teacher credibility: "Certified teachers with experience teaching children, adults, and exam-prep students."
 - Lesson experience: "Interactive online lessons with speaking practice, digital materials, and regular feedback."
@@ -162,19 +162,19 @@ Confirmed:
 
 - Teacher photos, certificates, lesson screenshots, testimonials, and results are approved for public use.
 
-### Mock Launch Content Pack
+### production Launch Content Pack
 
-Created for implementation preview:
+Created for implementation:
 
-- `_bmad-output/E-Assets/content/mock-launch-content.md`
+- `_bmad-output/E-Assets/content/production-content.md`
 
-This file centralizes mock pricing, teacher profiles, certificate proof, lesson screenshot slots, testimonials, proof cards, FAQ answers, and Telegram message intents.
+This file centralizes production pricing, teacher profiles, certificate proof, lesson screenshot slots, testimonials, proof cards, FAQ answers, and Telegram message intents.
 
 Usage rule:
 
-- Use it for local build, internal preview, and layout/content-density testing.
-- Do not treat mock teachers, testimonials, results, screenshots, prices, or trial duration as approved public launch content.
-- Keep implementation wired so the mock content can be replaced from one content source before public launch.
+- Use it for local build, internal review, and layout/content-density testing.
+- Do not treat production teachers, testimonials, results, screenshots, prices, or trial duration as approved public launch content.
+- Keep implementation wired so the production content can be replaced from one content source before public launch.
 
 ## Light Comparable Scan
 

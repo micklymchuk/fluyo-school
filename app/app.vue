@@ -1,8 +1,18 @@
+<script setup lang="ts">
+import { IconoirProvider } from '@iconoir/vue'
+</script>
+
 <template>
-  <div>
+  <IconoirProvider
+    :icon-props="{
+      width: '1em',
+      height: '1em',
+      'stroke-width': 1.5
+    }"
+  >
     <NuxtRouteAnnouncer />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-  </div>
+  </IconoirProvider>
 </template>

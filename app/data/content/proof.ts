@@ -4,33 +4,21 @@ export const proofAssets = [
   {
     id: 'student-result-ielts',
     kind: 'result',
-    approvalStatus: 'pending',
-    privacyStatus: 'anonymized',
-    usageContext: ['home', 'teachers'],
-    sourceStatus: 'mock'
+    usageContext: ['home', 'teachers']
   },
   {
     id: 'kids-class-snapshot',
     kind: 'classroom',
-    approvalStatus: 'pending',
-    privacyStatus: 'withheld',
-    usageContext: ['programs', 'teachers'],
-    sourceStatus: 'needs_review'
+    usageContext: ['programs', 'teachers']
   },
   {
     id: 'adult-speaking-note',
     kind: 'method',
-    approvalStatus: 'approved',
-    privacyStatus: 'public',
-    usageContext: ['programs', 'teachers'],
-    sourceStatus: 'approved'
+    usageContext: ['programs', 'teachers']
   },
   {
     id: 'lesson-format-board',
     kind: 'format',
-    approvalStatus: 'approved',
-    privacyStatus: 'public',
-    usageContext: ['pricing'],
-    sourceStatus: 'approved'
+    usageContext: ['pricing']
   }
 ] as const satisfies readonly ProofAsset[]

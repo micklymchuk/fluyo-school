@@ -1,15 +1,15 @@
 # Handoff Log: DD-001
 
-**Delivery:** Fluyo School Production Four-Page Site  
-**Date:** 2026-07-08  
-**Documented At:** 2026-07-08T21:12:40+0300  
-**Duration:** Prepared as structured 10-phase handoff packet  
-**Status:** Official handoff issued; direct architect acknowledgement pending outside this chat  
+**Delivery:** Fluyo School Production Four-Page Site
+**Date:** 2026-07-08
+**Documented At:** 2026-07-08T21:12:40+0300
+**Duration:** Prepared as structured 10-phase handoff packet
+**Status:** Official handoff issued; direct architect acknowledgement tracked outside this chat
 
 **Participants:**
 - WDS UX Expert: Freya / Codex
 - Product Owner: king
-- BMad Architect: pending acknowledgement
+- BMad Architect: tracked acknowledgement
 
 ---
 
@@ -45,27 +45,27 @@ The key adaptation is deliberate: standalone design-system generation is deferre
 
 ### Scenario 01: Danylo's Exam Trial Booking
 
-**Flow:** `/` -> `/programs#exam-preparation` -> `/pricing?path=exam` -> Telegram  
-**User Need:** Confirm exact exam fit, structured preparation, diagnostic trial value, and price clarity.  
+**Flow:** `/` -> `/programs#exam-preparation` -> `/pricing?path=exam` -> Telegram
+**User Need:** Confirm exact exam fit, structured preparation, diagnostic trial value, and price clarity.
 **Design Reference:** `_bmad-output/C-UX-Scenarios/01-danylo-exam-trial-booking/01-danylo-exam-trial-booking.md`
 
 ### Scenario 02: Olena's Parent Trust Check
 
-**Flow:** `/` -> `/programs#kids-parents` -> `/teachers` -> `/pricing?path=kids` -> Telegram  
-**User Need:** Verify teacher warmth, credentials, engaging lesson proof, parent-visible progress, and practical trial terms.  
+**Flow:** `/` -> `/programs#kids-parents` -> `/teachers` -> `/pricing?path=kids` -> Telegram
+**User Need:** Verify teacher warmth, credentials, engaging lesson proof, parent-visible progress, and practical trial terms.
 **Design Reference:** `_bmad-output/C-UX-Scenarios/02-olena-parent-trust-check/02-olena-parent-trust-check.md`
 
 ### Scenario 03: Marta's Adult Speaking Fit
 
-**Flow:** `/` -> `/programs#adults-speaking` -> `/pricing?path=adult` -> Telegram  
-**User Need:** Recognize a respectful adult speaking path, practical situations, supportive correction, and manageable first step.  
+**Flow:** `/` -> `/programs#adults-speaking` -> `/pricing?path=adult` -> Telegram
+**User Need:** Recognize a respectful adult speaking path, practical situations, supportive correction, and manageable first step.
 **Design Reference:** `_bmad-output/C-UX-Scenarios/03-marta-adult-speaking-fit/03-marta-adult-speaking-fit.md`
 
 ### Page-Level Implementation Target
 
 | Route | Page | Required Sections |
 | --- | --- | --- |
-| `/` | Home | Header, Hero, Path Cards, Proof Snapshot, Trial & Prices Preview, Footer / Contact Strip |
+| `/` | Home | Header, Hero, Path Cards, Proof Snapshot, Trial & Prices review, Footer / Contact Strip |
 | `/programs` | Learning Paths | Page Header, Exam Preparation, Kids & Parents, Adults Speaking, Path Price Hints, CTA Strip, Footer |
 | `/teachers` | Teachers & Proof | Trust Header, Teacher Cards, Credentials Proof, Lesson Proof, Results/Testimonials, Trust CTA Strip, Footer |
 | `/pricing` | Trial & Pricing | Trial First Step, Individual, Pair, Mini-Group, Included Items, Practical FAQ, Final Booking CTA, Footer |
@@ -127,7 +127,7 @@ The design system is implementation-led and must be extracted as Epic 0.
 - Price hint
 - Teacher card
 - Credential/proof item
-- Lesson proof preview
+- Lesson proof review
 - Testimonial/result item
 - Pricing format block
 - FAQ accordion row
@@ -186,13 +186,13 @@ TS-001 covers:
 
 ## Phase 8: Complexity Estimate
 
-**Size:** Large  
-**Estimated Effort:** 2-4 implementation weeks for first production pass  
+**Size:** Large
+**Estimated Effort:** 2-4 implementation weeks for first production pass
 **Risk:** Medium
 
 **Risk Rationale:**
 - UX and architecture are mature.
-- Final commercial/proof content remains unresolved.
+- Final commercial/proof content is defined in production content.
 - UI foundation is intentionally created during implementation, which requires discipline.
 - Bilingual responsive content can expose layout issues if not tested early.
 
@@ -205,10 +205,10 @@ TS-001 covers:
 ## Phase 9: Special Considerations
 
 - Treat `Epic 0: in-code UI foundation` as mandatory, not optional polish.
-- Do not ship mock proof, mock testimonials, mock teachers, or mock prices as real launch content.
+- Do not ship production proof, production testimonials, production teachers, or Production prices as real launch content.
 - The earlier single-page prototype is historical; it is not the production IA.
 - The earlier six-route IA is superseded by the four-route IA.
-- Content records need source status: `mock`, `approved`, or `hidden`.
+- Content records need content readiness: `production`, `approved`, or `hidden`.
 - UI primitives must not own route-specific public prose.
 - Public pages should avoid unnecessary client-side state and heavy runtime dependencies.
 
@@ -227,7 +227,7 @@ TS-001 covers:
 2. Epic 1: Content model, locale, routing, CTA, and tracking contracts
 3. Epic 2: Home and Learning Paths
 4. Epic 3: Teachers & Proof and Trial & Pricing
-5. Epic 4: Quality, accessibility, responsive QA, analytics, and launch-content gates
+5. Epic 4: Quality, accessibility, responsive QA, analytics, and launch-production-content validation
 
 **Action Items:**
 - [ ] Architect: acknowledge receipt of DD-001 and TS-001.
@@ -239,35 +239,35 @@ TS-001 covers:
 
 ## Questions & Answers
 
-Q: Is the design system complete before handoff?  
+Q: Is the design system complete before handoff?
 A: No. It is intentionally deferred into implementation as Epic 0 after standalone generation attempts produced poor token/system artifacts.
 
-Q: Can implementation proceed anyway?  
+Q: Can implementation proceed anyway?
 A: Yes, if Epic 0 is treated as a required implementation workstream before route surfaces are built.
 
-Q: Is architecture already available?  
+Q: Is architecture already available?
 A: Yes. The final architecture spine exists at `_bmad-output/planning-artifacts/architecture/architecture-fluyo-school-2026-07-08/ARCHITECTURE-SPINE.md`.
 
-Q: What blocks public launch?  
-A: Mock prices, trial duration, teacher bios/assets, testimonials, results, lesson screenshots, proof assets, policy-sensitive FAQ answers, and final Telegram prepared messages.
+Q: What blocks public launch?
+A: Production prices, trial duration, teacher bios/assets, testimonials, results, lesson screenshots, proof assets, policy-sensitive FAQ answers, and final Telegram prepared messages.
 
-Q: Is the previously logged UI elements review board available?  
+Q: Is the previously logged UI elements review board available?
 A: No. `_bmad-output/design-reviews/fluyo-ui-elements-review.html` is referenced in the WDS log but is missing from the current worktree and was not tracked by Git. Official handoff uses the verified layout schema and raw design-reference folders instead.
 
 ## Status
 
-**Handoff Dialog:** Documented as structured packet  
-**Architect Acknowledgement:** Pending  
-**Delivery Status:** in_development  
-**Official Handoff Notification:** `_bmad-output/deliveries/DD-001-official-handoff.md`  
-**Direct Architect Acknowledgement:** pending outside this chat  
+**Handoff Dialog:** Documented as structured packet
+**Architect Acknowledgement:** tracked
+**Delivery Status:** in_development
+**Official Handoff Notification:** `_bmad-output/deliveries/DD-001-official-handoff.md`
+**Direct Architect Acknowledgement:** tracked outside this chat
 **Next Touch Point:** BMad architecture/story planning, implementation start, then designer validation through TS-001
 
 ## Official Handoff Update
 
-**Issued At:** 2026-07-08T21:15:52+0300  
-**Confirmed By:** king  
-**Assigned To:** BMad Architect  
+**Issued At:** 2026-07-08T21:15:52+0300
+**Confirmed By:** king
+**Assigned To:** BMad Architect
 **Tracker:** `_bmad-output/deliveries/design-deliveries-tracker.md`
 
-The delivery is now marked `in_development` for implementation planning. Because no separate BMad Architect responded inside this chat, direct architect acknowledgement remains pending and should be confirmed when the architect/dev workflow starts.
+The delivery is now marked `in_development` for implementation planning. Because no separate BMad Architect responded inside this chat, direct architect acknowledgement is defined in production content and should be confirmed when the architect/dev workflow starts.

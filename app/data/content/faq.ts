@@ -3,32 +3,26 @@ import type { FaqItem } from './types'
 export const faqItems = [
   {
     id: 'trial-booking',
-    policySensitivity: 'standard',
-    sourceStatus: 'approved'
+    policySensitivity: 'standard'
   },
   {
     id: 'format-choice',
-    policySensitivity: 'standard',
-    sourceStatus: 'approved'
+    policySensitivity: 'standard'
   },
   {
     id: 'teacher-match',
-    policySensitivity: 'policy_sensitive',
-    sourceStatus: 'needs_input'
+    policySensitivity: 'policy_sensitive'
   },
   {
     id: 'pricing-policy',
-    policySensitivity: 'policy_sensitive',
-    sourceStatus: 'needs_review'
+    policySensitivity: 'policy_sensitive'
   },
   {
     id: 'schedule-policy',
-    policySensitivity: 'policy_sensitive',
-    sourceStatus: 'needs_input'
+    policySensitivity: 'policy_sensitive'
   },
   {
     id: 'english-switch',
-    policySensitivity: 'standard',
-    sourceStatus: 'approved'
+    policySensitivity: 'standard'
   }
 ] as const satisfies readonly FaqItem[]

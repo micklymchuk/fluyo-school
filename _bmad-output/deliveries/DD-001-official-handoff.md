@@ -42,7 +42,7 @@ The formal standalone design system is not a prerequisite artifact for this deli
 2. **Epic 1:** Content model, locale, routing, Telegram CTA, and tracking contracts.
 3. **Epic 2:** Home and Learning Paths.
 4. **Epic 3:** Teachers & Proof and Trial & Pricing.
-5. **Epic 4:** Quality, accessibility, responsive QA, analytics, and launch-content gates.
+5. **Epic 4:** Quality, accessibility, responsive QA, analytics, and launch-production-content validation.
 
 Epic 0 is mandatory and must happen before route build-out hardens one-off styling.
 

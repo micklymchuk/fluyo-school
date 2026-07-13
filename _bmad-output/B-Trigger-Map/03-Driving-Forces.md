@@ -152,7 +152,7 @@ Marta wants a teacher who corrects her gently and helps her keep talking. She wa
 
 She wants English for travel, meetings, work conversations, interviews, relocation, studies, or everyday confidence. Practical relevance keeps her motivated.
 
-**Fluyo Promise:** Adult program copy should name real-life situations and show sample lesson topics.
+**Fluyo Promise:** Adult program copy should name real-life situations and show lesson topics.
 
 **3. Build a rhythm that survives a busy schedule**
 

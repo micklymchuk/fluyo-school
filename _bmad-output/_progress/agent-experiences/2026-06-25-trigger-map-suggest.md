@@ -58,9 +58,9 @@ The autonomous workflow references `docs/method/phase-wds-2-trigger-mapping-guid
 - Ukrainian is the default language; English is secondary.
 - Telegram manager URL is confirmed: `https://t.me/fluyo_manager`.
 - Mini-groups are capped at four students.
-- Pricing and paid trial duration are placeholder/mock until confirmed.
+- Pricing and paid trial duration are final content/production until confirmed.
 - Teacher bios, testimonials, exact results, certificates, and lesson screenshots are approved in category but not cataloged.
-- Contact strategy beyond Telegram is unresolved.
+- Contact strategy beyond Telegram is tracked.
 
 ### Strategic Direction
 
@@ -105,7 +105,7 @@ The metrics are marked proposed because baseline traffic, final pricing, and tri
 - Three visionary goals present.
 - Three measurable objectives per goal present.
 - Primary conversion is clearly marked as the engine.
-- Assumptions and unresolved dependencies are visible.
+- Assumptions and tracked dependencies are visible.
 - Related documents are linked.
 - Target groups are not yet connected because that is the next step.
 

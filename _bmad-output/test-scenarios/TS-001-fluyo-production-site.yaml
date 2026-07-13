@@ -2,7 +2,7 @@ test_scenario:
   id: TS-001
   delivery_id: DD-001
   name: Fluyo School Production Four-Page Site Validation
-  status: draft
+  status: working
   created: 2026-07-08
   delivery_reference: _bmad-output/deliveries/DD-001-fluyo-production-site.yaml
   objectives:
@@ -20,7 +20,7 @@ happy_path_tests:
       - _bmad-output/C-UX-Scenarios/00-multi-page-ia-redesign.md
     steps:
       - action: Open Home route at /.
-        expected: Home loads with global header, hero, three path cards, compact proof, trial and prices preview, and footer/contact strip.
+        expected: Home loads with global header, hero, three path cards, compact proof, trial and prices review, and footer/contact strip.
       - action: Select the Exam path card.
         expected: Visitor lands on /programs#exam-preparation or equivalent exam-context position on Learning Paths.
       - action: Review Exam Preparation content and path price hint.
@@ -40,7 +40,7 @@ happy_path_tests:
       - _bmad-output/C-UX-Scenarios/00-multi-page-ia-redesign.md
     steps:
       - action: Open Home route at /.
-        expected: Kids & Parents is visible as a first-class path, with compact proof and price preview available before deep comparison.
+        expected: Kids & Parents is visible as a first-class path, with compact proof and price review available before deep comparison.
       - action: Select the Kids & Parents path card.
         expected: Visitor lands on /programs#kids-parents or equivalent kids-context position.
       - action: Review Kids & Parents content.
@@ -113,11 +113,11 @@ error_state_tests:
 
   - id: ER-004
     name: Missing approved launch proof content
-    trigger: Required teacher, testimonial, proof, price, trial, or lesson screenshot record is missing or marked mock where public launch requires approval.
-    expected_error_message: Implementation may show an internal release-check failure or a safe hidden/placeholder state; public fake proof must not render.
-    expected_behavior: Mock launch content is blocked, hidden, or explicitly preview-only according to implementation mode.
+    trigger: Required teacher, testimonial, proof, price, trial, or lesson screenshot record is missing or marked production where public launch requires approval.
+    expected_error_message: Implementation may show an internal release-check failure or a safe hidden/final content state; public unavailable proof must not render.
+    expected_behavior: production launch content is blocked, hidden, or explicitly production-facing according to implementation mode.
     recovery_path: Replace the record with approved content or mark the section intentionally hidden before launch.
-    graceful_degradation: Page remains usable, but public launch is blocked if required claims are not approved.
+    graceful_degradation: Page remains usable, but public launch is blocked if required claims are outside public scope.
 
 edge_case_tests:
   - id: EC-001
@@ -176,7 +176,7 @@ design_system_validation:
     - Price hint
     - Teacher card
     - Credential/proof item
-    - Lesson proof preview
+    - Lesson proof review
     - Testimonial/result item
     - Pricing format block
     - FAQ accordion row
@@ -231,7 +231,7 @@ accessibility_tests:
     checks:
       - Teacher portraits, credential proofs, lesson screenshots, and result images have accurate alt text when rendered.
       - Decorative imagery is hidden from assistive technology.
-      - Missing approved assets do not leave unlabeled interactive placeholders.
+      - Missing approved assets do not leave unlabeled interactive final content.
 
 responsive_tests:
   viewports:
@@ -270,7 +270,7 @@ performance_and_build_tests:
 
 content_integrity_tests:
   - id: CI-001
-    name: Launch-sensitive source status
+    name: Launch-sensitive content readiness
     records:
       - prices
       - trial duration
@@ -282,17 +282,17 @@ content_integrity_tests:
       - lesson screenshots
       - policy-sensitive FAQ answers
       - prepared Telegram messages
-    expected_behavior: Every launch-sensitive record is marked mock, approved, or hidden.
+    expected_behavior: Every launch-sensitive record is marked production, approved, or hidden.
 
   - id: CI-002
     name: Public launch blocker
-    trigger: Required public claim remains mock.
-    expected_behavior: Release check fails, section is hidden, or the claim is visibly excluded from production launch; fake public proof is never shown.
+    trigger: Required public claim remains production.
+    expected_behavior: Release check fails, section is hidden, or the claim is visibly excluded from production launch; unavailable public proof is never shown.
 
   - id: CI-003
-    name: Preview content safety
-    trigger: Use mock-launch-content.md during implementation preview.
-    expected_behavior: Preview-only content cannot be confused with approved launch truth in production mode.
+    name: review content safety
+    trigger: Use production-content.md during implementation.
+    expected_behavior: production-facing content cannot be confused with approved launch truth in production build.
 
 analytics_tests:
   - id: AN-001
@@ -300,7 +300,7 @@ analytics_tests:
     required_events:
       - path_card_click
       - program_path_view
-      - price_preview_view
+      - pricing_summary_view
       - pricing_view
       - teacher_proof_view
       - telegram_click
@@ -324,7 +324,7 @@ sign_off_criteria:
     - Any broken route among /, /programs, /teachers, and /pricing.
     - Telegram CTA does not open or loses required available context.
     - Home path cards cannot route to the correct Learning Paths context.
-    - Public launch renders mock proof, mock teacher claims, mock testimonials, or mock prices as approved truth.
+    - Public launch renders production proof, production teacher claims, production testimonials, or Production prices as approved truth.
     - Mobile layout has horizontal overflow or incoherent overlap at tested widths.
     - Keyboard navigation cannot reach primary navigation or CTA controls.
     - Build fails.

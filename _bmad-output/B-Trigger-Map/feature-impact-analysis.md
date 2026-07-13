@@ -123,7 +123,7 @@ This motif can strengthen brand distinctiveness, but it should not compete with 
 - **Olena:** Compares formats around family budget and schedule.
 - **Marta:** Needs flexible options without hidden commitment.
 
-**Design implication:** Show direct comparison and label unresolved mock values clearly until final prices are confirmed.
+**Design implication:** Show direct comparison and label tracked final content clearly until final prices are confirmed.
 
 ### 5. Context-aware Telegram booking flow - Must Have
 

@@ -17,7 +17,7 @@ The Phase 1 brief confirms three launch paths:
 2. Parents/kids
 3. Adults
 
-This target-group draft keeps those three as the focus. Teens and Business English remain secondary program signals, but they should not compete with these three launch paths in first-screen strategy.
+This target-group working keeps those three as the focus. Teens and Business English remain secondary program signals, but they should not compete with these three launch paths in first-screen strategy.
 
 ---
 
@@ -35,7 +35,7 @@ This target-group draft keeps those three as the focus. Teens and Business Engli
 
 Danylo is not browsing English schools for inspiration. He is comparing options because there is a deadline on the calendar and a score he needs to reach. He has probably tried self-study, free resources, YouTube explanations, or grammar drills. Some helped, but he still does not feel fully guided. He wants a teacher who can look at his current level, identify weak spots, and build a realistic path.
 
-He is practical but anxious. He looks for proof quickly: exam names, teacher experience, result screenshots, certificates, sample materials, and clear lesson structure. A beautiful brand helps only if it signals discipline and credibility. If the page feels vague, he will assume the school is more lifestyle-oriented than exam-serious.
+He is practical but anxious. He looks for proof quickly: exam names, teacher experience, result screenshots, certificates, lesson materials, and clear lesson structure. A beautiful brand helps only if it signals discipline and credibility. If the page feels vague, he will assume the school is more lifestyle-oriented than exam-serious.
 
 **Usage context:**
 

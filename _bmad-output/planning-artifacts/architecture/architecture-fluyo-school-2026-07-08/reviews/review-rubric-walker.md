@@ -11,8 +11,8 @@ Scope checked:
 
 Findings applied before final:
 
-1. Mock/reference assets could have been placed under a public path by future builders.
-   - Fix applied: `public/assets/proof` is now approved-public proof only; raw references and preview assets stay outside public app assets by default.
+1. production/reference assets could have been placed under a public path by future builders.
+   - Fix applied: `public/assets/proof` is now approved-public proof only; raw references and review assets stay outside public app assets by default.
 
 2. Localized SEO metadata was implicit under public copy but not independently enforceable.
    - Fix applied: AD-11 makes route metadata owned by localized page content and consumed through one helper.
@@ -20,5 +20,5 @@ Findings applied before final:
 Residual non-blockers:
 
 - Exact commercial terms and approved proof assets are still pre-launch content dependencies, correctly listed under Deferred.
-- Release enforcement for mock content is an implementation task governed by AD-4.
+- Release enforcement for production content is an implementation task governed by AD-4.
 

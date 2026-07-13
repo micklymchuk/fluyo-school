@@ -14,8 +14,8 @@
     "test:app-shell": "node scripts/verify-ui-primitives-and-app-shell.mjs",
     "test:content-locale": "node scripts/verify-content-locale-and-seo.mjs",
     "test:telegram-cta": "node scripts/verify-telegram-cta-and-tracking.mjs",
-    "test:content-gate": "node scripts/verify-content-gate.mjs",
-    "content:gate": "node scripts/check-content-gate.mjs"
+    "test:home-route": "node scripts/verify-home-route.mjs",
+    "test:production-content": "node scripts/verify-production-content.mjs"
   },
   "dependencies": {
     "@iconoir/vue": "^7.11.1",

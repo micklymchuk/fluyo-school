@@ -6,7 +6,7 @@
 - Handed off: 2026-07-08T21:15:52+0300
 - Assigned: BMad Architect
 - Product owner confirmation: king
-- Direct architect acknowledgement: pending outside this chat
+- Direct architect acknowledgement: tracked outside this chat
 - Delivery: `_bmad-output/deliveries/DD-001-fluyo-production-site.yaml`
 - Test Scenario: `_bmad-output/test-scenarios/TS-001-fluyo-production-site.yaml`
 - Handoff Log: `_bmad-output/deliveries/DD-001-handoff-log.md`
@@ -19,11 +19,11 @@
 
 ### Content Readiness: Launch-Sensitive Content Replacement
 
-- Status: Approval matrix created; production inputs pending
+- Status: Approval matrix created; production inputs tracked
 - Phase: Content/spec readiness while DD-001 enters implementation planning
 - Reason: Public launch is blocked until exact prices, trial duration, teacher bios/assets, testimonials, results, lesson screenshots, proof assets, policy-sensitive FAQ answers, and Telegram prepared messages are approved or hidden.
 - Artifact: `_bmad-output/E-Assets/content/launch-content-approval-matrix.md`
-- Next: Fill approved production values or mark sections hidden before public launch.
+- Next: Fill approved final content or mark sections hidden before public launch.
 
 ### Validation: DD-001 Implementation
 

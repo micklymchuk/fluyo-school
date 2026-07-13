@@ -16,7 +16,7 @@ const files = {
 const allowedEvents = [
   'path_card_click',
   'program_path_view',
-  'price_preview_view',
+  'pricing_summary_view',
   'pricing_view',
   'teacher_proof_view',
   'telegram_click',
@@ -114,7 +114,7 @@ function loadTelegramCtaModule() {
   )('uk', ['uk', 'en'])
 }
 
-function loadTrackingModule(mockConsole = console) {
+function loadTrackingModule(testConsole = console) {
   const executableSource = removeImportBlocks(read(files.useTracking))
     .replace(/export type TrackingEventName = \(typeof TRACKING_EVENT_NAMES\)\[number\]\n\n/, '')
     .replace(/type TrackingEvent = \{[\s\S]*?\n\}\n\n/, '')
@@ -132,7 +132,7 @@ function loadTrackingModule(mockConsole = console) {
   return new Function(
     'console',
     `${executableSource}\nreturn { TRACKING_EVENT_NAMES, isTrackingEventName, sanitizeTrackingPayload, useTracking }`
-  )(mockConsole)
+  )(testConsole)
 }
 
 function verifyPackageScript() {

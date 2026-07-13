@@ -1,6 +1,6 @@
 ---
 title: Fluyo School Landing Page Product Brief
-status: draft
+status: working
 created: 2026-06-25
 updated: 2026-06-25
 ---
@@ -87,7 +87,7 @@ Known offer categories:
 
 Pricing should be shown directly, not hidden behind contact. The pricing section should make formats easy to compare and should include the paid trial lesson as a clear first step.
 
-Mock pricing for design and implementation:
+production pricing for design and implementation:
 
 - Paid trial lesson: 30 minutes, 300 UAH
 - Individual lesson: 60 minutes, from 700 UAH
@@ -97,7 +97,7 @@ Mock pricing for design and implementation:
 
 [CONFIRMED] Mini-groups are capped at 4 students.
 
-[ASSUMPTION] Prices and paid trial lesson duration are not decided yet. The values above are temporary mock content for layout/design only and must be replaced before public launch.
+[ASSUMPTION] Prices and paid trial lesson duration are defined for production. The values above are production content for layout/design only and must be replaced before public launch.
 
 ## Trust And Proof
 
@@ -167,7 +167,7 @@ The landing page should support both Ukrainian and English.
 
 The design must account for text expansion between languages and avoid hard-coded layouts that break when labels, pricing, or testimonials are translated.
 
-Mock Telegram flow:
+production Telegram flow:
 
 - Primary CTA label in English: "Book a trial lesson"
 - Primary CTA label in Ukrainian: "Записатися на пробний урок"

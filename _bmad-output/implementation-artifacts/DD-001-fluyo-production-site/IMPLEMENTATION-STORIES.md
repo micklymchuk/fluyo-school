@@ -20,7 +20,7 @@ No feature branch was created for this planning-only artifact. Create the implem
 - `_bmad-output/planning-artifacts/fluyo-school-landing-visual-schema.md`
 - `_bmad-output/planning-artifacts/architecture/architecture-fluyo-school-2026-07-08/ARCHITECTURE-SPINE.md`
 - `_bmad-output/E-Assets/content/launch-content-approval-matrix.md`
-- `_bmad-output/E-Assets/content/mock-launch-content.md`
+- `_bmad-output/E-Assets/content/production-content.md`
 - `docs/design-ref/design-els/`
 - `docs/design-ref/design-instagram-elements/`
 
@@ -32,7 +32,7 @@ No feature branch was created for this planning-only artifact. Create the implem
 | 2 | `stories/DD-001.0.2-ui-primitives-and-app-shell.md` | Epic 0 - UI foundation | Medium | `DD-001.0.1` |
 | 3 | `stories/DD-001.1.1-typed-content-locale-and-seo.md` | Epic 1 - Content and routing contracts | Large | `DD-001.0.1` |
 | 4 | `stories/DD-001.1.2-telegram-cta-and-tracking-contracts.md` | Epic 1 - CTA and analytics contracts | Medium | `DD-001.1.1` |
-| 5 | `stories/DD-001.1.3-launch-content-gate.md` | Epic 1 - Content integrity | Medium | `DD-001.1.1` |
+| 5 | `stories/DD-001.1.3-launch-production-content-validation.md` | Epic 1 - Content integrity | Medium | `DD-001.1.1` |
 | 6 | `stories/DD-001.2.1-home-route.md` | Epic 2 - Home and Learning Paths | Large | `DD-001.0.2`, `DD-001.1.1`, `DD-001.1.2` |
 | 7 | `stories/DD-001.2.2-learning-paths-route.md` | Epic 2 - Home and Learning Paths | Large | `DD-001.2.1` |
 | 8 | `stories/DD-001.3.1-teachers-proof-route.md` | Epic 3 - Proof and Pricing | Large | `DD-001.1.3`, `DD-001.2.2` |
@@ -48,7 +48,7 @@ No feature branch was created for this planning-only artifact. Create the implem
 - Add route-agnostic UI primitives and section primitives under `app/components/ui/`, `app/components/navigation/`, and `app/components/sections/`.
 - Add typed bilingual content records and metadata under `app/data/`.
 - Add `useLocale`, `useSeo`, `useTelegramCta`, and `useTracking` composables.
-- Add launch-sensitive source status handling and release checks.
+- Add launch-sensitive content readiness handling and release checks.
 - Build `/`, `/programs`, `/teachers`, and `/pricing`.
 - Preserve path context through anchors, query state, CTA contexts, and Telegram tracking payloads.
 - Validate route direct loads, accessibility, responsive behavior, content integrity, analytics events, and production build.
@@ -61,8 +61,8 @@ No feature branch was created for this planning-only artifact. Create the implem
 - [ ] Ukrainian is the default visible language; English is selectable without route-structure drift.
 - [ ] Public route copy is sourced from typed content records, not hard-coded inside route-specific UI primitives.
 - [ ] Telegram CTA links are built through one helper and preserve available `path`, `format`, `sourceRoute`, `locale`, and `messageIntent` context.
-- [ ] Analytics events use only `path_card_click`, `program_path_view`, `price_preview_view`, `pricing_view`, `teacher_proof_view`, `telegram_click`, and `telegram_context`.
-- [ ] Launch-sensitive records have explicit source status and mock records cannot ship as approved public truth.
+- [ ] Analytics events use only `path_card_click`, `program_path_view`, `pricing_summary_view`, `pricing_view`, `teacher_proof_view`, `telegram_click`, and `telegram_context`.
+- [ ] Launch-sensitive records have explicit content readiness and only production-facing records ship as public truth.
 - [ ] UI uses the in-code foundation: Tailwind theme tokens, SCSS base styles, primitives, section patterns, square geometry, hairline borders, restrained palette, no decorative shadows.
 - [ ] Text uses stable type sizes, no viewport-width font scaling, and no negative letter spacing.
 - [ ] Routes have no horizontal overflow at 375, 428, 768, 1440, or 1920 widths.
@@ -72,7 +72,7 @@ No feature branch was created for this planning-only artifact. Create the implem
 
 - DD-001, TS-001, the architecture spine, and this story index are available to the implementation agent.
 - The implementation agent starts with `DD-001.0.1`.
-- Final production content can remain pending during local preview, but each story must preserve source-status rules and launch blockers.
+- Final production content is defined in `_bmad-output/E-Assets/content/production-content.md`; each story must preserve production-facing content and validation rules.
 
 ## Definition Of Done For DD-001
 

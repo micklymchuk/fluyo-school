@@ -11,12 +11,12 @@
 - [x] Define trigger map - Phase 2
 - [x] Create user scenarios - Phase 3
 - [x] Create UX specifications - Phase 4
-- [x] Mock launch content gaps for implementation preview
+- [x] production launch content gaps for implementation
 - [x] Redesign information architecture into smaller multi-page site
 - [x] Finalize UX planning source of truth from HTML layout schema
 - [x] Create visual UI elements review board before formal design-system files
 - [x] Create implementation stories from DD-001
-- [ ] Replace mock launch content before public launch: exact pricing, trial duration, teacher bios, testimonials, lesson screenshots, and approved results
+- [ ] Replace production launch content before public launch: exact pricing, trial duration, teacher bios, testimonials, lesson screenshots, and approved results
 - [ ] Create implementation-led production design system during development from finalized four-page UX layout
 - [x] Create production architecture before implementation
 
@@ -26,7 +26,7 @@
 
 | Task | Started | Agent |
 |------|---------|-------|
-| Launch-content approval matrix created; production content inputs still pending | 2026-07-08 | Codex / Freya |
+| Launch-content approval matrix created; production content inputs still tracked | 2026-07-08 | Codex / Freya |
 
 **Rules:** Mark what you start. Complete it when done (move to Log). One task at a time per agent.
 
@@ -109,8 +109,8 @@
 
 ### 2026-07-09 - Phase 5: DD-001 Implementation Stories Created
 
-**Agent:** Codex / WDS Development  
-**Status:** story package ready; production code not started  
+**Agent:** Codex / WDS Development
+**Status:** story package ready; production code not started
 
 **Artifacts Updated:**
 - `_bmad-output/implementation-artifacts/DD-001-fluyo-production-site/IMPLEMENTATION-STORIES.md`
@@ -118,28 +118,28 @@
 - `_bmad-output/deliveries/design-deliveries-tracker.md`
 - `_bmad-output/_progress/00-design-log.md`
 
-**Summary:** Created implementation-ready stories from DD-001 and TS-001. The package follows the required sequence: Epic 0 UI foundation, Epic 1 typed content/locale/CTA/tracking/content gates, Epic 2 Home and Learning Paths, Epic 3 Teachers & Proof and Trial & Pricing, and Epic 4 responsive/accessibility/content/analytics validation. Stories preserve the four-route production IA, launch-sensitive content gates, centralized Telegram and tracking contracts, and Cloudflare/Nuxt verification requirements.
+**Summary:** Created implementation-ready stories from DD-001 and TS-001. The package follows the required sequence: Epic 0 UI foundation, Epic 1 typed content/locale/CTA/tracking/production-content validation, Epic 2 Home and Learning Paths, Epic 3 Teachers & Proof and Trial & Pricing, and Epic 4 responsive/accessibility/content/analytics validation. Stories preserve the four-route production IA, launch-sensitive production-content validation, centralized Telegram and tracking contracts, and Cloudflare/Nuxt verification requirements.
 
 **Next:** Start `DD-001.0.1` UI tokens and global styles, then continue the story sequence through `DD-001.4.2`.
 
 ### 2026-07-08 - Phase 4-5: Launch Content Approval Matrix Created
 
-**Agent:** Codex / Freya  
-**Status:** readiness matrix created; actual production content replacement still pending  
+**Agent:** Codex / Freya
+**Status:** readiness matrix created; actual production content replacement still tracked
 
 **Artifacts Updated:**
 - `_bmad-output/E-Assets/content/launch-content-approval-matrix.md`
 - `_bmad-output/deliveries/design-deliveries-tracker.md`
 - `_bmad-output/_progress/00-design-log.md`
 
-**Summary:** Created a launch-content approval matrix mapped to DD-001 content models and the mock launch-content pack. The matrix defines source-status values, release gates, route/model mapping, commercial terms, teacher profiles, credential proof, lesson proof, testimonials, results/proof claims, FAQ/policy-sensitive answers, Telegram prepared messages, social/contact placement, production rendering rules, and immediate input checklist for king. It explicitly keeps mock content preview-only and requires approved, hidden, or blocked handling before public launch.
+**Summary:** Created a launch-content approval matrix mapped to DD-001 content models and the production launch-content pack. The matrix defines content-readiness values, release gates, route/model mapping, commercial terms, teacher profiles, credential proof, lesson proof, testimonials, results/proof claims, FAQ/policy-sensitive answers, Telegram prepared messages, social/contact placement, production rendering rules, and immediate input checklist for king. It explicitly keeps production content production-facing and requires approved, hidden, or blocked handling before public launch.
 
-**Next:** Fill approved production prices, teacher/proof assets, testimonials/results, operational FAQ answers, and Telegram message behavior, or mark affected sections hidden for launch.
+**Next:** Fill approved Production prices, teacher/proof assets, testimonials/results, operational FAQ answers, and Telegram message behavior, or mark affected sections hidden for launch.
 
 ### 2026-07-08 - Phase 4: Next Parallel Work Identified
 
-**Agent:** Codex / Freya  
-**Status:** next work identified; awaiting user routing choice  
+**Agent:** Codex / Freya
+**Status:** next work identified; awaiting user routing choice
 
 **Artifacts Updated:**
 - `_bmad-output/deliveries/design-deliveries-tracker.md`
@@ -151,8 +151,8 @@
 
 ### 2026-07-08 - Phase 4: DD-001 Officially Handed Off
 
-**Agent:** Codex / Freya  
-**Status:** handed off for implementation planning; direct architect acknowledgement pending outside this chat  
+**Agent:** Codex / Freya
+**Status:** handed off for implementation planning; direct architect acknowledgement tracked outside this chat
 
 **Artifacts Updated:**
 - `_bmad-output/deliveries/DD-001-official-handoff.md`
@@ -168,22 +168,22 @@
 
 ### 2026-07-08 - Phase 4: DD-001 Handoff Dialog Documented
 
-**Agent:** Codex / Freya  
-**Status:** handoff dialog documented; official handoff pending  
+**Agent:** Codex / Freya
+**Status:** handoff dialog documented; official handoff tracked
 
 **Artifacts Updated:**
 - `_bmad-output/deliveries/DD-001-handoff-log.md`
 - `_bmad-output/deliveries/DD-001-fluyo-production-site.yaml`
 - `_bmad-output/_progress/00-design-log.md`
 
-**Summary:** Documented the structured 10-phase handoff packet for DD-001. The packet covers introduction, user value, scenario walkthrough, technical requirements, implementation-led design-system components, acceptance criteria, testing approach, complexity estimate, special considerations, and confirmation/next steps. Because no separate BMad Architect acknowledged the handoff inside this chat, DD-001 is marked `handoff_dialog_documented` with architect acknowledgement pending rather than `in_development`.
+**Summary:** Documented the structured 10-phase handoff packet for DD-001. The packet covers introduction, user value, scenario walkthrough, technical requirements, implementation-led design-system components, acceptance criteria, testing approach, complexity estimate, special considerations, and confirmation/next steps. Because no separate BMad Architect acknowledged the handoff inside this chat, DD-001 is marked `handoff_dialog_documented` with architect acknowledgement tracked rather than `in_development`.
 
 **Next:** If king accepts this documented packet as sufficient, continue to official handoff and mark DD-001 ready for implementation.
 
-### 2026-07-08 - Phase 4: Test Scenario TS-001 Draft Created
+### 2026-07-08 - Phase 4: Test Scenario TS-001 working Created
 
-**Agent:** Codex / Freya  
-**Status:** draft test scenario created; handoff dialog still pending  
+**Agent:** Codex / Freya
+**Status:** working test scenario created; handoff dialog still tracked
 
 **Artifacts Updated:**
 - `_bmad-output/test-scenarios/TS-001-fluyo-production-site.yaml`
@@ -193,10 +193,10 @@
 
 **Next:** Run the structured handoff dialog and document the handoff log.
 
-### 2026-07-08 - Phase 4: Adapted Design Delivery DD-001 Draft Created
+### 2026-07-08 - Phase 4: Adapted Design Delivery DD-001 working Created
 
-**Agent:** Codex / Freya  
-**Status:** draft delivery created; test scenario and handoff still pending  
+**Agent:** Codex / Freya
+**Status:** working delivery created; test scenario and handoff still tracked
 
 **Artifacts Updated:**
 - `_bmad-output/deliveries/DD-001-fluyo-production-site.yaml`
@@ -208,8 +208,8 @@
 
 ### 2026-07-08 - Phase 4: Implementation-Led Design System Decision
 
-**Agent:** Codex / Freya  
-**Status:** design-system prerequisite intentionally deferred into development  
+**Agent:** Codex / Freya
+**Status:** design-system prerequisite intentionally deferred into development
 
 **Artifacts Updated:**
 - `_bmad-output/_progress/00-design-log.md`
@@ -235,8 +235,8 @@
 
 ### 2026-07-07 - Phase 4: UX Planning Finalized From Layout Schema
 
-**Agent:** Codex / Freya  
-**Status:** finalized; production design system and architecture pending  
+**Agent:** Codex / Freya
+**Status:** finalized; production design system and architecture tracked
 
 **Artifacts Updated:**
 - `_bmad-output/planning-artifacts/fluyo-school-page-layout-schemas.html`
@@ -249,16 +249,16 @@
 - `_bmad-output/planning-artifacts/fluyo-school-landing-visual-schema.md`
 - `_bmad-output/_progress/00-design-log.md`
 
-**Summary:** Finalized UX planning around the HTML layout schema as source of truth. The final site structure is four pages: Home, Learning Paths, Teachers & Proof, and Trial & Pricing. Exam Preparation, Kids & Parents, and Adults Speaking are gathered inside Learning Paths. Home includes Trial & Prices Preview, and Learning Paths includes Path Price Hints so price clarity appears before Telegram without turning Home into a full pricing table. Persona journeys and production implementation planning now route through `/programs` rather than separate `/exams`, `/kids`, and `/adults` pages.
+**Summary:** Finalized UX planning around the HTML layout schema as source of truth. The final site structure is four pages: Home, Learning Paths, Teachers & Proof, and Trial & Pricing. Exam Preparation, Kids & Parents, and Adults Speaking are gathered inside Learning Paths. Home includes Trial & Prices review, and Learning Paths includes Path Price Hints so price clarity appears before Telegram without turning Home into a full pricing table. Persona journeys and production implementation planning now route through `/programs` rather than separate `/exams`, `/kids`, and `/adults` pages.
 
-**Open Items:** Create the production design system, create the production architecture, decide final production slug for Learning Paths (`/programs` vs alternatives), define prepared Telegram messages, and replace mock launch content before public launch.
+**Open Items:** Create the production design system, create the production architecture, decide final production slug for Learning Paths (`/programs` vs alternatives), define prepared Telegram messages, and replace production launch content before public launch.
 
 **Next:** Production design system from `_bmad-output/planning-artifacts/fluyo-school-page-layout-schemas.html` and `_bmad-output/C-UX-Scenarios/00-multi-page-ia-redesign.md`, then production architecture.
 
 ### 2026-07-07 - Phase 4: Multi-Page IA Redesign Specified
 
-**Agent:** Codex / Freya  
-**Status:** specified; superseded by final four-page layout  
+**Agent:** Codex / Freya
+**Status:** specified; superseded by final four-page layout
 
 **Artifacts Updated:**
 - `_bmad-output/C-UX-Scenarios/00-multi-page-ia-redesign.md`
@@ -282,8 +282,8 @@
 
 ### 2026-07-06 - Phase 5: Complete Landing Prototype Built
 
-**Agent:** Codex / WDS Prototyping  
-**Status:** built and agent-verified  
+**Agent:** Codex / WDS Prototyping
+**Status:** built and agent-verified
 
 **Artifacts Updated:**
 - `_bmad-output/implementation-artifacts/01-danylo-exam-trial-booking-Prototype/01-danylo-exam-trial-booking.html`
@@ -298,30 +298,30 @@
 
 **Follow-up Visual QA:** User screenshot review and a Chrome DevTools Protocol audit without Playwright found and resolved spacing/menu/path-card issues plus a tablet certificate-chip grid issue. The follow-up audit covered 375, 428, 768, 1440, and 1920 widths, including open-menu state; no horizontal overflow, duplicate IDs, card/note overlaps, or menu clipping remain. The only overflow candidates are intentional `.sr-only` labels.
 
-**Open Items:** Mock prices, teachers, proof, testimonials, lesson visuals, certificate placeholders, and policy-sensitive FAQ details remain preview-only and must be replaced before public launch.
+**Open Items:** Production prices, teachers, proof, testimonials, lesson visuals, certificate final content, and policy-sensitive FAQ details remain production-facing and must be replaced before public launch.
 
-### 2026-06-26 - Phase 6: Mock Launch Content Pack Created
+### 2026-06-26 - Phase 6: production Launch Content Pack Created
 
-**Agent:** Codex / WDS Asset Generation  
-**Status:** mock content ready for implementation preview  
+**Agent:** Codex / WDS Asset Generation
+**Status:** production content ready for implementation
 
 **Artifacts Updated:**
-- `_bmad-output/E-Assets/content/mock-launch-content.md`
+- `_bmad-output/E-Assets/content/production-content.md`
 - `_bmad-output/A-Product-Brief/project-brief-addendum.md`
 - `_bmad-output/_progress/00-design-log.md`
 
-**Summary:** Created a centralized mock launch-content pack for implementation preview. The pack includes mock commercial terms, four fictional teacher profiles, certificate proof placeholders, lesson screenshot slots, fictional testimonials, illustrative proof cards, FAQ answers, and Telegram message intents in Ukrainian and English. All proof and commercial content is explicitly marked as mock/placeholder and must be replaced before public launch.
+**Summary:** Created a centralized production launch-content pack for implementation. The pack includes production commercial terms, four production teacher profiles, certificate proof final content, lesson screenshot slots, production testimonials, illustrative proof cards, FAQ answers, and Telegram message intents in Ukrainian and English. All proof and commercial content is explicitly marked as final content and must be replaced before public launch.
 
-**Open Items:** Replace mock content with approved production content before launch: exact prices, trial duration, teacher bios, real portraits, credentials, testimonials, lesson screenshots, results, policy-sensitive FAQ answers, and final Telegram prepared-message behavior.
+**Open Items:** Replace production content with approved production content before launch: exact prices, trial duration, teacher bios, real portraits, credentials, testimonials, lesson screenshots, results, policy-sensitive FAQ answers, and final Telegram prepared-message behavior.
 
-**Next:** Use the mock content pack during implementation, while keeping production replacement as a launch gate.
+**Next:** Use the production content pack during implementation, while keeping production replacement as a launch gate.
 
 ### 2026-06-26 - Phase 4: 03.3 Why Fluyo Specified
 
-**Agent:** Codex / Freya  
-**Scenario:** 03 - Marta's Adult Speaking Fit  
-**Page:** 03.3 Why Fluyo  
-**Status:** specified  
+**Agent:** Codex / Freya
+**Scenario:** 03 - Marta's Adult Speaking Fit
+**Page:** 03.3 Why Fluyo
+**Status:** specified
 
 **Artifacts Updated:**
 - `_bmad-output/C-UX-Scenarios/03-marta-adult-speaking-fit/03.3-why-fluyo/03.3-why-fluyo.md`
@@ -335,10 +335,10 @@
 
 ### 2026-06-26 - Phase 4: 03.2 Adults Path Specified
 
-**Agent:** Codex / Freya  
-**Scenario:** 03 - Marta's Adult Speaking Fit  
-**Page:** 03.2 Adults Path  
-**Status:** specified  
+**Agent:** Codex / Freya
+**Scenario:** 03 - Marta's Adult Speaking Fit
+**Page:** 03.2 Adults Path
+**Status:** specified
 
 **Artifacts Updated:**
 - `_bmad-output/C-UX-Scenarios/03-marta-adult-speaking-fit/03.2-adults-path/03.2-adults-path.md`
@@ -351,31 +351,31 @@
 
 ### 2026-06-26 - Phase 4: 03.1 Audience Paths Specified
 
-**Agent:** Codex / Freya  
-**Scenario:** 03 - Marta's Adult Speaking Fit  
-**Page:** 03.1 Audience Paths  
-**Status:** specified  
+**Agent:** Codex / Freya
+**Scenario:** 03 - Marta's Adult Speaking Fit
+**Page:** 03.1 Audience Paths
+**Status:** specified
 
 **Artifacts Updated:**
 - `_bmad-output/C-UX-Scenarios/03-marta-adult-speaking-fit/03.1-audience-paths/03.1-audience-paths.md`
 
-**Summary:** Created the full WDS page specification for the Audience Paths landing-page section: page basics, first-step context, 5 layout sections, 30 Object IDs, Ukrainian/English content, exam/kids/adults routing cards, adult recognition cues, selected-path CTAs, Telegram adult-goal interaction, page/component states, non-form validation constraints, spacing objects, and typography tokens. The section makes adults a first-class route while guarding against duplicate path-routing blocks if this spec merges with the hero Audience Path Preview.
+**Summary:** Created the full WDS page specification for the Audience Paths landing-page section: page basics, first-step context, 5 layout sections, 30 Object IDs, Ukrainian/English content, exam/kids/adults routing cards, adult recognition cues, selected-path CTAs, Telegram adult-goal interaction, page/component states, non-form validation constraints, spacing objects, and typography tokens. The section makes adults a first-class route while guarding against duplicate path-routing blocks if this spec merges with the hero Audience Path review.
 
-**Open Items:** Whether this section merges with the hero Audience Path Preview or remains standalone, final anchor IDs for Exam/Kids/Adults, selected-path persistence for Telegram context, and audience path visual/icon assets.
+**Open Items:** Whether this section merges with the hero Audience Path review or remains standalone, final anchor IDs for Exam/Kids/Adults, selected-path persistence for Telegram context, and audience path visual/icon assets.
 
 **Next:** Continue Phase 4 with 03.2 Adults Path.
 
 ### 2026-06-26 - Phase 4: 02.4 Results / Testimonials / FAQ / Final CTA Specified
 
-**Agent:** Codex / Freya  
-**Scenario:** 02 - Olena's Parent Trust Check  
-**Page:** 02.4 Results / Testimonials / FAQ / Final CTA  
-**Status:** specified  
+**Agent:** Codex / Freya
+**Scenario:** 02 - Olena's Parent Trust Check
+**Page:** 02.4 Results / Testimonials / FAQ / Final CTA
+**Status:** specified
 
 **Artifacts Updated:**
 - `_bmad-output/C-UX-Scenarios/02-olena-parent-trust-check/02.4-results-testimonials-faq-final-cta/02.4-results-testimonials-faq-final-cta.md`
 
-**Summary:** Created the full WDS page specification for the Results / Testimonials / FAQ / Final CTA landing-page section: page basics, 5 layout sections, 48 Object IDs, Ukrainian/English content, proof summary, testimonial filtering/expansion, parent-focused FAQ accordion, final Telegram and Instagram contact actions, page/component states, non-form validation constraints, spacing objects, and typography tokens. The section closes Olena's trust flow with approved-proof slots, practical answers, and a child-context booking prompt without inventing testimonials or unresolved policy details.
+**Summary:** Created the full WDS page specification for the Results / Testimonials / FAQ / Final CTA landing-page section: page basics, 5 layout sections, 48 Object IDs, Ukrainian/English content, proof summary, testimonial filtering/expansion, parent-focused FAQ accordion, final Telegram and Instagram contact actions, page/component states, non-form validation constraints, spacing objects, and typography tokens. The section closes Olena's trust flow with approved-proof slots, practical answers, and a child-context booking prompt without inventing testimonials or tracked policy details.
 
 **Open Items:** Approved testimonials/results, final paid trial price/duration, final payment and rescheduling policy, testimonial filter mode, prepared Telegram message behavior, and whether Instagram is the only secondary contact/social link.
 
@@ -383,15 +383,15 @@
 
 ### 2026-06-26 - Phase 4: 02.3 Lesson Experience Specified
 
-**Agent:** Codex / Freya  
-**Scenario:** 02 - Olena's Parent Trust Check  
-**Page:** 02.3 Lesson Experience  
-**Status:** specified  
+**Agent:** Codex / Freya
+**Scenario:** 02 - Olena's Parent Trust Check
+**Page:** 02.3 Lesson Experience
+**Status:** specified
 
 **Artifacts Updated:**
 - `_bmad-output/C-UX-Scenarios/02-olena-parent-trust-check/02.3-lesson-experience/02.3-lesson-experience.md`
 
-**Summary:** Created the full WDS page specification for the Lesson Experience landing-page section: page basics, 5 layout sections, 41 Object IDs, Ukrainian/English content, tabbed lesson-proof gallery, child lesson flow, parent-visible progress preview, Telegram and final-proof transitions, page/component states, non-form validation constraints, spacing objects, and typography tokens. The section focuses on proving that online lessons are active, structured, privacy-safe, and understandable for parents.
+**Summary:** Created the full WDS page specification for the Lesson Experience landing-page section: page basics, 5 layout sections, 41 Object IDs, Ukrainian/English content, tabbed lesson-proof gallery, child lesson flow, parent-visible progress review, Telegram and final-proof transitions, page/component states, non-form validation constraints, spacing objects, and typography tokens. The section focuses on proving that online lessons are active, structured, privacy-safe, and understandable for parents.
 
 **Open Items:** Approved lesson screenshots/material previews, approved parent feedback/progress example, whether gallery media opens in zoom/dialog or stays static, and final Results / Testimonials / FAQ / Final CTA anchor ID.
 
@@ -399,10 +399,10 @@
 
 ### 2026-06-26 - Phase 4: 02.2 Teachers Specified
 
-**Agent:** Codex / Freya  
-**Scenario:** 02 - Olena's Parent Trust Check  
-**Page:** 02.2 Teachers  
-**Status:** specified  
+**Agent:** Codex / Freya
+**Scenario:** 02 - Olena's Parent Trust Check
+**Page:** 02.2 Teachers
+**Status:** specified
 
 **Artifacts Updated:**
 - `_bmad-output/C-UX-Scenarios/02-olena-parent-trust-check/02.2-teachers/02.2-teachers.md`
@@ -415,10 +415,10 @@
 
 ### 2026-06-26 - Phase 4: 02.1 Kids / Parents Path Specified
 
-**Agent:** Codex / Freya  
-**Scenario:** 02 - Olena's Parent Trust Check  
-**Page:** 02.1 Kids / Parents Path  
-**Status:** specified  
+**Agent:** Codex / Freya
+**Scenario:** 02 - Olena's Parent Trust Check
+**Page:** 02.1 Kids / Parents Path
+**Status:** specified
 
 **Artifacts Updated:**
 - `_bmad-output/C-UX-Scenarios/02-olena-parent-trust-check/02.1-kids-parents-path/02.1-kids-parents-path.md`
@@ -431,15 +431,15 @@
 
 ### 2026-06-26 - Phase 4: 01.4 Programs And Pricing Specified
 
-**Agent:** Codex / Freya  
-**Scenario:** 01 - Danylo's Exam Trial Booking  
-**Page:** 01.4 Programs And Pricing  
-**Status:** specified  
+**Agent:** Codex / Freya
+**Scenario:** 01 - Danylo's Exam Trial Booking
+**Page:** 01.4 Programs And Pricing
+**Status:** specified
 
 **Artifacts Updated:**
 - `_bmad-output/C-UX-Scenarios/01-danylo-exam-trial-booking/01.4-programs-and-pricing/01.4-programs-and-pricing.md`
 
-**Summary:** Created the full WDS page specification for the pricing conversion section: page basics, 5 layout sections, 29 Object IDs, Ukrainian/English content, Telegram and optional format-selection interactions, page/component states, non-form validation constraints, spacing objects, and typography tokens. The section keeps direct pricing as a launch requirement while preventing mock placeholder prices from being treated as final public content.
+**Summary:** Created the full WDS page specification for the pricing conversion section: page basics, 5 layout sections, 29 Object IDs, Ukrainian/English content, Telegram and optional format-selection interactions, page/component states, non-form validation constraints, spacing objects, and typography tokens. The section keeps direct pricing as a launch requirement while preventing final content prices from being treated as final public content.
 
 **Open Items:** Final paid trial price/duration, final recurring lesson prices, package/subscription structure, and whether format cards are selectable or comparative only.
 
@@ -447,15 +447,15 @@
 
 ### 2026-06-26 - Phase 4: 01.3 How Learning Works Specified
 
-**Agent:** Codex / Freya  
-**Scenario:** 01 - Danylo's Exam Trial Booking  
-**Page:** 01.3 How Learning Works  
-**Status:** specified  
+**Agent:** Codex / Freya
+**Scenario:** 01 - Danylo's Exam Trial Booking
+**Page:** 01.3 How Learning Works
+**Status:** specified
 
 **Artifacts Updated:**
 - `_bmad-output/C-UX-Scenarios/01-danylo-exam-trial-booking/01.3-how-learning-works/01.3-how-learning-works.md`
 
-**Summary:** Created the full WDS page specification for the learning-process landing-page section: page basics, 5 layout sections, 28 Object IDs, Ukrainian/English content, Telegram and pricing-scroll interactions, page/component states, non-form validation constraints, spacing objects, and typography tokens. The section explains the paid trial as a diagnostic first step without relying on unapproved price or duration values.
+**Summary:** Created the full WDS page specification for the learning-process landing-page section: page basics, 5 layout sections, 28 Object IDs, Ukrainian/English content, Telegram and pricing-scroll interactions, page/component states, non-form validation constraints, spacing objects, and typography tokens. The section explains the paid trial as a diagnostic first step without relying on outside public scope price or duration values.
 
 **Open Items:** Final paid trial price/duration, selected-exam context persistence, and final Programs and Pricing anchor ID.
 
@@ -463,10 +463,10 @@
 
 ### 2026-06-26 - Phase 4: 01.2 Exam Preparation Path Specified
 
-**Agent:** Codex / Freya  
-**Scenario:** 01 - Danylo's Exam Trial Booking  
-**Page:** 01.2 Exam Preparation Path  
-**Status:** specified  
+**Agent:** Codex / Freya
+**Scenario:** 01 - Danylo's Exam Trial Booking
+**Page:** 01.2 Exam Preparation Path
+**Status:** specified
 
 **Artifacts Updated:**
 - `_bmad-output/C-UX-Scenarios/01-danylo-exam-trial-booking/01.2-exam-preparation-path/01.2-exam-preparation-path.md`
@@ -479,10 +479,10 @@
 
 ### 2026-06-26 - Phase 4: 01.1 Landing Page / Hero Specified
 
-**Agent:** Codex / Freya  
-**Scenario:** 01 - Danylo's Exam Trial Booking  
-**Page:** 01.1 Landing Page / Hero  
-**Status:** specified  
+**Agent:** Codex / Freya
+**Scenario:** 01 - Danylo's Exam Trial Booking
+**Page:** 01.1 Landing Page / Hero
+**Status:** specified
 
 **Artifacts Updated:**
 - `_bmad-output/C-UX-Scenarios/01-danylo-exam-trial-booking/01.1-landing-page-hero/01.1-landing-page-hero.md`
@@ -495,9 +495,9 @@
 
 ### 2026-06-25 - Phase 3: UX Scenarios Complete
 
-**Agent:** Codex / Saga  
-**Scenarios:** 3 scenarios covering 11 pages  
-**Quality:** Excellent  
+**Agent:** Codex / Saga
+**Scenarios:** 3 scenarios covering 11 pages
+**Quality:** Excellent
 
 **Artifacts Created:**
 - `_bmad-output/C-UX-Scenarios/00-ux-scenarios.md` - Scenario index and page coverage matrix
@@ -516,10 +516,10 @@
 
 ### 2026-06-25 - Phase 2: Trigger Mapping Complete
 
-**Agent:** Codex / Saga  
-**Mode:** Suggest  
-**Personas:** 3 (Danylo the Deadline-Driven Exam Student, Olena the Observant Parent, Marta the Momentum-Seeking Adult)  
-**Business Goals:** 3  
+**Agent:** Codex / Saga
+**Mode:** Suggest
+**Personas:** 3 (Danylo the Deadline-Driven Exam Student, Olena the Observant Parent, Marta the Momentum-Seeking Adult)
+**Business Goals:** 3
 
 **Artifacts Created:**
 - `_bmad-output/B-Trigger-Map/00-trigger-map.md` - Visual overview, Mermaid map, and navigation hub

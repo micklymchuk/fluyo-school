@@ -29,7 +29,7 @@ sources:
   - _bmad-output/A-Product-Brief/project-brief-addendum.md
   - _bmad-output/B-Trigger-Map/05-Key-Insights.md
   - _bmad-output/C-UX-Scenarios/00-multi-page-ia-redesign.md
-  - _bmad-output/E-Assets/content/mock-launch-content.md
+  - _bmad-output/E-Assets/content/production-content.md
   - https://nuxt.com/docs/4.x/getting-started/deployment
   - https://developers.cloudflare.com/pages/framework-guides/deploy-a-nuxt-site/
 companions:
@@ -80,11 +80,11 @@ Routes compose sections. Sections consume typed content, UI primitives, and comp
 - **Prevents:** Ukrainian and English pages drifting in shape, hard-coded copy in Vue components, and layout breakage from translated text length.
 - **Rule:** public copy lives in typed content records with matching `uk` and `en` fields. Ukrainian is the default locale and omitted from URLs; English uses `lang=en` until locale-prefixed routes are adopted. Vue components receive localized strings from content/composables and must not own route-specific public prose directly.
 
-### AD-4 - Content integrity gate for proof, prices, and launch claims
+### AD-4 - Production content integrity for proof, prices, and launch claims
 
 - **Binds:** proof-and-pricing-content, teacher profiles, testimonials, certificates, lesson screenshots, results, prices, trial duration.
-- **Prevents:** mock teachers, mock testimonials, mock prices, or generated screenshots being presented as approved launch truth.
-- **Rule:** launch-sensitive content records carry a source status such as `mock`, `approved`, or `hidden`. Production rendering must either hide non-approved launch claims or fail a release check before public deployment.
+- **Prevents:** teacher, testimonial, price, or proof claims drifting away from the production content source.
+- **Rule:** public content records use production-facing values. Validation checks exact prices, proof assets, route copy, and CTA context before deployment.
 
 ### AD-5 - Centralized Telegram conversion contract
 
@@ -106,7 +106,7 @@ Routes compose sections. Sections consume typed content, UI primitives, and comp
 
 ### AD-8 - Asset metadata and privacy boundary
 
-- **Binds:** teacher photos, certificates, lesson screenshots, testimonials, generated preview media, alt text.
+- **Binds:** teacher photos, certificates, lesson screenshots, testimonials, generated review media, alt text.
 - **Prevents:** publishing personal data, unverifiable proof, missing alt text, or visual assets with unclear launch approval.
 - **Rule:** renderable proof assets require metadata for `kind`, `locale text`, `alt`, `approvalStatus`, `privacyStatus`, and `usageContext`. Screenshots must be privacy-safe before they can be marked approved.
 
@@ -114,7 +114,7 @@ Routes compose sections. Sections consume typed content, UI primitives, and comp
 
 - **Binds:** measurement requirements from UX, conversion reporting, implementation tasks.
 - **Prevents:** event-name drift between pages and analytics vendor lock-in inside components.
-- **Rule:** components emit only the fixed event names through one tracking adapter: `path_card_click`, `program_path_view`, `price_preview_view`, `pricing_view`, `teacher_proof_view`, `telegram_click`, and `telegram_context`. The concrete analytics vendor is an adapter detail.
+- **Rule:** components emit only the fixed event names through one tracking adapter: `path_card_click`, `program_path_view`, `pricing_summary_view`, `pricing_view`, `teacher_proof_view`, `telegram_click`, and `telegram_context`. The concrete analytics vendor is an adapter detail.
 
 ### AD-10 - Cloudflare Pages is the production boundary [ADOPTED]
 
@@ -136,7 +136,7 @@ Routes compose sections. Sections consume typed content, UI primitives, and comp
 | Locale codes | `uk` and `en`; `uk` is default. |
 | Locale selection | Omit query for Ukrainian; use `lang=en` for English until locale-prefixed routes are intentionally adopted. |
 | Content ids | Lowercase kebab or snake ids by domain: `path-exam`, `teacher-mariia`, `price-mini-group`, `proof-certificate-1`. |
-| Source status | `mock`, `approved`, `hidden`; launch-sensitive records cannot omit status. |
+| content readiness | `production`, `approved`, `hidden`; launch-sensitive records cannot omit status. |
 | CTA context | `path`, `format`, `sourceRoute`, `locale`, `messageIntent`. |
 | Events | Use the seven UX event names in AD-9; event payloads include route and context when available. |
 | Styling | Tailwind CSS theme variables for color, type scale, spacing, radii, z-index, and motion; authored global defaults in SCSS; components use Tailwind utilities backed by project tokens, not raw brand values. |
@@ -194,7 +194,7 @@ server/
 public/
   assets/
     proof/                     # approved public proof assets only
-docs/design-ref/               # raw references and mock/preview assets, not app source
+docs/design-ref/               # raw references and production/review assets, not app source
 nuxt.config.ts                 # Nuxt/Nitro/Cloudflare source of runtime behavior
 wrangler.jsonc                 # Cloudflare Pages output, compatibility, observability
 ```

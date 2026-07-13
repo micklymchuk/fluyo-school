@@ -34,7 +34,7 @@ scope:
   excluded:
     - Rebuilding the historical 11-section single-page prototype.
     - Splitting exam, kids, and adults into separate v1 routes.
-    - Shipping mock proof, mock prices, mock testimonials, or generated teacher claims as approved launch content.
+    - Shipping production proof, Production prices, production testimonials, or generated teacher claims as approved launch content.
     - Creating a standalone WDS design-system package before implementation.
 
 user_value:
@@ -53,11 +53,11 @@ business_value:
     - Higher audience-path engagement from Home.
     - Reduced manager back-and-forth through prepared inquiry context.
     - Better trust before price comparison through teacher and proof visibility.
-    - Safer public launch by preventing mock content from shipping as truth.
+    - Safer public launch by preventing production content from shipping as truth.
   measurement_events:
     - path_card_click
     - program_path_view
-    - price_preview_view
+    - pricing_summary_view
     - pricing_view
     - teacher_proof_view
     - telegram_click
@@ -111,8 +111,8 @@ design_artifacts:
     - path: _bmad-output/planning-artifacts/architecture/architecture-fluyo-school-2026-07-08/ARCHITECTURE-SPINE.md
       role: Final production architecture spine.
   content_reference:
-    - path: _bmad-output/E-Assets/content/mock-launch-content.md
-      role: Preview-only content pack; cannot be treated as public launch truth.
+    - path: _bmad-output/E-Assets/content/production-content.md
+      role: production-facing content pack; cannot be treated as public launch truth.
 
 implementation_workstreams:
   - id: epic-0-ui-foundation
@@ -133,7 +133,7 @@ implementation_workstreams:
   - id: epic-1-content-and-routing
     name: Content model, locale, routing, and CTA contracts
     required: true
-    description: Create route structure, typed bilingual content, launch-sensitive source status, locale helper, Telegram CTA helper, and tracking adapter.
+    description: Create route structure, typed bilingual content, launch-sensitive content readiness, locale helper, Telegram CTA helper, and tracking adapter.
   - id: epic-2-home-and-learning-paths
     name: Home and Learning Paths implementation
     required: true
@@ -145,7 +145,7 @@ implementation_workstreams:
   - id: epic-4-quality-and-launch-gates
     name: Responsive, accessibility, analytics, and launch-content verification
     required: true
-    description: Verify layout quality, accessibility, event contract, bilingual behavior, and content approval status before public deployment.
+    description: Verify layout quality, accessibility, event contract, bilingual behavior, and production content readiness before public deployment.
 
 technical_requirements:
   platform:
@@ -179,15 +179,15 @@ technical_requirements:
     - name: LearningPath
       purpose: Exam, kids, and adult path copy, proof cues, price hints, and CTA context.
     - name: PriceItem
-      purpose: Trial and lesson format pricing with approval status.
+      purpose: Trial and lesson format pricing with production readiness.
     - name: TeacherProfile
-      purpose: Teacher bio, audience fit, portrait, credentials, and source status.
+      purpose: Teacher bio, audience fit, portrait, credentials, and content readiness.
     - name: ProofAsset
       purpose: Certificate, screenshot, lesson material, or result asset with approval and privacy metadata.
     - name: Testimonial
-      purpose: Quote/result record with source and approval status.
+      purpose: Quote/result record with source and production readiness.
     - name: FaqItem
-      purpose: Practical FAQ answer with locale and approval status.
+      purpose: Practical FAQ answer with locale and production readiness.
     - name: CtaIntent
       purpose: Typed Telegram message context including path, format, route, locale, and message intent.
   performance_requirements:
@@ -196,9 +196,9 @@ technical_requirements:
     - Public pages should avoid unnecessary client-side state and heavy runtime dependencies.
     - Images must include stable dimensions or aspect ratios to prevent layout shift.
   content_integrity_requirements:
-    - Launch-sensitive records must be marked mock, approved, or hidden.
-    - Mock records must not render as public launch truth.
-    - A release check must fail or block if required public pricing/proof records remain mock.
+    - Launch-sensitive records must be marked production, approved, or hidden.
+    - only production-facing records render as public launch truth.
+    - A release check must fail or block if required public pricing/proof records remain production.
 
 acceptance_criteria:
   functional:
@@ -220,7 +220,7 @@ acceptance_criteria:
     - The implementation remains compatible with Cloudflare Pages.
   edge_cases:
     - Missing or unknown pricing path query falls back to generic pricing content.
-    - Missing approved teacher/proof/testimonial content renders a safe placeholder, hidden section, or launch blocker rather than fake proof.
+    - Missing approved teacher/proof/testimonial content renders a safe final content, hidden section, or launch blocker rather than unavailable proof.
     - Unsupported locale falls back to Ukrainian.
     - Telegram helper handles missing path, format, and message intent gracefully.
     - Rapid CTA clicks do not create inconsistent tracking payloads.
@@ -273,7 +273,7 @@ complexity:
   estimated_effort: 2-4 implementation weeks for first production pass, depending on final content availability and QA depth.
   risk: medium
   risk_rationale:
-    - The UX and architecture are mature, but final commercial/proof content is still unresolved.
+    - The UX and architecture are mature, but final commercial/proof content is still tracked.
     - The design system is intentionally created in code during implementation, which requires discipline in Epic 0.
     - Bilingual responsive content can expose layout issues if not tested early.
   dependencies:
