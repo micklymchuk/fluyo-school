@@ -52,6 +52,28 @@ const blockedPatterns = [
   /preview mode/i
 ]
 
+// Public copy must read as the real thing it names, spoken to the visitor —
+// never as a specimen ("example of...") or a description of the site itself
+// ("this page shows..."). Applied to locale message files only.
+const localeBlockedPatterns = [
+  // Unicode lookarounds instead of \b: JS \b is ASCII-only and never matches
+  // around Cyrillic letters. (?!н) keeps «прикладна/прикладний» (applied) legal.
+  /(?<![\p{L}\p{N}])приклад(?!н)/iu,
+  /зразок/iu,
+  /фрагмент/iu,
+  /\bexample/i,
+  /\bspecimen/i,
+  /\bsnapshot\b(?!":)/i,
+  /(?<![\p{L}\p{N}])демо(?![\p{L}\p{N}])/iu,
+  /this (?:page|section|card|block) (?:explains|shows|describes|presents)/i,
+  /(?:ця сторінка|цей розділ|ця картка|цей блок)/iu,
+  /сторінка (?:пояснює|показує|описує)/iu,
+  /кожна картка (?:показує|пояснює)/iu,
+  /each card (?:shows|explains)/i
+]
+
+const isLocaleMessageFile = (path) => /app\/i18n\/locales\/[^/]+\.json$/.test(path.split('\\').join('/'))
+
 function listFiles(path) {
   const absolutePath = resolve(root, path)
 
@@ -84,9 +106,12 @@ const violations = []
 for (const path of files) {
   const source = readFileSync(path, 'utf8')
   const lines = source.split('\n')
+  const activePatterns = isLocaleMessageFile(relative(root, path))
+    ? [...blockedPatterns, ...localeBlockedPatterns]
+    : blockedPatterns
 
   lines.forEach((line, index) => {
-    for (const pattern of blockedPatterns) {
+    for (const pattern of activePatterns) {
       if (pattern.test(line)) {
         violations.push(`${relative(root, path)}:${index + 1}: ${line.trim()}`)
         break

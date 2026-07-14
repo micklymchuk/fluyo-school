@@ -18,8 +18,20 @@ export const faqItems = [
     policySensitivity: 'policy_sensitive'
   },
   {
+    id: 'payment-method',
+    policySensitivity: 'policy_sensitive'
+  },
+  {
     id: 'schedule-policy',
     policySensitivity: 'policy_sensitive'
+  },
+  {
+    id: 'reschedule-policy',
+    policySensitivity: 'policy_sensitive'
+  },
+  {
+    id: 'online-format',
+    policySensitivity: 'standard'
   },
   {
     id: 'english-switch',

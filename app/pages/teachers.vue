@@ -1,15 +1,25 @@
 <script setup lang="ts">
+import TeachersHeaderSection from '~/components/sections/TeachersHeaderSection.vue'
+import TeachersProofColumnsSection from '~/components/sections/TeachersProofColumnsSection.vue'
+import TeachersTestimonialsSection from '~/components/sections/TeachersTestimonialsSection.vue'
+import TeachersCtaStripSection from '~/components/sections/TeachersCtaStripSection.vue'
+
 useSeo('/teachers')
 </script>
 
 <template>
-  <div class="route-shell-anchor" aria-hidden="true" />
+  <div class="teachers-page">
+    <TeachersHeaderSection />
+    <TeachersProofColumnsSection />
+    <TeachersTestimonialsSection />
+    <TeachersCtaStripSection />
+  </div>
 </template>
 
 <style scoped>
 @reference "~/assets/css/tailwind.css";
 
-.route-shell-anchor {
-  @apply min-h-64 bg-page;
+.teachers-page {
+  @apply bg-page;
 }
 </style>

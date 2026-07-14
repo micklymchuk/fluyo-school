@@ -16,6 +16,8 @@
     "test:telegram-cta": "node scripts/verify-telegram-cta-and-tracking.mjs",
     "test:home-route": "node scripts/verify-home-route.mjs",
     "test:programs-route": "node scripts/verify-programs-route.mjs",
+    "test:teachers-route": "node scripts/verify-teachers-route.mjs",
+    "test:pricing-route": "node scripts/verify-pricing-route.mjs",
     "test:production-content": "node scripts/verify-production-content.mjs"
   },
   "dependencies": {

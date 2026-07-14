@@ -47,6 +47,8 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Keep Tailwind wired through `@tailwindcss/vite` in `nuxt.config.ts`; do not switch to another Tailwind integration without an explicit architecture/product decision.
 - Preserve the `nitro-cloudflare-dev` module while local Cloudflare runtime behavior is needed.
 - Use Vue single-file components for UI. The current app entry is `app/app.vue`; replace `NuxtWelcome` when building the real application surface.
+- Route pages must stay thin composers: a page under `app/pages/` holds only SEO registration, route-level tracking, and an ordered list of section components. Every visual section lives in its own component under `app/components/sections/` (see `Home*Section.vue` and `Pricing*Section.vue`); never build a route as one monolithic template. State shared by several sections (e.g. query context) belongs in a composable, not in the page.
+- Repeated units inside a section (cards rendered in a `v-for`) must be their own components under a domain folder (e.g. `app/components/pricing/PricingFormatCard.vue`), and they must be fully presentational and independent: configured entirely by the parent through typed props carrying resolved strings/flags/URLs, emitting events (e.g. `cta-click`) instead of tracking, with no i18n, content-record, tracking, or business-logic composable imports inside — only markup, styles, and aria. The parent section resolves `t()`, content records, path context, and Telegram/tracking contracts, and keeps the loop and grid layout.
 - Keep `NuxtRouteAnnouncer` in the root app unless there is a deliberate accessibility replacement.
 - When adding Cloudflare-specific server behavior, use Nitro/server routes and the typed H3 event context rather than browser-only APIs.
 - Avoid adding client-only dependencies or Node-only APIs without checking Cloudflare Pages compatibility.
@@ -73,6 +75,8 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Keep comments sparse and useful; avoid narrating obvious Vue/TypeScript behavior.
 - If adding a formatter/linter, add explicit npm scripts and config so future agents have a concrete command to run.
 - All public app content is production content. Public copy, variables, types, scripts, docs, and tests must frame content as final production-facing content; when a value is needed, write the concrete value instead of adding internal-status wording.
+- Public copy must sound like a real school speaking warmly to a real visitor, never like documentation. Never publish copy that describes the site itself («Сторінка пояснює…», "This page explains…", «Кожна картка показує…», "Each card shows…") — address the visitor directly instead.
+- Never publish specimen wording in public copy («приклад», «зразок», "example"): every title, caption, and alt text must read as the real thing it names («Фідбек після speaking-практики», not «Приклад формату фідбеку»). `npm run test:production-content` blocks this vocabulary in locale message files — run it after any copy change.
 
 ### Development Workflow Rules
 

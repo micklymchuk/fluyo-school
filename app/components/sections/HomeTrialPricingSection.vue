@@ -2,7 +2,7 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import UiButtonLink from '~/components/ui/UiButtonLink.vue'
 import UiSection from '~/components/sections/UiSection.vue'
-import { priceItems, type CtaContext } from '~/data/content'
+import { priceItems, type CtaContext, type PriceItemId } from '~/data/content'
 
 const route = useRoute()
 const { locale } = useLocale()
@@ -12,6 +12,8 @@ const observerTarget = ref<HTMLElement | null>(null)
 const hasTrackedPricingSummary = ref(false)
 let pricingSummaryObserver: IntersectionObserver | undefined
 const formatSignalIndexes = [0, 1, 2] as const
+const summaryPriceItemIds = ['trial', 'exam-group', 'kids-group', 'adult-individual'] as const satisfies readonly PriceItemId[]
+const summaryPriceItems = priceItems.filter((item) => (summaryPriceItemIds as readonly PriceItemId[]).includes(item.id))
 
 const telegramContext = computed<CtaContext>(() => ({
   path: 'generic',
@@ -72,7 +74,7 @@ onBeforeUnmount(() => {
     <div ref="observerTarget" class="pricing-summary">
       <div class="pricing-summary__panel">
         <div class="pricing-summary__items">
-          <article v-for="item in priceItems" :key="item.id" class="pricing-summary__item">
+          <article v-for="item in summaryPriceItems" :key="item.id" class="pricing-summary__item">
             <span class="pricing-summary__item-label">{{ t(`priceItems.${item.id}.label`) }}</span>
             <strong class="pricing-summary__item-value">{{ t(`priceItems.${item.id}.value`) }}</strong>
             <span class="pricing-summary__item-caption">{{ t(`priceItems.${item.id}.caption`) }}</span>

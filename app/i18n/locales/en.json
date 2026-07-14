@@ -25,12 +25,12 @@
     "teachers": {
       "seo": {
         "title": "Teachers and proof - Fluyo School",
-        "description": "Meet Fluyo School teachers, the lesson approach, and managed proof of student progress."
+        "description": "Meet the Fluyo School teachers: who leads the lessons, how classes feel, and how students see their progress."
       },
       "intro": {
         "eyebrow": "Teachers and trust",
-        "heading": "People, method, and proof before booking.",
-        "summary": "This page explains who teaches, how learning works, and which proof assets support the learning journey."
+        "heading": "Meet the people you will trust with your English.",
+        "summary": "See who leads the lessons, how classes feel, and what progress looks like for our students - everything you want to check before the first lesson."
       }
     },
     "pricing": {
@@ -61,9 +61,9 @@
       "cardCta": "View path"
     },
     "proofSnapshot": {
-      "eyebrow": "Proof snapshot",
+      "eyebrow": "Trust at a glance",
       "title": "Three trust signals before the first lesson.",
-      "description": "The first scan shows who leads learning, how progress is tracked, and what happens in the trial lesson.",
+      "description": "From the start you can see who leads the lessons, how progress is tracked, and what happens in the trial lesson.",
       "items": [
         {
           "title": "A teacher leads the start",
@@ -85,7 +85,7 @@
     "trialPricing": {
       "eyebrow": "Trial and pricing",
       "title": "Start with a paid trial lesson and a clear format.",
-      "description": "This section shows the first step and core formats, while the full comparison stays on the pricing page.",
+      "description": "Here is the first step and the core formats - the full comparison lives on the pricing page.",
       "formatSignals": ["Trial lesson", "Individual", "Mini-group"],
       "formatSignalsAriaLabel": "Learning format signals",
       "pricingCta": "See pricing",
@@ -146,6 +146,124 @@
       "telegramCta": "Ask on Telegram"
     }
   },
+  "teachersSections": {
+    "header": {
+      "trustNote": "During the trial lesson we check not only the level, but also the learner's comfort with the teacher."
+    },
+    "teacherCards": {
+      "title": "Meet the people behind the lessons",
+      "description": "Different goals need different teachers: some are strongest with exams, others with kids or everyday speaking.",
+      "audienceFitLabel": "Works with"
+    },
+    "credentials": {
+      "title": "Qualifications you can check",
+      "description": "Certificates and experience here are never abstract - each one belongs to a specific teacher.",
+      "proofNote": "Only real proof lives here: certificates, experience, and the teaching focus where each teacher works best."
+    },
+    "lessonProof": {
+      "title": "What a lesson looks like",
+      "description": "In a lesson, the learner does most of the speaking, works through short tasks, and gets teacher support right away.",
+      "privacyNote": "We protect our students' privacy: no personal data appears in public materials."
+    },
+    "testimonials": {
+      "eyebrow": "Results and voices",
+      "title": "Progress in our students' own words.",
+      "description": "We don't promise scores - we give a plan, honest feedback, and a clear next step."
+    },
+    "ctaStrip": {
+      "eyebrow": "Next step",
+      "title": "You have seen the people — now choose the format.",
+      "description": "Compare pricing, revisit the learning paths, or ask about a teacher for your goal.",
+      "pricingCta": "See pricing",
+      "programsCta": "Compare programs",
+      "telegramCta": "Ask about a teacher"
+    },
+    "proofKindLabels": {
+      "result": "Result",
+      "classroom": "Lesson moment",
+      "method": "Method"
+    }
+  },
+  "pricingSections": {
+    "trial": {
+      "includedLabel": "Included:",
+      "telegramCta": "Book a trial lesson",
+      "pathNotes": {
+        "generic": "After the trial lesson, the manager suggests a format and schedule for your goal.",
+        "exam": "For exam preparation, the trial lesson includes a level check and a plan up to your exam date.",
+        "kids": "For a child, the trial lesson runs at a calm pace, and parents get a format recommendation right after.",
+        "adult": "For adults, the trial lesson is a real conversation: we check your level and match a speaking format."
+      }
+    },
+    "formats": {
+      "eyebrow": "Learning formats",
+      "title": "Choose the format that fits how you learn.",
+      "description": "Individual, pair, or mini-group - every format keeps a live teacher conversation and a clear plan.",
+      "fitLabel": "Best for",
+      "termsLabel": "Terms",
+      "recommendedLabel": "Suggested for your goal",
+      "items": {
+        "individual": {
+          "title": "Individual",
+          "fit": "Adults and teens who want maximum speaking practice and a flexible schedule.",
+          "terms": "60 minutes one-on-one with the teacher, with a schedule built around you.",
+          "telegramCta": "Ask about individual lessons"
+        },
+        "pair": {
+          "title": "Pair",
+          "fit": "Friends, partners, or same-age kids who feel better learning together.",
+          "terms": "60 minutes for two with a shared pace and a lower price per person.",
+          "telegramCta": "Ask about pair lessons"
+        },
+        "mini-group": {
+          "title": "Mini-group",
+          "fit": "Kids and exam-focused learners who benefit from a steady pace and group support.",
+          "terms": "Up to six learners per group, a stable schedule, and a term plan.",
+          "telegramCta": "Ask about mini-groups"
+        }
+      }
+    },
+    "included": {
+      "eyebrow": "What is included",
+      "title": "Every lesson is more than a lesson.",
+      "description": "Whatever the format, you get teacher matching, a live lesson, materials, and clear progress.",
+      "items": {
+        "teacher-matching": {
+          "title": "Teacher matching",
+          "description": "The manager weighs your goal, age, and level to suggest a teacher for your exact context."
+        },
+        "live-lesson": {
+          "title": "Live lesson",
+          "description": "A full real-time lesson with the teacher - speaking practice, not recordings."
+        },
+        "materials": {
+          "title": "Materials",
+          "description": "All working materials and homework are already covered by the price."
+        },
+        "feedback-progress": {
+          "title": "Feedback and progress",
+          "description": "You get teacher feedback after lessons and see your level grow."
+        }
+      }
+    },
+    "faq": {
+      "eyebrow": "Practical questions",
+      "title": "Payment, schedule, and format in short.",
+      "description": "The answers most people need before booking a trial lesson."
+    },
+    "finalCta": {
+      "eyebrow": "Next step",
+      "title": "Book your trial lesson in Telegram.",
+      "pathDescriptions": {
+        "generic": "Message us - the manager replies, matches a teacher, and offers a time for your trial lesson.",
+        "exam": "Message us - we will match an exam-prep teacher and offer a time for your trial lesson.",
+        "kids": "Message us - we will match a teacher for your child and offer a convenient trial lesson time.",
+        "adult": "Message us - we will match a speaking teacher and offer a convenient trial lesson time."
+      },
+      "telegramCta": "Message us in Telegram",
+      "programsCta": "See the programs"
+    }
+  },
   "learningPaths": {
     "exam": {
       "title": "Exam preparation",
@@ -158,7 +276,7 @@
       "title": "English for kids",
       "summary": "Lessons for children with parent-friendly progress signals and a gentle start.",
       "proofCues": [
-        "Class moments show privacy-safe lesson context."
+        "Kids speak up in a safe, friendly lesson atmosphere."
       ]
     },
     "adult": {
@@ -189,6 +307,11 @@
       "label": "Individual speaking",
       "value": "from UAH 700 / 60 min",
       "caption": "Personal speaking practice for work, travel, and confident communication."
+    },
+    "pair-lessons": {
+      "label": "Pair lesson",
+      "value": "from UAH 450 / person",
+      "caption": "Learn together with a friend or partner: a shared pace at a lower price per person."
     }
   },
   "teacherProfiles": {
@@ -213,18 +336,18 @@
   },
   "proofAssets": {
     "student-result-ielts": {
-      "title": "Exam progress example",
-      "caption": "A structured example of how a learner sees strengths, weak spots, and next steps.",
-      "alt": "Anonymized example of a student progress table."
+      "title": "Weekly exam progress",
+      "caption": "After every week of preparation, the learner sees their strengths, weak spots, and the next step.",
+      "alt": "Student progress table for exam preparation."
     },
     "kids-class-snapshot": {
-      "title": "Kids lesson snapshot",
+      "title": "Inside a kids lesson",
       "caption": "A live lesson format where the child speaks, completes short tasks, and gets teacher support.",
-      "alt": "Snapshot of a kids online lesson."
+      "alt": "A kids online lesson at Fluyo School."
     },
     "adult-speaking-note": {
-      "title": "Speaking practice note",
-      "caption": "Example feedback format for an adult learner.",
+      "title": "Feedback after speaking practice",
+      "caption": "After a lesson, adult learners get short feedback: what already sounds confident and what to practice next.",
       "alt": "Card with speaking feedback notes."
     },
     "lesson-format-board": {
@@ -264,13 +387,25 @@
       "question": "Are the website prices final?",
       "answer": "Yes. Current formats and starting prices are shown on the pricing page, and the manager can help choose the right option."
     },
+    "payment-method": {
+      "question": "How do I pay for lessons?",
+      "answer": "Payment is online: once your schedule is confirmed, the manager sends payment details in Telegram."
+    },
     "schedule-policy": {
       "question": "When are lessons available?",
       "answer": "The manager offers available slots after the trial lesson and matches them with the chosen format."
     },
+    "reschedule-policy": {
+      "question": "What if I need to reschedule a lesson?",
+      "answer": "Tell the manager at least 24 hours ahead, and the lesson moves to another convenient slot without losing your payment."
+    },
+    "online-format": {
+      "question": "How do online lessons work?",
+      "answer": "Lessons run in Zoom or Google Meet with an interactive board. You only need stable internet and headphones."
+    },
     "english-switch": {
       "question": "Can I view the site in English?",
-      "answer": "Yes. English is selected through `lang=en` without changing the route structure."
+      "answer": "Yes. Tap EN in the menu and the site switches to English right away — you stay on the same page."
     }
   },
   "assets": {
@@ -290,13 +425,13 @@
       "alt": "Portrait of teacher Andriy Lev."
     },
     "student-result-ielts": {
-      "alt": "Example of student exam progress."
+      "alt": "Student progress in exam preparation."
     },
     "kids-class-snapshot": {
-      "alt": "Snapshot of a kids online lesson."
+      "alt": "A kids online lesson at Fluyo School."
     },
     "adult-speaking-note": {
-      "alt": "Example adult speaking feedback note."
+      "alt": "Speaking feedback note for an adult learner."
     },
     "lesson-format-board": {
       "alt": "Diagram of the trial lesson structure."

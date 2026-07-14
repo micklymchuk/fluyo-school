@@ -29,7 +29,8 @@ export const sanitizeTrackingPayload = (payload: TrackingPayload = {}): Tracking
     format: payload.format,
     sourceRoute: payload.sourceRoute,
     messageIntent: payload.messageIntent,
-    trigger: payload.trigger
+    trigger: payload.trigger,
+    surface: payload.surface
   }
 
   return Object.fromEntries(

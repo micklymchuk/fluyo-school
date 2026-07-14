@@ -37,8 +37,9 @@ No feature branch was created for this planning-only artifact. Create the implem
 | 7 | `stories/DD-001.2.2-learning-paths-route.md` | Epic 2 - Home and Learning Paths | Large | `DD-001.2.1` |
 | 8 | `stories/DD-001.3.1-teachers-proof-route.md` | Epic 3 - Proof and Pricing | Large | `DD-001.1.3`, `DD-001.2.2` |
 | 9 | `stories/DD-001.3.2-trial-pricing-route.md` | Epic 3 - Proof and Pricing | Large | `DD-001.1.2`, `DD-001.1.3`, `DD-001.2.2` |
-| 10 | `stories/DD-001.4.1-responsive-accessibility-and-build-validation.md` | Epic 4 - Quality gates | Medium | `DD-001.2.1` through `DD-001.3.2` |
-| 11 | `stories/DD-001.4.2-content-analytics-and-handoff-validation.md` | Epic 4 - Launch gates | Medium | `DD-001.4.1` |
+| 10 | `stories/DD-001.3.3-route-section-architecture-refactor.md` | Epic 3 - Architecture retrofit | Medium | `DD-001.2.2`, `DD-001.3.1`, `DD-001.3.2` |
+| 11 | `stories/DD-001.4.1-responsive-accessibility-and-build-validation.md` | Epic 4 - Quality gates | Medium | `DD-001.2.1` through `DD-001.3.2` |
+| 12 | `stories/DD-001.4.2-content-analytics-and-handoff-validation.md` | Epic 4 - Launch gates | Medium | `DD-001.4.1` |
 
 ## Work Item Inventory
 
