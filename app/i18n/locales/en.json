@@ -92,6 +92,60 @@
       "telegramCta": "Book now"
     }
   },
+  "programsSections": {
+    "header": {
+      "compareCta": "Compare pricing",
+      "teachersCta": "Check teachers",
+      "telegramCta": "Ask about a program"
+    },
+    "signalLabels": {
+      "fit": "Best fit",
+      "method": "How it works",
+      "start": "First step"
+    },
+    "paths": {
+      "exam": {
+        "eyebrow": "Exams",
+        "summary": "A path for IELTS, NMT, or school exams when the learner needs structure, deadlines, and regular progress checks.",
+        "fit": "Fits teens and adults preparing for a specific exam or closing weak spots before a test date.",
+        "method": "At the start, the teacher checks level, target score or exam format, then builds a lesson plan around writing, speaking, grammar, and task practice.",
+        "diagnosticCue": "The trial lesson works as a diagnosis: the learner sees the current point, risks, and closest next step.",
+        "pricingCta": "See exam pricing",
+        "telegramCta": "Ask about exams"
+      },
+      "kids": {
+        "eyebrow": "Kids and parents",
+        "summary": "A path for families who need a gentle start, child engagement, and parent-friendly progress signals.",
+        "fit": "Fits kids and teens who need regular practice without pressure, while parents get a clear view of progress.",
+        "method": "Lessons keep a short rhythm, speaking tasks, and a clear next step so the child speaks instead of only completing exercises.",
+        "diagnosticCue": "The trial lesson shows level, comfort with the teacher, and the format that can support regular learning.",
+        "pricingCta": "See kids pricing",
+        "telegramCta": "Ask about kids groups"
+      },
+      "adult": {
+        "eyebrow": "Adult speaking",
+        "summary": "A path for adults who want to speak more confidently at work, while travelling, or in everyday conversations.",
+        "fit": "Fits learners who have studied English before but freeze in live conversation or need practice for specific situations.",
+        "method": "The teacher builds speaking practice around real scenarios, corrects blockers, and gives phrases the learner can use immediately.",
+        "diagnosticCue": "The trial lesson identifies level, speaking barriers, and the format that helps progress without overload.",
+        "pricingCta": "See adult pricing",
+        "telegramCta": "Ask about speaking"
+      }
+    },
+    "priceHints": {
+      "eyebrow": "Price direction",
+      "title": "Each path has a short pricing signal.",
+      "description": "This shows the cost direction for the first step and regular lessons, while the full comparison stays on the pricing page."
+    },
+    "ctaStrip": {
+      "eyebrow": "Next step",
+      "title": "Compare terms or ask with path context.",
+      "description": "If the path is clear, continue to pricing. If teacher trust or fit needs checking, use the matching next action.",
+      "pricingCta": "See pricing",
+      "teachersCta": "See teachers",
+      "telegramCta": "Ask on Telegram"
+    }
+  },
   "learningPaths": {
     "exam": {
       "title": "Exam preparation",

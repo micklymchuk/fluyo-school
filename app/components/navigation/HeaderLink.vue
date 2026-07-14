@@ -10,6 +10,7 @@ const props = withDefaults(defineProps<{
 })
 
 const route = useRoute()
+const localizedTo = useLocalizedTo()
 
 function isActiveRoute(to: string) {
   if (to === '/') {
@@ -27,7 +28,7 @@ function isActiveRoute(to: string) {
       `header-link--${display}`,
       { 'header-link--active': isActiveRoute(props.to) }
     ]"
-    :to="props.to"
+    :to="localizedTo(props.to)"
     :aria-current="isActiveRoute(props.to) ? 'page' : undefined"
   >
     {{ label }}

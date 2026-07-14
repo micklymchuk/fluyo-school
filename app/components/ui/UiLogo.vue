@@ -33,10 +33,11 @@ function resolveLogoVariant(value: unknown): LogoVariant {
   return value === 'short' ? 'short' : 'full'
 }
 
+const localizedTo = useLocalizedTo()
 const logoVariant = computed(() => resolveLogoVariant(props.variant))
 const logo = computed(() => logos[logoVariant.value])
 const componentType = computed(() => props.to ? resolveComponent('NuxtLink') : 'span')
-const componentProps = computed(() => props.to ? { to: props.to, 'aria-label': props.label } : {})
+const componentProps = computed(() => props.to ? { to: localizedTo(props.to), 'aria-label': props.label } : {})
 </script>
 
 <template>

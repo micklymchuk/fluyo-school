@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, resolveComponent } from 'vue'
 import UiButton from './UiButton.vue'
+import { useLocalizedTo } from '~/composables/useLocale'
 
 type ButtonVariant = 'primary' | 'secondary' | 'ghost'
 type ButtonSize = 'default' | 'compact'
@@ -31,6 +32,7 @@ const props = withDefaults(defineProps<{
 })
 
 const isDisabled = computed(() => props.disabled || props.loading)
+const localizedTo = useLocalizedTo()
 
 const componentType = computed(() => {
   if (props.to && !isDisabled.value) {
@@ -51,7 +53,7 @@ const externalLink = computed(() => {
 const componentProps = computed(() => {
   if (props.to && !isDisabled.value) {
     return {
-      to: props.to
+      to: typeof props.to === 'string' ? localizedTo(props.to) : props.to
     }
   }
 

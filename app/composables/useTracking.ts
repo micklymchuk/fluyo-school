@@ -28,7 +28,8 @@ export const sanitizeTrackingPayload = (payload: TrackingPayload = {}): Tracking
     path: payload.path,
     format: payload.format,
     sourceRoute: payload.sourceRoute,
-    messageIntent: payload.messageIntent
+    messageIntent: payload.messageIntent,
+    trigger: payload.trigger
   }
 
   return Object.fromEntries(

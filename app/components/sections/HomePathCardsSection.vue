@@ -12,6 +12,7 @@ const route = useRoute()
 const { locale } = useLocale()
 const { t } = useI18n()
 const { trackEvent } = useTracking()
+const localizedTo = useLocalizedTo()
 
 function handlePathClick(path: LearningPath) {
   trackEvent('path_card_click', {
@@ -34,7 +35,7 @@ function handlePathClick(path: LearningPath) {
         v-for="path in learningPaths"
         :key="path.id"
         class="path-card"
-        :to="pathRoutes[path.id]"
+        :to="localizedTo(pathRoutes[path.id])"
         @click="handlePathClick(path)"
       >
         <span class="path-card__tag">{{ path.id }}</span>

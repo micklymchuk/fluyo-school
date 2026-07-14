@@ -46,6 +46,8 @@ export type CtaContext = {
   messageIntent?: MessageIntent
 }
 
+export type TrackingTrigger = 'observe' | 'activate'
+
 export type TrackingPayload = {
   route?: string | null
   locale?: Locale | null
@@ -53,6 +55,7 @@ export type TrackingPayload = {
   format?: TelegramFormatContext | null
   sourceRoute?: CtaSourceRoute | null
   messageIntent?: MessageIntent | null
+  trigger?: TrackingTrigger | null
 }
 
 export type CtaIntent = {
@@ -67,6 +70,7 @@ export type LearningPath = {
   anchorId: string
   priceHintIds: readonly PriceItemId[]
   ctaIntent: CtaIntent
+  telegramFormat: TelegramFormatContext
 }
 
 export type PriceFormat = 'trial' | 'group' | 'individual'

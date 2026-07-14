@@ -28,6 +28,7 @@ const telegramContext = computed<CtaContext>(() => ({
   locale: locale.value
 }))
 const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramContext)
+const localizedTo = useLocalizedTo()
 </script>
 
 <template>
@@ -40,7 +41,7 @@ const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramConte
           v-for="link in primaryNavigationLinks"
           :key="link.to"
           class="footer-link"
-          :to="link.to"
+          :to="localizedTo(link.to)"
         >
           {{ link.label }}
         </NuxtLink>

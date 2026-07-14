@@ -25,6 +25,32 @@ export const getLocaleQueryValue = (locale: Locale): Locale | undefined => {
   return locale === DEFAULT_LOCALE ? undefined : locale
 }
 
+export const withLocaleQuery = (to: string, locale: Locale): string => {
+  const queryValue = getLocaleQueryValue(locale)
+
+  if (!queryValue || !to.startsWith('/')) {
+    return to
+  }
+
+  const hashIndex = to.indexOf('#')
+  const hash = hashIndex === -1 ? '' : to.slice(hashIndex)
+  const pathAndQuery = hashIndex === -1 ? to : to.slice(0, hashIndex)
+
+  if (/[?&]lang=/.test(pathAndQuery)) {
+    return to
+  }
+
+  const separator = pathAndQuery.includes('?') ? '&' : '?'
+
+  return `${pathAndQuery}${separator}lang=${queryValue}${hash}`
+}
+
+export const useLocalizedTo = () => {
+  const { locale: i18nLocale } = useI18n()
+
+  return (to: string) => withLocaleQuery(to, resolveLocale(i18nLocale.value))
+}
+
 export const useLocale = () => {
   const route = useRoute()
   const router = useRouter()

@@ -10,7 +10,7 @@ export const sitePages = [
   {
     routeId: 'programs',
     path: '/programs',
-    sectionOrder: ['program-overview', 'exam-path', 'kids-path', 'adult-path', 'path-faq', 'program-cta'],
+    sectionOrder: ['programs-header', 'exam-preparation', 'kids-parents', 'adults-speaking', 'path-price-hints', 'learning-paths-cta'],
     messageKey: 'programs'
   },
   {
