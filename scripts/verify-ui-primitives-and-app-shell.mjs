@@ -124,8 +124,8 @@ function verifyVisualRules() {
   const tailwindCss = read(resolve(root, 'app/assets/css/tailwind.css'))
   const appHeader = read(files.appHeader)
 
-  assertPattern(tailwindCss, /--color-page:\s*#ffffff;/, 'App page background token must be white')
-  assertPattern(tailwindCss, /--color-surface-muted:\s*#fbfaf7;/, 'Cream background must remain available as a muted surface token')
+  assertPattern(tailwindCss, /--color-page:\s*#faf5f2;/, 'App page background token must be brand cream, never pure white')
+  assertPattern(tailwindCss, /--color-surface-muted:\s*#f7f3ef;/, 'Cream-on-dark tone must remain available as a muted surface token')
   assertNotIncludes(appHeader, 'border-b border-border-hairline', 'AppHeader must not render a bottom border')
 }
 

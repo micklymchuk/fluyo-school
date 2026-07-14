@@ -40,6 +40,8 @@ No feature branch was created for this planning-only artifact. Create the implem
 | 10 | `stories/DD-001.3.3-route-section-architecture-refactor.md` | Epic 3 - Architecture retrofit | Medium | `DD-001.2.2`, `DD-001.3.1`, `DD-001.3.2` |
 | 11 | `stories/DD-001.4.1-responsive-accessibility-and-build-validation.md` | Epic 4 - Quality gates | Medium | `DD-001.2.1` through `DD-001.3.2` |
 | 12 | `stories/DD-001.4.2-content-analytics-and-handoff-validation.md` | Epic 4 - Launch gates | Medium | `DD-001.4.1` |
+| 13 | `stories/DD-001.5.1-brand-ui-components.md` | Epic 5 - Brand design system adoption | Large | `DD-001.3.3`, brand tokens in `app/assets/css/tailwind.css` |
+| 14 | `stories/DD-001.5.2-brand-route-section-rewiring.md` | Epic 5 - Brand design system adoption | Large | `DD-001.5.1` |
 
 ## Work Item Inventory
 
@@ -64,7 +66,7 @@ No feature branch was created for this planning-only artifact. Create the implem
 - [ ] Telegram CTA links are built through one helper and preserve available `path`, `format`, `sourceRoute`, `locale`, and `messageIntent` context.
 - [ ] Analytics events use only `path_card_click`, `program_path_view`, `pricing_summary_view`, `pricing_view`, `teacher_proof_view`, `telegram_click`, and `telegram_context`.
 - [ ] Launch-sensitive records have explicit content readiness and only production-facing records ship as public truth.
-- [ ] UI uses the in-code foundation: Tailwind theme tokens, SCSS base styles, primitives, section patterns, square geometry, hairline borders, restrained palette, no decorative shadows.
+- [ ] UI uses the in-code foundation: Tailwind theme tokens, SCSS base styles, primitives, section patterns, hairline borders, restrained palette, no decorative shadows. (Square geometry retired 2026-07-14 by the brand design system — pills and `--radius-card` per `DD-001.5.1` and `_bmad-output/design-system/fluyo-brand-design-system.md`.)
 - [ ] Text uses stable type sizes, no viewport-width font scaling, and no negative letter spacing.
 - [ ] Routes have no horizontal overflow at 375, 428, 768, 1440, or 1920 widths.
 - [ ] `npm run build` passes with the Cloudflare Pages Nitro preset.
