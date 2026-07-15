@@ -113,7 +113,7 @@ function getMessageShape(value) {
 function assertHomeSectionMessages(messages, locale) {
   assert(typeof messages.homeSections === 'object' && messages.homeSections !== null, `${locale}.json must contain homeSections`)
 
-  for (const field of ['pathLabel', 'trialLabel', 'primaryCta', 'telegramCta', 'visualAlt', 'signalsAriaLabel']) {
+  for (const field of ['scriptWord', 'primaryCta', 'telegramCta']) {
     assertNonEmptyString(messages.homeSections.hero?.[field], `${locale}.json homeSections.hero.${field}`)
   }
 
@@ -134,7 +134,7 @@ function assertHomeSectionMessages(messages, locale) {
   }
 
   const speakingClub = messages.homeSections.speakingClub
-  for (const field of ['capsWord', 'scriptWord', 'line', 'telegramCta']) {
+  for (const field of ['capsWord', 'scriptWord', 'noteText', 'line', 'telegramCta']) {
     assertNonEmptyString(speakingClub?.[field], `${locale}.json homeSections.speakingClub.${field}`)
   }
 

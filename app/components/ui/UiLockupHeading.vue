@@ -3,6 +3,7 @@ import { computed, useSlots } from 'vue'
 
 type LockupLevel = 'h1' | 'h2' | 'h3'
 type LockupAlign = 'start' | 'center'
+type LockupSize = 'default' | 'poster' | 'hero'
 
 const props = withDefaults(defineProps<{
   level?: LockupLevel
@@ -11,13 +12,15 @@ const props = withDefaults(defineProps<{
   accent?: boolean
   align?: LockupAlign
   inverse?: boolean
+  size?: LockupSize
 }>(), {
   accent: false,
   align: 'start',
   caps: undefined,
   inverse: false,
   level: 'h2',
-  script: undefined
+  script: undefined,
+  size: 'default'
 })
 
 const slots = useSlots()
@@ -37,7 +40,11 @@ if (import.meta.dev && props.script && /[Ѐ-ӿ]/.test(props.script)) {
     class="lockup"
     :class="[
       `lockup--${align}`,
-      { 'lockup--inverse': inverse }
+      {
+        'lockup--inverse': inverse,
+        'lockup--poster': size === 'poster',
+        'lockup--hero': size === 'hero'
+      }
     ]"
   >
     <!-- Script lines set Latin content only: Pinyon has no Cyrillic glyphs. -->
@@ -74,6 +81,23 @@ if (import.meta.dev && props.script && /[Ѐ-ӿ]/.test(props.script)) {
 
 .lockup-script--accent {
   @apply normal-case tracking-normal;
+}
+
+/* Size variants change type scale only; slot/emit contract stays identical. */
+.lockup--hero .lockup-script {
+  @apply text-hero-script sm:text-hero-script-sm lg:text-hero-script-lg;
+}
+
+.lockup--hero .lockup-caps {
+  @apply max-w-3xl text-hero-caps sm:text-hero-caps-sm lg:text-hero-caps-lg;
+}
+
+.lockup--poster .lockup-script {
+  @apply text-poster-script sm:text-poster-script-sm lg:text-poster-script-lg;
+}
+
+.lockup--poster .lockup-caps {
+  @apply text-poster-caps sm:text-poster-caps-sm lg:text-poster-caps-lg;
 }
 
 .lockup--inverse .lockup-script,

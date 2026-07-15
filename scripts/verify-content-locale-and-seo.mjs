@@ -347,7 +347,7 @@ function assertHomeSectionMessages(messages, locale) {
   }
 
   const hero = messages.homeSections.hero
-  for (const field of ['pathLabel', 'trialLabel', 'primaryCta', 'telegramCta', 'visualAlt', 'signalsAriaLabel']) {
+  for (const field of ['scriptWord', 'primaryCta', 'telegramCta']) {
     assert(typeof hero[field] === 'string' && hero[field].length > 0, `${locale}.json homeSections.hero.${field} must be a non-empty string`)
   }
 

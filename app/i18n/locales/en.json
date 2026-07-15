@@ -47,15 +47,9 @@
   },
   "homeSections": {
     "hero": {
-      "pathLabel": "Exams, kids, and adult speaking",
-      "trialLabel": "Free trial lesson as the first step",
-      "primaryCta": "Choose a path",
-      "telegramCta": "Ask on Telegram",
-      "visualAlt": "Fluyo School logo on the home hero.",
-      "signalsAriaLabel": "Home summary",
       "scriptWord": "Fluyo school",
-      "noteText": "You look like my new student",
-      "founderImageAlt": "Fluyo School founder talking on a vintage red telephone."
+      "primaryCta": "Choose a path",
+      "telegramCta": "Ask on Telegram"
     },
     "lessons": {
       "eyebrow": "Our lessons",
@@ -79,6 +73,7 @@
     "speakingClub": {
       "capsWord": "Speaking",
       "scriptWord": "club",
+      "noteText": "You look like my new student",
       "line": "Weekly speaking practice in a small group — the place where your English finally sounds like you.",
       "telegramCta": "Join on Telegram"
     },

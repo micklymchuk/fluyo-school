@@ -47,15 +47,9 @@
   },
   "homeSections": {
     "hero": {
-      "pathLabel": "Іспити, діти та дорослий speaking",
-      "trialLabel": "Безкоштовне пробне заняття як перший крок",
-      "primaryCta": "Обрати шлях",
-      "telegramCta": "Запитати в Telegram",
-      "visualAlt": "Логотип Fluyo School на головному екрані.",
-      "signalsAriaLabel": "Короткий опис головної сторінки",
       "scriptWord": "Fluyo school",
-      "noteText": "You look like my new student",
-      "founderImageAlt": "Засновниця Fluyo School розмовляє червоним вінтажним телефоном."
+      "primaryCta": "Обрати шлях",
+      "telegramCta": "Запитати в Telegram"
     },
     "lessons": {
       "eyebrow": "Наші заняття",
@@ -79,6 +73,7 @@
     "speakingClub": {
       "capsWord": "Speaking",
       "scriptWord": "club",
+      "noteText": "You look like my new student",
       "line": "Щотижнева розмовна практика в невеликій групі — місце, де ваша англійська нарешті звучить.",
       "telegramCta": "Приєднатися в Telegram"
     },
