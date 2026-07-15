@@ -139,7 +139,7 @@ function assertHomeSectionMessages(messages, locale) {
   }
 
   const reviews = messages.homeSections.reviews
-  for (const field of ['eyebrow', 'title', 'description']) {
+  for (const field of ['eyebrow', 'title', 'scriptWord', 'description']) {
     assertNonEmptyString(reviews?.[field], `${locale}.json homeSections.reviews.${field}`)
   }
 

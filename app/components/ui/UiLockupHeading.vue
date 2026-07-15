@@ -100,6 +100,12 @@ if (import.meta.dev && props.script && /[Ѐ-ӿ]/.test(props.script)) {
   @apply text-poster-caps sm:text-poster-caps-sm lg:text-poster-caps-lg;
 }
 
+/* Poster headlines are the page's burgundy display moments; inverse still wins on bands. */
+.lockup--poster:not(.lockup--inverse) .lockup-caps,
+.lockup--poster:not(.lockup--inverse) .lockup-script {
+  @apply text-accent-burgundy;
+}
+
 .lockup--inverse .lockup-script,
 .lockup--inverse .lockup-caps {
   @apply text-text-inverse;

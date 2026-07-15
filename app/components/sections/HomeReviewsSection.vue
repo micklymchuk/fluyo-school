@@ -34,6 +34,7 @@ const testimonialItems = computed(() => {
         id="home-reviews-title"
         level="h2"
         inverse
+        :script="t('homeSections.reviews.scriptWord')"
         :caps="t('homeSections.reviews.title')"
       />
       <p class="reviews__description">{{ t('homeSections.reviews.description') }}</p>

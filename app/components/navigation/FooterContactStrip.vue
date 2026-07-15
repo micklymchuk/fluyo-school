@@ -74,7 +74,7 @@ const localizedTo = useLocalizedTo()
 @reference "~/assets/css/tailwind.css";
 
 .footer-contact-strip {
-  @apply border-t border-border-hairline bg-surface text-text;
+  @apply border-t border-border-hairline bg-page text-text;
 }
 
 .footer-inner {

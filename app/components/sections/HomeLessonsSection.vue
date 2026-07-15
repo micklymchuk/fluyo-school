@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import HomeFactCard from '~/components/home/HomeFactCard.vue'
+import HomeHarlequinBand from '~/components/home/HomeHarlequinBand.vue'
+import UiSticker from '~/components/ui/UiSticker.vue'
 
 const { t } = useI18n()
 
@@ -16,25 +18,23 @@ const lessonItems = computed(() => {
 
 <template>
   <section id="lessons" class="lessons" aria-labelledby="home-lessons-title">
-    <div class="lessons__band">
+    <HomeHarlequinBand>
       <div class="lessons__container">
         <div class="lessons__panel">
-          <img
+          <UiSticker
             class="lessons__sticker lessons__sticker--notebook"
             src="/images/home/sticker-notebook.png"
-            width="540"
-            height="640"
-            alt=""
-            aria-hidden="true"
-          >
-          <img
+            :width="540"
+            :height="640"
+            :rotate="12"
+          />
+          <UiSticker
             class="lessons__sticker lessons__sticker--coffee"
             src="/images/home/sticker-coffee.png"
-            width="520"
-            height="504"
-            alt=""
-            aria-hidden="true"
-          >
+            :width="520"
+            :height="504"
+            :rotate="-6"
+          />
           <p class="lessons__eyebrow">{{ t('homeSections.lessons.eyebrow') }}</p>
           <h2 id="home-lessons-title" class="lessons__title">{{ t('homeSections.lessons.title') }}</h2>
           <p class="lessons__description">{{ t('homeSections.lessons.description') }}</p>
@@ -49,7 +49,7 @@ const lessonItems = computed(() => {
           />
         </div>
       </div>
-    </div>
+    </HomeHarlequinBand>
   </section>
 </template>
 
@@ -60,39 +60,14 @@ const lessonItems = computed(() => {
   @apply bg-page text-text;
 }
 
-/* Harlequin band: burgundy diamonds on cream, straight from the lessons post.
-   A square conic checkerboard is stretched vertically for the elongated argyle shape. */
-.lessons__band {
-  @apply relative overflow-hidden bg-page py-section;
-}
-
-.lessons__band::before {
-  --diamond-size: 5.25rem;
-  --diamond-stretch: 1.6;
-
-  content: '';
-
-  @apply absolute inset-x-0 top-0;
-  height: calc(100% / var(--diamond-stretch));
-  background: conic-gradient(
-      from 45deg,
-      var(--color-accent-burgundy) 0 25%,
-      transparent 0 50%,
-      var(--color-accent-burgundy) 0 75%,
-      transparent 0
-    )
-    50% 0 / var(--diamond-size) var(--diamond-size);
-  transform: scaleY(var(--diamond-stretch));
-  transform-origin: top;
-}
-
 .lessons__container {
   @apply relative mx-auto flex w-full max-w-6xl flex-col gap-section-compact px-page-gutter;
 }
 
-/* Cream note panel floating on the pattern, stickers pinned to its corners. */
+/* Cream note panel floating on the pattern, stickers pinned to its corners.
+   bg-surface: one card tone across the section, matching the fact cards. */
 .lessons__panel {
-  @apply relative mx-auto flex w-full max-w-2xl flex-col items-center gap-control-compact rounded-card bg-surface-muted px-6 py-10 text-center shadow-md sm:px-12;
+  @apply relative mx-auto flex w-full max-w-2xl flex-col items-center gap-control-compact rounded-card bg-surface px-6 py-10 text-center shadow-md sm:px-12;
 }
 
 .lessons__eyebrow {
@@ -108,15 +83,15 @@ const lessonItems = computed(() => {
 }
 
 .lessons__sticker {
-  @apply pointer-events-none absolute hidden h-auto sm:block;
+  @apply absolute hidden sm:block;
 }
 
 .lessons__sticker--notebook {
-  @apply -right-14 -top-12 w-32 rotate-12;
+  @apply -right-14 -top-12 w-32;
 }
 
 .lessons__sticker--coffee {
-  @apply -bottom-12 -left-12 w-28 -rotate-6;
+  @apply -bottom-12 -left-12 w-28;
 }
 
 .lessons__grid {

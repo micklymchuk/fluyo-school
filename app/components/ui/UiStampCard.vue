@@ -36,10 +36,11 @@ withDefaults(defineProps<{
     @apply rounded-none bg-transparent;
   }
 
-  /* Perforation: interior rect inset by half the pitch + edge holes repeated `round`. */
+  /* Perforation: interior rect inset by half the pitch + edge holes repeated `round`.
+     Pitch/hole sized so the postage-stamp edge registers at arm's length. */
   .stamp-card__edge {
-    --stamp-pitch: 1.1rem;
-    --stamp-hole: 0.28rem;
+    --stamp-pitch: 1.35rem;
+    --stamp-hole: 0.4rem;
 
     @apply block;
     -webkit-mask:

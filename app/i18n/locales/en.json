@@ -80,6 +80,7 @@
     "reviews": {
       "eyebrow": "Reviews",
       "title": "Student reviews",
+      "scriptWord": "Student reviews",
       "description": "Real messages from our students after their lessons."
     },
     "pathCards": {

@@ -2,6 +2,7 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import PriceSimpleCard from '~/components/home/PriceSimpleCard.vue'
 import UiButtonLink from '~/components/ui/UiButtonLink.vue'
+import UiLockupHeading from '~/components/ui/UiLockupHeading.vue'
 import UiWatermark from '~/components/ui/UiWatermark.vue'
 import { priceItems, type CtaContext, type PriceItemId } from '~/data/content'
 
@@ -70,7 +71,13 @@ onBeforeUnmount(() => {
   <section id="trial-pricing-summary" class="trial-pricing" aria-labelledby="home-trial-pricing-title">
     <UiWatermark />
     <div ref="observerTarget" class="trial-pricing__container">
-      <h2 id="home-trial-pricing-title" class="trial-pricing__title">{{ t('homeSections.trialPricing.title') }}</h2>
+      <UiLockupHeading
+        id="home-trial-pricing-title"
+        level="h2"
+        align="center"
+        size="poster"
+        :caps="t('homeSections.trialPricing.title')"
+      />
       <p class="trial-pricing__line">{{ t('homeSections.trialPricing.description') }}</p>
 
       <div class="trial-pricing__grid">
@@ -111,14 +118,6 @@ onBeforeUnmount(() => {
 
 .trial-pricing__container {
   @apply relative mx-auto flex w-full max-w-6xl flex-col items-center gap-component-gap px-page-gutter text-center;
-}
-
-/* Poster-scale heading echoing the speaking club section typography.
-   Caps-only: the script face is Latin-only, so translated titles stay in the display font. */
-.trial-pricing__title {
-  @apply text-center font-display font-bold uppercase tracking-display text-accent-burgundy;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  line-height: 1.1;
 }
 
 .trial-pricing__line {

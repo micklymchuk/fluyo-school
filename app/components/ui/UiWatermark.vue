@@ -7,14 +7,15 @@ withDefaults(defineProps<{
   mode: 'cream'
 })
 
-// Fixed scatter: deterministic positions keep SSR and client renders identical.
+// Deliberate corner/edge placement: four uniform glyphs held to the outer band of the
+// section (content at max-w-6xl/7xl never reaches the outer ~8% at desktop widths),
+// so watermarks read as texture and never collide with card grids.
+// Deterministic positions keep SSR and client renders identical.
 const glyphs = [
-  { top: '4%', left: '6%', rotate: '-14deg', size: '5.5rem' },
-  { top: '18%', left: '78%', rotate: '10deg', size: '7rem' },
-  { top: '42%', left: '30%', rotate: '-6deg', size: '4.5rem' },
-  { top: '55%', left: '88%', rotate: '-18deg', size: '5rem' },
-  { top: '68%', left: '10%', rotate: '12deg', size: '6.5rem' },
-  { top: '82%', left: '55%', rotate: '-10deg', size: '5.5rem' }
+  { top: '6%', left: '2%', rotate: '-10deg' },
+  { top: '14%', left: '90%', rotate: '8deg' },
+  { top: '68%', left: '4%', rotate: '6deg' },
+  { top: '60%', left: '91%', rotate: '-8deg' }
 ]
 </script>
 
@@ -32,7 +33,6 @@ const glyphs = [
       :style="{
         top: glyph.top,
         left: glyph.left,
-        fontSize: glyph.size,
         transform: `rotate(${glyph.rotate})`
       }"
     >F</span>
@@ -47,7 +47,7 @@ const glyphs = [
 }
 
 .watermark__glyph {
-  @apply absolute font-script leading-none text-accent-burgundy;
+  @apply absolute font-script text-watermark-glyph text-accent-burgundy;
   opacity: 0.06;
 }
 

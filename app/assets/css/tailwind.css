@@ -67,6 +67,8 @@
   --text-ghost-letter--line-height: 1;
   --text-ghost-letter-lg: 36rem;
   --text-ghost-letter-lg--line-height: 1;
+  --text-watermark-glyph: 6rem;
+  --text-watermark-glyph--line-height: 1;
   --leading-body: 1.6;
   --leading-tight: 1.12;
   --leading-compact: 1.35;

@@ -19,11 +19,12 @@ defineProps<{
 <style scoped>
 @reference "~/assets/css/tailwind.css";
 
+/* Quote leads the stamp; attribution stays a small, clearly subordinate caption. */
 .testimonial__quote {
-  @apply text-body text-text;
+  @apply text-card-title text-text;
 }
 
 .testimonial__source {
-  @apply mt-control-compact text-eyebrow font-semibold uppercase tracking-display text-text-muted;
+  @apply mt-component-gap text-eyebrow font-semibold uppercase tracking-display text-text-muted;
 }
 </style>

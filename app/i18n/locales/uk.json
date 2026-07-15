@@ -80,6 +80,7 @@
     "reviews": {
       "eyebrow": "Відгуки",
       "title": "Відгуки студентів",
+      "scriptWord": "Student reviews",
       "description": "Справжні повідомлення від студентів після занять."
     },
     "pathCards": {
