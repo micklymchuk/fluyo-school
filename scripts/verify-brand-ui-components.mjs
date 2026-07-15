@@ -173,11 +173,10 @@ function verifyBrandComponents() {
   assertPattern(frameBox, /<slot/, 'UiFrameBox must expose a content slot')
 
   const stampCard = read(files.uiStampCard)
-  assertPattern(stampCard, /@supports[^{]*mask/, 'UiStampCard must gate the perforation behind an @supports mask query')
-  assertPattern(stampCard, /radial-gradient/, 'UiStampCard perforation must use the radial-gradient hole recipe')
-  assertPattern(stampCard, /-webkit-mask/, 'UiStampCard must include the -webkit-mask twin')
-  assertPattern(stampCard, /rounded-card/, 'UiStampCard fallback must remain a plain rounded card')
-  assertPattern(stampCard, /aria-hidden/, 'UiStampCard decorative edge must not affect reading order')
+  assertPattern(stampCard, /rounded-card/, 'UiStampCard must be a plain rounded card')
+  assertPattern(stampCard, /bg-surface-muted/, 'UiStampCard must keep the cream card surface')
+  assertNotPattern(stampCard, /mask/, 'UiStampCard must not carry the retired perforation mask')
+  assertPattern(stampCard, /<slot/, 'UiStampCard must expose a content slot')
 
   const underlineList = read(files.uiUnderlineList)
   assertPattern(underlineList, /<ul/, 'UiUnderlineList must keep semantic list markup')
