@@ -16,7 +16,7 @@ import { useTracking } from './useTracking'
 
 const TELEGRAM_BASE_URL = 'https://t.me/fluyo_manager'
 const telegramPathContexts = ['exam', 'kids', 'adult', 'generic'] as const
-const telegramFormatContexts = ['individual', 'pair', 'mini-group', 'generic'] as const
+const telegramFormatContexts = ['individual', 'speaking-club', 'mini-group', 'generic'] as const
 const messageIntents = ['book_trial', 'ask_program', 'ask_teacher', 'ask_price'] as const
 const defaultMessageIntent = 'book_trial' satisfies MessageIntent
 
@@ -29,7 +29,7 @@ const pathLabels: Record<TelegramPathContext, string> = {
 
 const formatLabels: Record<TelegramFormatContext, string> = {
   individual: 'individual',
-  pair: 'pair',
+  'speaking-club': 'speaking club',
   'mini-group': 'mini-group',
   generic: 'trial'
 }

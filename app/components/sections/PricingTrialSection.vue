@@ -8,6 +8,7 @@ import type { CtaContext } from '~/data/content'
 
 const { locale } = useLocale()
 const { t } = useI18n()
+const { priceValue } = usePriceValue()
 const { pathContext, recommendedFormat } = usePricingPathContext()
 
 const telegramContext = computed<CtaContext>(() => ({
@@ -30,11 +31,11 @@ const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramConte
   >
     <UiFrameBox class="trial-card">
       <div class="trial-card__body">
-        <span class="trial-card__label">{{ t('priceItems.trial.label') }}</span>
-        <strong class="trial-card__value">{{ t('priceItems.trial.value') }}</strong>
+        <span class="trial-card__label">{{ t('priceItems.TRIAL.label') }}</span>
+        <strong class="trial-card__value">{{ priceValue('TRIAL') }}</strong>
         <p class="trial-card__included">
           <span class="trial-card__included-label">{{ t('pricingSections.trial.includedLabel') }}</span>
-          {{ t('priceItems.trial.caption') }}
+          {{ t('priceItems.TRIAL.caption') }}
         </p>
         <p class="trial-card__path-note">{{ t(`pricingSections.trial.pathNotes.${pathContext}`) }}</p>
         <div class="trial-card__actions">

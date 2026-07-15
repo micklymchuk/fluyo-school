@@ -7,6 +7,7 @@ const files = {
   teachersPage: resolve(root, 'app/pages/teachers.vue'),
   surfaceViewObserver: resolve(root, 'app/composables/useSurfaceViewObserver.ts'),
   headerSection: resolve(root, 'app/components/sections/TeachersHeaderSection.vue'),
+  founderSection: resolve(root, 'app/components/sections/TeachersFounderSection.vue'),
   proofColumnsSection: resolve(root, 'app/components/sections/TeachersProofColumnsSection.vue'),
   testimonialsSection: resolve(root, 'app/components/sections/TeachersTestimonialsSection.vue'),
   ctaStripSection: resolve(root, 'app/components/sections/TeachersCtaStripSection.vue'),
@@ -122,6 +123,7 @@ function verifyTeachersRoute() {
     teachersPage,
     [
       '<TeachersHeaderSection',
+      '<TeachersFounderSection',
       '<TeachersProofColumnsSection',
       '<TeachersTestimonialsSection',
       '<TeachersCtaStripSection'
@@ -153,6 +155,7 @@ function verifySurfaceViewObserver() {
 
 function verifySectionComponents() {
   const headerSection = read(files.headerSection)
+  const founderSection = read(files.founderSection)
   const proofColumnsSection = read(files.proofColumnsSection)
   const testimonialsSection = read(files.testimonialsSection)
   const ctaStripSection = read(files.ctaStripSection)
@@ -162,6 +165,7 @@ function verifySectionComponents() {
   const testimonial = read(files.testimonial)
   const localizedSections = [
     [headerSection, 'header section'],
+    [founderSection, 'founder section'],
     [proofColumnsSection, 'proof columns section'],
     [testimonialsSection, 'testimonials section'],
     [ctaStripSection, 'CTA strip section']
@@ -184,6 +188,9 @@ function verifySectionComponents() {
 
   assertIncludes(headerSection, 'teachers-page__header', 'header section')
   assertIncludes(headerSection, 'trust-note', 'header section must keep the trust note')
+
+  assertPattern(founderSection, /t\(`teachersSections\.founder\.facts\[\$\{factIndex\}\]\.title`\)/, 'founder section must read fact titles through t()')
+  assertPattern(founderSection, /t\(`teachersSections\.founder\.directions\[\$\{directionIndex\}\]`\)/, 'founder section must read directions through t()')
 
   assertPattern(proofColumnsSection, /teacherProfiles/, 'proof columns section must render from shared teacher profiles')
   assertPattern(proofColumnsSection, /proofAssets/, 'proof columns section must render from shared proof assets')
@@ -307,6 +314,23 @@ function verifyTeachersMessages(messages, locale) {
   }
 
   assertNonEmptyString(teachersSections.header?.trustNote, `${locale}.json teachersSections.header.trustNote`)
+
+  const founder = teachersSections.founder
+  for (const field of ['eyebrow', 'scriptName', 'role', 'directionsTitle', 'quote']) {
+    assertNonEmptyString(founder?.[field], `${locale}.json teachersSections.founder.${field}`)
+  }
+
+  assert(Array.isArray(founder?.facts) && founder.facts.length === 2, `${locale}.json teachersSections.founder.facts must contain two facts`)
+  for (const fact of founder.facts) {
+    for (const field of ['title', 'body']) {
+      assertNonEmptyString(fact[field], `${locale}.json teachersSections.founder.facts.${field}`)
+    }
+  }
+
+  assert(Array.isArray(founder?.directions) && founder.directions.length === 9, `${locale}.json teachersSections.founder.directions must contain nine directions`)
+  for (const direction of founder.directions) {
+    assertNonEmptyString(direction, `${locale}.json teachersSections.founder.directions item`)
+  }
 
   for (const field of ['title', 'description', 'audienceFitLabel']) {
     assertNonEmptyString(teachersSections.teacherCards?.[field], `${locale}.json teachersSections.teacherCards.${field}`)

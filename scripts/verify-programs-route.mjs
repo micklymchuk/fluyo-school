@@ -20,7 +20,7 @@ const files = {
 
 const anchors = ['exam-preparation', 'kids-parents', 'adults-speaking']
 const pathIds = ['exam', 'kids', 'adult']
-const priceHintIds = ['trial', 'exam-group', 'kids-group', 'adult-individual']
+const priceHintIds = ['TRIAL', 'EXAM_PREP', 'MINI_GROUP', 'INDIVIDUAL']
 
 function fail(message) {
   throw new Error(message)
@@ -294,7 +294,6 @@ function verifyProgramMessages(messages, locale) {
 
   for (const priceId of priceHintIds) {
     assertNonEmptyString(messages.priceItems?.[priceId]?.label, `${locale}.json priceItems.${priceId}.label`)
-    assertNonEmptyString(messages.priceItems?.[priceId]?.value, `${locale}.json priceItems.${priceId}.value`)
     assertNonEmptyString(messages.priceItems?.[priceId]?.caption, `${locale}.json priceItems.${priceId}.caption`)
   }
 

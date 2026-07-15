@@ -42,6 +42,7 @@ No feature branch was created for this planning-only artifact. Create the implem
 | 12 | `stories/DD-001.4.2-content-analytics-and-handoff-validation.md` | Epic 4 - Launch gates | Medium | `DD-001.4.1` |
 | 13 | `stories/DD-001.5.1-brand-ui-components.md` | Epic 5 - Brand design system adoption | Large | `DD-001.3.3`, brand tokens in `app/assets/css/tailwind.css` |
 | 14 | `stories/DD-001.5.2-brand-route-section-rewiring.md` | Epic 5 - Brand design system adoption | Large | `DD-001.5.1` |
+| 15 | `stories/DD-001.5.3-home-design-polish-typographic-hero.md` | Epic 5 - Brand design system adoption | Large | `DD-001.5.2` + committed in-flight home iteration |
 
 ## Work Item Inventory
 

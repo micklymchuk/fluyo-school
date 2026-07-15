@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import UiSection from '~/components/sections/UiSection.vue'
 import UiCard from '~/components/ui/UiCard.vue'
-import UiEyebrowPill from '~/components/ui/UiEyebrowPill.vue'
+import UiWatermark from '~/components/ui/UiWatermark.vue'
 import { learningPaths, type LearningPath, type LearningPathId } from '~/data/content'
 
 const pathRoutes = {
@@ -23,40 +22,53 @@ function handlePathClick(path: LearningPath) {
     path: path.id
   })
 }
+
+function formatIndex(index: number) {
+  return String(index + 1).padStart(2, '0')
+}
 </script>
 
 <template>
-  <UiSection
-    id="learning-paths"
-    :eyebrow="t('homeSections.pathCards.eyebrow')"
-    :title="t('homeSections.pathCards.title')"
-    :description="t('homeSections.pathCards.description')"
-  >
-    <div class="path-card-grid">
-      <NuxtLink
-        v-for="path in learningPaths"
-        :key="path.id"
-        class="path-card-link"
-        :to="localizedTo(pathRoutes[path.id])"
-        @click="handlePathClick(path)"
-      >
-        <UiCard as="div" interactive class="path-card">
-          <UiEyebrowPill class="path-card__tag" :label="path.id" />
-          <h3 class="path-card__title">{{ t(`learningPaths.${path.id}.title`) }}</h3>
-          <p class="path-card__summary">{{ t(`learningPaths.${path.id}.summary`) }}</p>
-          <p class="path-card__proof">{{ t(`learningPaths.${path.id}.proofCues[0]`) }}</p>
-          <span class="path-card__cta">{{ t('homeSections.pathCards.cardCta') }}</span>
-        </UiCard>
-      </NuxtLink>
+  <section id="learning-paths" class="paths" aria-labelledby="home-paths-title">
+    <UiWatermark />
+    <div class="paths__container">
+      <h2 id="home-paths-title" class="sr-only">{{ t('homeSections.pathCards.title') }}</h2>
+      <div class="paths__grid">
+        <NuxtLink
+          v-for="(path, index) in learningPaths"
+          :key="path.id"
+          class="path-card-link"
+          :to="localizedTo(pathRoutes[path.id])"
+          @click="handlePathClick(path)"
+        >
+          <UiCard as="div" interactive class="path-card">
+            <span class="path-card__index" aria-hidden="true">{{ formatIndex(index) }}</span>
+            <h3 class="path-card__title">{{ t(`learningPaths.${path.id}.title`) }}</h3>
+            <p class="path-card__summary">{{ t(`learningPaths.${path.id}.summary`) }}</p>
+            <span class="path-card__cta">
+              {{ t('homeSections.pathCards.cardCta') }}
+              <span aria-hidden="true">→</span>
+            </span>
+          </UiCard>
+        </NuxtLink>
+      </div>
     </div>
-  </UiSection>
+  </section>
 </template>
 
 <style scoped>
 @reference "~/assets/css/tailwind.css";
 
-.path-card-grid {
-  @apply grid gap-component-gap md:grid-cols-3;
+.paths {
+  @apply relative bg-page py-section text-text;
+}
+
+.paths__container {
+  @apply relative mx-auto flex w-full max-w-6xl flex-col items-center gap-section-compact px-page-gutter;
+}
+
+.paths__grid {
+  @apply grid w-full gap-component-gap md:grid-cols-3;
 }
 
 .path-card-link {
@@ -67,23 +79,20 @@ function handlePathClick(path: LearningPath) {
   @apply flex h-full flex-col gap-control-compact;
 }
 
-.path-card__tag {
-  @apply self-start;
+.path-card__index {
+  @apply font-script text-lockup-script leading-none text-accent-burgundy;
 }
 
 .path-card__title {
-  @apply font-display text-section-heading font-semibold leading-tight text-text;
+  @apply font-display text-card-title font-bold uppercase leading-compact tracking-display text-text;
 }
 
+/* grow: pins the CTA row to the card's bottom edge across unequal summaries. */
 .path-card__summary {
-  @apply text-body text-text-muted;
-}
-
-.path-card__proof {
-  @apply mt-auto border-t border-border-hairline pt-control-compact text-small text-text-muted;
+  @apply grow text-body text-text-muted;
 }
 
 .path-card__cta {
-  @apply text-small font-semibold text-accent-burgundy;
+  @apply text-eyebrow font-bold uppercase tracking-display text-accent-burgundy;
 }
 </style>

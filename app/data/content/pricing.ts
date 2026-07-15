@@ -1,46 +1,74 @@
-import type { PriceItem, PricingFormat, PricingIncludedItem } from './types'
+import type { PriceConfig, PriceItem, PriceItemId, PricingFormat, PricingIncludedItem } from './types'
 
 export const priceItems = [
   {
-    id: 'trial',
-    format: 'trial'
+    id: 'TRIAL'
   },
   {
-    id: 'exam-group',
-    format: 'group'
+    id: 'EXAM_PREP'
   },
   {
-    id: 'kids-group',
-    format: 'group'
+    id: 'INDIVIDUAL'
   },
   {
-    id: 'adult-individual',
-    format: 'individual'
+    id: 'MINI_GROUP'
   },
   {
-    id: 'pair-lessons',
-    format: 'pair'
+    id: 'SPEAKING_CLUB'
   }
 ] as const satisfies readonly PriceItem[]
+
+export const PRICES_CONFIG = {
+  TRIAL: {
+    amount: 0,
+    currency: 'UAH',
+    unit: 'thirty-minutes',
+    isFromPrice: false
+  },
+  EXAM_PREP: {
+    amount: 700,
+    currency: 'UAH',
+    unit: 'sixty-minutes',
+    isFromPrice: true
+  },
+  MINI_GROUP: {
+    amount: 500,
+    currency: 'UAH',
+    unit: 'learner',
+    isFromPrice: true
+  },
+  INDIVIDUAL: {
+    amount: 700,
+    currency: 'UAH',
+    unit: 'sixty-minutes',
+    isFromPrice: true
+  },
+  SPEAKING_CLUB: {
+    amount: 350,
+    currency: 'UAH',
+    unit: 'meeting',
+    isFromPrice: true
+  }
+} as const satisfies Record<PriceItemId, PriceConfig>
 
 export const pricingFormats = [
   {
     id: 'individual',
     telegramFormat: 'individual',
-    priceItemIds: ['adult-individual'],
+    priceItemIds: ['INDIVIDUAL', 'EXAM_PREP'],
     pathFit: ['adult', 'exam']
   },
   {
-    id: 'pair',
-    telegramFormat: 'pair',
-    priceItemIds: ['pair-lessons'],
-    pathFit: ['adult', 'kids']
+    id: 'speaking-club',
+    telegramFormat: 'speaking-club',
+    priceItemIds: ['SPEAKING_CLUB'],
+    pathFit: ['adult']
   },
   {
     id: 'mini-group',
     telegramFormat: 'mini-group',
-    priceItemIds: ['exam-group', 'kids-group'],
-    pathFit: ['exam', 'kids']
+    priceItemIds: ['MINI_GROUP'],
+    pathFit: ['kids', 'adult']
   }
 ] as const satisfies readonly PricingFormat[]
 

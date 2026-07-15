@@ -48,15 +48,48 @@
   "homeSections": {
     "hero": {
       "pathLabel": "Exams, kids, and adult speaking",
-      "trialLabel": "Paid trial lesson as the first step",
+      "trialLabel": "Free trial lesson as the first step",
       "primaryCta": "Choose a path",
       "telegramCta": "Ask on Telegram",
       "visualAlt": "Fluyo School logo on the home hero.",
-      "signalsAriaLabel": "Home summary"
+      "signalsAriaLabel": "Home summary",
+      "scriptWord": "Fluyo school",
+      "noteText": "You look like my new student",
+      "founderImageAlt": "Fluyo School founder talking on a vintage red telephone."
+    },
+    "lessons": {
+      "eyebrow": "Our lessons",
+      "title": "What our lessons look like",
+      "description": "Real conversation, materials built around your goal, and feedback after every lesson — all online, at your pace.",
+      "items": [
+        {
+          "title": "Live speaking",
+          "body": "You spend most of the lesson speaking English, not listening to a lecture."
+        },
+        {
+          "title": "Materials built around your goal",
+          "body": "Your plan and tasks match your level, pace, and goal."
+        },
+        {
+          "title": "Feedback after every lesson",
+          "body": "After each lesson you get a short summary and a clear next step."
+        }
+      ]
+    },
+    "speakingClub": {
+      "capsWord": "Speaking",
+      "scriptWord": "club",
+      "line": "Weekly speaking practice in a small group — the place where your English finally sounds like you.",
+      "telegramCta": "Join on Telegram"
+    },
+    "reviews": {
+      "eyebrow": "Reviews",
+      "title": "Student reviews",
+      "description": "Real messages from our students after their lessons."
     },
     "pathCards": {
       "eyebrow": "Learning paths",
-      "title": "Find the format that matches your goal.",
+      "title": "Choose your path",
       "description": "Each card leads to the matching program block and helps you choose the next step quickly.",
       "cardCta": "View path"
     },
@@ -83,13 +116,17 @@
       ]
     },
     "trialPricing": {
+      "recommendedBadge": "Recommended",
       "eyebrow": "Trial and pricing",
-      "title": "Start with a paid trial lesson and a clear format.",
-      "description": "Here is the first step and the core formats - the full comparison lives on the pricing page.",
-      "formatSignals": ["Trial lesson", "Individual", "Mini-group"],
+      "title": "Your first lesson is free",
+      "description": "We meet, check your level, and match the right format. After that — transparent prices with no hidden terms.",
+      "trialBadge": "Trial lesson",
+      "trialValue": "Free",
+      "trialUnit": "30 minutes with a teacher",
+      "formatSignals": ["Individual", "Mini-group"],
       "formatSignalsAriaLabel": "Learning format signals",
-      "pricingCta": "See pricing",
-      "telegramCta": "Book now"
+      "pricingCta": "All prices",
+      "telegramCta": "Book a free lesson"
     }
   },
   "programsSections": {
@@ -150,6 +187,24 @@
     "header": {
       "trustNote": "During the trial lesson we check not only the level, but also the learner's comfort with the teacher."
     },
+    "founder": {
+      "eyebrow": "Who leads the school",
+      "scriptName": "Catherina",
+      "role": "founder & english teacher",
+      "facts": [
+        {
+          "title": "4 years of experience",
+          "body": "I help students move from studying rules to speaking with confidence."
+        },
+        {
+          "title": "Levels A1–C1",
+          "body": "Personalised learning shaped around each student’s goals, pace, and needs."
+        }
+      ],
+      "directionsTitle": "Learning directions",
+      "directions": ["General English", "Speaking Practice", "English for Travel", "English for Kids and Teens", "Everyday English", "Interview Preparation", "NMT preparation", "EVI preparation", "Speaking Club"],
+      "quote": "I created Fluyo School so that English becomes not another subject, but a tool for new opportunities, careers, and confident communication."
+    },
     "teacherCards": {
       "title": "Meet the people behind the lessons",
       "description": "Different goals need different teachers: some are strongest with exams, others with kids or everyday speaking.",
@@ -198,7 +253,7 @@
     "formats": {
       "eyebrow": "Learning formats",
       "title": "Choose the format that fits how you learn.",
-      "description": "Individual, pair, or mini-group - every format keeps a live teacher conversation and a clear plan.",
+      "description": "Individual, mini-group, or speaking club - every format keeps a live teacher conversation and a clear plan.",
       "fitLabel": "Best for",
       "termsLabel": "Terms",
       "recommendedLabel": "Suggested for your goal",
@@ -209,15 +264,15 @@
           "terms": "60 minutes one-on-one with the teacher, with a schedule built around you.",
           "telegramCta": "Ask about individual lessons"
         },
-        "pair": {
-          "title": "Pair",
-          "fit": "Friends, partners, or same-age kids who feel better learning together.",
-          "terms": "60 minutes for two with a shared pace and a lower price per person.",
-          "telegramCta": "Ask about pair lessons"
+        "speaking-club": {
+          "title": "Speaking club",
+          "fit": "Adults who want regular live English conversation without homework or extra pressure.",
+          "terms": "A weekly small-group conversation meetup with a teacher-moderator and a fresh topic every time.",
+          "telegramCta": "Ask about the speaking club"
         },
         "mini-group": {
           "title": "Mini-group",
-          "fit": "Kids and exam-focused learners who benefit from a steady pace and group support.",
+          "fit": "Kids and adults who enjoy learning in a small group: a steady pace and supportive peers.",
           "terms": "Up to six learners per group, a stable schedule, and a term plan.",
           "telegramCta": "Ask about mini-groups"
         }
@@ -288,30 +343,40 @@
     }
   },
   "priceItems": {
-    "trial": {
+    "TRIAL": {
       "label": "Trial lesson",
-      "value": "UAH 300 / 30 min",
       "caption": "Meet the teacher, check your level, and get a format recommendation."
     },
-    "exam-group": {
-      "label": "Exam prep group",
-      "value": "from UAH 700 / 60 min",
+    "EXAM_PREP": {
+      "label": "Exam preparation",
       "caption": "Structured preparation for IELTS, NMT, or school exams."
     },
-    "kids-group": {
-      "label": "Kids mini-group",
-      "value": "from UAH 500 / learner",
-      "caption": "Small-group practice with attention to the child and clear progress for parents."
+    "MINI_GROUP": {
+      "label": "Mini-group",
+      "caption": "Small-group practice with attention to every learner and clear progress."
     },
-    "adult-individual": {
+    "INDIVIDUAL": {
       "label": "Individual speaking",
-      "value": "from UAH 700 / 60 min",
       "caption": "Personal speaking practice for work, travel, and confident communication."
     },
-    "pair-lessons": {
-      "label": "Pair lesson",
-      "value": "from UAH 450 / person",
-      "caption": "Learn together with a friend or partner: a shared pace at a lower price per person."
+    "SPEAKING_CLUB": {
+      "label": "Speaking club",
+      "caption": "Weekly speaking practice in a small group: live discussion and topics worth talking about."
+    }
+  },
+  "priceFormat": {
+    "free": "Free",
+    "from": "from {currency} {amount}",
+    "exact": "{currency} {amount}",
+    "value": "{price} / {unit}",
+    "currencies": {
+      "UAH": "UAH"
+    },
+    "units": {
+      "thirty-minutes": "30 min",
+      "sixty-minutes": "60 min",
+      "learner": "learner",
+      "meeting": "meeting"
     }
   },
   "teacherProfiles": {

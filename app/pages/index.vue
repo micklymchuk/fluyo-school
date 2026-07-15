@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import HomeHeroSection from '~/components/sections/HomeHeroSection.vue'
 import HomePathCardsSection from '~/components/sections/HomePathCardsSection.vue'
-import HomeProofSnapshotSection from '~/components/sections/HomeProofSnapshotSection.vue'
+import HomeLessonsSection from '~/components/sections/HomeLessonsSection.vue'
+import HomeSpeakingClubSection from '~/components/sections/HomeSpeakingClubSection.vue'
+import HomeReviewsSection from '~/components/sections/HomeReviewsSection.vue'
 import HomeTrialPricingSection from '~/components/sections/HomeTrialPricingSection.vue'
 
 useSeo('/')
@@ -11,8 +13,10 @@ useSeo('/')
   <div class="home-page">
     <HomeHeroSection />
     <HomePathCardsSection />
-    <HomeProofSnapshotSection />
+    <HomeSpeakingClubSection />
     <HomeTrialPricingSection />
+    <HomeLessonsSection />
+    <HomeReviewsSection />
   </div>
 </template>
 

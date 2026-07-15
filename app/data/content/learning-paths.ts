@@ -11,21 +11,21 @@ export const learningPaths = [
   {
     id: 'exam',
     anchorId: 'exam-preparation',
-    priceHintIds: ['trial', 'exam-group'],
+    priceHintIds: ['TRIAL', 'EXAM_PREP'],
     ctaIntent: ctaIntent('/programs', 'programs', 'ask_program'),
-    telegramFormat: 'mini-group'
+    telegramFormat: 'individual'
   },
   {
     id: 'kids',
     anchorId: 'kids-parents',
-    priceHintIds: ['trial', 'kids-group'],
+    priceHintIds: ['TRIAL', 'MINI_GROUP'],
     ctaIntent: ctaIntent('/programs', 'programs', 'book_trial'),
     telegramFormat: 'mini-group'
   },
   {
     id: 'adult',
     anchorId: 'adults-speaking',
-    priceHintIds: ['trial', 'adult-individual'],
+    priceHintIds: ['TRIAL', 'INDIVIDUAL'],
     ctaIntent: ctaIntent('/programs', 'programs', 'ask_program'),
     telegramFormat: 'individual'
   }

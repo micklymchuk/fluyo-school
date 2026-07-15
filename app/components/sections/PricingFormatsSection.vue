@@ -9,6 +9,7 @@ import { priceItems, pricingFormats, type CtaContext, type PricingFormat } from 
 const route = useRoute()
 const { locale } = useLocale()
 const { t } = useI18n()
+const { priceValue } = usePriceValue()
 const { trackEvent } = useTracking()
 const { activePathId, pathContext } = usePricingPathContext()
 
@@ -30,7 +31,7 @@ const formatCards = computed(() => {
       .map((priceItem) => ({
         id: priceItem.id,
         label: t(`priceItems.${priceItem.id}.label`),
-        value: t(`priceItems.${priceItem.id}.value`),
+        value: priceValue(priceItem.id),
         caption: t(`priceItems.${priceItem.id}.caption`)
       })),
     fit: t(`pricingSections.formats.items.${format.id}.fit`),

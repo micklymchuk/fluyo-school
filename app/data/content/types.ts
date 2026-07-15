@@ -8,7 +8,7 @@ export type LocalizedString = Record<Locale, string>
 export type PageRouteId = 'home' | 'programs' | 'teachers' | 'pricing'
 export type PagePath = '/' | '/programs' | '/teachers' | '/pricing'
 export type LearningPathId = 'exam' | 'kids' | 'adult'
-export type PriceItemId = 'trial' | 'exam-group' | 'kids-group' | 'adult-individual' | 'pair-lessons'
+export type PriceItemId = 'TRIAL' | 'EXAM_PREP' | 'MINI_GROUP' | 'INDIVIDUAL' | 'SPEAKING_CLUB'
 export type TeacherProfileId = 'olena-bondar' | 'marta-koval' | 'andriy-lev'
 export type ProofAssetId = 'student-result-ielts' | 'kids-class-snapshot' | 'adult-speaking-note' | 'lesson-format-board'
 export type TestimonialId = 'danylo-exam' | 'olena-parent' | 'marta-adult'
@@ -23,29 +23,17 @@ export type FaqItemId =
   | 'online-format'
   | 'english-switch'
 
-export type LocalizedSeoMetadata = {
-  title: string
-  description: string
-}
-
-export type PageIntro = {
-  eyebrow: string
-  heading: string
-  summary: string
-}
-
 export type PageContent = {
   routeId: PageRouteId
   path: PagePath
-  sectionOrder: readonly string[]
   messageKey: PageRouteId
 }
 
 export type CtaFormat = 'telegram' | 'anchor' | 'route'
 export type MessageIntent = 'book_trial' | 'ask_program' | 'ask_teacher' | 'ask_price'
 export type TelegramPathContext = 'exam' | 'kids' | 'adult' | 'generic'
-export type TelegramFormatContext = 'individual' | 'pair' | 'mini-group' | 'generic'
-export type CtaSourceRoute = PageRouteId | 'header' | 'footer' | 'section' | 'pricing' | 'final-booking'
+export type TelegramFormatContext = 'individual' | 'speaking-club' | 'mini-group' | 'generic'
+export type CtaSourceRoute = PageRouteId | 'header' | 'footer' | 'section' | 'final-booking'
 
 export type CtaContext = {
   path?: TelegramPathContext
@@ -84,14 +72,21 @@ export type LearningPath = {
   telegramFormat: TelegramFormatContext
 }
 
-export type PriceFormat = 'trial' | 'group' | 'individual' | 'pair'
-
 export type PriceItem = {
   id: PriceItemId
-  format: PriceFormat
 }
 
-export type PricingFormatId = 'individual' | 'pair' | 'mini-group'
+export type PriceCurrency = 'UAH'
+export type PriceUnit = 'thirty-minutes' | 'sixty-minutes' | 'learner' | 'meeting'
+
+export type PriceConfig = {
+  amount: number
+  currency: PriceCurrency
+  unit: PriceUnit
+  isFromPrice: boolean
+}
+
+export type PricingFormatId = 'individual' | 'speaking-club' | 'mini-group'
 
 export type PricingFormat = {
   id: PricingFormatId
@@ -109,7 +104,6 @@ export type PricingIncludedItem = {
 export type TeacherProfile = {
   id: TeacherProfileId
   audienceFit: readonly LearningPathId[]
-  portraitAssetId: string
 }
 
 export type ProofKind = 'result' | 'classroom' | 'method' | 'format'
@@ -122,12 +116,8 @@ export type ProofAsset = {
 
 export type Testimonial = {
   id: TestimonialId
-  audience: LearningPathId
 }
-
-export type PolicySensitivity = 'standard' | 'policy_sensitive'
 
 export type FaqItem = {
   id: FaqItemId
-  policySensitivity: PolicySensitivity
 }

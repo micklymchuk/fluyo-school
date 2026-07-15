@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import PriceSimpleCard from '~/components/home/PriceSimpleCard.vue'
 import UiButtonLink from '~/components/ui/UiButtonLink.vue'
-import UiCard from '~/components/ui/UiCard.vue'
-import UiEyebrowPill from '~/components/ui/UiEyebrowPill.vue'
-import UiSection from '~/components/sections/UiSection.vue'
+import UiWatermark from '~/components/ui/UiWatermark.vue'
 import { priceItems, type CtaContext, type PriceItemId } from '~/data/content'
 
 const route = useRoute()
 const { locale } = useLocale()
 const { t } = useI18n()
+const { priceValue } = usePriceValue()
 const { trackEvent } = useTracking()
 const observerTarget = ref<HTMLElement | null>(null)
 const hasTrackedPricingSummary = ref(false)
 let pricingSummaryObserver: IntersectionObserver | undefined
-const formatSignalIndexes = [0, 1, 2] as const
-const summaryPriceItemIds = ['trial', 'exam-group', 'kids-group', 'adult-individual'] as const satisfies readonly PriceItemId[]
+const summaryPriceItemIds = ['TRIAL', 'EXAM_PREP', 'INDIVIDUAL', 'MINI_GROUP'] as const satisfies readonly PriceItemId[]
+const recommendedPriceItemId: PriceItemId = 'TRIAL'
 const summaryPriceItems = priceItems.filter((item) => (summaryPriceItemIds as readonly PriceItemId[]).includes(item.id))
 
 const telegramContext = computed<CtaContext>(() => ({
@@ -22,7 +22,7 @@ const telegramContext = computed<CtaContext>(() => ({
   format: 'generic',
   sourceRoute: 'section',
   locale: locale.value,
-  messageIntent: 'ask_price'
+  messageIntent: 'book_trial'
 }))
 const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramContext)
 
@@ -36,7 +36,7 @@ function trackPricingSummaryView() {
     route: route.fullPath,
     locale: locale.value,
     sourceRoute: 'home',
-    messageIntent: 'ask_price'
+    messageIntent: 'book_trial'
   })
 }
 
@@ -67,33 +67,25 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <UiSection
-    id="trial-pricing-summary"
-    :eyebrow="t('homeSections.trialPricing.eyebrow')"
-    :title="t('homeSections.trialPricing.title')"
-    :description="t('homeSections.trialPricing.description')"
-  >
-    <div ref="observerTarget" class="pricing-summary">
-      <UiCard as="div" class="pricing-summary__panel">
-        <div class="pricing-summary__items">
-          <article v-for="item in summaryPriceItems" :key="item.id" class="pricing-summary__item">
-            <span class="pricing-summary__item-label">{{ t(`priceItems.${item.id}.label`) }}</span>
-            <strong class="pricing-summary__item-value">{{ t(`priceItems.${item.id}.value`) }}</strong>
-            <span class="pricing-summary__item-caption">{{ t(`priceItems.${item.id}.caption`) }}</span>
-          </article>
-        </div>
-      </UiCard>
+  <section id="trial-pricing-summary" class="trial-pricing" aria-labelledby="home-trial-pricing-title">
+    <UiWatermark />
+    <div ref="observerTarget" class="trial-pricing__container">
+      <h2 id="home-trial-pricing-title" class="trial-pricing__title">{{ t('homeSections.trialPricing.title') }}</h2>
+      <p class="trial-pricing__line">{{ t('homeSections.trialPricing.description') }}</p>
 
-      <div class="pricing-summary__formats" :aria-label="t('homeSections.trialPricing.formatSignalsAriaLabel')">
-        <UiEyebrowPill v-for="signalIndex in formatSignalIndexes" :key="signalIndex">
-          {{ t(`homeSections.trialPricing.formatSignals[${signalIndex}]`) }}
-        </UiEyebrowPill>
+      <div class="trial-pricing__grid">
+        <PriceSimpleCard
+          v-for="item in summaryPriceItems"
+          :key="item.id"
+          :label="t(`priceItems.${item.id}.label`)"
+          :value="priceValue(item.id)"
+          :caption="t(`priceItems.${item.id}.caption`)"
+          :recommended="item.id === recommendedPriceItemId"
+          :recommended-label="t('homeSections.trialPricing.recommendedBadge')"
+        />
       </div>
 
-      <div class="pricing-summary__actions">
-        <UiButtonLink to="/pricing" variant="secondary" @click="trackPricingSummaryView">
-          {{ t('homeSections.trialPricing.pricingCta') }}
-        </UiButtonLink>
+      <div class="trial-pricing__actions">
         <UiButtonLink
           :href="telegramTarget"
           external
@@ -102,40 +94,43 @@ onBeforeUnmount(() => {
         >
           {{ t('homeSections.trialPricing.telegramCta') }}
         </UiButtonLink>
+        <UiButtonLink to="/pricing" variant="secondary" @click="trackPricingSummaryView">
+          {{ t('homeSections.trialPricing.pricingCta') }}
+        </UiButtonLink>
       </div>
     </div>
-  </UiSection>
+  </section>
 </template>
 
 <style scoped>
 @reference "~/assets/css/tailwind.css";
 
-.pricing-summary {
-  @apply grid gap-component-gap lg:grid-cols-[minmax(0,1fr)_minmax(15rem,22rem)] lg:items-start;
+.trial-pricing {
+  @apply relative bg-page py-section text-text;
 }
 
-.pricing-summary__items {
-  @apply grid gap-control-compact md:grid-cols-2;
+.trial-pricing__container {
+  @apply relative mx-auto flex w-full max-w-6xl flex-col items-center gap-component-gap px-page-gutter text-center;
 }
 
-.pricing-summary__item {
-  @apply flex flex-col gap-micro-gap border-l-2 border-accent-subdued pl-control-compact;
+/* Poster-scale heading echoing the speaking club section typography.
+   Caps-only: the script face is Latin-only, so translated titles stay in the display font. */
+.trial-pricing__title {
+  @apply text-center font-display font-bold uppercase tracking-display text-accent-burgundy;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
 }
 
-.pricing-summary__item-label,
-.pricing-summary__item-caption {
-  @apply text-small text-text-muted;
+.trial-pricing__line {
+  @apply max-w-2xl text-body text-text-muted;
 }
 
-.pricing-summary__item-value {
-  @apply text-body font-semibold text-text;
+/* pt: breathing room for the recommended badge overhanging the first card. */
+.trial-pricing__grid {
+  @apply grid w-full gap-component-gap pt-3 text-left sm:grid-cols-2 lg:grid-cols-4;
 }
 
-.pricing-summary__formats {
-  @apply flex flex-wrap gap-control-compact lg:flex-col lg:items-start;
-}
-
-.pricing-summary__actions {
-  @apply flex flex-wrap gap-control-compact lg:col-span-2;
+.trial-pricing__actions {
+  @apply flex flex-wrap items-center justify-center gap-control-compact;
 }
 </style>

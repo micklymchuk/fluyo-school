@@ -47,7 +47,7 @@ const requiredPages = [
   ['pricing', '/pricing']
 ]
 const requiredLearningPathIds = ['exam', 'kids', 'adult']
-const requiredPriceItemIds = ['trial', 'exam-group', 'kids-group', 'adult-individual']
+const requiredPriceItemIds = ['TRIAL', 'EXAM_PREP', 'MINI_GROUP', 'INDIVIDUAL', 'SPEAKING_CLUB']
 const requiredTeacherProfileIds = ['olena-bondar', 'marta-koval', 'andriy-lev']
 const requiredProofAssetIds = ['student-result-ielts', 'kids-class-snapshot', 'adult-speaking-note', 'lesson-format-board']
 const requiredTestimonialIds = ['danylo-exam', 'olena-parent', 'marta-adult']
@@ -263,13 +263,30 @@ function assertLocaleMessageTree(messages, locale) {
 
   assertMessageRecords(messages, locale, 'learningPaths', requiredLearningPathIds, ['title', 'summary'])
   assertArrayMessageRecords(messages, locale, 'learningPaths', requiredLearningPathIds, ['proofCues'])
-  assertMessageRecords(messages, locale, 'priceItems', requiredPriceItemIds, ['label', 'value', 'caption'])
+  assertMessageRecords(messages, locale, 'priceItems', requiredPriceItemIds, ['label', 'caption'])
+  assertPriceFormatMessages(messages, locale)
   assertMessageRecords(messages, locale, 'teacherProfiles', requiredTeacherProfileIds, ['name', 'role', 'bio'])
   assertArrayMessageRecords(messages, locale, 'teacherProfiles', requiredTeacherProfileIds, ['credentials'])
   assertMessageRecords(messages, locale, 'proofAssets', requiredProofAssetIds, ['title', 'caption', 'alt'])
   assertMessageRecords(messages, locale, 'testimonials', requiredTestimonialIds, ['quote', 'sourceLabel'])
   assertMessageRecords(messages, locale, 'faqItems', requiredFaqItemIds, ['question', 'answer'])
   assertMessageRecords(messages, locale, 'assets', requiredAssetIds, ['alt'])
+}
+
+function assertPriceFormatMessages(messages, locale) {
+  const priceFormat = messages.priceFormat
+
+  assert(typeof priceFormat === 'object' && priceFormat !== null, `${locale}.json must contain priceFormat templates`)
+
+  for (const field of ['free', 'from', 'exact', 'value']) {
+    assert(typeof priceFormat[field] === 'string' && priceFormat[field].length > 0, `${locale}.json priceFormat.${field} must be a non-empty string`)
+  }
+
+  assert(typeof priceFormat.currencies?.UAH === 'string' && priceFormat.currencies.UAH.length > 0, `${locale}.json priceFormat.currencies.UAH must be a non-empty string`)
+
+  for (const unit of ['thirty-minutes', 'sixty-minutes', 'learner', 'meeting']) {
+    assert(typeof priceFormat.units?.[unit] === 'string' && priceFormat.units[unit].length > 0, `${locale}.json priceFormat.units.${unit} must be a non-empty string`)
+  }
 }
 
 function assertMessageRecords(messages, locale, section, ids, fields) {
@@ -356,7 +373,7 @@ function assertHomeSectionMessages(messages, locale) {
     assert(typeof trialPricing[field] === 'string' && trialPricing[field].length > 0, `${locale}.json homeSections.trialPricing.${field} must be a non-empty string`)
   }
 
-  assert(Array.isArray(trialPricing.formatSignals) && trialPricing.formatSignals.length === 3, `${locale}.json homeSections.trialPricing.formatSignals must contain three signals`)
+  assert(Array.isArray(trialPricing.formatSignals) && trialPricing.formatSignals.length === 2, `${locale}.json homeSections.trialPricing.formatSignals must contain two signals`)
   assert(trialPricing.formatSignals.every((item) => typeof item === 'string' && item.length > 0), `${locale}.json homeSections.trialPricing.formatSignals must contain only non-empty strings`)
 }
 
@@ -498,6 +515,11 @@ for (const pagePath of requiredPagePaths) {
   const escapedPath = pagePath.replace('/', '\\/')
 
   assertPattern(contentPages, new RegExp(`path:\\s*'${escapedPath}'`), `pages.ts must define a page record for ${pagePath}`)
+}
+
+assertPattern(contentPricing, /export const PRICES_CONFIG\b/, 'pricing.ts must export the PRICES_CONFIG price data')
+for (const priceItemId of requiredPriceItemIds) {
+  assertPattern(contentPricing, new RegExp(`\\b${priceItemId}\\b:\\s*\\{`), `pricing.ts PRICES_CONFIG must configure ${priceItemId}`)
 }
 
 assertPattern(contentLearningPaths, /export const learningPaths\b/, 'learning-paths.ts must export learningPaths')

@@ -2,15 +2,12 @@ import type { Testimonial } from './types'
 
 export const testimonials = [
   {
-    id: 'danylo-exam',
-    audience: 'exam'
+    id: 'danylo-exam'
   },
   {
-    id: 'olena-parent',
-    audience: 'kids'
+    id: 'olena-parent'
   },
   {
-    id: 'marta-adult',
-    audience: 'adult'
+    id: 'marta-adult'
   }
 ] as const satisfies readonly Testimonial[]

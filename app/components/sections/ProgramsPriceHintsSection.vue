@@ -5,6 +5,7 @@ import UiSection from '~/components/sections/UiSection.vue'
 import { learningPaths, priceItems, type LearningPath } from '~/data/content'
 
 const { t } = useI18n()
+const { priceValue } = usePriceValue()
 
 function getPathPriceHints(path: LearningPath) {
   return priceItems.filter((priceItem) => path.priceHintIds.includes(priceItem.id))
@@ -17,7 +18,7 @@ const priceHintCards = computed(() => {
     prices: getPathPriceHints(path).map((priceItem) => ({
       id: priceItem.id,
       label: t(`priceItems.${priceItem.id}.label`),
-      value: t(`priceItems.${priceItem.id}.value`),
+      value: priceValue(priceItem.id),
       caption: t(`priceItems.${priceItem.id}.caption`)
     }))
   }))

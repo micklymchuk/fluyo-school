@@ -7,7 +7,9 @@ const files = {
   indexPage: resolve(root, 'app/pages/index.vue'),
   homeHero: resolve(root, 'app/components/sections/HomeHeroSection.vue'),
   homePathCards: resolve(root, 'app/components/sections/HomePathCardsSection.vue'),
-  homeProofSnapshot: resolve(root, 'app/components/sections/HomeProofSnapshotSection.vue'),
+  homeLessons: resolve(root, 'app/components/sections/HomeLessonsSection.vue'),
+  homeSpeakingClub: resolve(root, 'app/components/sections/HomeSpeakingClubSection.vue'),
+  homeReviews: resolve(root, 'app/components/sections/HomeReviewsSection.vue'),
   homeTrialPricing: resolve(root, 'app/components/sections/HomeTrialPricingSection.vue'),
   ukMessages: resolve(root, 'app/i18n/locales/uk.json'),
   enMessages: resolve(root, 'app/i18n/locales/en.json'),
@@ -119,24 +121,34 @@ function assertHomeSectionMessages(messages, locale) {
     assertNonEmptyString(messages.homeSections.pathCards?.[field], `${locale}.json homeSections.pathCards.${field}`)
   }
 
-  const proofSnapshot = messages.homeSections.proofSnapshot
+  const lessons = messages.homeSections.lessons
   for (const field of ['eyebrow', 'title', 'description']) {
-    assertNonEmptyString(proofSnapshot?.[field], `${locale}.json homeSections.proofSnapshot.${field}`)
+    assertNonEmptyString(lessons?.[field], `${locale}.json homeSections.lessons.${field}`)
   }
 
-  assert(Array.isArray(proofSnapshot?.items) && proofSnapshot.items.length === 3, `${locale}.json homeSections.proofSnapshot.items must contain three items`)
-  for (const item of proofSnapshot.items) {
-    for (const field of ['title', 'body', 'status']) {
-      assertNonEmptyString(item[field], `${locale}.json homeSections.proofSnapshot.items.${field}`)
+  assert(Array.isArray(lessons?.items) && lessons.items.length === 3, `${locale}.json homeSections.lessons.items must contain three items`)
+  for (const item of lessons.items) {
+    for (const field of ['title', 'body']) {
+      assertNonEmptyString(item[field], `${locale}.json homeSections.lessons.items.${field}`)
     }
   }
 
+  const speakingClub = messages.homeSections.speakingClub
+  for (const field of ['capsWord', 'scriptWord', 'line', 'telegramCta']) {
+    assertNonEmptyString(speakingClub?.[field], `${locale}.json homeSections.speakingClub.${field}`)
+  }
+
+  const reviews = messages.homeSections.reviews
+  for (const field of ['eyebrow', 'title', 'description']) {
+    assertNonEmptyString(reviews?.[field], `${locale}.json homeSections.reviews.${field}`)
+  }
+
   const trialPricing = messages.homeSections.trialPricing
-  for (const field of ['eyebrow', 'title', 'description', 'formatSignalsAriaLabel', 'pricingCta', 'telegramCta']) {
+  for (const field of ['eyebrow', 'title', 'description', 'trialBadge', 'trialValue', 'trialUnit', 'formatSignalsAriaLabel', 'pricingCta', 'telegramCta']) {
     assertNonEmptyString(trialPricing?.[field], `${locale}.json homeSections.trialPricing.${field}`)
   }
 
-  assert(Array.isArray(trialPricing?.formatSignals) && trialPricing.formatSignals.length === 3, `${locale}.json homeSections.trialPricing.formatSignals must contain three signals`)
+  assert(Array.isArray(trialPricing?.formatSignals) && trialPricing.formatSignals.length === 2, `${locale}.json homeSections.trialPricing.formatSignals must contain two signals`)
   for (const signal of trialPricing.formatSignals) {
     assertNonEmptyString(signal, `${locale}.json homeSections.trialPricing.formatSignals item`)
   }
@@ -180,8 +192,10 @@ function verifyHomePageComposition() {
     [
       '<HomeHeroSection',
       '<HomePathCardsSection',
-      '<HomeProofSnapshotSection',
-      '<HomeTrialPricingSection'
+      '<HomeSpeakingClubSection',
+      '<HomeTrialPricingSection',
+      '<HomeLessonsSection',
+      '<HomeReviewsSection'
     ],
     'home page'
   )
@@ -207,17 +221,14 @@ function verifyPathCards() {
   assertPattern(homePathCards, /path:\s*path\.id/, 'path card tracking must include path context')
 }
 
-function verifyProofSnapshot() {
-  const homeProofSnapshot = read(files.homeProofSnapshot)
-  const ukMessages = readJson(files.ukMessages)
-  const enMessages = readJson(files.enMessages)
-  const proofMessages = `${JSON.stringify(ukMessages.homeSections.proofSnapshot)}\n${JSON.stringify(enMessages.homeSections.proofSnapshot)}`
+function verifyBrandSections() {
+  const homeLessons = read(files.homeLessons)
+  const homeSpeakingClub = read(files.homeSpeakingClub)
+  const homeReviews = read(files.homeReviews)
 
-  assertPattern(homeProofSnapshot, /useI18n\(\)/, 'proof snapshot must use Nuxt i18n')
-  assertPattern(homeProofSnapshot, /t\(`homeSections\.proofSnapshot\.items\[\$\{itemIndex\}\]\.title`\)/, 'proof snapshot must read item titles through t()')
-  assertPattern(proofMessages, /teacher|викладач/i, 'proof snapshot messages must include teacher-led proof')
-  assertPattern(proofMessages, /progress|прогрес/i, 'proof snapshot messages must include progress proof')
-  assertPattern(proofMessages, /trial|пробн/i, 'proof snapshot messages must include trial step proof')
+  assertPattern(homeLessons, /t\(`homeSections\.lessons\.items\[\$\{itemIndex\}\]\.title`\)/, 'lessons section must read item titles through t()')
+  assertPattern(homeSpeakingClub, /useTelegramCta/, 'speaking club must use the Telegram CTA contract')
+  assertPattern(homeReviews, /t\(`testimonials\.\$\{testimonial\.id\}\.quote`\)/, 'reviews section must read testimonial quotes through t()')
 }
 
 function verifyTrialPricing() {
@@ -225,7 +236,7 @@ function verifyTrialPricing() {
 
   assertPattern(homeTrialPricing, /useI18n\(\)/, 'trial pricing must use Nuxt i18n')
   assertPattern(homeTrialPricing, /t\(`priceItems\.\$\{item\.id\}\.label`\)/, 'trial pricing must read labels through t()')
-  assertPattern(homeTrialPricing, /t\(`priceItems\.\$\{item\.id\}\.value`\)/, 'trial pricing must read values through t()')
+  assertPattern(homeTrialPricing, /:value="priceValue\(item\.id\)"/, 'trial pricing must resolve values through the shared price config')
   assertPattern(homeTrialPricing, /t\(`priceItems\.\$\{item\.id\}\.caption`\)/, 'trial pricing must read captions through t()')
   assertPattern(homeTrialPricing, /trackEvent\(['"]pricing_summary_view['"]/, 'trial pricing must emit pricing_summary_view')
   assertPattern(homeTrialPricing, /IntersectionObserver|onMounted/, 'trial pricing must track when observed or mounted')
@@ -236,7 +247,9 @@ function verifyLocalization() {
   const homeSections = [
     [files.homeHero, 'home hero'],
     [files.homePathCards, 'home path cards'],
-    [files.homeProofSnapshot, 'home proof snapshot'],
+    [files.homeLessons, 'home lessons'],
+    [files.homeSpeakingClub, 'home speaking club'],
+    [files.homeReviews, 'home reviews'],
     [files.homeTrialPricing, 'home trial pricing']
   ]
   const ukMessages = readJson(files.ukMessages)
@@ -268,7 +281,7 @@ verifyPackageScript()
 verifyShellContracts()
 verifyHomePageComposition()
 verifyPathCards()
-verifyProofSnapshot()
+verifyBrandSections()
 verifyTrialPricing()
 verifyLocalization()
 

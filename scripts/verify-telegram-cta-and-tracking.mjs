@@ -149,8 +149,8 @@ function verifySharedTypes() {
   const contentTypes = read(files.contentTypes)
 
   assertPattern(contentTypes, /export type TelegramPathContext = 'exam' \| 'kids' \| 'adult' \| 'generic'/, 'content types must define TelegramPathContext')
-  assertPattern(contentTypes, /export type TelegramFormatContext = 'individual' \| 'pair' \| 'mini-group' \| 'generic'/, 'content types must define TelegramFormatContext')
-  assertPattern(contentTypes, /export type CtaSourceRoute = PageRouteId \| 'header' \| 'footer' \| 'section' \| 'pricing' \| 'final-booking'/, 'content types must define CtaSourceRoute')
+  assertPattern(contentTypes, /export type TelegramFormatContext = 'individual' \| 'speaking-club' \| 'mini-group' \| 'generic'/, 'content types must define TelegramFormatContext')
+  assertPattern(contentTypes, /export type CtaSourceRoute = PageRouteId \| 'header' \| 'footer' \| 'section' \| 'final-booking'/, 'content types must define CtaSourceRoute')
   assertPattern(contentTypes, /export type CtaContext = \{[\s\S]*path\?: TelegramPathContext[\s\S]*format\?: TelegramFormatContext[\s\S]*sourceRoute\?: CtaSourceRoute[\s\S]*locale\?: Locale[\s\S]*messageIntent\?: MessageIntent/s, 'content types must define optional CtaContext fields')
   assertPattern(contentTypes, /export type TrackingPayload = \{[\s\S]*route\?: string \| null[\s\S]*locale\?: Locale \| null[\s\S]*path\?: TelegramPathContext \| null[\s\S]*format\?: TelegramFormatContext \| null[\s\S]*sourceRoute\?: CtaSourceRoute \| null[\s\S]*messageIntent\?: MessageIntent \| null/s, 'content types must define nullable TrackingPayload fields')
 }

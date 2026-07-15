@@ -21,8 +21,8 @@ const files = {
   tracking: resolve(root, 'app/composables/useTracking.ts')
 }
 
-const pricingFormatIds = ['individual', 'pair', 'mini-group']
-const priceItemIds = ['trial', 'exam-group', 'kids-group', 'adult-individual', 'pair-lessons']
+const pricingFormatIds = ['individual', 'speaking-club', 'mini-group']
+const priceItemIds = ['TRIAL', 'EXAM_PREP', 'MINI_GROUP', 'INDIVIDUAL', 'SPEAKING_CLUB']
 const includedItemIds = ['teacher-matching', 'live-lesson', 'materials', 'feedback-progress']
 const faqItemIds = [
   'trial-booking',
@@ -180,7 +180,7 @@ function verifySectionComponents() {
   }
 
   assertIncludes(trialSection, 'pricing-page__trial', 'trial section')
-  assertPattern(trialSection, /priceItems\.trial/, 'trial section must render the shared trial price item')
+  assertPattern(trialSection, /priceItems\.TRIAL/, 'trial section must render the shared trial price item')
   assertPattern(trialSection, /pathNotes/, 'trial section must adapt its helper note to path context')
   assertPattern(trialSection, /usePricingPathContext\(/, 'trial section must resolve path context through the shared composable')
   assertPattern(trialSection, /useTelegramCta\(/, 'trial section must build Telegram URLs through useTelegramCta')
@@ -302,7 +302,7 @@ function verifyPricingMessages(messages, locale) {
   }
 
   for (const priceItemId of priceItemIds) {
-    for (const field of ['label', 'value', 'caption']) {
+    for (const field of ['label', 'caption']) {
       assertNonEmptyString(messages.priceItems?.[priceItemId]?.[field], `${locale}.json priceItems.${priceItemId}.${field}`)
     }
   }
