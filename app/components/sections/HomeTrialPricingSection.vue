@@ -75,7 +75,7 @@ onBeforeUnmount(() => {
         id="home-trial-pricing-title"
         level="h2"
         align="center"
-        size="poster"
+        size="display"
         :caps="t('homeSections.trialPricing.title')"
       />
       <p class="trial-pricing__line">{{ t('homeSections.trialPricing.description') }}</p>

@@ -3,7 +3,7 @@ import { computed, useSlots } from 'vue'
 
 type LockupLevel = 'h1' | 'h2' | 'h3'
 type LockupAlign = 'start' | 'center'
-type LockupSize = 'default' | 'poster' | 'hero'
+type LockupSize = 'default' | 'display' | 'poster' | 'hero'
 
 const props = withDefaults(defineProps<{
   level?: LockupLevel
@@ -42,6 +42,7 @@ if (import.meta.dev && props.script && /[Ѐ-ӿ]/.test(props.script)) {
       `lockup--${align}`,
       {
         'lockup--inverse': inverse,
+        'lockup--display': size === 'display',
         'lockup--poster': size === 'poster',
         'lockup--hero': size === 'hero'
       }
@@ -92,6 +93,10 @@ if (import.meta.dev && props.script && /[Ѐ-ӿ]/.test(props.script)) {
   @apply max-w-3xl text-hero-caps sm:text-hero-caps-sm lg:text-hero-caps-lg;
 }
 
+.lockup--display .lockup-caps {
+  @apply text-display-caps sm:text-display-caps-sm lg:text-display-caps-lg;
+}
+
 .lockup--poster .lockup-script {
   @apply text-poster-script sm:text-poster-script-sm lg:text-poster-script-lg;
 }
@@ -100,7 +105,8 @@ if (import.meta.dev && props.script && /[Ѐ-ӿ]/.test(props.script)) {
   @apply text-poster-caps sm:text-poster-caps-sm lg:text-poster-caps-lg;
 }
 
-/* Poster headlines are the page's burgundy display moments; inverse still wins on bands. */
+/* Display/poster headlines are the page's burgundy display moments; inverse still wins on bands. */
+.lockup--display:not(.lockup--inverse) .lockup-caps,
 .lockup--poster:not(.lockup--inverse) .lockup-caps,
 .lockup--poster:not(.lockup--inverse) .lockup-script {
   @apply text-accent-burgundy;

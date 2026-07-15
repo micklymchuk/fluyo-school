@@ -51,6 +51,12 @@
   --text-hero-caps-sm--line-height: 1.14;
   --text-hero-caps-lg: 2.5rem;
   --text-hero-caps-lg--line-height: 1.12;
+  --text-display-caps: 2rem;
+  --text-display-caps--line-height: 1.12;
+  --text-display-caps-sm: 2.75rem;
+  --text-display-caps-sm--line-height: 1.1;
+  --text-display-caps-lg: 3.5rem;
+  --text-display-caps-lg--line-height: 1.08;
   --text-poster-script: 2.25rem;
   --text-poster-script--line-height: 1;
   --text-poster-script-sm: 3.25rem;
