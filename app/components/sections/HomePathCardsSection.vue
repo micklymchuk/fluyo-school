@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import UiSection from '~/components/sections/UiSection.vue'
+import UiCard from '~/components/ui/UiCard.vue'
+import UiEyebrowPill from '~/components/ui/UiEyebrowPill.vue'
 import { learningPaths, type LearningPath, type LearningPathId } from '~/data/content'
 
 const pathRoutes = {
@@ -34,15 +36,17 @@ function handlePathClick(path: LearningPath) {
       <NuxtLink
         v-for="path in learningPaths"
         :key="path.id"
-        class="path-card"
+        class="path-card-link"
         :to="localizedTo(pathRoutes[path.id])"
         @click="handlePathClick(path)"
       >
-        <span class="path-card__tag">{{ path.id }}</span>
-        <h3 class="path-card__title">{{ t(`learningPaths.${path.id}.title`) }}</h3>
-        <p class="path-card__summary">{{ t(`learningPaths.${path.id}.summary`) }}</p>
-        <p class="path-card__proof">{{ t(`learningPaths.${path.id}.proofCues[0]`) }}</p>
-        <span class="path-card__cta">{{ t('homeSections.pathCards.cardCta') }}</span>
+        <UiCard as="div" interactive class="path-card">
+          <UiEyebrowPill class="path-card__tag" :label="path.id" />
+          <h3 class="path-card__title">{{ t(`learningPaths.${path.id}.title`) }}</h3>
+          <p class="path-card__summary">{{ t(`learningPaths.${path.id}.summary`) }}</p>
+          <p class="path-card__proof">{{ t(`learningPaths.${path.id}.proofCues[0]`) }}</p>
+          <span class="path-card__cta">{{ t('homeSections.pathCards.cardCta') }}</span>
+        </UiCard>
       </NuxtLink>
     </div>
   </UiSection>
@@ -55,17 +59,16 @@ function handlePathClick(path: LearningPath) {
   @apply grid gap-component-gap md:grid-cols-3;
 }
 
-.path-card {
-  @apply flex min-h-72 flex-col gap-control-compact rounded-default border border-border-hairline bg-surface p-card-padding text-text no-underline transition-colors duration-short ease-standard;
+.path-card-link {
+  @apply block rounded-card text-text no-underline;
 }
 
-.path-card:hover,
-.path-card:focus-visible {
-  @apply border-accent-subdued bg-surface-muted text-text;
+.path-card {
+  @apply flex h-full flex-col gap-control-compact;
 }
 
 .path-card__tag {
-  @apply text-eyebrow font-bold uppercase text-accent-burgundy;
+  @apply self-start;
 }
 
 .path-card__title {

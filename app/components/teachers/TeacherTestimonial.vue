@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import UiStampCard from '~/components/ui/UiStampCard.vue'
+
 defineProps<{
   quote: string
   sourceLabel: string
@@ -6,26 +8,22 @@ defineProps<{
 </script>
 
 <template>
-  <figure class="testimonial">
+  <UiStampCard as="figure" class="testimonial">
     <blockquote>
       <p class="testimonial__quote">{{ quote }}</p>
     </blockquote>
     <figcaption class="testimonial__source">{{ sourceLabel }}</figcaption>
-  </figure>
+  </UiStampCard>
 </template>
 
 <style scoped>
 @reference "~/assets/css/tailwind.css";
-
-.testimonial {
-  @apply flex flex-col gap-control-compact border border-border-hairline bg-surface p-card-padding;
-}
 
 .testimonial__quote {
   @apply text-body text-text;
 }
 
 .testimonial__source {
-  @apply text-small text-text-muted;
+  @apply mt-control-compact text-eyebrow font-semibold uppercase tracking-display text-text-muted;
 }
 </style>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import UiButtonLink from '~/components/ui/UiButtonLink.vue'
+import UiCard from '~/components/ui/UiCard.vue'
+import UiEyebrowPill from '~/components/ui/UiEyebrowPill.vue'
 
 interface PricingFormatCardPrice {
   id: string
@@ -28,14 +30,14 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <article
+  <UiCard
     class="format-block"
     :data-pricing-format="id"
     :aria-labelledby="`format-${id}-title`"
   >
     <header class="format-block__header">
       <h3 :id="`format-${id}-title`" class="format-block__title">{{ title }}</h3>
-      <span v-if="recommended" class="format-block__recommended">{{ recommendedLabel }}</span>
+      <UiEyebrowPill v-if="recommended" :label="recommendedLabel" />
     </header>
 
     <div class="format-block__prices">
@@ -65,26 +67,22 @@ const emit = defineEmits<{
         {{ ctaLabel }}
       </UiButtonLink>
     </div>
-  </article>
+  </UiCard>
 </template>
 
 <style scoped>
 @reference "~/assets/css/tailwind.css";
 
 .format-block {
-  @apply flex flex-col gap-control-compact border border-border-hairline bg-surface p-card-padding;
+  @apply flex flex-col gap-control-compact;
 }
 
 .format-block__header {
-  @apply flex flex-wrap items-baseline justify-between gap-control-compact;
+  @apply flex flex-wrap items-center justify-between gap-control-compact;
 }
 
 .format-block__title {
   @apply font-display text-section-heading font-semibold leading-tight text-text;
-}
-
-.format-block__recommended {
-  @apply rounded-default bg-accent-subdued px-2 py-1 text-small font-bold uppercase text-text;
 }
 
 .format-block__prices {
@@ -92,7 +90,7 @@ const emit = defineEmits<{
 }
 
 .format-price {
-  @apply flex flex-col gap-1 border-t border-border-hairline pt-control-compact;
+  @apply flex flex-col gap-micro-gap border-t border-border-hairline pt-control-compact;
 }
 
 .format-price__label,
@@ -104,12 +102,19 @@ const emit = defineEmits<{
   @apply text-body font-semibold text-text;
 }
 
+/* The brand underline-list gesture: signals are label+text pairs, not UiUnderlineList strings. */
 .format-block__signal {
-  @apply border-l-2 border-accent-subdued pl-control-compact text-body text-text-muted;
+  @apply relative pb-2 text-body text-text-muted;
+}
+
+.format-block__signal::after {
+  content: '';
+
+  @apply absolute bottom-0 left-0 h-0.5 w-10 bg-accent-burgundy;
 }
 
 .format-block__signal-label {
-  @apply mb-1 block text-eyebrow font-bold uppercase text-text;
+  @apply mb-micro-gap block text-eyebrow font-bold uppercase tracking-display text-text;
 }
 
 .format-block__actions {

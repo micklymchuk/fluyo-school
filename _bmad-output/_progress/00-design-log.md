@@ -107,6 +107,34 @@
 
 ## Log
 
+### 2026-07-15 - Phase 5: DD-001.5.1 + DD-001.5.2 Done — Brand Design System Adopted Across All Routes
+
+**Agent:** Claude / Amelia (dev-story)
+**Status:** done
+
+**Summary:** Epic 5 redesign stories are closed. `DD-001.5.1` (brand UI components, reviewed 2026-07-14 with 8 review patches applied) and `DD-001.5.2` (route section rewiring + typography/spacing pass across Home, Programs, Teachers, Pricing) are both accepted by the user and marked `done`. All four routes now compose the brand components — pill controls, lockup headings, eyebrow pills, one frame moment per route, stamp testimonials on inverse bands, watermarked CTA strips — with token-backed type and spacing, full verify suite and build green.
+
+**Next:** No open Epic 5 stories; next work per `IMPLEMENTATION-STORIES.md` backlog or new design delivery.
+
+### 2026-07-14 - Phase 5: DD-001.5.1 Brand UI Components Implemented; Square Geometry Retired
+
+**Agent:** Claude / Amelia (dev-story)
+**Status:** implemented, ready for review
+
+**Decision:** The DD-001 global AC "square geometry, hairline borders, restrained palette" is partially superseded by the brand extraction (`_bmad-output/design-system/fluyo-brand-design-system.md`). Square geometry is retired: controls are pills (`--radius-pill`), cards use `--radius-card: 1.25rem`. Hairline borders, restrained palette, and no-decorative-shadows remain in force.
+
+**Artifacts Updated:**
+- `public/fonts/` — self-hosted Inter (latin+cyrillic, variable 400–700) and Pinyon Script (latin) woff2
+- `app/assets/scss/main.scss` — brand `@font-face` declarations
+- `app/assets/css/tailwind.css` — lockup/eyebrow-script type tokens, frame spacing tokens
+- `app/components/ui/` — UiButton/UiCard retrofits; new UiEyebrowPill, UiLockupHeading, UiFrameBox, UiStampCard, UiUnderlineList, UiWatermark
+- `app/components/sections/UiSection.vue` — pill eyebrow, display-caps titles, inverse-band focus-ring fix
+- `scripts/verify-brand-ui-components.mjs` + `test:brand-ui`
+
+**Summary:** The shared UI primitives now carry the brand's signature moves: pill controls, script+sans lockup headings, eyebrow pills, thick-frame hero container, postage-stamp testimonial card, underline vocabulary list, and F-monogram watermark. Section adoption follows in DD-001.5.2.
+
+**Next:** Review DD-001.5.1, then start `DD-001.5.2` (compose the new components into route sections).
+
 ### 2026-07-09 - Phase 5: DD-001 Implementation Stories Created
 
 **Agent:** Codex / WDS Development

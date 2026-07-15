@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import UiCard from '~/components/ui/UiCard.vue'
+
 interface ProgramPriceHintCardPrice {
   id: string
   label: string
@@ -13,7 +15,7 @@ defineProps<{
 </script>
 
 <template>
-  <article class="price-hint">
+  <UiCard class="price-hint">
     <h3 class="price-hint__title">{{ title }}</h3>
     <div class="price-hint__items">
       <div v-for="price in prices" :key="price.id" class="price-hint__item">
@@ -22,15 +24,11 @@ defineProps<{
         <span class="price-hint__caption">{{ price.caption }}</span>
       </div>
     </div>
-  </article>
+  </UiCard>
 </template>
 
 <style scoped>
 @reference "~/assets/css/tailwind.css";
-
-.price-hint {
-  @apply border border-border-hairline bg-surface p-card-padding;
-}
 
 .price-hint__title {
   @apply font-display text-section-heading font-semibold leading-tight text-text;
@@ -41,7 +39,7 @@ defineProps<{
 }
 
 .price-hint__item {
-  @apply flex flex-col gap-1 border-t border-border-hairline pt-control-compact;
+  @apply flex flex-col gap-micro-gap border-t border-border-hairline pt-control-compact;
 }
 
 .price-hint__label,

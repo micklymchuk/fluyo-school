@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { computed, useId } from 'vue'
+import UiEyebrowPill from '~/components/ui/UiEyebrowPill.vue'
+import UiWatermark from '~/components/ui/UiWatermark.vue'
 
 type SectionVariant = 'default' | 'compact' | 'spacious' | 'inverse'
 
@@ -10,13 +12,15 @@ const props = withDefaults(defineProps<{
   title?: string
   description?: string
   labelledby?: string
+  watermark?: boolean
 }>(), {
   as: 'section',
   description: undefined,
   eyebrow: undefined,
   labelledby: undefined,
   title: undefined,
-  variant: 'default'
+  variant: 'default',
+  watermark: false
 })
 
 const generatedId = useId()
@@ -40,10 +44,16 @@ const hasHeader = computed(() => {
     :class="`section--${variant}`"
     :aria-labelledby="headingId"
   >
+    <UiWatermark v-if="watermark" :mode="variant === 'inverse' ? 'inverse' : 'cream'" />
     <div class="section-inner">
       <header v-if="hasHeader || $slots.heading" class="section-header">
         <slot name="heading">
-          <p v-if="eyebrow" class="section-eyebrow">{{ eyebrow }}</p>
+          <UiEyebrowPill
+            v-if="eyebrow"
+            class="section-eyebrow"
+            :label="eyebrow"
+            :inverse="variant === 'inverse'"
+          />
           <h2 v-if="title" :id="headingId" class="section-title">{{ title }}</h2>
           <p v-if="description" class="section-description">{{ description }}</p>
         </slot>
@@ -59,7 +69,7 @@ const hasHeader = computed(() => {
 @reference "~/assets/css/tailwind.css";
 
 .section {
-  @apply bg-page py-section text-text;
+  @apply relative bg-page py-section text-text;
 }
 
 .section--compact {
@@ -74,8 +84,9 @@ const hasHeader = computed(() => {
   @apply bg-surface-inverse text-text-inverse;
 }
 
+/* relative: content must stack above the absolutely-positioned watermark layer. */
 .section-inner {
-  @apply mx-auto flex w-full max-w-6xl flex-col gap-component-gap px-page-gutter;
+  @apply relative mx-auto flex w-full max-w-6xl flex-col gap-component-gap px-page-gutter;
 }
 
 .section-header {
@@ -83,11 +94,11 @@ const hasHeader = computed(() => {
 }
 
 .section-eyebrow {
-  @apply text-eyebrow font-bold uppercase text-accent-burgundy;
+  @apply self-start;
 }
 
 .section-title {
-  @apply font-display text-section-heading font-semibold leading-tight text-text;
+  @apply font-display text-section-heading font-bold uppercase leading-tight tracking-display text-text;
 }
 
 .section-description {
@@ -99,8 +110,44 @@ const hasHeader = computed(() => {
 }
 
 .section--inverse .section-title,
-.section--inverse .section-description,
-.section--inverse .section-eyebrow {
+.section--inverse .section-description {
   @apply text-text-inverse;
+}
+
+/* The global teal focus ring is near-invisible on the burgundy band. */
+.section--inverse :deep(:focus-visible) {
+  @apply outline-text-inverse;
+}
+
+/* Nested light surfaces inside the band keep the teal ring (cream-on-cream is invisible). */
+.section--inverse :deep(.card-surface :focus-visible),
+.section--inverse :deep(.stamp-card :focus-visible),
+.section--inverse :deep(.frame-box__well :focus-visible) {
+  @apply outline-focus;
+}
+
+/* CTAs on the burgundy band flip to cream treatments (burgundy-on-burgundy is invisible). */
+.section--inverse :deep(.ui-button--primary) {
+  @apply border-surface-muted bg-surface-muted text-accent-burgundy;
+}
+
+.section--inverse :deep(.ui-button--primary:hover) {
+  @apply border-page bg-page text-accent-burgundy-strong;
+}
+
+.section--inverse :deep(.ui-button--secondary) {
+  @apply border-text-inverse bg-transparent text-text-inverse;
+}
+
+.section--inverse :deep(.ui-button--secondary:hover) {
+  @apply border-text-inverse bg-text-inverse text-accent-burgundy;
+}
+
+.section--inverse :deep(.ui-button--ghost) {
+  @apply text-text-inverse;
+}
+
+.section--inverse :deep(.ui-button--ghost:hover) {
+  @apply bg-accent-burgundy-strong text-text-inverse;
 }
 </style>

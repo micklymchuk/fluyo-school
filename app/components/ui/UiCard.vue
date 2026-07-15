@@ -31,7 +31,7 @@ const props = withDefaults(defineProps<{
 @reference "~/assets/css/tailwind.css";
 
 .card-surface {
-  @apply rounded-default border border-border-hairline bg-surface p-card-padding text-text;
+  @apply rounded-card border border-border-hairline bg-surface p-card-padding text-text;
 }
 
 .card-surface--interactive {

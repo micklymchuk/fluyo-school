@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import UiUnderlineList from '~/components/ui/UiUnderlineList.vue'
+
 defineProps<{
   id: string
   initials: string
@@ -19,17 +21,15 @@ defineProps<{
     <h3 :id="`teacher-${id}-name`" class="teacher-card__name">{{ name }}</h3>
     <p class="teacher-card__role">{{ role }}</p>
     <p class="teacher-card__bio">{{ bio }}</p>
-    <p v-if="fitItems.length" class="teacher-card__fit">
+    <div v-if="fitItems.length" class="teacher-card__fit">
       <span class="teacher-card__fit-label">{{ fitLabel }}</span>
-      <span v-for="(fitItem, fitIndex) in fitItems" :key="fitIndex" class="teacher-card__fit-item">
-        {{ fitItem }}
-      </span>
-    </p>
-    <ul v-if="credentials.length" class="teacher-card__credentials">
-      <li v-for="(credential, credentialIndex) in credentials" :key="credentialIndex" class="teacher-card__credential">
-        {{ credential }}
-      </li>
-    </ul>
+      <UiUnderlineList class="teacher-card__fit-list" :items="fitItems" />
+    </div>
+    <UiUnderlineList
+      v-if="credentials.length"
+      class="teacher-card__credentials"
+      :items="credentials"
+    />
   </article>
 </template>
 
@@ -41,7 +41,7 @@ defineProps<{
 }
 
 .teacher-card__portrait {
-  @apply flex aspect-square w-20 items-center justify-center rounded-default bg-surface-muted;
+  @apply flex aspect-square w-portrait items-center justify-center rounded-default bg-surface-muted;
 }
 
 .teacher-card__initials {
@@ -49,11 +49,11 @@ defineProps<{
 }
 
 .teacher-card__name {
-  @apply font-display text-[1.35rem] font-semibold leading-tight text-text;
+  @apply font-display text-card-title font-semibold text-text;
 }
 
 .teacher-card__role {
-  @apply text-eyebrow font-bold uppercase text-accent-burgundy;
+  @apply text-eyebrow font-bold uppercase tracking-display text-accent-burgundy;
 }
 
 .teacher-card__bio {
@@ -61,22 +61,15 @@ defineProps<{
 }
 
 .teacher-card__fit {
-  @apply flex flex-wrap items-baseline gap-1 text-small text-text-muted;
+  @apply flex flex-col gap-micro-gap;
 }
 
 .teacher-card__fit-label {
-  @apply font-bold uppercase text-text;
+  @apply text-eyebrow font-bold uppercase tracking-display text-text;
 }
 
-.teacher-card__fit-item {
-  @apply text-small text-text-muted;
-}
-
+.teacher-card__fit-list,
 .teacher-card__credentials {
-  @apply flex flex-wrap gap-1;
-}
-
-.teacher-card__credential {
-  @apply rounded-default border border-border-hairline bg-surface-muted px-2 py-1 text-small text-text;
+  @apply text-small text-text-muted;
 }
 </style>

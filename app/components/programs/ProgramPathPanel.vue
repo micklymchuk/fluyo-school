@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import UiButtonLink from '~/components/ui/UiButtonLink.vue'
+import UiCard from '~/components/ui/UiCard.vue'
+import UiEyebrowPill from '~/components/ui/UiEyebrowPill.vue'
 
 interface ProgramPathPanelSignal {
   id: string
@@ -33,9 +35,9 @@ const emit = defineEmits<{
     :data-program-path="id"
     :aria-labelledby="`program-${id}-title`"
   >
-    <div class="program-panel__inner">
+    <UiCard as="div" class="program-panel__inner">
       <div class="program-panel__copy">
-        <p class="program-panel__eyebrow">{{ eyebrow }}</p>
+        <UiEyebrowPill class="program-panel__eyebrow" :label="eyebrow" />
         <h2 :id="`program-${id}-title`" class="program-panel__title">
           {{ title }}
         </h2>
@@ -66,7 +68,7 @@ const emit = defineEmits<{
           {{ telegramCtaLabel }}
         </UiButtonLink>
       </div>
-    </div>
+    </UiCard>
   </section>
 </template>
 
@@ -78,7 +80,7 @@ const emit = defineEmits<{
 }
 
 .program-panel__inner {
-  @apply mx-auto grid w-full max-w-6xl gap-component-gap border border-border-hairline bg-surface p-card-padding lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start;
+  @apply mx-auto grid w-full max-w-6xl gap-component-gap lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start;
 }
 
 .program-panel__copy {
@@ -86,11 +88,11 @@ const emit = defineEmits<{
 }
 
 .program-panel__eyebrow {
-  @apply text-eyebrow font-bold uppercase text-accent-burgundy;
+  @apply self-start;
 }
 
 .program-panel__title {
-  @apply font-display text-section-heading font-semibold leading-tight text-text;
+  @apply font-display text-section-heading font-bold uppercase leading-tight tracking-display text-text;
 }
 
 .program-panel__summary {
@@ -101,12 +103,20 @@ const emit = defineEmits<{
   @apply grid gap-control-compact;
 }
 
+/* The brand underline-list gesture, applied locally: signals are label+text pairs,
+   not the plain strings UiUnderlineList carries. */
 .program-signal {
-  @apply border-l-2 border-accent-subdued pl-control-compact text-body text-text-muted;
+  @apply relative pb-2 text-body text-text-muted;
+}
+
+.program-signal::after {
+  content: '';
+
+  @apply absolute bottom-0 left-0 h-0.5 w-10 bg-accent-burgundy;
 }
 
 .program-signal__label {
-  @apply mb-1 block text-eyebrow font-bold uppercase text-text;
+  @apply mb-micro-gap block text-eyebrow font-bold uppercase tracking-display text-text;
 }
 
 .program-panel__actions {

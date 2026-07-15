@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import UiSection from '~/components/sections/UiSection.vue'
+import UiCard from '~/components/ui/UiCard.vue'
 import { pricingIncludedItems } from '~/data/content'
 
 const { t } = useI18n()
@@ -13,10 +14,10 @@ const { t } = useI18n()
     :description="t('pricingSections.included.description')"
   >
     <ul class="included-grid">
-      <li v-for="item in pricingIncludedItems" :key="item.id" class="included-item">
+      <UiCard v-for="item in pricingIncludedItems" :key="item.id" as="li" class="included-item">
         <h3 class="included-item__title">{{ t(`pricingSections.included.items.${item.id}.title`) }}</h3>
         <p class="included-item__description">{{ t(`pricingSections.included.items.${item.id}.description`) }}</p>
-      </li>
+      </UiCard>
     </ul>
   </UiSection>
 </template>
@@ -29,11 +30,11 @@ const { t } = useI18n()
 }
 
 .included-item {
-  @apply flex flex-col gap-control-compact border-l-2 border-accent-subdued bg-surface-muted p-card-padding;
+  @apply flex flex-col gap-control-compact;
 }
 
 .included-item__title {
-  @apply font-display text-[1.35rem] font-semibold leading-tight text-text;
+  @apply font-display text-card-title font-semibold text-text;
 }
 
 .included-item__description {

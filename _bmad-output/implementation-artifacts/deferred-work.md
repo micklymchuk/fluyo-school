@@ -26,3 +26,7 @@
 ## Open Bugs
 
 - `BUG-001`: Home section copy is hard-coded in route section components via `sectionCopy`, `proofItems`, and `pricingSummaryCopy`; move it into the i18n message layer and add a guard. See `_bmad-output/implementation-artifacts/DD-001-fluyo-production-site/bugs/BUG-001-home-section-copy-must-use-i18n.md`.
+
+## Deferred from: code review of DD-001.5.1-brand-ui-components.md (2026-07-14)
+
+- `--color-surface` stays `#ffffff` while the brand design system's drop-in token block specifies cream `#f7f3ef` ("never pure white" surfaces) — `UiCard` renders pure-white cards on the cream page. Token application predates DD-001.5.1, and that story mandates consuming tokens as-is ("do not re-derive values"). Resolve as a deliberate design decision in the design log or adjust the token during DD-001.5.2 section adoption.

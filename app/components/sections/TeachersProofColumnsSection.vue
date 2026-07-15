@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import TeacherCard from '~/components/teachers/TeacherCard.vue'
+import UiCard from '~/components/ui/UiCard.vue'
 import TeacherCredentialStripItem from '~/components/teachers/TeacherCredentialStripItem.vue'
 import TeacherProofItem from '~/components/teachers/TeacherProofItem.vue'
 import { useSurfaceViewObserver } from '~/composables/useSurfaceViewObserver'
@@ -105,7 +106,8 @@ useSurfaceViewObserver('data-proof-surface', (surface) => {
 <template>
   <div class="proof-columns">
     <div class="proof-columns__inner">
-      <section
+      <UiCard
+        as="section"
         class="proof-column"
         data-proof-surface="teacher-cards"
         aria-labelledby="teacher-cards-title"
@@ -127,9 +129,10 @@ useSurfaceViewObserver('data-proof-surface', (surface) => {
           :fit-items="card.fitItems"
           :credentials="card.credentials"
         />
-      </section>
+      </UiCard>
 
-      <section
+      <UiCard
+        as="section"
         class="proof-column"
         data-proof-surface="credentials-proof"
         aria-labelledby="credentials-proof-title"
@@ -157,9 +160,10 @@ useSurfaceViewObserver('data-proof-surface', (surface) => {
         />
 
         <p class="proof-column__note">{{ t('teachersSections.credentials.proofNote') }}</p>
-      </section>
+      </UiCard>
 
-      <section
+      <UiCard
+        as="section"
         class="proof-column"
         data-proof-surface="lesson-proof"
         aria-labelledby="lesson-proof-title"
@@ -178,7 +182,7 @@ useSurfaceViewObserver('data-proof-surface', (surface) => {
         />
 
         <p class="proof-column__note">{{ t('teachersSections.lessonProof.privacyNote') }}</p>
-      </section>
+      </UiCard>
     </div>
   </div>
 </template>
@@ -195,11 +199,11 @@ useSurfaceViewObserver('data-proof-surface', (surface) => {
 }
 
 .proof-column {
-  @apply flex flex-col gap-control-compact border border-border-hairline bg-surface p-card-padding;
+  @apply flex flex-col gap-control-compact;
 }
 
 .proof-column__title {
-  @apply font-display text-section-heading font-semibold leading-tight text-text;
+  @apply font-display text-section-heading font-bold uppercase leading-tight tracking-display text-text;
 }
 
 .proof-column__description {

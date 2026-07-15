@@ -76,7 +76,7 @@ function handleClick(event: MouseEvent) {
 @reference "~/assets/css/tailwind.css";
 
 .ui-button {
-  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-control border px-6 text-center text-small font-semibold no-underline transition-colors duration-short ease-standard;
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-pill border-[1.5px] px-6 text-center text-small font-semibold no-underline transition-colors duration-short ease-standard;
 }
 
 .ui-button--compact {
@@ -92,11 +92,11 @@ function handleClick(event: MouseEvent) {
 }
 
 .ui-button--secondary {
-  @apply border-border-hairline bg-surface text-text;
+  @apply border-accent-burgundy bg-transparent text-accent-burgundy;
 }
 
 .ui-button--secondary:hover {
-  @apply border-accent-subdued bg-surface-muted text-text;
+  @apply border-accent-burgundy bg-accent-subdued text-accent-burgundy-strong;
 }
 
 .ui-button--ghost {

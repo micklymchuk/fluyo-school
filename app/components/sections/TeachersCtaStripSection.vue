@@ -42,6 +42,7 @@ function handleTelegramClick() {
   <UiSection
     class="teachers-page__cta-strip"
     variant="inverse"
+    watermark
     :eyebrow="t('teachersSections.ctaStrip.eyebrow')"
     :title="t('teachersSections.ctaStrip.title')"
     :description="t('teachersSections.ctaStrip.description')"

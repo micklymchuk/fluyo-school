@@ -49,6 +49,8 @@ useSurfaceViewObserver('data-proof-surface', (surface) => {
   <UiSection
     class="teachers-page__testimonials"
     data-proof-surface="testimonials"
+    variant="inverse"
+    watermark
     :eyebrow="t('teachersSections.testimonials.eyebrow')"
     :title="t('teachersSections.testimonials.title')"
     :description="t('teachersSections.testimonials.description')"

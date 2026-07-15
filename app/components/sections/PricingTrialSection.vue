@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import UiSection from '~/components/sections/UiSection.vue'
 import UiButtonLink from '~/components/ui/UiButtonLink.vue'
+import UiFrameBox from '~/components/ui/UiFrameBox.vue'
 import { usePricingPathContext } from '~/composables/usePricingPathContext'
 import type { CtaContext } from '~/data/content'
 
@@ -27,25 +28,27 @@ const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramConte
     :title="t('pages.pricing.intro.heading')"
     :description="t('pages.pricing.intro.summary')"
   >
-    <div class="trial-card">
-      <span class="trial-card__label">{{ t('priceItems.trial.label') }}</span>
-      <strong class="trial-card__value">{{ t('priceItems.trial.value') }}</strong>
-      <p class="trial-card__included">
-        <span class="trial-card__included-label">{{ t('pricingSections.trial.includedLabel') }}</span>
-        {{ t('priceItems.trial.caption') }}
-      </p>
-      <p class="trial-card__path-note">{{ t(`pricingSections.trial.pathNotes.${pathContext}`) }}</p>
-      <div class="trial-card__actions">
-        <UiButtonLink
-          :href="telegramTarget"
-          external
-          variant="primary"
-          @click="trackTelegramClick"
-        >
-          {{ t('pricingSections.trial.telegramCta') }}
-        </UiButtonLink>
+    <UiFrameBox class="trial-card">
+      <div class="trial-card__body">
+        <span class="trial-card__label">{{ t('priceItems.trial.label') }}</span>
+        <strong class="trial-card__value">{{ t('priceItems.trial.value') }}</strong>
+        <p class="trial-card__included">
+          <span class="trial-card__included-label">{{ t('pricingSections.trial.includedLabel') }}</span>
+          {{ t('priceItems.trial.caption') }}
+        </p>
+        <p class="trial-card__path-note">{{ t(`pricingSections.trial.pathNotes.${pathContext}`) }}</p>
+        <div class="trial-card__actions">
+          <UiButtonLink
+            :href="telegramTarget"
+            external
+            variant="primary"
+            @click="trackTelegramClick"
+          >
+            {{ t('pricingSections.trial.telegramCta') }}
+          </UiButtonLink>
+        </div>
       </div>
-    </div>
+    </UiFrameBox>
   </UiSection>
 </template>
 
@@ -53,11 +56,15 @@ const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramConte
 @reference "~/assets/css/tailwind.css";
 
 .trial-card {
-  @apply flex max-w-2xl flex-col gap-control-compact border border-border-hairline bg-surface p-card-padding;
+  @apply max-w-2xl;
+}
+
+.trial-card__body {
+  @apply flex flex-col gap-control-compact;
 }
 
 .trial-card__label {
-  @apply text-eyebrow font-bold uppercase text-accent-burgundy;
+  @apply text-eyebrow font-bold uppercase tracking-display text-accent-burgundy;
 }
 
 .trial-card__value {
@@ -69,7 +76,7 @@ const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramConte
 }
 
 .trial-card__included-label {
-  @apply mr-1 font-bold uppercase text-eyebrow text-text;
+  @apply mr-micro-gap font-bold uppercase text-eyebrow text-text;
 }
 
 .trial-card__path-note {

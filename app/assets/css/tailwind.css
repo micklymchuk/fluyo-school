@@ -31,6 +31,14 @@
   --text-section-heading--line-height: 1.18;
   --text-display-heading: 3rem;
   --text-display-heading--line-height: 1.12;
+  --text-lockup-script: 2.75rem;
+  --text-lockup-script--line-height: 1.05;
+  --text-lockup-caps: 2.25rem;
+  --text-lockup-caps--line-height: 1.12;
+  --text-eyebrow-script: 1.25rem;
+  --text-eyebrow-script--line-height: 1;
+  --text-card-title: 1.35rem;
+  --text-card-title--line-height: 1.2;
   --leading-body: 1.6;
   --leading-tight: 1.12;
   --leading-compact: 1.35;
@@ -46,6 +54,11 @@
   --spacing-component-gap: 1.25rem;
   --spacing-card-padding: 1.25rem;
   --spacing-control-compact: 0.75rem;
+  --spacing-frame: 1.75rem;
+  --spacing-frame-tight: 1rem;
+  --spacing-micro-gap: 0.25rem;
+  --spacing-hero-logo: 18rem;
+  --spacing-portrait: 5rem;
 
   --radius-default: 0;
   --radius-control: 2px;

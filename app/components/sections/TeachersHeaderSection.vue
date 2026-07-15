@@ -19,7 +19,14 @@ const { t } = useI18n()
 <style scoped>
 @reference "~/assets/css/tailwind.css";
 
+/* Brand underline accent (short burgundy rule) instead of the old left border. */
 .trust-note {
-  @apply max-w-2xl border-l-2 border-accent-subdued pl-control-compact text-body text-text-muted;
+  @apply relative max-w-2xl pb-2 text-body text-text-muted;
+}
+
+.trust-note::after {
+  content: '';
+
+  @apply absolute bottom-0 left-0 h-0.5 w-10 bg-accent-burgundy;
 }
 </style>
