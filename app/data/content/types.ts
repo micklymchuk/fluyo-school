@@ -9,7 +9,7 @@ export type PageRouteId = 'home' | 'programs' | 'teachers' | 'pricing'
 export type PagePath = '/' | '/programs' | '/teachers' | '/pricing'
 export type LearningPathId = 'exam' | 'kids' | 'adult'
 export type PriceItemId = 'TRIAL' | 'EXAM_PREP' | 'MINI_GROUP' | 'INDIVIDUAL' | 'SPEAKING_CLUB'
-export type TeacherProfileId = 'olena-bondar' | 'marta-koval' | 'andriy-lev'
+export type TeacherProfileId = 'catherina' | 'diana' | 'ksenia'
 export type ProofAssetId = 'student-result-ielts' | 'kids-class-snapshot' | 'adult-speaking-note' | 'lesson-format-board'
 export type TestimonialId = 'danylo-exam' | 'olena-parent' | 'marta-adult'
 export type FaqItemId =
@@ -103,7 +103,13 @@ export type PricingIncludedItem = {
 
 export type TeacherProfile = {
   id: TeacherProfileId
+  /** Latin display name for the script lockup (Pinyon has no Cyrillic glyphs), so it stays locale-neutral. */
+  scriptName: string
+  /** Public path to the cut-out portrait asset. */
+  photo: string
   audienceFit: readonly LearningPathId[]
+  /** Marks the founder so her profile carries the founder badge and closing quote. */
+  isFounder?: boolean
 }
 
 export type ProofKind = 'result' | 'classroom' | 'method' | 'format'

@@ -1,4 +1,17 @@
 {
+  "navigation": {
+    "skipToContent": "Skip to content",
+    "primary": "Primary navigation",
+    "footer": "Footer navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "links": {
+      "home": "Home",
+      "programs": "Learning Paths",
+      "teachers": "Teachers",
+      "pricing": "Trial & Pricing"
+    }
+  },
   "pages": {
     "home": {
       "seo": {
@@ -48,7 +61,7 @@
   "homeSections": {
     "hero": {
       "scriptWord": "Fluyo school",
-      "primaryCta": "Choose a path",
+      "primaryCta": "View programs",
       "telegramCta": "Ask on Telegram"
     },
     "lessons": {
@@ -78,10 +91,8 @@
       "telegramCta": "Join on Telegram"
     },
     "reviews": {
-      "eyebrow": "Reviews",
       "title": "Student reviews",
-      "scriptWord": "Student reviews",
-      "description": "Real messages from our students after their lessons."
+      "slideLabel": "Show review"
     },
     "pathCards": {
       "eyebrow": "Learning paths",
@@ -180,59 +191,14 @@
     }
   },
   "teachersSections": {
-    "header": {
-      "trustNote": "During the trial lesson we check not only the level, but also the learner's comfort with the teacher."
-    },
     "founder": {
-      "eyebrow": "Who leads the school",
-      "scriptName": "Catherina",
-      "role": "founder & english teacher",
-      "facts": [
-        {
-          "title": "4 years of experience",
-          "body": "I help students move from studying rules to speaking with confidence."
-        },
-        {
-          "title": "Levels A1–C1",
-          "body": "Personalised learning shaped around each student’s goals, pace, and needs."
-        }
-      ],
-      "directionsTitle": "Learning directions",
-      "directions": ["General English", "Speaking Practice", "English for Travel", "English for Kids and Teens", "Everyday English", "Interview Preparation", "NMT preparation", "EVI preparation", "Speaking Club"],
-      "quote": "I created Fluyo School so that English becomes not another subject, but a tool for new opportunities, careers, and confident communication."
+      "badge": "Founder"
     },
-    "teacherCards": {
-      "title": "Meet the people behind the lessons",
-      "description": "Different goals need different teachers: some are strongest with exams, others with kids or everyday speaking.",
-      "audienceFitLabel": "Works with"
-    },
-    "credentials": {
-      "title": "Qualifications you can check",
-      "description": "Certificates and experience here are never abstract - each one belongs to a specific teacher.",
-      "proofNote": "Only real proof lives here: certificates, experience, and the teaching focus where each teacher works best."
-    },
-    "lessonProof": {
-      "title": "What a lesson looks like",
-      "description": "In a lesson, the learner does most of the speaking, works through short tasks, and gets teacher support right away.",
-      "privacyNote": "We protect our students' privacy: no personal data appears in public materials."
-    },
-    "testimonials": {
-      "eyebrow": "Results and voices",
-      "title": "Progress in our students' own words.",
-      "description": "We don't promise scores - we give a plan, honest feedback, and a clear next step."
-    },
-    "ctaStrip": {
-      "eyebrow": "Next step",
-      "title": "You have seen the people — now choose the format.",
-      "description": "Compare pricing, revisit the learning paths, or ask about a teacher for your goal.",
-      "pricingCta": "See pricing",
-      "programsCta": "Compare programs",
-      "telegramCta": "Ask about a teacher"
-    },
-    "proofKindLabels": {
-      "result": "Result",
-      "classroom": "Lesson moment",
-      "method": "Method"
+    "team": {
+      "eyebrow": "Our teachers",
+      "title": "The people who teach at Fluyo",
+      "description": "From our founder to every teacher on the team, each owns a focus — so you land with the person who fits your goal best from the very first lesson.",
+      "focusTitle": "Focus areas"
     }
   },
   "pricingSections": {
@@ -352,7 +318,7 @@
       "caption": "Small-group practice with attention to every learner and clear progress."
     },
     "INDIVIDUAL": {
-      "label": "Individual speaking",
+      "label": "Individual",
       "caption": "Personal speaking practice for work, travel, and confident communication."
     },
     "SPEAKING_CLUB": {
@@ -376,23 +342,50 @@
     }
   },
   "teacherProfiles": {
-    "olena-bondar": {
-      "name": "Olena Bondar",
+    "catherina": {
+      "name": "Catherina",
+      "role": "founder & english teacher",
+      "facts": [
+        {
+          "title": "4 years of experience",
+          "body": "I help students move from studying rules to speaking with confidence."
+        },
+        {
+          "title": "Levels A1–C1",
+          "body": "Personalised learning shaped around each student’s goals, pace, and needs."
+        }
+      ],
+      "focus": ["General English", "Speaking Practice", "English for Travel", "English for Kids and Teens", "Everyday English", "Interview Preparation", "NMT preparation", "EVI preparation", "Speaking Club"]
+    },
+    "diana": {
+      "name": "Diana",
       "role": "Exam preparation teacher",
-      "bio": "Helps students turn exam preparation into a clear plan, with academic writing practice and regular progress checks.",
-      "credentials": ["IELTS focus", "Academic writing"]
+      "facts": [
+        {
+          "title": "Exam formats",
+          "body": "I prepare students for NMT, EVI and IELTS: breaking the syllabus into clear steps and keeping the focus on the result."
+        },
+        {
+          "title": "Strategy & writing",
+          "body": "We train test strategy, academic writing and error review — so nothing on the exam comes as a surprise."
+        }
+      ],
+      "focus": ["NMT preparation", "EVI preparation", "IELTS", "Academic writing", "Test strategy", "Error review"]
     },
-    "marta-koval": {
-      "name": "Marta Koval",
+    "ksenia": {
+      "name": "Ksenia",
       "role": "Kids and teens teacher",
-      "bio": "Works with children through a gentle start, short active tasks, and regular parent-friendly feedback.",
-      "credentials": ["Young learners", "Parent feedback"]
-    },
-    "andriy-lev": {
-      "name": "Andriy Lev",
-      "role": "Adult speaking coach",
-      "bio": "Builds speaking practice around work, everyday, and travel situations so learners move into live communication faster.",
-      "credentials": ["Business English", "Speaking practice"]
+      "facts": [
+        {
+          "title": "Kids & teens",
+          "body": "I guide younger learners and teens at a calm pace, with short active tasks and plenty of games."
+        },
+        {
+          "title": "Speaking & joy",
+          "body": "I focus on live speaking and confidence, and parents get honest feedback on a regular basis."
+        }
+      ],
+      "focus": ["English for Kids and Teens", "Speaking Practice", "Playful tasks", "Speaking confidence", "Parent feedback", "Gentle start"]
     }
   },
   "proofAssets": {
@@ -476,14 +469,14 @@
     "brand-logo-short": {
       "alt": "Short Fluyo School logo."
     },
-    "portrait-olena-bondar": {
-      "alt": "Portrait of teacher Olena Bondar."
+    "portrait-catherina": {
+      "alt": "Portrait of founder and teacher Catherina."
     },
-    "portrait-marta-koval": {
-      "alt": "Portrait of teacher Marta Koval."
+    "portrait-diana": {
+      "alt": "Portrait of teacher Diana."
     },
-    "portrait-andriy-lev": {
-      "alt": "Portrait of teacher Andriy Lev."
+    "portrait-ksenia": {
+      "alt": "Portrait of teacher Ksenia."
     },
     "student-result-ielts": {
       "alt": "Student progress in exam preparation."

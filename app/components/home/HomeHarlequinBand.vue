@@ -34,7 +34,7 @@
   /* Deliberate bottom edge: the pattern dissolves over its last diamond row instead
      of hard-cutting mid-diamond against whatever band follows. The fade distance is
      pre-transform, so scaleY stretches it to exactly one visual diamond row at any width. */
-  -webkit-mask-image: linear-gradient(to bottom, black calc(100% - var(--diamond-size)), transparent);
-  mask-image: linear-gradient(to bottom, black calc(100% - var(--diamond-size)), transparent);
+  //-webkit-mask-image: linear-gradient(to bottom, black calc(100% - var(--diamond-size)), transparent);
+  //mask-image: linear-gradient(to bottom, black calc(100% - var(--diamond-size)), transparent);
 }
 </style>

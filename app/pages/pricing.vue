@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, watch } from 'vue'
-import PricingTrialSection from '~/components/sections/PricingTrialSection.vue'
-import PricingFormatsSection from '~/components/sections/PricingFormatsSection.vue'
-import PricingIncludedSection from '~/components/sections/PricingIncludedSection.vue'
-import PricingFaqSection from '~/components/sections/PricingFaqSection.vue'
-import PricingFinalCtaSection from '~/components/sections/PricingFinalCtaSection.vue'
+import PricingTrialSection from '~/components/sections/pricing/PricingTrialSection.vue'
+import PricingFormatsSection from '~/components/sections/pricing/PricingFormatsSection.vue'
+import PricingIncludedSection from '~/components/sections/pricing/PricingIncludedSection.vue'
+import PricingFaqSection from '~/components/sections/pricing/PricingFaqSection.vue'
+import PricingFinalCtaSection from '~/components/sections/pricing/PricingFinalCtaSection.vue'
 import { usePricingPathContext } from '~/composables/usePricingPathContext'
 
 useSeo('/pricing')

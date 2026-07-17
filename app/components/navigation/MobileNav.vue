@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<{
   telegramLabel: telegramAction.label
 })
 
+const { t } = useI18n()
 const route = useRoute()
 const isOpen = ref(false)
 const panel = ref<HTMLElement | null>(null)
@@ -96,10 +97,10 @@ function handlePanelTab(event: KeyboardEvent) {
       type="button"
       aria-controls="mobile-nav-panel"
       :aria-expanded="isOpen"
-      :aria-label="isOpen ? 'Close menu' : 'Open menu'"
+      :aria-label="isOpen ? t('navigation.closeMenu') : t('navigation.openMenu')"
       @click="toggleNav"
     >
-      <span class="visually-hidden">{{ isOpen ? 'Close menu' : 'Open menu' }}</span>
+      <span class="visually-hidden">{{ isOpen ? t('navigation.closeMenu') : t('navigation.openMenu') }}</span>
       <span class="mobile-nav-icon" aria-hidden="true">
         <span />
         <span />
@@ -116,12 +117,12 @@ function handlePanelTab(event: KeyboardEvent) {
         @keydown.esc="closeNav"
         @keydown.tab="handlePanelTab"
       >
-        <nav class="mobile-link-list" aria-label="Primary mobile navigation">
+        <nav class="mobile-link-list" :aria-label="t('navigation.primary')">
           <HeaderLink
             v-for="link in primaryNavigationLinks"
             :key="link.to"
             :to="link.to"
-            :label="link.label"
+            :label="t(link.labelKey)"
             display="mobile"
             @click="closeNav"
           />

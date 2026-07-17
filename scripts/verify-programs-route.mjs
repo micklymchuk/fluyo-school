@@ -6,16 +6,16 @@ const files = {
   packageJson: resolve(root, 'package.json'),
   programsPage: resolve(root, 'app/pages/programs.vue'),
   surfaceViewObserver: resolve(root, 'app/composables/useSurfaceViewObserver.ts'),
-  headerSection: resolve(root, 'app/components/sections/ProgramsHeaderSection.vue'),
-  pathsSection: resolve(root, 'app/components/sections/ProgramsPathsSection.vue'),
-  priceHintsSection: resolve(root, 'app/components/sections/ProgramsPriceHintsSection.vue'),
-  ctaStripSection: resolve(root, 'app/components/sections/ProgramsCtaStripSection.vue'),
+  headerSection: resolve(root, 'app/components/sections/programs/ProgramsHeaderSection.vue'),
+  pathsSection: resolve(root, 'app/components/sections/programs/ProgramsPathsSection.vue'),
+  priceHintsSection: resolve(root, 'app/components/sections/programs/ProgramsPriceHintsSection.vue'),
+  ctaStripSection: resolve(root, 'app/components/sections/programs/ProgramsCtaStripSection.vue'),
   pathPanel: resolve(root, 'app/components/programs/ProgramPathPanel.vue'),
   priceHintCard: resolve(root, 'app/components/programs/ProgramPriceHintCard.vue'),
   ukMessages: resolve(root, 'app/i18n/locales/uk.json'),
   enMessages: resolve(root, 'app/i18n/locales/en.json'),
   learningPaths: resolve(root, 'app/data/content/learning-paths.ts'),
-  homePathCards: resolve(root, 'app/components/sections/HomePathCardsSection.vue')
+  homePathCards: resolve(root, 'app/components/sections/home/HomePathCardsSection.vue')
 }
 
 const anchors = ['exam-preparation', 'kids-parents', 'adults-speaking']

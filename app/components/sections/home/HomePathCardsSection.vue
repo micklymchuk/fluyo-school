@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import UiCard from '~/components/ui/UiCard.vue'
-import UiWatermark from '~/components/ui/UiWatermark.vue'
+import UiSection from '~/components/sections/UiSection.vue'
 import { learningPaths, type LearningPath, type LearningPathId } from '~/data/content'
 
 const pathRoutes = {
@@ -29,43 +29,32 @@ function formatIndex(index: number) {
 </script>
 
 <template>
-  <section id="learning-paths" class="paths" aria-labelledby="home-paths-title">
-    <UiWatermark />
-    <div class="paths__container">
-      <h2 id="home-paths-title" class="sr-only">{{ t('homeSections.pathCards.title') }}</h2>
-      <div class="paths__grid">
-        <NuxtLink
-          v-for="(path, index) in learningPaths"
-          :key="path.id"
-          class="path-card-link"
-          :to="localizedTo(pathRoutes[path.id])"
-          @click="handlePathClick(path)"
-        >
-          <UiCard as="div" interactive class="path-card">
-            <span class="path-card__index" aria-hidden="true">{{ formatIndex(index) }}</span>
-            <h3 class="path-card__title">{{ t(`learningPaths.${path.id}.title`) }}</h3>
-            <p class="path-card__summary">{{ t(`learningPaths.${path.id}.summary`) }}</p>
-            <span class="path-card__cta">
-              {{ t('homeSections.pathCards.cardCta') }}
-              <span aria-hidden="true">→</span>
-            </span>
-          </UiCard>
-        </NuxtLink>
-      </div>
+  <UiSection id="learning-paths" watermark labelledby="home-paths-title">
+    <h2 id="home-paths-title" class="sr-only">{{ t('homeSections.pathCards.title') }}</h2>
+    <div class="paths__grid">
+      <NuxtLink
+        v-for="(path, index) in learningPaths"
+        :key="path.id"
+        class="path-card-link"
+        :to="localizedTo(pathRoutes[path.id])"
+        @click="handlePathClick(path)"
+      >
+        <UiCard as="div" interactive class="path-card">
+          <span class="path-card__index" aria-hidden="true">{{ formatIndex(index) }}</span>
+          <h3 class="path-card__title">{{ t(`learningPaths.${path.id}.title`) }}</h3>
+          <p class="path-card__summary">{{ t(`learningPaths.${path.id}.summary`) }}</p>
+          <span class="path-card__cta">
+            {{ t('homeSections.pathCards.cardCta') }}
+            <span aria-hidden="true">→</span>
+          </span>
+        </UiCard>
+      </NuxtLink>
     </div>
-  </section>
+  </UiSection>
 </template>
 
 <style scoped>
 @reference "~/assets/css/tailwind.css";
-
-.paths {
-  @apply relative bg-page py-section text-text;
-}
-
-.paths__container {
-  @apply relative mx-auto flex w-full max-w-6xl flex-col items-center gap-section-compact px-page-gutter;
-}
 
 .paths__grid {
   @apply grid w-full gap-component-gap md:grid-cols-3;

@@ -13,6 +13,7 @@ const files = {
   uiLockupHeading: resolve(root, 'app/components/ui/UiLockupHeading.vue'),
   uiFrameBox: resolve(root, 'app/components/ui/UiFrameBox.vue'),
   uiStampCard: resolve(root, 'app/components/ui/UiStampCard.vue'),
+  uiCarousel: resolve(root, 'app/components/ui/UiCarousel.vue'),
   uiUnderlineList: resolve(root, 'app/components/ui/UiUnderlineList.vue'),
   uiWatermark: resolve(root, 'app/components/ui/UiWatermark.vue'),
   fontsDir: resolve(root, 'public/fonts')
@@ -23,6 +24,7 @@ const newComponents = [
   'uiLockupHeading',
   'uiFrameBox',
   'uiStampCard',
+  'uiCarousel',
   'uiUnderlineList',
   'uiWatermark'
 ]
@@ -173,10 +175,18 @@ function verifyBrandComponents() {
   assertPattern(frameBox, /<slot/, 'UiFrameBox must expose a content slot')
 
   const stampCard = read(files.uiStampCard)
-  assertPattern(stampCard, /rounded-card/, 'UiStampCard must be a plain rounded card')
-  assertPattern(stampCard, /bg-surface-muted/, 'UiStampCard must keep the cream card surface')
-  assertNotPattern(stampCard, /mask/, 'UiStampCard must not carry the retired perforation mask')
+  assertPattern(stampCard, /mask:/, 'UiStampCard must carry the postage-stamp perforation mask')
+  assertPattern(stampCard, /mask-repeat:\s*round/, 'UiStampCard perforation must be gated behind a mask-repeat: round @supports guard')
+  assertPattern(stampCard, /bg-surface\b/, 'UiStampCard must keep a light card surface')
   assertPattern(stampCard, /<slot/, 'UiStampCard must expose a content slot')
+
+  const carousel = read(files.uiCarousel)
+  assertPattern(carousel, /aria-roledescription="carousel"/, 'UiCarousel must announce itself as a carousel')
+  assertPattern(carousel, /aria-roledescription="slide"/, 'UiCarousel slides must carry the slide roledescription')
+  assertPattern(carousel, /name="slide"/, 'UiCarousel must expose a per-slide scoped slot')
+  assertPattern(carousel, /prefers-reduced-motion/, 'UiCarousel must disable slide motion under prefers-reduced-motion')
+  assertPattern(carousel, /carousel__dots--inverse/, 'UiCarousel must support the on-inverse dot treatment')
+  assertPattern(carousel, /onPointerDown|@pointerdown/, 'UiCarousel must support swipe via pointer events')
 
   const underlineList = read(files.uiUnderlineList)
   assertPattern(underlineList, /<ul/, 'UiUnderlineList must keep semantic list markup')

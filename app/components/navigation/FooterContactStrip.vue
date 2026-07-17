@@ -18,6 +18,7 @@ const props = withDefaults(defineProps<{
   telegramLabel: telegramAction.label
 })
 
+const { t } = useI18n()
 const instagramTarget = computed(() => props.instagramHref)
 const instagramLabel = computed(() => props.instagramLabel)
 const telegramLabel = computed(() => props.telegramLabel)
@@ -36,14 +37,14 @@ const localizedTo = useLocalizedTo()
     <div class="footer-inner">
       <UiLogo class="footer-brand" to="/" variant="full" size="large" />
 
-      <nav class="footer-links" aria-label="Footer navigation">
+      <nav class="footer-links" :aria-label="t('navigation.footer')">
         <NuxtLink
           v-for="link in primaryNavigationLinks"
           :key="link.to"
           class="footer-link"
           :to="localizedTo(link.to)"
         >
-          {{ link.label }}
+          {{ t(link.labelKey) }}
         </NuxtLink>
       </nav>
 

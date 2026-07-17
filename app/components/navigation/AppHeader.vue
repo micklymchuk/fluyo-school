@@ -22,6 +22,7 @@ const props = withDefaults(defineProps<{
   telegramLabel: telegramAction.label
 })
 
+const { t } = useI18n()
 const instagramTarget = computed(() => props.instagramHref)
 const instagramLabel = computed(() => props.instagramLabel)
 const { locale, setLocale } = useLocale()
@@ -39,17 +40,17 @@ function handleLocaleChange(nextLocale: Locale) {
 
 <template>
   <header class="app-header">
-    <a class="skip-link" href="#main-content">Skip to content</a>
+    <a class="skip-link" href="#main-content">{{ t('navigation.skipToContent') }}</a>
     <div class="header-inner">
       <UiLogo class="brand-logo brand-logo--short" to="/" variant="short" size="compact" />
       <UiLogo class="brand-logo brand-logo--full" to="/" variant="full" size="compact" />
 
-      <nav class="desktop-nav" aria-label="Primary navigation">
+      <nav class="desktop-nav" :aria-label="t('navigation.primary')">
         <HeaderLink
           v-for="link in primaryNavigationLinks"
           :key="link.to"
           :to="link.to"
-          :label="link.label"
+          :label="t(link.labelKey)"
           display="desktop"
         />
       </nav>

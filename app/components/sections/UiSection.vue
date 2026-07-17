@@ -121,7 +121,6 @@ const hasHeader = computed(() => {
 
 /* Nested light surfaces inside the band keep the teal ring (cream-on-cream is invisible). */
 .section--inverse :deep(.card-surface :focus-visible),
-.section--inverse :deep(.stamp-card :focus-visible),
 .section--inverse :deep(.frame-box__well :focus-visible) {
   @apply outline-focus;
 }

@@ -5,12 +5,12 @@ const root = process.cwd()
 const files = {
   packageJson: resolve(root, 'package.json'),
   indexPage: resolve(root, 'app/pages/index.vue'),
-  homeHero: resolve(root, 'app/components/sections/HomeHeroSection.vue'),
-  homePathCards: resolve(root, 'app/components/sections/HomePathCardsSection.vue'),
-  homeLessons: resolve(root, 'app/components/sections/HomeLessonsSection.vue'),
-  homeSpeakingClub: resolve(root, 'app/components/sections/HomeSpeakingClubSection.vue'),
-  homeReviews: resolve(root, 'app/components/sections/HomeReviewsSection.vue'),
-  homeTrialPricing: resolve(root, 'app/components/sections/HomeTrialPricingSection.vue'),
+  homeHero: resolve(root, 'app/components/sections/home/HomeHeroSection.vue'),
+  homePathCards: resolve(root, 'app/components/sections/home/HomePathCardsSection.vue'),
+  homeLessons: resolve(root, 'app/components/sections/home/HomeLessonsSection.vue'),
+  homeSpeakingClub: resolve(root, 'app/components/sections/home/HomeSpeakingClubSection.vue'),
+  homeReviews: resolve(root, 'app/components/sections/home/HomeReviewsSection.vue'),
+  homeTrialPricing: resolve(root, 'app/components/sections/home/HomeTrialPricingSection.vue'),
   ukMessages: resolve(root, 'app/i18n/locales/uk.json'),
   enMessages: resolve(root, 'app/i18n/locales/en.json'),
   defaultLayout: resolve(root, 'app/layouts/default.vue'),
@@ -139,7 +139,7 @@ function assertHomeSectionMessages(messages, locale) {
   }
 
   const reviews = messages.homeSections.reviews
-  for (const field of ['eyebrow', 'title', 'scriptWord', 'description']) {
+  for (const field of ['title', 'slideLabel']) {
     assertNonEmptyString(reviews?.[field], `${locale}.json homeSections.reviews.${field}`)
   }
 
@@ -173,8 +173,16 @@ function verifyShellContracts() {
   assertPattern(defaultLayout, /<AppHeader\s*\/>/, 'default layout must render the global header')
   assertPattern(defaultLayout, /<FooterContactStrip\s*\/>/, 'default layout must render the footer contact strip')
 
-  for (const link of ['Home', 'Learning Paths', 'Teachers & Proof', 'Trial & Pricing']) {
-    assertIncludes(navigationLinks, link, 'primary navigation')
+  const navLinkKeys = ['home', 'programs', 'teachers', 'pricing']
+  for (const key of navLinkKeys) {
+    assertIncludes(navigationLinks, `navigation.links.${key}`, 'primary navigation')
+  }
+
+  for (const path of [files.enMessages, files.ukMessages]) {
+    const messages = readJson(path)
+    for (const key of navLinkKeys) {
+      assertNonEmptyString(messages.navigation?.links?.[key], `${relative(root, path)} navigation.links.${key}`)
+    }
   }
 
   assertPattern(appHeader, /LanguageControl/, 'header must expose the language control')

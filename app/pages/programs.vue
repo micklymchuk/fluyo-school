@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import ProgramsHeaderSection from '~/components/sections/ProgramsHeaderSection.vue'
-import ProgramsPathsSection from '~/components/sections/ProgramsPathsSection.vue'
-import ProgramsPriceHintsSection from '~/components/sections/ProgramsPriceHintsSection.vue'
-import ProgramsCtaStripSection from '~/components/sections/ProgramsCtaStripSection.vue'
+import ProgramsHeaderSection from '~/components/sections/programs/ProgramsHeaderSection.vue'
+import ProgramsPathsSection from '~/components/sections/programs/ProgramsPathsSection.vue'
+import ProgramsPriceHintsSection from '~/components/sections/programs/ProgramsPriceHintsSection.vue'
+import ProgramsCtaStripSection from '~/components/sections/programs/ProgramsCtaStripSection.vue'
 
 useSeo('/programs')
 </script>

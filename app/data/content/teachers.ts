@@ -1,16 +1,25 @@
 import type { TeacherProfile } from './types'
 
+// All three profiles render through the same showcase; the founder leads the list
+// and is set apart by the founder badge + closing quote rather than a separate section.
 export const teacherProfiles = [
   {
-    id: 'olena-bondar',
-    audienceFit: ['exam']
+    id: 'catherina',
+    scriptName: 'Catherina',
+    photo: '/images/teachers/catherina-web.png',
+    audienceFit: ['adult'],
+    isFounder: true
   },
   {
-    id: 'marta-koval',
+    id: 'ksenia',
+    scriptName: 'Ksenia',
+    photo: '/images/teachers/ksenia-web.png',
     audienceFit: ['kids']
   },
   {
-    id: 'andriy-lev',
-    audienceFit: ['adult']
+    id: 'diana',
+    scriptName: 'Diana',
+    photo: '/images/teachers/diana-web.png',
+    audienceFit: ['exam']
   }
 ] as const satisfies readonly TeacherProfile[]

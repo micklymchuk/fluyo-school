@@ -54,7 +54,7 @@ const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramConte
 
 /* Typographic 2A cover: relative + overflow-hidden clip the bleeding ghost F. */
 .home-hero {
-  @apply relative overflow-hidden border-b border-border-hairline bg-page text-text;
+  @apply relative overflow-hidden bg-page text-text;
 }
 
 /* One letterform per viewport: the full-bleed bottom-right F needs sm+ width to

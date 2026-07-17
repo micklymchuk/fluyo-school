@@ -1,5 +1,5 @@
 export type PrimaryNavigationLink = {
-  label: string
+  labelKey: string
   to: string
 }
 
@@ -13,10 +13,10 @@ export type LabeledAction = {
 }
 
 export const primaryNavigationLinks = [
-  { label: 'Home', to: '/' },
-  { label: 'Learning Paths', to: '/programs' },
-  { label: 'Teachers & Proof', to: '/teachers' },
-  { label: 'Trial & Pricing', to: '/pricing' }
+  { labelKey: 'navigation.links.home', to: '/' },
+  { labelKey: 'navigation.links.programs', to: '/programs' },
+  { labelKey: 'navigation.links.teachers', to: '/teachers' },
+  { labelKey: 'navigation.links.pricing', to: '/pricing' }
 ] as const satisfies readonly PrimaryNavigationLink[]
 
 export const instagramAction = {

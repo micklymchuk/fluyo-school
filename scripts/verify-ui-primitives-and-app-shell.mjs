@@ -196,7 +196,12 @@ function verifyNavigation() {
   const mobileNav = read(files.mobileNav)
   const languageControl = read(files.languageControl)
   const footer = read(files.footerContactStrip)
-  const approvedOrder = ['Home', 'Learning Paths', 'Teachers & Proof', 'Trial & Pricing']
+  const approvedOrder = [
+    'navigation.links.home',
+    'navigation.links.programs',
+    'navigation.links.teachers',
+    'navigation.links.pricing'
+  ]
   const approvedRoutePages = [
     files.indexPage,
     files.programsPage,
@@ -230,7 +235,7 @@ function verifyNavigation() {
   assertPattern(mobileNav, /@iconoir\/vue[\s\S]*Instagram[\s\S]*Telegram|Instagram[\s\S]*Telegram[\s\S]*@iconoir\/vue/, 'MobileNav must import Iconoir Instagram and Telegram icons')
   assertPattern(mobileNav, /<UiIconButton[\s\S]*:icon="Instagram"[\s\S]*<UiIconButton[\s\S]*:icon="Telegram"/, 'MobileNav social actions must render Instagram and Telegram icon buttons')
   assertPattern(mobileNav, /:class="\{ 'mobile-nav-trigger--open': isOpen \}"/, 'MobileNav trigger must animate between menu and close states')
-  assertPattern(mobileNav, /:aria-label="isOpen \? 'Close menu' : 'Open menu'"/, 'MobileNav trigger must expose open and close states')
+  assertPattern(mobileNav, /:aria-label="isOpen \? t\('navigation\.closeMenu'\) : t\('navigation\.openMenu'\)"/, 'MobileNav trigger must expose open and close states')
   assertPattern(mobileNav, /\.mobile-nav-trigger--open \.mobile-nav-icon span:first-child\s*\{[\s\S]*rotate-45/, 'MobileNav trigger first line must rotate into the close icon')
   assertPattern(mobileNav, /\.mobile-nav-trigger--open \.mobile-nav-icon span:last-child\s*\{[\s\S]*-rotate-45/, 'MobileNav trigger second line must rotate into the close icon')
   assertNotIncludes(mobileNav, 'class="mobile-close"', 'MobileNav must use the persistent trigger instead of a separate close button')
