@@ -1,10 +1,40 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import tailwindcss from "@tailwindcss/vite"
+import { getGatedPages, parseAvailablePages } from "./app/utils/pages"
+
+// Resolve the public page allowlist ONCE at build time (see story DD-001.6.1).
+// Unset NUXT_PUBLIC_AVAILABLE_PAGES ⇒ every page available (dev default). The
+// resolved list feeds BOTH the edge redirect route rules and the client/server
+// render (via runtimeConfig.public.pages) from the same value, so the SSR nav
+// and the hydrated client nav can never disagree (no hydration mismatch).
+const availablePages = parseAvailablePages(process.env.NUXT_PUBLIC_AVAILABLE_PAGES)
+
+// Every gated (non-available) page redirects (302) to '/' at the Cloudflare
+// edge before any render. Status code is explicit — Nitro defaults a redirect
+// rule to 307; D1/AC-2 call for 302.
+const gatedRouteRules = Object.fromEntries(
+  getGatedPages(availablePages).map((path) => [
+    path,
+    { redirect: { to: "/", statusCode: 302 } }
+  ])
+)
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   css: ["~/assets/css/tailwind.css", "~/assets/scss/main.scss"],
+
+  // Key is `pages`, NOT `availablePages`: Nuxt would auto-map the env var
+  // NUXT_PUBLIC_AVAILABLE_PAGES onto runtimeConfig.public.availablePages at
+  // server runtime and overwrite it with the raw comma-string, corrupting the
+  // baked array. Storing under `pages` sidesteps that auto-override entirely.
+  runtimeConfig: {
+    public: {
+      pages: availablePages
+    }
+  },
+
+  routeRules: gatedRouteRules,
 
   nitro: {
     preset: "cloudflare-pages",

@@ -20,6 +20,9 @@ const props = withDefaults(defineProps<{
 })
 
 const { t } = useI18n()
+// Exclude gated pages from the hamburger dropdown. MobileNav only mounts when
+// showNav is true (parent v-if), so links always has ≥1 non-home entry here.
+const { links } = useNavigationLinks(primaryNavigationLinks)
 const route = useRoute()
 const isOpen = ref(false)
 const panel = ref<HTMLElement | null>(null)
@@ -119,7 +122,7 @@ function handlePanelTab(event: KeyboardEvent) {
       >
         <nav class="mobile-link-list" :aria-label="t('navigation.primary')">
           <HeaderLink
-            v-for="link in primaryNavigationLinks"
+            v-for="link in links"
             :key="link.to"
             :to="link.to"
             :label="t(link.labelKey)"

@@ -30,6 +30,10 @@ const telegramContext = computed<CtaContext>(() => ({
 }))
 const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramContext)
 const localizedTo = useLocalizedTo()
+// Footer nav reflects the available-pages allowlist; the whole links block is
+// hidden when home is the only available page (logo + actions remain).
+const { links, showNav } = useNavigationLinks(primaryNavigationLinks)
+const year = new Date().getFullYear()
 </script>
 
 <template>
@@ -37,9 +41,9 @@ const localizedTo = useLocalizedTo()
     <div class="footer-inner">
       <UiLogo class="footer-brand" to="/" variant="full" size="large" />
 
-      <nav class="footer-links" :aria-label="t('navigation.footer')">
+      <nav v-if="showNav" class="footer-links" :aria-label="t('navigation.footer')">
         <NuxtLink
-          v-for="link in primaryNavigationLinks"
+          v-for="link in links"
           :key="link.to"
           class="footer-link"
           :to="localizedTo(link.to)"
@@ -68,6 +72,8 @@ const localizedTo = useLocalizedTo()
         />
       </div>
     </div>
+
+    <p class="footer-rights">{{ t('navigation.rights', { year }) }}</p>
   </footer>
 </template>
 
@@ -79,7 +85,7 @@ const localizedTo = useLocalizedTo()
 }
 
 .footer-inner {
-  @apply mx-auto flex w-full max-w-6xl flex-col gap-component-gap px-page-gutter py-section-compact md:flex-row md:items-center;
+  @apply mx-auto flex w-full max-w-6xl flex-col gap-component-gap px-page-gutter pt-section-compact pb-component-gap md:flex-row md:items-center;
 }
 
 .footer-links {
@@ -94,7 +100,13 @@ const localizedTo = useLocalizedTo()
   @apply text-accent-burgundy;
 }
 
+/* ml-auto keeps the actions hard right — beside the nav links when they show,
+   directly across from the logo when the nav is collapsed (home-only). */
 .footer-actions {
-  @apply flex flex-wrap gap-control-compact;
+  @apply flex flex-wrap gap-control-compact md:ml-auto;
+}
+
+.footer-rights {
+  @apply mx-auto w-full max-w-6xl px-page-gutter pb-section-compact text-small text-text-muted;
 }
 </style>

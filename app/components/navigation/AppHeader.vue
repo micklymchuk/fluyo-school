@@ -23,6 +23,9 @@ const props = withDefaults(defineProps<{
 })
 
 const { t } = useI18n()
+// Filter nav to the available-pages allowlist. showNav is false when home is
+// the only available page → the header collapses to logo + inline actions (D4).
+const { links, showNav } = useNavigationLinks(primaryNavigationLinks)
 const instagramTarget = computed(() => props.instagramHref)
 const instagramLabel = computed(() => props.instagramLabel)
 const { locale, setLocale } = useLocale()
@@ -45,9 +48,9 @@ function handleLocaleChange(nextLocale: Locale) {
       <UiLogo class="brand-logo brand-logo--short" to="/" variant="short" size="compact" />
       <UiLogo class="brand-logo brand-logo--full" to="/" variant="full" size="compact" />
 
-      <nav class="desktop-nav" :aria-label="t('navigation.primary')">
+      <nav v-if="showNav" class="desktop-nav" :aria-label="t('navigation.primary')">
         <HeaderLink
-          v-for="link in primaryNavigationLinks"
+          v-for="link in links"
           :key="link.to"
           :to="link.to"
           :label="t(link.labelKey)"
@@ -55,7 +58,10 @@ function handleLocaleChange(nextLocale: Locale) {
         />
       </nav>
 
-      <div class="header-actions">
+      <div
+        class="header-actions"
+        :class="showNav ? 'header-actions--collapsible' : 'header-actions--inline'"
+      >
         <slot name="language-control">
           <LanguageControl :model-value="locale" @change="handleLocaleChange" />
         </slot>
@@ -81,6 +87,7 @@ function handleLocaleChange(nextLocale: Locale) {
       </div>
 
       <MobileNav
+        v-if="showNav"
         class="mobile-nav-shell"
         :instagram-href="instagramTarget"
         :instagram-label="instagramLabel"
@@ -125,7 +132,17 @@ function handleLocaleChange(nextLocale: Locale) {
 }
 
 .header-actions {
-  @apply ml-auto hidden items-center gap-2 lg:flex;
+  @apply ml-auto items-center gap-2;
+}
+
+/* Default: actions live on desktop only; mobile surfaces them via the hamburger. */
+.header-actions--collapsible {
+  @apply hidden lg:flex;
+}
+
+/* Collapsed header (home-only): no hamburger, so actions show inline on every breakpoint. */
+.header-actions--inline {
+  @apply flex;
 }
 
 .mobile-nav-shell {

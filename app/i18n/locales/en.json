@@ -5,6 +5,7 @@
     "footer": "Footer navigation",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
+    "rights": "© {year} Fluyo School. All rights reserved.",
     "links": {
       "home": "Home",
       "programs": "Learning Paths",
