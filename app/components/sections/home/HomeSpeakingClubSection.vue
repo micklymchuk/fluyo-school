@@ -9,7 +9,7 @@ import type { CtaContext } from '~/data/content'
 const { locale } = useLocale()
 const { t } = useI18n()
 const telegramContext = computed<CtaContext>(() => ({
-  path: 'adult',
+  path: 'speaking-club',
   format: 'speaking-club',
   sourceRoute: 'section',
   locale: locale.value,

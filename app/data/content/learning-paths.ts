@@ -9,11 +9,25 @@ const ctaIntent = (path: PagePath, sourceRoute: PageRouteId, messageIntent: Mess
 
 export const learningPaths = [
   {
+    id: 'general',
+    anchorId: 'general-english',
+    priceHintIds: ['TRIAL', 'INDIVIDUAL'],
+    ctaIntent: ctaIntent('/programs', 'programs', 'ask_program'),
+    telegramFormat: 'individual'
+  },
+  {
     id: 'exam',
     anchorId: 'exam-preparation',
     priceHintIds: ['TRIAL', 'EXAM_PREP'],
     ctaIntent: ctaIntent('/programs', 'programs', 'ask_program'),
     telegramFormat: 'individual'
+  },
+  {
+    id: 'speaking-club',
+    anchorId: 'speaking-club',
+    priceHintIds: ['TRIAL', 'SPEAKING_CLUB'],
+    ctaIntent: ctaIntent('/programs', 'programs', 'ask_program'),
+    telegramFormat: 'speaking-club'
   },
   {
     id: 'kids',
@@ -23,8 +37,15 @@ export const learningPaths = [
     telegramFormat: 'mini-group'
   },
   {
-    id: 'adult',
-    anchorId: 'adults-speaking',
+    id: 'professional',
+    anchorId: 'professional-english',
+    priceHintIds: ['TRIAL', 'INDIVIDUAL'],
+    ctaIntent: ctaIntent('/programs', 'programs', 'ask_program'),
+    telegramFormat: 'individual'
+  },
+  {
+    id: 'interview',
+    anchorId: 'interview-preparation',
     priceHintIds: ['TRIAL', 'INDIVIDUAL'],
     ctaIntent: ctaIntent('/programs', 'programs', 'ask_program'),
     telegramFormat: 'individual'

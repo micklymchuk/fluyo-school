@@ -56,19 +56,19 @@ export const pricingFormats = [
     id: 'individual',
     telegramFormat: 'individual',
     priceItemIds: ['INDIVIDUAL', 'EXAM_PREP'],
-    pathFit: ['adult', 'exam']
+    pathFit: ['general', 'exam', 'professional', 'interview']
   },
   {
     id: 'speaking-club',
     telegramFormat: 'speaking-club',
     priceItemIds: ['SPEAKING_CLUB'],
-    pathFit: ['adult']
+    pathFit: ['speaking-club']
   },
   {
     id: 'mini-group',
     telegramFormat: 'mini-group',
     priceItemIds: ['MINI_GROUP'],
-    pathFit: ['kids', 'adult']
+    pathFit: ['kids']
   }
 ] as const satisfies readonly PricingFormat[]
 

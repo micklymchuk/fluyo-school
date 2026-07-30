@@ -283,25 +283,46 @@
     }
   },
   "learningPaths": {
+    "general": {
+      "title": "General English",
+      "summary": "Systematic language learning for everyday life, travel, and work.",
+      "proofCues": [
+        "Step by step we bring your English to a confident everyday level."
+      ]
+    },
     "exam": {
       "title": "Exam preparation",
-      "summary": "A path for IELTS, NMT, or school exams with regular progress checkpoints.",
+      "summary": "NMT, EVI, and other exams with a clear preparation plan.",
       "proofCues": [
         "Work with a goal, diagnosis, and weekly progress checkpoints."
       ]
     },
+    "speaking-club": {
+      "title": "Speaking club",
+      "summary": "Conversation practice on relevant topics in a friendly atmosphere.",
+      "proofCues": [
+        "Weekly live conversation in a small group of like-minded learners."
+      ]
+    },
     "kids": {
       "title": "English for kids",
-      "summary": "Lessons for children with parent-friendly progress signals and a gentle start.",
+      "summary": "Engaging and effective lessons for children from age 5.",
       "proofCues": [
         "Kids speak up in a safe, friendly lesson atmosphere."
       ]
     },
-    "adult": {
-      "title": "English for adults",
-      "summary": "Practical speaking and individual goals for work, travel, or confident communication.",
+    "professional": {
+      "title": "Professional tracks",
+      "summary": "Business English, Medical English, and other tracks for your growth.",
       "proofCues": [
-        "Lessons focus on real situations: work, travel, and confident conversation."
+        "Lessons are built around the vocabulary and situations of your field."
+      ]
+    },
+    "interview": {
+      "title": "Interview preparation",
+      "summary": "We help you present yourself confidently and pass an interview in English.",
+      "proofCues": [
+        "Practice self-presentation and typical interview questions."
       ]
     }
   },
