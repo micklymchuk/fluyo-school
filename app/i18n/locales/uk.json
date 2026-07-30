@@ -87,8 +87,9 @@
     "speakingClub": {
       "capsWord": "Speaking",
       "scriptWord": "club",
-      "noteText": "You look like my new student",
-      "line": "Щотижнева розмовна практика в невеликій групі — місце, де ваша англійська нарешті звучить.",
+      "bodyEyebrow": "It's time to level up your English",
+      "bodyText": "Наші {brand} проходять у мінігрупах, щоб кожен учасник отримав максимум мовної практики, уваги та задоволення від навчання.",
+      "bodyBrand": "Speaking Clubs",
       "telegramCta": "Приєднатися в Telegram"
     },
     "reviews": {

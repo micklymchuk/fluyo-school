@@ -73,7 +73,7 @@ if (import.meta.dev && props.script && /[Ѐ-ӿ]/.test(props.script)) {
 }
 
 .lockup-script {
-  @apply font-script text-lockup-script font-normal text-accent-burgundy;
+  @apply font-script text-lockup-script font-normal text-accent-burgundy mb-4;
 }
 
 .lockup-caps {

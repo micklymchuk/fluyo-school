@@ -1,21 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import UiButtonLink from '~/components/ui/UiButtonLink.vue'
-import UiNoteCard from '~/components/ui/UiNoteCard.vue'
+import HomeSpeakingClubBody from '~/components/sections/home/HomeSpeakingClubBody.vue'
 import UiSticker from '~/components/ui/UiSticker.vue'
 import UiWatermark from '~/components/ui/UiWatermark.vue'
-import type { CtaContext } from '~/data/content'
 
-const { locale } = useLocale()
 const { t } = useI18n()
-const telegramContext = computed<CtaContext>(() => ({
-  path: 'speaking-club',
-  format: 'speaking-club',
-  sourceRoute: 'section',
-  locale: locale.value,
-  messageIntent: 'ask_program'
-}))
-const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramContext)
 </script>
 
 <template>
@@ -27,27 +15,16 @@ const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramConte
         <span class="speaking-club__script">{{ t('homeSections.speakingClub.scriptWord') }}</span>
       </h2>
 
-      <div class="speaking-club__collage">
+      <!-- Poster layout: cat cutout on the left, the club promise body on the right. -->
+      <div class="speaking-club__layout">
         <UiSticker
           class="speaking-club__sticker"
           src="/images/home/sticker-cat.png"
           :width="488"
-          :height="640"
-          :rotate="-3"
+          :height="440"
         />
-        <UiNoteCard class="speaking-club__note" :text="t('homeSections.speakingClub.noteText')" />
+        <HomeSpeakingClubBody class="speaking-club__body" />
       </div>
-
-      <p class="speaking-club__line">{{ t('homeSections.speakingClub.line') }}</p>
-      <UiButtonLink
-        class="speaking-club__cta"
-        :href="telegramTarget"
-        external
-        variant="secondary"
-        @click="trackTelegramClick"
-      >
-        {{ t('homeSections.speakingClub.telegramCta') }}
-      </UiButtonLink>
     </div>
   </section>
 </template>
@@ -59,7 +36,6 @@ const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramConte
   @apply relative bg-page py-section text-text;
 }
 
-/* Tight vertical stack: headline → sticker/note collage → line → button read as one unit. */
 .speaking-club__container {
   @apply relative mx-auto flex w-full max-w-6xl flex-col items-center gap-component-gap px-page-gutter text-center;
 }
@@ -81,21 +57,16 @@ const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramConte
   @apply text-poster-script sm:text-poster-script-sm lg:text-poster-script-lg;
 }
 
-/* Collage anchored to the lockup: the cat tucks up under the headline baseline
-   and the note leans against it instead of floating in the stack. */
-.speaking-club__collage {
-  @apply -mt-2 flex flex-wrap items-center justify-center gap-x-component-gap gap-y-control-compact;
+/* Stacked on mobile, cat-beside-body from lg where the poster proportions hold. */
+.speaking-club__layout {
+  @apply lg:mt-16 flex w-full flex-col items-center justify-center gap-component-gap sm:flex-row lg:items-center lg:gap-0;
 }
 
 .speaking-club__sticker {
-  @apply w-48 sm:w-64;
+  @apply w-56 shrink-0 sm:w-72 lg:w-96;
 }
 
-.speaking-club__note {
-  @apply -ml-6 sm:-ml-10;
-}
-
-.speaking-club__line {
-  @apply max-w-2xl text-body text-text-muted;
+.speaking-club__body {
+  @apply lg:flex-1;
 }
 </style>

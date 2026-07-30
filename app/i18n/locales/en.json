@@ -87,8 +87,9 @@
     "speakingClub": {
       "capsWord": "Speaking",
       "scriptWord": "club",
-      "noteText": "You look like my new student",
-      "line": "Weekly speaking practice in a small group — the place where your English finally sounds like you.",
+      "bodyEyebrow": "It's time to level up your English",
+      "bodyText": "Our {brand} run in small mini-groups, so every member gets the most speaking practice, attention, and joy from learning.",
+      "bodyBrand": "Speaking Clubs",
       "telegramCta": "Join on Telegram"
     },
     "reviews": {

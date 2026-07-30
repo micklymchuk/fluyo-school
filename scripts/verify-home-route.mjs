@@ -9,6 +9,7 @@ const files = {
   homePathCards: resolve(root, 'app/components/sections/home/HomePathCardsSection.vue'),
   homeLessons: resolve(root, 'app/components/sections/home/HomeLessonsSection.vue'),
   homeSpeakingClub: resolve(root, 'app/components/sections/home/HomeSpeakingClubSection.vue'),
+  homeSpeakingClubBody: resolve(root, 'app/components/sections/home/HomeSpeakingClubBody.vue'),
   homeReviews: resolve(root, 'app/components/sections/home/HomeReviewsSection.vue'),
   homeTrialPricing: resolve(root, 'app/components/sections/home/HomeTrialPricingSection.vue'),
   ukMessages: resolve(root, 'app/i18n/locales/uk.json'),
@@ -134,7 +135,7 @@ function assertHomeSectionMessages(messages, locale) {
   }
 
   const speakingClub = messages.homeSections.speakingClub
-  for (const field of ['capsWord', 'scriptWord', 'noteText', 'line', 'telegramCta']) {
+  for (const field of ['capsWord', 'scriptWord', 'bodyEyebrow', 'bodyText', 'bodyBrand', 'telegramCta']) {
     assertNonEmptyString(speakingClub?.[field], `${locale}.json homeSections.speakingClub.${field}`)
   }
 
@@ -231,11 +232,10 @@ function verifyPathCards() {
 
 function verifyBrandSections() {
   const homeLessons = read(files.homeLessons)
-  const homeSpeakingClub = read(files.homeSpeakingClub)
   const homeReviews = read(files.homeReviews)
 
   assertPattern(homeLessons, /t\(`homeSections\.lessons\.items\[\$\{itemIndex\}\]\.title`\)/, 'lessons section must read item titles through t()')
-  assertPattern(homeSpeakingClub, /useTelegramCta/, 'speaking club must use the Telegram CTA contract')
+  assertPattern(read(files.homeSpeakingClubBody), /useTelegramCta/, 'speaking club body must use the Telegram CTA contract')
   assertPattern(homeReviews, /t\(`testimonials\.\$\{testimonial\.id\}\.quote`\)/, 'reviews section must read testimonial quotes through t()')
 }
 
