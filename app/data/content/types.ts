@@ -5,6 +5,12 @@ export const DEFAULT_LOCALE = 'uk' satisfies Locale
 
 export type LocalizedString = Record<Locale, string>
 
+/**
+ * Copy that lives in a content const rather than i18n. Either a single string used
+ * for every locale, or a per-locale record when the text differs by language.
+ */
+export type LocalizedText = string | LocalizedString
+
 export type PageRouteId = 'home' | 'programs' | 'teachers' | 'pricing'
 export type PagePath = '/' | '/programs' | '/teachers' | '/pricing'
 export type LearningPathId = 'general' | 'exam' | 'speaking-club' | 'kids' | 'professional' | 'interview'
@@ -122,6 +128,10 @@ export type ProofAsset = {
 
 export type Testimonial = {
   id: TestimonialId
+  /** Testimonial copy, held verbatim in the const (not localized). */
+  quote: string
+  /** Attribution, resolved from the const (not i18n). Localized or a single string. */
+  sourceLabel: LocalizedText
 }
 
 export type FaqItem = {

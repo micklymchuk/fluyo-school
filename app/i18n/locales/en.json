@@ -433,20 +433,6 @@
       "alt": "Diagram of trial lesson stages."
     }
   },
-  "testimonials": {
-    "danylo-exam": {
-      "quote": "I understood exactly what to practice for the exam each week.",
-      "sourceLabel": "Danylo, exam preparation"
-    },
-    "olena-parent": {
-      "quote": "I can see my child is not just doing exercises, but speaking more confidently.",
-      "sourceLabel": "Olena, parent"
-    },
-    "marta-adult": {
-      "quote": "The lessons helped me speak more calmly at work.",
-      "sourceLabel": "Marta, adult learner"
-    }
-  },
   "faqItems": {
     "trial-booking": {
       "question": "How do I book a trial lesson?",

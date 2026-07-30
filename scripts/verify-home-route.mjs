@@ -236,7 +236,7 @@ function verifyBrandSections() {
 
   assertPattern(homeLessons, /t\(`homeSections\.lessons\.items\[\$\{itemIndex\}\]\.title`\)/, 'lessons section must read item titles through t()')
   assertPattern(read(files.homeSpeakingClubBody), /useTelegramCta/, 'speaking club body must use the Telegram CTA contract')
-  assertPattern(homeReviews, /t\(`testimonials\.\$\{testimonial\.id\}\.quote`\)/, 'reviews section must read testimonial quotes through t()')
+  assertPattern(homeReviews, /quote: testimonial\.quote/, 'reviews section must read testimonial quotes from the content const')
 }
 
 function verifyTrialPricing() {

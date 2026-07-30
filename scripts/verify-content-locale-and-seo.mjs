@@ -268,7 +268,7 @@ function assertLocaleMessageTree(messages, locale) {
   assertMessageRecords(messages, locale, 'teacherProfiles', requiredTeacherProfileIds, ['name', 'role'])
   assertArrayMessageRecords(messages, locale, 'teacherProfiles', requiredTeacherProfileIds, ['focus'])
   assertMessageRecords(messages, locale, 'proofAssets', requiredProofAssetIds, ['title', 'caption', 'alt'])
-  assertMessageRecords(messages, locale, 'testimonials', requiredTestimonialIds, ['quote', 'sourceLabel'])
+  // testimonials copy + labels live in content/testimonials.ts (LocalizedText), not i18n.
   assertMessageRecords(messages, locale, 'faqItems', requiredFaqItemIds, ['question', 'answer'])
   assertMessageRecords(messages, locale, 'assets', requiredAssetIds, ['alt'])
 }
@@ -535,7 +535,16 @@ assertNoInlineLocalizedCopy(contentLearningPaths, 'content/learning-paths.ts')
 assertNoInlineLocalizedCopy(contentPricing, 'content/pricing.ts')
 assertNoInlineLocalizedCopy(contentTeachers, 'content/teachers.ts')
 assertNoInlineLocalizedCopy(contentProof, 'content/proof.ts')
-assertNoInlineLocalizedCopy(contentTestimonials, 'content/testimonials.ts')
+// Testimonials intentionally hold their quotes and source labels inline (LocalizedText)
+// rather than in i18n, so Cyrillic copy is allowed here — but the draft mechanism stays
+// blocked, and every required testimonial must still be present with both fields.
+assert(!contentTestimonials.includes('defineLocalized'), 'content/testimonials.ts must not define inline localized copy')
+for (const id of requiredTestimonialIds) {
+  assert(contentTestimonials.includes(`'${id}'`), `content/testimonials.ts must define testimonial ${id}`)
+}
+for (const field of ['quote', 'sourceLabel']) {
+  assert(contentTestimonials.includes(`${field}:`), `content/testimonials.ts must define ${field} for each testimonial`)
+}
 assertNoInlineLocalizedCopy(contentFaq, 'content/faq.ts')
 assertNoInlineLocalizedCopy(assetManifest, 'asset-manifest.ts')
 
