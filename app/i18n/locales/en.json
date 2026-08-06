@@ -21,8 +21,8 @@
       },
       "intro": {
         "eyebrow": "Online English school",
-        "heading": "Choose your path to confident English.",
-        "summary": "Structured programs for exams, kids, and adults with a clear first step through a trial lesson."
+        "heading": "Speak English with confidence — without fear of mistakes",
+        "summary": "Online lessons for kids, teens, and adults with a personal approach, modern materials, and a clear learning plan."
       }
     },
     "programs": {
@@ -62,8 +62,11 @@
   "homeSections": {
     "hero": {
       "scriptWord": "Fluyo school",
-      "primaryCta": "View programs",
-      "telegramCta": "Ask on Telegram"
+      "headingLead": "Speak English with confidence",
+      "headingAccent": "without fear of mistakes",
+      "trialCta": "Book a trial lesson",
+      "programsCta": "View programs",
+      "assurance": "We'll assess your level and match a program to your goal."
     },
     "lessons": {
       "eyebrow": "Our lessons",

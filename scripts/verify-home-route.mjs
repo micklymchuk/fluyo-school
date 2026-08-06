@@ -114,7 +114,7 @@ function getMessageShape(value) {
 function assertHomeSectionMessages(messages, locale) {
   assert(typeof messages.homeSections === 'object' && messages.homeSections !== null, `${locale}.json must contain homeSections`)
 
-  for (const field of ['scriptWord', 'primaryCta', 'telegramCta']) {
+  for (const field of ['scriptWord', 'headingLead', 'headingAccent', 'trialCta', 'programsCta', 'assurance']) {
     assertNonEmptyString(messages.homeSections.hero?.[field], `${locale}.json homeSections.hero.${field}`)
   }
 
@@ -275,7 +275,7 @@ function verifyLocalization() {
     assertPattern(source, /\bt\(/, `${label} must read public copy through t()`)
   }
 
-  assertPattern(read(files.homeHero), /t\(['"]pages\.home\.intro\.heading['"]\)/, 'home hero must read page intro through t()')
+  assertPattern(read(files.homeHero), /t\(['"]pages\.home\.intro\.summary['"]\)/, 'home hero must read page intro through t()')
   assertPattern(read(files.homePathCards), /t\(`learningPaths\.\$\{path\.id\}\.title`\)/, 'home path cards must read path titles through t()')
   assertHomeSectionMessages(ukMessages, 'uk')
   assertHomeSectionMessages(enMessages, 'en')

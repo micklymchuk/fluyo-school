@@ -19,13 +19,13 @@
 
   content: '';
 
-  @apply absolute inset-x-0 top-0;
+  @apply absolute inset-x-0 top-0 opacity-0;
   height: calc(100% / var(--diamond-stretch));
   background: conic-gradient(
       from 45deg,
-      var(--color-accent-burgundy) 0 25%,
+      var(--color-accent-subdued) 0 25%,
       transparent 0 50%,
-      var(--color-accent-burgundy) 0 75%,
+      var(--color-accent-subdued) 0 75%,
       transparent 0
     )
     50% 0 / var(--diamond-size) var(--diamond-size);
