@@ -4,9 +4,12 @@ import UiSection from '~/components/sections/UiSection.vue'
 import { learningPaths, type LearningPath, type LearningPathId } from '~/data/content'
 
 const pathRoutes = {
+  general: '/programs#general-english',
   exam: '/programs#exam-preparation',
+  'speaking-club': '/programs#speaking-club',
   kids: '/programs#kids-parents',
-  adult: '/programs#adults-speaking'
+  professional: '/programs#professional-english',
+  interview: '/programs#interview-preparation'
 } satisfies Record<LearningPathId, string>
 
 const route = useRoute()

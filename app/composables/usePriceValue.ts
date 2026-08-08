@@ -1,7 +1,13 @@
-import { PRICES_CONFIG, type PriceItemId } from '~/data/content'
+import { PRICES_CONFIG, type PriceCurrency, type PriceItemId, type PricePackageTier } from '~/data/content'
 
 export const usePriceValue = () => {
   const { t } = useI18n()
+
+  const amountLabel = (amount: number, currency: PriceCurrency): string =>
+    t('priceFormat.exact', {
+      amount,
+      currency: t(`priceFormat.currencies.${currency}`)
+    })
 
   const priceValue = (id: PriceItemId): string => {
     const config = PRICES_CONFIG[id]
@@ -20,5 +26,13 @@ export const usePriceValue = () => {
     return t('priceFormat.value', { price, unit })
   }
 
-  return { priceValue }
+  const packageTotal = (tier: PricePackageTier): string => amountLabel(tier.totalAmount, tier.currency)
+
+  const packagePerLesson = (tier: PricePackageTier): string =>
+    t('priceFormat.value', {
+      price: amountLabel(tier.perLessonAmount, tier.currency),
+      unit: t('priceFormat.units.lesson')
+    })
+
+  return { priceValue, packageTotal, packagePerLesson }
 }

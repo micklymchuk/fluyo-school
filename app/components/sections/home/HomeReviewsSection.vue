@@ -4,15 +4,16 @@ import UiCarousel from '~/components/ui/UiCarousel.vue'
 import UiLockupHeading from '~/components/ui/UiLockupHeading.vue'
 import UiSection from '~/components/sections/UiSection.vue'
 import UiStampCard from '~/components/ui/UiStampCard.vue'
-import { testimonials } from '~/data/content'
+import { resolveLocalizedText, testimonials } from '~/data/content'
 
 const { t } = useI18n()
+const { locale } = useLocale()
 
 const testimonialItems = computed(() => {
   return testimonials.map((testimonial) => ({
     id: testimonial.id,
-    quote: t(`testimonials.${testimonial.id}.quote`),
-    sourceLabel: t(`testimonials.${testimonial.id}.sourceLabel`)
+    quote: testimonial.quote,
+    sourceLabel: resolveLocalizedText(testimonial.sourceLabel, locale.value)
   }))
 })
 </script>

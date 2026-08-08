@@ -4,7 +4,7 @@ import { computed } from 'vue'
 import UiIconButton from '~/components/ui/UiIconButton.vue'
 import UiLogo from '~/components/ui/UiLogo.vue'
 import type { CtaContext } from '~/data/content'
-import { instagramAction, primaryNavigationLinks, telegramAction } from './navigationLinks'
+import { instagramAction, telegramAction } from './navigationLinks'
 
 const props = withDefaults(defineProps<{
   instagramHref?: string
@@ -32,7 +32,7 @@ const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramConte
 const localizedTo = useLocalizedTo()
 // Footer nav reflects the available-pages allowlist; the whole links block is
 // hidden when home is the only available page (logo + actions remain).
-const { links, showNav } = useNavigationLinks(primaryNavigationLinks)
+const { links, showNav } = useNavigationLinks()
 const year = new Date().getFullYear()
 </script>
 

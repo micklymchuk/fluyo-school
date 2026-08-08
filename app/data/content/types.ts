@@ -5,10 +5,16 @@ export const DEFAULT_LOCALE = 'uk' satisfies Locale
 
 export type LocalizedString = Record<Locale, string>
 
+/**
+ * Copy that lives in a content const rather than i18n. Either a single string used
+ * for every locale, or a per-locale record when the text differs by language.
+ */
+export type LocalizedText = string | LocalizedString
+
 export type PageRouteId = 'home' | 'programs' | 'teachers' | 'pricing'
 export type PagePath = '/' | '/programs' | '/teachers' | '/pricing'
-export type LearningPathId = 'exam' | 'kids' | 'adult'
-export type PriceItemId = 'TRIAL' | 'EXAM_PREP' | 'MINI_GROUP' | 'INDIVIDUAL' | 'SPEAKING_CLUB'
+export type LearningPathId = 'general' | 'exam' | 'speaking-club' | 'kids' | 'professional' | 'interview'
+export type PriceItemId = 'TRIAL' | 'EXAM_PREP' | 'MINI_GROUP' | 'INDIVIDUAL' | 'PAIR'
 export type TeacherProfileId = 'catherina' | 'diana' | 'ksenia'
 export type ProofAssetId = 'student-result-ielts' | 'kids-class-snapshot' | 'adult-speaking-note' | 'lesson-format-board'
 export type TestimonialId = 'danylo-exam' | 'olena-parent' | 'marta-adult'
@@ -31,7 +37,7 @@ export type PageContent = {
 
 export type CtaFormat = 'telegram' | 'anchor' | 'route'
 export type MessageIntent = 'book_trial' | 'ask_program' | 'ask_teacher' | 'ask_price'
-export type TelegramPathContext = 'exam' | 'kids' | 'adult' | 'generic'
+export type TelegramPathContext = 'general' | 'exam' | 'speaking-club' | 'kids' | 'professional' | 'interview' | 'generic'
 export type TelegramFormatContext = 'individual' | 'speaking-club' | 'mini-group' | 'generic'
 export type CtaSourceRoute = PageRouteId | 'header' | 'footer' | 'section' | 'final-booking'
 
@@ -77,7 +83,7 @@ export type PriceItem = {
 }
 
 export type PriceCurrency = 'UAH'
-export type PriceUnit = 'thirty-minutes' | 'sixty-minutes' | 'learner' | 'meeting'
+export type PriceUnit = 'thirty-minutes' | 'sixty-minutes' | 'seventy-five-minutes' | 'lesson'
 
 export type PriceConfig = {
   amount: number
@@ -86,13 +92,32 @@ export type PriceConfig = {
   isFromPrice: boolean
 }
 
-export type PricingFormatId = 'individual' | 'speaking-club' | 'mini-group'
+export type PricingFormatId = 'individual' | 'mini-group'
 
 export type PricingFormat = {
   id: PricingFormatId
   telegramFormat: TelegramFormatContext
   priceItemIds: readonly PriceItemId[]
   pathFit: readonly LearningPathId[]
+}
+
+export type PricePackageTrackId = 'general' | 'exam-prep'
+
+export type PricePackageTier = {
+  lessonCount: number
+  totalAmount: number
+  perLessonAmount: number
+  currency: PriceCurrency
+  isPopular: boolean
+}
+
+export type PricePackageTrack = {
+  id: PricePackageTrackId
+  /** The single-lesson item this track derives from, for label/telegram reuse. */
+  priceItemId: PriceItemId
+  telegramFormat: TelegramFormatContext
+  telegramPath: TelegramPathContext
+  tiers: readonly PricePackageTier[]
 }
 
 export type PricingIncludedItemId = 'teacher-matching' | 'live-lesson' | 'materials' | 'feedback-progress'
@@ -122,6 +147,10 @@ export type ProofAsset = {
 
 export type Testimonial = {
   id: TestimonialId
+  /** Testimonial copy, held verbatim in the const (not localized). */
+  quote: string
+  /** Attribution, resolved from the const (not i18n). Localized or a single string. */
+  sourceLabel: LocalizedText
 }
 
 export type FaqItem = {

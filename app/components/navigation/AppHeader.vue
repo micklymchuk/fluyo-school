@@ -8,7 +8,7 @@ import UiIconButton from '~/components/ui/UiIconButton.vue'
 import UiLogo from '~/components/ui/UiLogo.vue'
 import type { CtaContext } from '~/data/content'
 import type { Locale } from '~/data/content'
-import { instagramAction, primaryNavigationLinks, telegramAction } from './navigationLinks'
+import { instagramAction, telegramAction } from './navigationLinks'
 
 const props = withDefaults(defineProps<{
   instagramHref?: string
@@ -25,7 +25,14 @@ const props = withDefaults(defineProps<{
 const { t } = useI18n()
 // Filter nav to the available-pages allowlist. showNav is false when home is
 // the only available page → the header collapses to logo + inline actions (D4).
-const { links, showNav } = useNavigationLinks(primaryNavigationLinks)
+const { links, showNav } = useNavigationLinks()
+
+// In anchor mode, scrollspy the sections that have menu items so the active nav
+// item tracks the user's scroll position (one IntersectionObserver, shared).
+const spySectionIds = links
+  .filter((link) => link.to.includes('#'))
+  .map((link) => link.to.slice(link.to.indexOf('#') + 1))
+useSectionSpy(spySectionIds)
 const instagramTarget = computed(() => props.instagramHref)
 const instagramLabel = computed(() => props.instagramLabel)
 const { locale, setLocale } = useLocale()

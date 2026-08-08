@@ -1,4 +1,11 @@
-import type { PriceConfig, PriceItem, PriceItemId, PricingFormat, PricingIncludedItem } from './types'
+import type {
+  PriceConfig,
+  PriceItem,
+  PriceItemId,
+  PricePackageTrack,
+  PricingFormat,
+  PricingIncludedItem
+} from './types'
 
 export const priceItems = [
   {
@@ -11,10 +18,10 @@ export const priceItems = [
     id: 'INDIVIDUAL'
   },
   {
-    id: 'MINI_GROUP'
+    id: 'PAIR'
   },
   {
-    id: 'SPEAKING_CLUB'
+    id: 'MINI_GROUP'
   }
 ] as const satisfies readonly PriceItem[]
 
@@ -26,28 +33,28 @@ export const PRICES_CONFIG = {
     isFromPrice: false
   },
   EXAM_PREP: {
-    amount: 700,
+    amount: 675,
     currency: 'UAH',
     unit: 'sixty-minutes',
-    isFromPrice: true
+    isFromPrice: false
   },
   MINI_GROUP: {
-    amount: 500,
-    currency: 'UAH',
-    unit: 'learner',
-    isFromPrice: true
-  },
-  INDIVIDUAL: {
-    amount: 700,
-    currency: 'UAH',
-    unit: 'sixty-minutes',
-    isFromPrice: true
-  },
-  SPEAKING_CLUB: {
     amount: 350,
     currency: 'UAH',
-    unit: 'meeting',
-    isFromPrice: true
+    unit: 'seventy-five-minutes',
+    isFromPrice: false
+  },
+  INDIVIDUAL: {
+    amount: 575,
+    currency: 'UAH',
+    unit: 'sixty-minutes',
+    isFromPrice: false
+  },
+  PAIR: {
+    amount: 400,
+    currency: 'UAH',
+    unit: 'sixty-minutes',
+    isFromPrice: false
   }
 } as const satisfies Record<PriceItemId, PriceConfig>
 
@@ -55,22 +62,41 @@ export const pricingFormats = [
   {
     id: 'individual',
     telegramFormat: 'individual',
-    priceItemIds: ['INDIVIDUAL', 'EXAM_PREP'],
-    pathFit: ['adult', 'exam']
-  },
-  {
-    id: 'speaking-club',
-    telegramFormat: 'speaking-club',
-    priceItemIds: ['SPEAKING_CLUB'],
-    pathFit: ['adult']
+    priceItemIds: ['INDIVIDUAL', 'EXAM_PREP', 'PAIR'],
+    pathFit: ['general', 'exam', 'professional', 'interview']
   },
   {
     id: 'mini-group',
     telegramFormat: 'mini-group',
     priceItemIds: ['MINI_GROUP'],
-    pathFit: ['kids', 'adult']
+    pathFit: ['kids']
   }
 ] as const satisfies readonly PricingFormat[]
+
+export const pricePackages = [
+  {
+    id: 'general',
+    priceItemId: 'INDIVIDUAL',
+    telegramFormat: 'individual',
+    telegramPath: 'general',
+    tiers: [
+      { lessonCount: 4, totalAmount: 2300, perLessonAmount: 575, currency: 'UAH', isPopular: false },
+      { lessonCount: 8, totalAmount: 4400, perLessonAmount: 550, currency: 'UAH', isPopular: true },
+      { lessonCount: 12, totalAmount: 6300, perLessonAmount: 525, currency: 'UAH', isPopular: false }
+    ]
+  },
+  {
+    id: 'exam-prep',
+    priceItemId: 'EXAM_PREP',
+    telegramFormat: 'individual',
+    telegramPath: 'exam',
+    tiers: [
+      { lessonCount: 4, totalAmount: 2700, perLessonAmount: 675, currency: 'UAH', isPopular: false },
+      { lessonCount: 8, totalAmount: 5200, perLessonAmount: 650, currency: 'UAH', isPopular: true },
+      { lessonCount: 12, totalAmount: 7500, perLessonAmount: 625, currency: 'UAH', isPopular: false }
+    ]
+  }
+] as const satisfies readonly PricePackageTrack[]
 
 export const pricingIncludedItems = [
   {

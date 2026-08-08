@@ -15,7 +15,7 @@ useSeo('/')
     <HomePathCardsSection />
     <HomeSpeakingClubSection />
     <HomeTrialPricingSection />
-    <HomeLessonsSection />
+<!--    <HomeLessonsSection />-->
     <HomeReviewsSection />
   </div>
 </template>

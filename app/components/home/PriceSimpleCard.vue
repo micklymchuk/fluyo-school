@@ -42,7 +42,7 @@ withDefaults(defineProps<{
 }
 
 .price-simple-card--recommended .price-simple-card__badge {
-  @apply bg-surface-muted text-accent-burgundy;
+  @apply border border-accent-burgundy bg-surface-muted text-accent-burgundy;
 }
 
 .price-simple-card__label {

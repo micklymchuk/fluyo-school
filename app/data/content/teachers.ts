@@ -7,7 +7,7 @@ export const teacherProfiles = [
     id: 'catherina',
     scriptName: 'Catherina',
     photo: '/images/teachers/catherina-web.png',
-    audienceFit: ['adult'],
+    audienceFit: ['general', 'speaking-club', 'professional', 'interview'],
     isFounder: true
   },
   {

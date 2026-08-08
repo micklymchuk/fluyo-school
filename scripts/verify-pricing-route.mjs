@@ -9,6 +9,9 @@ const files = {
   trialSection: resolve(root, 'app/components/sections/pricing/PricingTrialSection.vue'),
   formatsSection: resolve(root, 'app/components/sections/pricing/PricingFormatsSection.vue'),
   formatCard: resolve(root, 'app/components/pricing/PricingFormatCard.vue'),
+  packagesSection: resolve(root, 'app/components/sections/pricing/PricingPackagesSection.vue'),
+  packageCard: resolve(root, 'app/components/pricing/PricingPackageCard.vue'),
+  specialConditionsSection: resolve(root, 'app/components/sections/pricing/PricingSpecialConditionsSection.vue'),
   includedSection: resolve(root, 'app/components/sections/pricing/PricingIncludedSection.vue'),
   faqSection: resolve(root, 'app/components/sections/pricing/PricingFaqSection.vue'),
   faqItemComponent: resolve(root, 'app/components/pricing/PricingFaqItem.vue'),
@@ -21,8 +24,10 @@ const files = {
   tracking: resolve(root, 'app/composables/useTracking.ts')
 }
 
-const pricingFormatIds = ['individual', 'speaking-club', 'mini-group']
-const priceItemIds = ['TRIAL', 'EXAM_PREP', 'MINI_GROUP', 'INDIVIDUAL', 'SPEAKING_CLUB']
+const pricingFormatIds = ['individual', 'mini-group']
+const priceItemIds = ['TRIAL', 'EXAM_PREP', 'MINI_GROUP', 'INDIVIDUAL', 'PAIR']
+const packageTrackIds = ['general', 'exam-prep']
+const specialConditionIds = ['first-package', 'military-family']
 const includedItemIds = ['teacher-matching', 'live-lesson', 'materials', 'feedback-progress']
 const faqItemIds = [
   'trial-booking',
@@ -132,6 +137,8 @@ function verifyPricingRoute() {
     [
       '<PricingTrialSection',
       '<PricingFormatsSection',
+      '<PricingPackagesSection',
+      '<PricingSpecialConditionsSection',
       '<PricingIncludedSection',
       '<PricingFaqSection',
       '<PricingFinalCtaSection'
@@ -210,6 +217,29 @@ function verifySectionComponents() {
   assertNotIncludes(formatCard, 'useTracking', 'format card (tracking is business logic)')
   assertNotIncludes(formatCard, 'usePricingPathContext', 'format card (path context is business logic)')
 
+  const packagesSection = read(files.packagesSection)
+  const packageCard = read(files.packageCard)
+  const specialConditionsSection = read(files.specialConditionsSection)
+
+  for (const [source, label] of [
+    [packagesSection, 'packages section'],
+    [specialConditionsSection, 'special conditions section']
+  ]) {
+    assertPattern(source, /useI18n\(\)/, `${label} must use Nuxt i18n directly`)
+    assertPattern(source, /\bt\(/, `${label} must read public copy through t()`)
+    assert(!/[А-Яа-яІіЇїЄєҐґ]/.test(source), `${label} must not hard-code Ukrainian public copy`)
+  }
+  assert(!/[А-Яа-яІіЇїЄєҐґ]/.test(packageCard), 'package card must not hard-code Ukrainian public copy')
+
+  assertIncludes(packagesSection, 'pricing-page__packages', 'packages section')
+  assertPattern(packagesSection, /pricePackages/, 'packages section must render from shared package tracks')
+  assertPattern(packagesSection, /resolveTelegramCta\(/, 'packages section must resolve Telegram CTAs through the shared contract')
+  assertPattern(packagesSection, /<PricingPackageCard/, 'packages section must compose the package tier card')
+  assertPattern(packageCard, /defineEmits/, 'package card must emit its CTA click instead of tracking directly')
+  assertNotIncludes(packageCard, "from '~/data/content'", 'package card (content records are resolved by the parent)')
+
+  assertIncludes(specialConditionsSection, 'pricing-page__special-conditions', 'special conditions section')
+
   assertIncludes(includedSection, 'pricing-page__included', 'included section')
   assertPattern(includedSection, /pricingIncludedItems/, 'included section must render from shared records')
 
@@ -238,7 +268,13 @@ function verifySharedContracts() {
 
   assertPattern(contentTypes, /PricingFormatId/, 'content types must define the pricing format id contract')
   assertPattern(contentTypes, /PricingFormat\b/, 'content types must define the pricing format contract')
+  assertPattern(contentTypes, /PricePackageTrack\b/, 'content types must define the package track contract')
   assertPattern(contentTypes, /PricingIncludedItem/, 'content types must define the included item contract')
+  assertPattern(pricing, /pricePackages/, 'pricing data must define package tracks')
+
+  for (const trackId of packageTrackIds) {
+    assertIncludes(pricing, `id: '${trackId}'`, 'package track data')
+  }
   assertPattern(contentTypes, /telegramFormat:\s*TelegramFormatContext/, 'pricing formats must carry a Telegram format context')
   assertPattern(tracking, /['"]pricing_view['"]/, 'tracking adapter must accept pricing_view')
 
@@ -283,6 +319,30 @@ function verifyPricingMessages(messages, locale) {
   for (const formatId of pricingFormatIds) {
     for (const field of ['title', 'fit', 'terms', 'telegramCta']) {
       assertNonEmptyString(pricingSections.formats?.items?.[formatId]?.[field], `${locale}.json pricingSections.formats.items.${formatId}.${field}`)
+    }
+  }
+
+  for (const field of ['eyebrow', 'title', 'description', 'totalLabel', 'popularLabel']) {
+    assertNonEmptyString(pricingSections.packages?.[field], `${locale}.json pricingSections.packages.${field}`)
+  }
+
+  for (const count of ['1', '4', '8', '12']) {
+    assertNonEmptyString(pricingSections.packages?.lessonLabels?.[count], `${locale}.json pricingSections.packages.lessonLabels.${count}`)
+  }
+
+  for (const trackId of packageTrackIds) {
+    for (const field of ['title', 'telegramCta']) {
+      assertNonEmptyString(pricingSections.packages?.tracks?.[trackId]?.[field], `${locale}.json pricingSections.packages.tracks.${trackId}.${field}`)
+    }
+  }
+
+  for (const field of ['eyebrow', 'title', 'description']) {
+    assertNonEmptyString(pricingSections.specialConditions?.[field], `${locale}.json pricingSections.specialConditions.${field}`)
+  }
+
+  for (const conditionId of specialConditionIds) {
+    for (const field of ['title', 'description']) {
+      assertNonEmptyString(pricingSections.specialConditions?.items?.[conditionId]?.[field], `${locale}.json pricingSections.specialConditions.items.${conditionId}.${field}`)
     }
   }
 

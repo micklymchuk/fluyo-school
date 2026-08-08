@@ -1,4 +1,5 @@
 export * from './types'
+export * from './localized'
 export * from './pages'
 export * from './learning-paths'
 export * from './pricing'

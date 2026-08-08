@@ -9,6 +9,7 @@ const files = {
   homePathCards: resolve(root, 'app/components/sections/home/HomePathCardsSection.vue'),
   homeLessons: resolve(root, 'app/components/sections/home/HomeLessonsSection.vue'),
   homeSpeakingClub: resolve(root, 'app/components/sections/home/HomeSpeakingClubSection.vue'),
+  homeSpeakingClubBody: resolve(root, 'app/components/sections/home/HomeSpeakingClubBody.vue'),
   homeReviews: resolve(root, 'app/components/sections/home/HomeReviewsSection.vue'),
   homeTrialPricing: resolve(root, 'app/components/sections/home/HomeTrialPricingSection.vue'),
   ukMessages: resolve(root, 'app/i18n/locales/uk.json'),
@@ -113,7 +114,7 @@ function getMessageShape(value) {
 function assertHomeSectionMessages(messages, locale) {
   assert(typeof messages.homeSections === 'object' && messages.homeSections !== null, `${locale}.json must contain homeSections`)
 
-  for (const field of ['scriptWord', 'primaryCta', 'telegramCta']) {
+  for (const field of ['scriptWord', 'headingLead', 'headingAccent', 'trialCta', 'programsCta', 'assurance']) {
     assertNonEmptyString(messages.homeSections.hero?.[field], `${locale}.json homeSections.hero.${field}`)
   }
 
@@ -134,7 +135,7 @@ function assertHomeSectionMessages(messages, locale) {
   }
 
   const speakingClub = messages.homeSections.speakingClub
-  for (const field of ['capsWord', 'scriptWord', 'noteText', 'line', 'telegramCta']) {
+  for (const field of ['capsWord', 'scriptWord', 'bodyEyebrow', 'bodyText', 'bodyBrand', 'telegramCta']) {
     assertNonEmptyString(speakingClub?.[field], `${locale}.json homeSections.speakingClub.${field}`)
   }
 
@@ -231,12 +232,11 @@ function verifyPathCards() {
 
 function verifyBrandSections() {
   const homeLessons = read(files.homeLessons)
-  const homeSpeakingClub = read(files.homeSpeakingClub)
   const homeReviews = read(files.homeReviews)
 
   assertPattern(homeLessons, /t\(`homeSections\.lessons\.items\[\$\{itemIndex\}\]\.title`\)/, 'lessons section must read item titles through t()')
-  assertPattern(homeSpeakingClub, /useTelegramCta/, 'speaking club must use the Telegram CTA contract')
-  assertPattern(homeReviews, /t\(`testimonials\.\$\{testimonial\.id\}\.quote`\)/, 'reviews section must read testimonial quotes through t()')
+  assertPattern(read(files.homeSpeakingClubBody), /useTelegramCta/, 'speaking club body must use the Telegram CTA contract')
+  assertPattern(homeReviews, /quote: testimonial\.quote/, 'reviews section must read testimonial quotes from the content const')
 }
 
 function verifyTrialPricing() {
@@ -275,7 +275,7 @@ function verifyLocalization() {
     assertPattern(source, /\bt\(/, `${label} must read public copy through t()`)
   }
 
-  assertPattern(read(files.homeHero), /t\(['"]pages\.home\.intro\.heading['"]\)/, 'home hero must read page intro through t()')
+  assertPattern(read(files.homeHero), /t\(['"]pages\.home\.intro\.summary['"]\)/, 'home hero must read page intro through t()')
   assertPattern(read(files.homePathCards), /t\(`learningPaths\.\$\{path\.id\}\.title`\)/, 'home path cards must read path titles through t()')
   assertHomeSectionMessages(ukMessages, 'uk')
   assertHomeSectionMessages(enMessages, 'en')
