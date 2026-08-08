@@ -2,6 +2,8 @@
 import { onMounted, watch } from 'vue'
 import PricingTrialSection from '~/components/sections/pricing/PricingTrialSection.vue'
 import PricingFormatsSection from '~/components/sections/pricing/PricingFormatsSection.vue'
+import PricingPackagesSection from '~/components/sections/pricing/PricingPackagesSection.vue'
+import PricingSpecialConditionsSection from '~/components/sections/pricing/PricingSpecialConditionsSection.vue'
 import PricingIncludedSection from '~/components/sections/pricing/PricingIncludedSection.vue'
 import PricingFaqSection from '~/components/sections/pricing/PricingFaqSection.vue'
 import PricingFinalCtaSection from '~/components/sections/pricing/PricingFinalCtaSection.vue'
@@ -37,6 +39,8 @@ watch(pathContext, () => {
   <div class="pricing-page">
     <PricingTrialSection />
     <PricingFormatsSection />
+    <PricingPackagesSection />
+    <PricingSpecialConditionsSection />
     <PricingIncludedSection />
     <PricingFaqSection />
     <PricingFinalCtaSection />

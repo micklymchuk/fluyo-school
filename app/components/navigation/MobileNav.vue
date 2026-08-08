@@ -5,7 +5,7 @@ import HeaderLink from '~/components/navigation/HeaderLink.vue'
 import LanguageControl from '~/components/navigation/LanguageControl.vue'
 import UiIconButton from '~/components/ui/UiIconButton.vue'
 import type { CtaContext } from '~/data/content'
-import { instagramAction, primaryNavigationLinks, telegramAction } from './navigationLinks'
+import { instagramAction, telegramAction } from './navigationLinks'
 
 const props = withDefaults(defineProps<{
   instagramHref?: string
@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<{
 const { t } = useI18n()
 // Exclude gated pages from the hamburger dropdown. MobileNav only mounts when
 // showNav is true (parent v-if), so links always has ≥1 non-home entry here.
-const { links } = useNavigationLinks(primaryNavigationLinks)
+const { links } = useNavigationLinks()
 const route = useRoute()
 const isOpen = ref(false)
 const panel = ref<HTMLElement | null>(null)

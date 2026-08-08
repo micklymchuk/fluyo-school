@@ -11,8 +11,17 @@ const props = withDefaults(defineProps<{
 
 const route = useRoute()
 const localizedTo = useLocalizedTo()
+const activeSection = useActiveSection()
 
 function isActiveRoute(to: string) {
+  const hashIndex = to.indexOf('#')
+
+  // Anchor link (e.g. "/#speaking-club"): active follows the scrollspy — the
+  // section currently in view — rather than a static route hash.
+  if (hashIndex !== -1) {
+    return activeSection.value === to.slice(hashIndex + 1)
+  }
+
   if (to === '/') {
     return route.path === '/'
   }

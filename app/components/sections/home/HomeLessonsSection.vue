@@ -67,7 +67,7 @@ const lessonItems = computed(() => {
 /* Cream note panel floating on the pattern, stickers pinned to its corners.
    bg-surface: one card tone across the section, matching the fact cards. */
 .lessons__panel {
-  @apply relative mx-auto flex w-full max-w-2xl flex-col items-center gap-control-compact rounded-card bg-surface px-6 py-10 text-center shadow-md sm:px-12;
+  @apply relative mx-auto flex w-full max-w-2xl flex-col items-center gap-control-compact rounded-card border border-accent-burgundy bg-surface px-6 py-10 text-center sm:px-12;
 }
 
 .lessons__eyebrow {

@@ -18,7 +18,7 @@ const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramConte
 </script>
 
 <template>
-  <section class="home-hero" aria-labelledby="home-hero-title">
+  <section id="home" class="home-hero" aria-labelledby="home-hero-title">
     <UiGhostLetter class="home-hero__ghost-wide" placement="bottom-right" size="lg" />
     <UiGhostLetter class="home-hero__ghost-narrow" placement="top-right" size="sm" />
     <div class="home-hero__container">

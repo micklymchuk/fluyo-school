@@ -25,7 +25,7 @@ export const learningPaths = [
   {
     id: 'speaking-club',
     anchorId: 'speaking-club',
-    priceHintIds: ['TRIAL', 'SPEAKING_CLUB'],
+    priceHintIds: ['TRIAL'],
     ctaIntent: ctaIntent('/programs', 'programs', 'ask_program'),
     telegramFormat: 'speaking-club'
   },
