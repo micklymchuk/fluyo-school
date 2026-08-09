@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fluyo — Викладачі · Editorial Rows</title>
+<link rel="stylesheet" href="_base.css">
+<style>
+  .rows { display: flex; flex-direction: column; gap: clamp(4rem, 9vw, 7rem); }
+  .head { text-align: center; margin-bottom: clamp(3rem, 7vw, 5rem); }
+  .head .script { font-size: clamp(3rem, 8vw, 5rem); display: block; margin-bottom: 0.35rem; }
+
+  .row { display: grid; grid-template-columns: minmax(0,1fr) minmax(15rem,23rem); gap: clamp(2rem,5vw,4rem); align-items: center; }
+  .row--rev { grid-template-columns: minmax(15rem,23rem) minmax(0,1fr); }
+  .row--rev .row__info { order: 2; }
+  .row--rev .row__portrait { order: 1; }
+
+  .row__intro { display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.75rem; }
+  .name-row { display: flex; align-items: center; gap: 0.75rem; }
+  .name-row .script { font-size: clamp(2.6rem, 5vw, 3.6rem); }
+  .sparkle { color: var(--burgundy); flex-shrink: 0; }
+
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+  .focus { background: var(--cream-dark); border: 1px solid var(--hairline); border-radius: var(--radius-card); padding: 1.25rem 1.4rem; }
+  .focus h4 { margin: 0 0 0.6rem; font-size: 0.72rem; font-weight: 800; letter-spacing: var(--tracking-display); text-transform: uppercase; color: var(--burgundy); }
+  .focus .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.5rem; }
+
+  @media (max-width: 820px) {
+    .row, .row--rev { grid-template-columns: 1fr; }
+    .row--rev .row__info, .row--rev .row__portrait { order: initial; }
+    .row__portrait { max-width: 20rem; margin: 0 auto; }
+    .focus .cols, .facts { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="proto-bar"><strong>Prototype 1 / 5</strong> <span>·</span> Editorial Rows — засновниця та команда великими виносними портретами, чергування сторін <span>·</span> <a href="index.html">всі варіанти →</a></div>
+
+<section class="section">
+  <div class="shell">
+    <div class="head">
+      <span class="eyebrow eyebrow--ghost">Наша команда</span>
+      <span class="script">Хто вас навчатиме</span>
+      <p class="lede" style="margin-inline:auto;text-align:center">Троє викладачів, кожен зі своїм напрямом — від першого «hello» дитини до C1 у дорослого.</p>
+    </div>
+
+    <div class="rows">
+
+      <!-- Founder -->
+      <div class="row">
+        <div class="row__info">
+          <div class="row__intro">
+            <span class="eyebrow">Засновниця</span>
+            <div class="name-row">
+              <svg class="sparkle" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c1 6 5 10 12 12-7 2-11 6-12 12-1-6-5-10-12-12 7-2 11-6 12-12z" fill="currentColor"/></svg>
+              <span class="script">Catherina</span>
+              <svg class="sparkle" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c1 6 5 10 12 12-7 2-11 6-12 12-1-6-5-10-12-12 7-2 11-6 12-12z" fill="currentColor"/></svg>
+            </div>
+            <span class="role">Засновниця школи · викладачка англійської</span>
+          </div>
+          <div class="facts">
+            <div class="fact"><p class="fact__title">12 років</p><p class="fact__body">викладає англійську дорослим і підліткам</p></div>
+            <div class="fact"><p class="fact__title">C2 · CELTA</p><p class="fact__body">Proficiency та міжнародна кваліфікація викладача</p></div>
+          </div>
+          <div class="focus">
+            <h4>Напрями</h4>
+            <div class="cols">
+              <ul class="ul-list"><li>Розмовна для дорослих</li><li>Ділова англійська</li></ul>
+              <ul class="ul-list"><li>Індивідуальні програми</li><li>Постановка вимови</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="row__portrait portrait portrait--well"><img src="../../public/images/teachers/catherina-web.png" alt="Catherina, засновниця Fluyo School"></div>
+      </div>
+
+      <!-- Diana -->
+      <div class="row row--rev">
+        <div class="row__info">
+          <div class="row__intro">
+            <div class="name-row"><span class="script">Diana</span></div>
+            <span class="role">Викладачка · підготовка до іспитів</span>
+          </div>
+          <div class="facts">
+            <div class="fact"><p class="fact__title">IELTS 8.5</p><p class="fact__body">власний результат, готує до Academic та General</p></div>
+            <div class="fact"><p class="fact__title">300+</p><p class="fact__body">учнів склали іспит на цільовий бал</p></div>
+          </div>
+          <div class="focus">
+            <h4>Напрями</h4>
+            <div class="cols">
+              <ul class="ul-list"><li>IELTS та TOEFL</li><li>Академічне письмо</li></ul>
+              <ul class="ul-list"><li>Стратегії тесту</li><li>Speaking під тайминг</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="row__portrait portrait portrait--well"><img src="../../public/images/teachers/diana-web.png" alt="Diana, викладачка підготовки до іспитів"></div>
+      </div>
+
+      <!-- Ksenia -->
+      <div class="row">
+        <div class="row__info">
+          <div class="row__intro">
+            <div class="name-row"><span class="script">Ksenia</span></div>
+            <span class="role">Викладачка · діти та підлітки</span>
+          </div>
+          <div class="facts">
+            <div class="fact"><p class="fact__title">6 років</p><p class="fact__body">працює з дітьми від 7 років і підлітками</p></div>
+            <div class="fact"><p class="fact__title">TKT: YL</p><p class="fact__body">сертифікат з методики навчання дітей</p></div>
+          </div>
+          <div class="focus">
+            <h4>Напрями</h4>
+            <div class="cols">
+              <ul class="ul-list"><li>Англійська для дітей</li><li>Ігрові заняття</li></ul>
+              <ul class="ul-list"><li>Підлітки та школа</li><li>Впевненість у розмові</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="row__portrait portrait portrait--well"><img src="../../public/images/teachers/ksenia-web.png" alt="Ksenia, викладачка для дітей та підлітків"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fluyo — Викладачі · Stamp Cards</title>
+<link rel="stylesheet" href="_base.css">
+<style>
+  .head { text-align: center; margin-bottom: clamp(2.5rem, 6vw, 4rem); }
+  .head .script { font-size: clamp(2.8rem, 7vw, 4.4rem); display: block; margin: 0.35rem 0; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.25rem, 3vw, 2.25rem); }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; max-width: 26rem; margin-inline: auto; } }
+
+  .stamp {
+    --pitch: 1.375rem; --hole: 0.4375rem;
+    background: var(--cream-dark);
+    border-radius: 4px;
+    text-align: center;
+    padding: 1.75rem 1.5rem 1.9rem;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  @supports (mask-repeat: round) {
+    .stamp {
+      border-radius: 0;
+      -webkit-mask:
+        linear-gradient(#000 0 0) no-repeat 50% 50% / calc(100% - 2 * var(--pitch)) calc(100% - 2 * var(--pitch)),
+        radial-gradient(circle var(--hole), #0000 97%, #000) 0 0 / var(--pitch) var(--pitch) round;
+      mask:
+        linear-gradient(#000 0 0) no-repeat 50% 50% / calc(100% - 2 * var(--pitch)) calc(100% - 2 * var(--pitch)),
+        radial-gradient(circle var(--hole), #0000 97%, #000) 0 0 / var(--pitch) var(--pitch) round;
+    }
+  }
+
+  .stamp__photo {
+    width: 100%; height: 250px;
+    border-radius: 12px;
+    background: var(--blush);
+    display: flex; align-items: flex-end; justify-content: center;
+    overflow: hidden;
+  }
+  .stamp__photo img { height: 100%; width: auto; object-fit: contain; object-position: bottom; filter: none; }
+
+  .stamp .script { font-size: 2.6rem; margin: 1.1rem 0 0.15rem; }
+  .stamp .role { font-size: 0.9rem; }
+  .stamp__line { margin: 0.75rem 0 1rem; font-size: 0.9rem; color: var(--charcoal); }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+  .chip {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--burgundy); background: #fff; border: 1px solid var(--hairline);
+    border-radius: 9999px; padding: 0.3rem 0.7rem;
+  }
+</style>
+</head>
+<body>
+<div class="proto-bar"><strong>Prototype 2 / 5</strong> <span>·</span> Stamp Cards — три викладачі поштовими марками на бордовому полотні <span>·</span> <a href="index.html">всі варіанти →</a></div>
+
+<section class="section section--inverse">
+  <div class="shell">
+    <div class="head">
+      <span class="eyebrow">Наша команда</span>
+      <span class="script">Викладачі Fluyo</span>
+      <p class="lede" style="margin-inline:auto;text-align:center">Кожен веде свій напрям — обирайте того, хто веде саме вашу мету.</p>
+    </div>
+
+    <div class="grid">
+      <figure class="stamp" style="margin:0">
+        <div class="stamp__photo"><img src="../../public/images/teachers/catherina-web.png" alt="Catherina, засновниця Fluyo School"></div>
+        <span class="script">Catherina</span>
+        <span class="role">Засновниця · англійська для дорослих</span>
+        <p class="stamp__line">12 років веде дорослих до впевненої розмови та ділової англійської.</p>
+        <div class="chips"><span class="chip">C2 Proficiency</span><span class="chip">CELTA</span><span class="chip">Speaking</span></div>
+      </figure>
+
+      <figure class="stamp" style="margin:0">
+        <div class="stamp__photo"><img src="../../public/images/teachers/diana-web.png" alt="Diana, викладачка підготовки до іспитів"></div>
+        <span class="script">Diana</span>
+        <span class="role">Підготовка до іспитів</span>
+        <p class="stamp__line">Доводить до цільового балу в IELTS і TOEFL — понад 300 успішних учнів.</p>
+        <div class="chips"><span class="chip">IELTS 8.5</span><span class="chip">TOEFL</span><span class="chip">Writing</span></div>
+      </figure>
+
+      <figure class="stamp" style="margin:0">
+        <div class="stamp__photo"><img src="../../public/images/teachers/ksenia-web.png" alt="Ksenia, викладачка для дітей та підлітків"></div>
+        <span class="script">Ksenia</span>
+        <span class="role">Діти та підлітки</span>
+        <p class="stamp__line">Робить перші кроки в мові легкими — заняття, на які діти йдуть із радістю.</p>
+        <div class="chips"><span class="chip">TKT: YL</span><span class="chip">Ігрові уроки</span><span class="chip">7+ років</span></div>
+      </figure>
+    </div>
+  </div>
+</section>
+</body>
+</html>

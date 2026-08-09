@@ -32,7 +32,7 @@ function formatIndex(index: number) {
 </script>
 
 <template>
-  <UiSection id="learning-paths" watermark labelledby="home-paths-title">
+  <UiSection id="learning-paths" labelledby="home-paths-title">
     <h2 id="home-paths-title" class="sr-only">{{ t('homeSections.pathCards.title') }}</h2>
     <div class="paths__grid">
       <NuxtLink

@@ -1,0 +1,263 @@
+/* Fluyo School — shared brand base for teachers-section prototypes.
+   Tokens sampled from _bmad-output/design-system/fluyo-brand-design-system.md.
+   Fonts + real teacher cut-out portraits are loaded from /public via relative paths,
+   so open these files from inside the repo. */
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../../public/fonts/inter-latin-wght.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-024F, U+2000-206F, U+2070-209F, U+20A0-20BF, U+2100-214F;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../../public/fonts/inter-cyrillic-wght.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0400-04FF, U+0500-052F, U+2DE0-2DFF, U+A640-A69F;
+}
+@font-face {
+  font-family: 'Pinyon Script';
+  src: url('../../public/fonts/pinyon-script-latin-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --burgundy: #7a1e2b;
+  --burgundy-deep: #5e1420;
+  --cream: #faf5f2;
+  --cream-dark: #f7f3ef;
+  --blush: #e9d5d2;
+  --rose: #8b5059;
+  --ink: #3c2a2a;
+  --charcoal: #494747;
+  --silver: #a5a5a5;
+  --hairline: rgba(122, 30, 43, 0.18);
+  --hairline-soft: rgba(122, 30, 43, 0.1);
+  --radius-card: 1.25rem;
+  --tracking-display: 0.08em;
+  --shadow-soft: 0 24px 60px -32px rgba(94, 20, 32, 0.35);
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { display: block; max-width: 100%; }
+
+/* ---- Prototype chrome (not part of the section) ---- */
+.proto-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 1.25rem;
+  padding: 1rem clamp(1.25rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--hairline-soft);
+  font-size: 0.8rem;
+  color: var(--charcoal);
+}
+.proto-bar strong {
+  font-weight: 700;
+  color: var(--burgundy);
+  letter-spacing: 0.02em;
+}
+.proto-bar a { color: var(--charcoal); }
+.proto-bar span { color: var(--silver); }
+
+/* ---- Section scaffold ---- */
+.section {
+  padding: clamp(3.5rem, 8vw, 7rem) clamp(1.25rem, 5vw, 4rem);
+}
+.section--inverse {
+  background: var(--burgundy);
+  color: var(--cream-dark);
+}
+.shell {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* ---- Eyebrow pill ---- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: 9999px;
+  background: var(--burgundy);
+  color: var(--cream-dark);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+}
+.eyebrow--ghost {
+  background: transparent;
+  color: var(--burgundy);
+  border: 1px solid var(--hairline);
+}
+.section--inverse .eyebrow {
+  background: var(--cream-dark);
+  color: var(--burgundy);
+}
+
+/* ---- Headings + lockups ---- */
+.script {
+  font-family: 'Pinyon Script', cursive;
+  font-weight: 400;
+  color: var(--burgundy);
+  line-height: 0.95;
+}
+.section--inverse .script { color: var(--cream-dark); }
+
+.section-title {
+  margin: 0;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.08;
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+  color: var(--burgundy);
+}
+.section--inverse .section-title { color: var(--cream-dark); }
+
+.lede {
+  max-width: 42ch;
+  margin: 1rem 0 0;
+  color: var(--charcoal);
+  font-size: 1.02rem;
+}
+.section--inverse .lede { color: rgba(247, 243, 239, 0.82); }
+
+.role {
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+.section--inverse .role { color: var(--cream-dark); }
+
+.meta {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: 9999px;
+  border: 1.5px solid var(--burgundy);
+  background: var(--burgundy);
+  color: var(--cream-dark);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.btn:hover { background: var(--burgundy-deep); border-color: var(--burgundy-deep); }
+.btn--ghost {
+  background: transparent;
+  color: var(--burgundy);
+}
+.btn--ghost:hover { background: var(--blush); color: var(--burgundy-deep); }
+.section--inverse .btn {
+  background: var(--cream-dark);
+  border-color: var(--cream-dark);
+  color: var(--burgundy);
+}
+.section--inverse .btn:hover { background: #fff; }
+
+/* ---- Fact card ---- */
+.fact {
+  background: #fff;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
+  padding: 1.1rem 1.25rem;
+}
+.fact__title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--burgundy);
+  letter-spacing: -0.01em;
+}
+.fact__body {
+  margin: 0.25rem 0 0;
+  font-size: 0.88rem;
+  color: var(--charcoal);
+}
+
+/* ---- Underline list ---- */
+.ul-list { list-style: none; margin: 0; padding: 0; }
+.ul-list li {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--hairline-soft);
+  font-size: 0.95rem;
+}
+.ul-list li::before {
+  content: '';
+  display: inline-block;
+  width: 1.1rem;
+  height: 2px;
+  margin-right: 0.6rem;
+  vertical-align: middle;
+  background: var(--burgundy);
+}
+
+/* ---- Cut-out portrait (collage element, never boxed) ---- */
+.portrait { position: relative; }
+.portrait img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 18px 34px rgba(94, 20, 32, 0.22));
+}
+.portrait--well::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 62%;
+  border-radius: var(--radius-card);
+  background: var(--blush);
+  z-index: -1;
+}
+
+/* ---- Watermark F ---- */
+.watermark {
+  position: absolute;
+  font-family: 'Pinyon Script', cursive;
+  color: var(--burgundy);
+  opacity: 0.06;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+.section--inverse .watermark { color: var(--cream-dark); opacity: 0.09; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

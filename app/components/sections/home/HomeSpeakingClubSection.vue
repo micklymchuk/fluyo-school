@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import HomeSpeakingClubBody from '~/components/sections/home/HomeSpeakingClubBody.vue'
 import UiSticker from '~/components/ui/UiSticker.vue'
-import UiWatermark from '~/components/ui/UiWatermark.vue'
 
 const { t } = useI18n()
 </script>
 
 <template>
   <section id="speaking-club" class="speaking-club" aria-labelledby="home-speaking-club-title">
-    <UiWatermark />
     <div class="speaking-club__container">
       <h2 id="home-speaking-club-title" class="speaking-club__title">
         <span class="speaking-club__caps">{{ t('homeSections.speakingClub.capsWord') }}</span>

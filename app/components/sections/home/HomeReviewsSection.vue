@@ -22,7 +22,6 @@ const testimonialItems = computed(() => {
   <UiSection
     id="student-reviews"
     variant="inverse"
-    watermark
     labelledby="home-reviews-title"
   >
     <template #heading>

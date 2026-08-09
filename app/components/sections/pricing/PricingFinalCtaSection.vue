@@ -23,7 +23,6 @@ const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramConte
   <UiSection
     class="pricing-page__final-cta"
     variant="inverse"
-    watermark
     :eyebrow="t('pricingSections.finalCta.eyebrow')"
     :title="t('pricingSections.finalCta.title')"
     :description="t(`pricingSections.finalCta.pathDescriptions.${pathContext}`)"
