@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fluyo — Викладачі · Editorial Index</title>
+<link rel="stylesheet" href="_base.css">
+<style>
+  .split { display: grid; grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); gap: clamp(2.5rem, 6vw, 5rem); align-items: start; }
+  @media (max-width: 820px) { .split { grid-template-columns: 1fr; gap: 2.5rem; } .aside { position: static !important; } }
+
+  .aside { position: sticky; top: 2rem; }
+  .aside .script { font-size: clamp(2.8rem, 6vw, 3.8rem); display: block; margin: 0.4rem 0 1rem; }
+
+  .roster { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hairline); }
+  .row { display: grid; grid-template-columns: 3rem 6.5rem 1fr auto; gap: clamp(1rem, 3vw, 2rem); align-items: center; padding: clamp(1.25rem, 3vw, 2rem) 0; border-bottom: 1px solid var(--hairline); }
+  .row:hover .row__name { color: var(--burgundy-deep); }
+
+  .row__num { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; color: var(--silver); }
+  .row__photo { height: 110px; display: flex; align-items: flex-end; justify-content: center; }
+  .row__photo img { height: 100%; width: auto; filter: drop-shadow(0 10px 18px rgba(94,20,32,0.2)); }
+  .row__name { font-family: 'Pinyon Script', cursive; font-size: 2.6rem; line-height: 1; color: var(--burgundy); transition: color .18s ease; }
+  .row__role { display: block; margin-top: 0.35rem; font-size: 0.8rem; font-weight: 700; letter-spacing: var(--tracking-display); text-transform: uppercase; color: var(--rose); }
+  .row__desc { margin: 0; max-width: 34ch; font-size: 0.9rem; color: var(--charcoal); }
+  .row__tag { justify-self: end; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--burgundy); border: 1px solid var(--hairline); border-radius: 9999px; padding: 0.3rem 0.7rem; white-space: nowrap; }
+
+  @media (max-width: 620px) {
+    .row { grid-template-columns: 4.5rem 1fr; grid-template-areas: 'photo name' 'photo role' 'desc desc' 'tag tag'; row-gap: 0.35rem; }
+    .row__num { display: none; }
+    .row__photo { grid-area: photo; height: 92px; }
+    .row__name { grid-area: name; font-size: 2.2rem; }
+    .row__role { grid-area: role; }
+    .row__desc { grid-area: desc; margin-top: 0.5rem; }
+    .row__tag { grid-area: tag; justify-self: start; margin-top: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+<div class="proto-bar"><strong>Prototype 5 / 5</strong> <span>·</span> Editorial Index — реєстр викладачів у стилі змісту журналу, максимально стримано <span>·</span> <a href="index.html">всі варіанти →</a></div>
+
+<section class="section">
+  <div class="shell split">
+    <div class="aside">
+      <span class="eyebrow eyebrow--ghost">Наша команда</span>
+      <span class="script">Викладачі</span>
+      <p class="lede">Невелика команда — щоб кожного учня вели особисто. Оберіть викладача під свою мету.</p>
+      <a class="btn" href="#" style="margin-top:1.5rem">Записатись на пробне →</a>
+    </div>
+
+    <ul class="roster">
+      <li class="row">
+        <span class="row__num">01</span>
+        <span class="row__photo"><img src="../../public/images/teachers/catherina-web.png" alt="Catherina, засновниця Fluyo School"></span>
+        <span><span class="row__name">Catherina</span><span class="row__role">Засновниця · дорослі</span></span>
+        <span class="row__tag">C2 · CELTA</span>
+        <p class="row__desc" style="grid-column: 2 / -1; margin-top: 0.75rem">Веде дорослих до вільної розмови та ділової англійської. 12 років викладання.</p>
+      </li>
+      <li class="row">
+        <span class="row__num">02</span>
+        <span class="row__photo"><img src="../../public/images/teachers/diana-web.png" alt="Diana, викладачка підготовки до іспитів"></span>
+        <span><span class="row__name">Diana</span><span class="row__role">Підготовка до іспитів</span></span>
+        <span class="row__tag">IELTS 8.5</span>
+        <p class="row__desc" style="grid-column: 2 / -1; margin-top: 0.75rem">Доводить до цільового балу в IELTS і TOEFL. Понад 300 успішних учнів.</p>
+      </li>
+      <li class="row">
+        <span class="row__num">03</span>
+        <span class="row__photo"><img src="../../public/images/teachers/ksenia-web.png" alt="Ksenia, викладачка для дітей та підлітків"></span>
+        <span><span class="row__name">Ksenia</span><span class="row__role">Діти та підлітки</span></span>
+        <span class="row__tag">TKT: YL</span>
+        <p class="row__desc" style="grid-column: 2 / -1; margin-top: 0.75rem">Легкий і радісний старт у мові для дітей від 7 років та школярів.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+</body>
+</html>

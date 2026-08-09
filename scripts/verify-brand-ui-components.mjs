@@ -15,7 +15,6 @@ const files = {
   uiStampCard: resolve(root, 'app/components/ui/UiStampCard.vue'),
   uiCarousel: resolve(root, 'app/components/ui/UiCarousel.vue'),
   uiUnderlineList: resolve(root, 'app/components/ui/UiUnderlineList.vue'),
-  uiWatermark: resolve(root, 'app/components/ui/UiWatermark.vue'),
   fontsDir: resolve(root, 'public/fonts')
 }
 
@@ -25,8 +24,7 @@ const newComponents = [
   'uiFrameBox',
   'uiStampCard',
   'uiCarousel',
-  'uiUnderlineList',
-  'uiWatermark'
+  'uiUnderlineList'
 ]
 
 const checks = {
@@ -192,13 +190,6 @@ function verifyBrandComponents() {
   assertPattern(underlineList, /<ul/, 'UiUnderlineList must keep semantic list markup')
   assertPattern(underlineList, /list-none/, 'UiUnderlineList must suppress native bullets')
   assertPattern(underlineList, /inverse/, 'UiUnderlineList must support the inverse variant')
-
-  const watermark = read(files.uiWatermark)
-  assertPattern(watermark, /aria-hidden="true"/, 'UiWatermark must be aria-hidden decoration')
-  assertPattern(watermark, /pointer-events-none|pointer-events:\s*none/, 'UiWatermark must not intercept pointer events')
-  assertPattern(watermark, /absolute/, 'UiWatermark must be absolutely positioned inside its parent')
-  assertPattern(watermark, /font-script/, 'UiWatermark glyphs must render in the script face')
-  assertPattern(watermark, /inverse/, 'UiWatermark must support the on-inverse mode')
 }
 
 function verifyStableTypeSizes() {

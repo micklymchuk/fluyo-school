@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fluyo — Викладачі · Framed Gallery</title>
+<link rel="stylesheet" href="_base.css">
+<style>
+  .frame {
+    position: relative;
+    border: clamp(12px, 1.6vw, 22px) solid var(--burgundy);
+    border-radius: 6px;
+    background: var(--cream);
+    padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3.5rem) clamp(2.5rem, 5vw, 3.5rem);
+    overflow: hidden;
+  }
+  .frame .watermark { font-size: 22rem; right: -3rem; bottom: -6rem; }
+
+  .head { text-align: center; margin-bottom: clamp(2.25rem, 5vw, 3.5rem); position: relative; }
+  .head .script { font-size: clamp(2.8rem, 7vw, 4.2rem); display: block; margin-top: 0.3rem; }
+
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 4vw, 3rem); position: relative; }
+  @media (max-width: 800px) { .gallery { grid-template-columns: 1fr; max-width: 22rem; margin-inline: auto; } }
+
+  .piece { text-align: center; }
+  .piece__stage {
+    position: relative;
+    height: 340px;
+    display: flex; align-items: flex-end; justify-content: center;
+  }
+  .piece__stage::before {
+    content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+    width: 82%; height: 60%; background: var(--blush); border-radius: 14px; z-index: 0;
+  }
+  .piece__stage img { position: relative; z-index: 1; height: 100%; width: auto; filter: drop-shadow(0 16px 26px rgba(94,20,32,0.22)); }
+  .piece:nth-child(1) img { transform: rotate(-1.5deg); }
+  .piece:nth-child(3) img { transform: rotate(1.5deg); }
+
+  .plate { margin-top: 1.1rem; }
+  .plate .script { font-size: 2.4rem; line-height: 1; }
+  .plate .role { display: block; margin-top: 0.35rem; font-size: 0.85rem; }
+  .plate .meta { display: block; margin-top: 0.5rem; }
+</style>
+</head>
+<body>
+<div class="proto-bar"><strong>Prototype 3 / 5</strong> <span>·</span> Framed Gallery — один товстий бордовий фрейм, портрети як на музейній стіні <span>·</span> <a href="index.html">всі варіанти →</a></div>
+
+<section class="section">
+  <div class="shell">
+    <div class="frame">
+      <span class="watermark">F</span>
+      <div class="head">
+        <span class="eyebrow">Наша команда</span>
+        <span class="script">Наші викладачі</span>
+      </div>
+
+      <div class="gallery">
+        <div class="piece">
+          <div class="piece__stage"><img src="../../public/images/teachers/catherina-web.png" alt="Catherina, засновниця Fluyo School"></div>
+          <div class="plate">
+            <span class="script">Catherina</span>
+            <span class="role">Засновниця · англійська для дорослих</span>
+            <span class="meta">C2 · CELTA · 12 років</span>
+          </div>
+        </div>
+        <div class="piece">
+          <div class="piece__stage"><img src="../../public/images/teachers/diana-web.png" alt="Diana, викладачка підготовки до іспитів"></div>
+          <div class="plate">
+            <span class="script">Diana</span>
+            <span class="role">Підготовка до іспитів</span>
+            <span class="meta">IELTS 8.5 · TOEFL</span>
+          </div>
+        </div>
+        <div class="piece">
+          <div class="piece__stage"><img src="../../public/images/teachers/ksenia-web.png" alt="Ksenia, викладачка для дітей та підлітків"></div>
+          <div class="plate">
+            <span class="script">Ksenia</span>
+            <span class="role">Діти та підлітки</span>
+            <span class="meta">TKT: YL · 7+ років</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

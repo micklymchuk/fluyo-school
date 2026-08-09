@@ -21,7 +21,6 @@ const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramConte
   <UiSection
     class="programs-page__cta-strip"
     variant="inverse"
-    watermark
     :eyebrow="t('programsSections.ctaStrip.eyebrow')"
     :title="t('programsSections.ctaStrip.title')"
     :description="t('programsSections.ctaStrip.description')"

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fluyo — Викладачі · Founder & Team</title>
+<link rel="stylesheet" href="_base.css">
+<style>
+  .head { margin-bottom: clamp(2.5rem, 6vw, 4rem); }
+  .head .script { font-size: clamp(2.8rem, 7vw, 4.2rem); display: block; margin-top: 0.25rem; }
+
+  /* Founder lead */
+  .lead { display: grid; grid-template-columns: minmax(15rem, 22rem) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  .lead__portrait { position: relative; }
+  .lead__portrait::before { content: ''; position: absolute; inset: 12% -6% -6% 8%; background: var(--blush); border-radius: var(--radius-card); z-index: 0; }
+  .lead__portrait img { position: relative; z-index: 1; filter: drop-shadow(0 20px 38px rgba(94,20,32,0.24)); }
+
+  .lead__name { display: flex; align-items: center; gap: 0.75rem; }
+  .lead__name .script { font-size: clamp(2.8rem, 5.5vw, 3.8rem); }
+  .sparkle { color: var(--burgundy); flex-shrink: 0; }
+  .quote { margin: 1.25rem 0 1.5rem; font-size: clamp(1.15rem, 2.2vw, 1.5rem); font-style: italic; line-height: 1.4; color: var(--burgundy-deep); }
+  .quote::before { content: '“'; font-family: 'Pinyon Script', cursive; font-style: normal; font-size: 2.2em; line-height: 0; vertical-align: -0.35em; margin-right: 0.1em; color: var(--rose); }
+  .lead__facts { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+  .lead__facts .n { font-size: 1.6rem; font-weight: 800; color: var(--burgundy); }
+  .lead__facts .t { font-size: 0.82rem; color: var(--charcoal); }
+
+  .rule { border: 0; border-top: 1px solid var(--hairline); margin: clamp(3rem, 6vw, 4.5rem) 0; }
+
+  /* Team */
+  .team-label { text-align: center; margin-bottom: 2rem; }
+  .team { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.25rem, 3vw, 2rem); max-width: 820px; margin-inline: auto; }
+  @media (max-width: 760px) { .lead { grid-template-columns: 1fr; } .lead__portrait { max-width: 20rem; margin-inline: auto; } .team { grid-template-columns: 1fr; max-width: 24rem; } }
+
+  .tcard { display: grid; grid-template-columns: 8rem 1fr; gap: 1.25rem; align-items: center; background: #fff; border: 1px solid var(--hairline); border-radius: var(--radius-card); padding: 1.25rem; }
+  .tcard__photo { height: 150px; background: var(--blush); border-radius: 12px; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; }
+  .tcard__photo img { height: 100%; width: auto; filter: none; }
+  .tcard .script { font-size: 2rem; line-height: 1; }
+  .tcard .role { display: block; font-size: 0.8rem; margin: 0.25rem 0 0.6rem; }
+  .tcard p { margin: 0; font-size: 0.85rem; color: var(--charcoal); }
+</style>
+</head>
+<body>
+<div class="proto-bar"><strong>Prototype 4 / 5</strong> <span>·</span> Founder &amp; Team — розворот-лід із засновницею та цитатою, далі дві компактні картки команди <span>·</span> <a href="index.html">всі варіанти →</a></div>
+
+<section class="section">
+  <div class="shell">
+    <div class="head">
+      <span class="eyebrow eyebrow--ghost">Наша команда</span>
+      <span class="script">Хто стоїть за Fluyo</span>
+    </div>
+
+    <div class="lead">
+      <div class="lead__portrait portrait"><img src="../../public/images/teachers/catherina-web.png" alt="Catherina, засновниця Fluyo School"></div>
+      <div>
+        <span class="eyebrow">Засновниця</span>
+        <div class="lead__name" style="margin-top:0.75rem">
+          <svg class="sparkle" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c1 6 5 10 12 12-7 2-11 6-12 12-1-6-5-10-12-12 7-2 11-6 12-12z" fill="currentColor"/></svg>
+          <span class="script">Catherina</span>
+        </div>
+        <span class="role">Засновниця школи · викладачка англійської</span>
+        <p class="quote">Я відкрила Fluyo, щоб англійська перестала бути іспитом і стала розмовою. Тут ви говорите з першого заняття.</p>
+        <div class="lead__facts">
+          <div><div class="n">12 років</div><div class="t">викладання</div></div>
+          <div><div class="n">C2 · CELTA</div><div class="t">кваліфікація</div></div>
+          <div><div class="n">400+</div><div class="t">випускників</div></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="rule">
+
+    <div class="team-label"><span class="meta">І команда, що веде вас далі</span></div>
+    <div class="team">
+      <div class="tcard">
+        <div class="tcard__photo"><img src="../../public/images/teachers/diana-web.png" alt="Diana, викладачка підготовки до іспитів"></div>
+        <div>
+          <span class="script">Diana</span>
+          <span class="role">Підготовка до іспитів</span>
+          <p>IELTS та TOEFL до цільового балу. Власний IELTS 8.5.</p>
+        </div>
+      </div>
+      <div class="tcard">
+        <div class="tcard__photo"><img src="../../public/images/teachers/ksenia-web.png" alt="Ksenia, викладачка для дітей та підлітків"></div>
+        <div>
+          <span class="script">Ksenia</span>
+          <span class="role">Діти та підлітки</span>
+          <p>Легкий старт для дітей від 7 років. TKT: Young Learners.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

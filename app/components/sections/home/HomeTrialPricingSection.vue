@@ -6,7 +6,6 @@ import UiCard from '~/components/ui/UiCard.vue'
 import UiDiscountBadge from '~/components/ui/UiDiscountBadge.vue'
 import UiLockupHeading from '~/components/ui/UiLockupHeading.vue'
 import UiTabSwitch from '~/components/ui/UiTabSwitch.vue'
-import UiWatermark from '~/components/ui/UiWatermark.vue'
 import { usePricePackageOptions } from '~/composables/usePricePackageOptions'
 import type { CtaContext, PriceItemId } from '~/data/content'
 
@@ -125,7 +124,6 @@ onBeforeUnmount(() => {
 
 <template>
   <section id="trial-pricing-summary" class="trial-pricing" aria-labelledby="home-trial-pricing-title">
-    <UiWatermark />
     <div ref="observerTarget" class="trial-pricing__container">
       <UiLockupHeading
         id="home-trial-pricing-title"

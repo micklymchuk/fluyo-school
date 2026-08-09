@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, useId } from 'vue'
 import UiEyebrowPill from '~/components/ui/UiEyebrowPill.vue'
-import UiWatermark from '~/components/ui/UiWatermark.vue'
 
 type SectionVariant = 'default' | 'compact' | 'spacious' | 'inverse'
 
@@ -12,15 +11,13 @@ const props = withDefaults(defineProps<{
   title?: string
   description?: string
   labelledby?: string
-  watermark?: boolean
 }>(), {
   as: 'section',
   description: undefined,
   eyebrow: undefined,
   labelledby: undefined,
   title: undefined,
-  variant: 'default',
-  watermark: false
+  variant: 'default'
 })
 
 const generatedId = useId()
@@ -44,7 +41,6 @@ const hasHeader = computed(() => {
     :class="`section--${variant}`"
     :aria-labelledby="headingId"
   >
-    <UiWatermark v-if="watermark" :mode="variant === 'inverse' ? 'inverse' : 'cream'" />
     <div class="section-inner">
       <header v-if="hasHeader || $slots.heading" class="section-header">
         <slot name="heading">
@@ -84,7 +80,6 @@ const hasHeader = computed(() => {
   @apply bg-surface-inverse text-text-inverse;
 }
 
-/* relative: content must stack above the absolutely-positioned watermark layer. */
 .section-inner {
   @apply relative mx-auto flex w-full max-w-6xl flex-col gap-component-gap px-page-gutter;
 }
