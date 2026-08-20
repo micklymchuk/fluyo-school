@@ -2,19 +2,13 @@
 import { computed } from 'vue'
 import FounderIntro from '~/components/teachers/FounderIntro.vue'
 import TeacherPortrait from '~/components/teachers/TeacherPortrait.vue'
-import HomeFactCard from '~/components/home/HomeFactCard.vue'
 import UiEyebrowPill from '~/components/ui/UiEyebrowPill.vue'
 import UiUnderlineList from '~/components/ui/UiUnderlineList.vue'
-
-type ShowcaseFact = {
-  title: string
-  body: string
-}
 
 const props = withDefaults(defineProps<{
   scriptName: string
   role: string
-  facts: ShowcaseFact[]
+  description: string
   focusTitle: string
   focusItems: string[]
   photoSrc: string
@@ -54,14 +48,7 @@ const focusColumns = computed(() => {
 
     <div class="showcase__grid" :class="{ 'showcase__grid--reversed': reversed }">
       <div class="showcase__info">
-        <div class="showcase__facts">
-          <HomeFactCard
-            v-for="(fact, factIndex) in facts"
-            :key="factIndex"
-            :title="fact.title"
-            :body="fact.body"
-          />
-        </div>
+        <p class="showcase__description">{{ description }}</p>
 
         <div v-if="focusItems.length" class="showcase__focus" role="group" :aria-label="focusTitle">
           <h3 class="showcase__focus-title">{{ focusTitle }}</h3>
@@ -114,8 +101,8 @@ const focusColumns = computed(() => {
   @apply flex flex-col gap-component-gap;
 }
 
-.showcase__facts {
-  @apply grid gap-component-gap sm:grid-cols-2;
+.showcase__description {
+  @apply text-body text-text-muted;
 }
 
 .showcase__focus {

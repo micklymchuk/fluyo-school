@@ -132,9 +132,13 @@ export type TeacherProfile = {
   scriptName: string
   /** Public path to the cut-out portrait asset. */
   photo: string
+  /** Public path to the square head-and-shoulders crop used by compact cards. */
+  avatar: string
   audienceFit: readonly LearningPathId[]
   /** Marks the founder so her profile carries the founder badge and closing quote. */
   isFounder?: boolean
+  /** Public path to the founder's full-length cut-out, used by the home founder section. */
+  founderPhoto?: string
 }
 
 export type ProofKind = 'result' | 'classroom' | 'method' | 'format'

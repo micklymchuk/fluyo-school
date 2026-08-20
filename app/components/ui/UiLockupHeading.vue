@@ -52,7 +52,11 @@ if (import.meta.dev && props.script && /[Ѐ-ӿ]/.test(props.script)) {
     <span v-if="!accent && hasScript" class="lockup-script">
       <slot name="script">{{ script }}</slot>
     </span>
-    <span v-if="hasCaps || (accent && hasScript)" class="lockup-caps">
+    <span
+      v-if="hasCaps || (accent && hasScript)"
+      class="lockup-caps"
+      :class="{ 'lockup-caps--accent': accent && hasScript }"
+    >
       <slot name="caps">{{ caps }}</slot>
       <span v-if="accent && hasScript" class="lockup-script lockup-script--accent">
         <slot name="script">{{ script }}</slot>
@@ -80,8 +84,18 @@ if (import.meta.dev && props.script && /[Ѐ-ӿ]/.test(props.script)) {
   @apply font-display text-lockup-caps font-bold uppercase tracking-display;
 }
 
+/* Accent pairing sits caps and script on one baseline and wraps between them on narrow
+   screens; the script keeps the wordmark whole so it never breaks mid-name. */
+.lockup-caps--accent {
+  @apply flex flex-wrap items-baseline gap-x-4;
+}
+
+.lockup--center .lockup-caps--accent {
+  @apply justify-center;
+}
+
 .lockup-script--accent {
-  @apply normal-case tracking-normal;
+  @apply mb-0 whitespace-nowrap normal-case tracking-normal;
 }
 
 /* Size variants change type scale only; slot/emit contract stays identical. */
@@ -95,6 +109,11 @@ if (import.meta.dev && props.script && /[Ѐ-ӿ]/.test(props.script)) {
 
 .lockup--display .lockup-caps {
   @apply text-display-caps sm:text-display-caps-sm lg:text-display-caps-lg;
+}
+
+/* Display-scale script line, so an accent pairing keeps the poster's caps/script ratio. */
+.lockup--display .lockup-script {
+  @apply text-poster-script sm:text-poster-script-sm;
 }
 
 .lockup--poster .lockup-script {

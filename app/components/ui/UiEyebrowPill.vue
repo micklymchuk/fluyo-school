@@ -8,8 +8,10 @@ const props = withDefaults(defineProps<{
   label?: string
   variant?: EyebrowPillVariant
   inverse?: boolean
+  compact?: boolean
 }>(), {
   as: 'span',
+  compact: false,
   inverse: false,
   label: undefined,
   variant: 'caps'
@@ -29,7 +31,10 @@ if (import.meta.dev && props.variant === 'script' && props.label && /[Ѐ-ӿ]/.te
     class="eyebrow-pill"
     :class="[
       `eyebrow-pill--${variant}`,
-      { 'eyebrow-pill--inverse': inverse }
+      {
+        'eyebrow-pill--compact': compact,
+        'eyebrow-pill--inverse': inverse
+      }
     ]"
   >
     <!-- Script variant sets Latin content only: Pinyon has no Cyrillic glyphs. -->
@@ -59,6 +64,15 @@ if (import.meta.dev && props.variant === 'script' && props.label && /[Ѐ-ӿ]/.te
 .eyebrow-pill--script .eyebrow-pill__label {
   @apply font-script text-eyebrow-script;
   transform: translateY(-0.12em);
+}
+
+/* Badge-scale pill that rides beside a heading (still height-driven, just a shorter track). */
+.eyebrow-pill--compact {
+  @apply h-5 min-h-0 px-2.5;
+}
+
+.eyebrow-pill--compact .eyebrow-pill__label {
+  @apply text-[0.625rem];
 }
 
 .eyebrow-pill--inverse {

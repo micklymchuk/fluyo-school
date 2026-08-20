@@ -6,15 +6,6 @@ import { teacherProfiles } from '~/data/content'
 
 const { t, tm, rt } = useI18n()
 
-const factIndexes = [0, 1] as const
-
-function teacherFacts(teacherId: string) {
-  return factIndexes.map((factIndex) => ({
-    title: t(`teacherProfiles.${teacherId}.facts[${factIndex}].title`),
-    body: t(`teacherProfiles.${teacherId}.facts[${factIndex}].body`)
-  }))
-}
-
 function teacherFocus(teacherId: string): string[] {
   const items = tm(`teacherProfiles.${teacherId}.focus`)
 
@@ -30,7 +21,7 @@ const teachers = computed(() => {
     id: teacher.id,
     scriptName: teacher.scriptName,
     role: t(`teacherProfiles.${teacher.id}.role`),
-    facts: teacherFacts(teacher.id),
+    description: t(`teacherProfiles.${teacher.id}.description`),
     focusItems: teacherFocus(teacher.id),
     photoSrc: teacher.photo,
     photoAlt: t(`assets.portrait-${teacher.id}.alt`),
@@ -57,7 +48,7 @@ const teachers = computed(() => {
         :sparkles="teacher.isFounder"
         :script-name="teacher.scriptName"
         :role="teacher.role"
-        :facts="teacher.facts"
+        :description="teacher.description"
         :focus-title="t('teachersSections.team.focusTitle')"
         :focus-items="teacher.focusItems"
         :photo-src="teacher.photoSrc"

@@ -62,6 +62,29 @@
     }
   },
   "homeSections": {
+    "founder": {
+      "capsWord": "Founder of",
+      "scriptWord": "Fluyo school",
+      "description": "My name is Catherina. It all started with one teacher and a simple idea: English comes alive the moment you speak it.",
+      "items": [
+        {
+          "title": "Education",
+          "body": "A degree in English philology — and constant practice with students from A1 to C1."
+        },
+        {
+          "title": "4 years of teaching",
+          "body": "From first phrases to confident conversation: one-to-one, in mini-groups and at Speaking Club."
+        },
+        {
+          "title": "Exam preparation",
+          "body": "NMT, EVI and English interviews — with a plan, clear steps and feedback after every lesson."
+        },
+        {
+          "title": "Why Fluyo",
+          "body": "I built Fluyo because I kept meeting people who knew the rules but were afraid to speak. Here English is learned out loud — in conversation, without fear of mistakes."
+        }
+      ]
+    },
     "hero": {
       "scriptWord": "Fluyo school",
       "headingLead": "Speak English with confidence",
@@ -128,6 +151,15 @@
           "status": "Start"
         }
       ]
+    },
+    "qa": {
+      "title": "Questions and answers",
+      "description": "These are the questions we hear most. If yours is not here, write to us on Telegram — we answer quickly."
+    },
+    "teachers": {
+      "eyebrow": "Our teachers",
+      "title": "Who you will learn with",
+      "description": "A small team where every teacher owns a focus — so you land with the person who leads exactly your goal."
     },
     "trialPricing": {
       "recommendedBadge": "Recommended",
@@ -419,46 +451,19 @@
     "catherina": {
       "name": "Catherina",
       "role": "founder & english teacher",
-      "facts": [
-        {
-          "title": "4 years of experience",
-          "body": "I help students move from studying rules to speaking with confidence."
-        },
-        {
-          "title": "Levels A1–C1",
-          "body": "Personalised learning shaped around each student’s goals, pace, and needs."
-        }
-      ],
+      "description": "Four years of experience, levels A1–C1. I help students move from studying rules to speaking with confidence, with a plan shaped around your goals and pace.",
       "focus": ["General English", "Speaking Practice", "English for Travel", "English for Kids and Teens", "Everyday English", "Interview Preparation", "NMT preparation", "EVI preparation", "Speaking Club"]
     },
     "diana": {
       "name": "Diana",
       "role": "Exam preparation teacher",
-      "facts": [
-        {
-          "title": "Exam formats",
-          "body": "I prepare students for NMT, EVI and IELTS: breaking the syllabus into clear steps and keeping the focus on the result."
-        },
-        {
-          "title": "Strategy & writing",
-          "body": "We train test strategy, academic writing and error review — so nothing on the exam comes as a surprise."
-        }
-      ],
+      "description": "I prepare students for NMT, EVI and IELTS: the syllabus broken into clear steps, plus test strategy, academic writing and error review.",
       "focus": ["NMT preparation", "EVI preparation", "IELTS", "Academic writing", "Test strategy", "Error review"]
     },
     "ksenia": {
       "name": "Ksenia",
       "role": "Kids and teens teacher",
-      "facts": [
-        {
-          "title": "Kids & teens",
-          "body": "I guide younger learners and teens at a calm pace, with short active tasks and plenty of games."
-        },
-        {
-          "title": "Speaking & joy",
-          "body": "I focus on live speaking and confidence, and parents get honest feedback on a regular basis."
-        }
-      ],
+      "description": "I guide younger learners and teens at a calm pace — short active tasks, plenty of games, and a focus on live speaking. Parents get honest feedback on a regular basis.",
       "focus": ["English for Kids and Teens", "Speaking Practice", "Playful tasks", "Speaking confidence", "Parent feedback", "Gentle start"]
     }
   },
@@ -529,8 +534,20 @@
     "brand-logo-short": {
       "alt": "Short Fluyo School logo."
     },
+    "avatar-catherina": {
+      "alt": "Close-up portrait of founder and teacher Catherina."
+    },
+    "avatar-diana": {
+      "alt": "Close-up portrait of teacher Diana."
+    },
+    "avatar-ksenia": {
+      "alt": "Close-up portrait of teacher Ksenia."
+    },
     "portrait-catherina": {
       "alt": "Portrait of founder and teacher Catherina."
+    },
+    "portrait-catherina-founder": {
+      "alt": "Catherina, founder of Fluyo School, full length."
     },
     "portrait-diana": {
       "alt": "Portrait of teacher Diana."

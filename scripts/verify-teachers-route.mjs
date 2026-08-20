@@ -140,7 +140,7 @@ function verifySectionComponents() {
   // Team — all three profiles (founder + two teachers) through one shared showcase.
   assertIncludes(teamSection, 'teachers-page__team', 'team section')
   assertPattern(teamSection, /teacherProfiles/, 'team section must render from shared teacher profiles')
-  assertPattern(teamSection, /teacherProfiles\.\$\{teacherId\}\.facts/, 'team cards must render fact blocks from shared teacher copy')
+  assertPattern(teamSection, /teacherProfiles\.\$\{teacher\.id\}\.description/, 'team cards must render the description from shared teacher copy')
   assertPattern(teamSection, /teacherProfiles\.\$\{teacherId\}\.focus/, 'team cards must render focus lists from shared teacher copy')
   assertPattern(teamSection, /<TeacherShowcase/, 'team section must compose the shared teacher showcase')
   assertPattern(teamSection, /isFounder/, 'team section must distinguish the founder profile')
@@ -150,7 +150,7 @@ function verifySectionComponents() {
   for (const [prop, label] of [
     ['scriptName: string', 'script name'],
     ['role: string', 'role'],
-    ['facts: ShowcaseFact[]', 'facts'],
+    ['description: string', 'description'],
     ['focusTitle: string', 'focus title'],
     ['focusItems: string[]', 'focus items'],
     ['photoSrc: string', 'photo source'],
@@ -208,12 +208,7 @@ function verifyTeachersMessages(messages, locale) {
       assertNonEmptyString(profile?.[field], `${locale}.json teacherProfiles.${teacherId}.${field}`)
     }
 
-    assert(Array.isArray(profile?.facts) && profile.facts.length === 2, `${locale}.json teacherProfiles.${teacherId}.facts must contain two facts`)
-    for (const fact of profile.facts) {
-      for (const field of ['title', 'body']) {
-        assertNonEmptyString(fact?.[field], `${locale}.json teacherProfiles.${teacherId}.facts.${field}`)
-      }
-    }
+    assertNonEmptyString(profile?.description, `${locale}.json teacherProfiles.${teacherId}.description`)
 
     assert(Array.isArray(profile?.focus) && profile.focus.length > 0, `${locale}.json teacherProfiles.${teacherId}.focus must be a non-empty array`)
     for (const item of profile.focus) {
