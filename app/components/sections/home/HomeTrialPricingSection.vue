@@ -6,6 +6,7 @@ import UiCard from '~/components/ui/UiCard.vue'
 import UiDiscountBadge from '~/components/ui/UiDiscountBadge.vue'
 import UiLockupHeading from '~/components/ui/UiLockupHeading.vue'
 import UiPencilMark from '~/components/ui/UiPencilMark.vue'
+import UiPriceSwap from '~/components/ui/UiPriceSwap.vue'
 import UiReveal from '~/components/ui/UiReveal.vue'
 import UiTabSwitch from '~/components/ui/UiTabSwitch.vue'
 import UiWatermarkField from '~/components/ui/UiWatermarkField.vue'
@@ -35,6 +36,18 @@ const activePackages = computed(() => packagesByAudience[selectedAudience.value]
 
 const selectedLessonCount = ref(
   packagesByAudience.adults.popularLessonCount ?? packagesByAudience.adults.lessonCounts[0] ?? 1
+)
+/** Prices travel with the switcher: a bigger package sends them up, a smaller one down. */
+const priceDirection = ref<'up' | 'down'>('up')
+/**
+ * The total chip stays mounted so its slot can animate its height, so it needs a value
+ * even while collapsed: it holds the last real package total instead of flashing a
+ * one-lesson "total" on the way out.
+ */
+const chipLessonCount = ref(
+  selectedLessonCount.value > 1
+    ? selectedLessonCount.value
+    : packagesByAudience.adults.lessonCounts.find((count) => count > 1) ?? selectedLessonCount.value
 )
 
 /** The two ways to start: the free consultation and the paid trial lesson. */
@@ -74,14 +87,16 @@ const switcherOptions = computed(() =>
 const tracks = computed(() =>
   activePackages.value.trackOptions.map((track) => {
     const option = track.options.find((item) => item.lessonCount === selectedLessonCount.value) ?? track.options[0]!
+    const chipOption = track.options.find((item) => item.lessonCount === chipLessonCount.value) ?? option
 
     return {
       id: track.id,
       title: t(`pricingSections.packages.tracks.${track.id}.title`),
       description: t(`priceItems.${track.priceItemId}.caption`),
       perLesson: packagePerLesson(option, track.unit),
-      total: packageTotal(option),
-      lessonCount: option.lessonCount
+      totalLine: `${packageTotal(chipOption)} ${t('pricingSections.packages.totalLabel')}`,
+      /** The single lesson has no package total, so its chip closes away. */
+      hasTotal: option.lessonCount > 1
     }
   })
 )
@@ -151,7 +166,12 @@ function onLessonCountChange(value: string | number) {
     return
   }
 
+  priceDirection.value = count > selectedLessonCount.value ? 'up' : 'down'
   selectedLessonCount.value = count
+
+  if (count > 1) {
+    chipLessonCount.value = count
+  }
   trackPricingSummaryView()
   trackEvent('pricing_switcher_change', {
     route: route.fullPath,
@@ -269,10 +289,29 @@ onBeforeUnmount(() => {
             <UiReveal v-for="(track, index) in tracks" :key="track.id" :delay="revealDelay(index)">
               <UiCard class="track-card">
                 <h3 class="track-card__title">{{ track.title }}</h3>
-                <p class="track-card__value">{{ track.perLesson }}</p>
-                <p v-if="track.lessonCount > 1" class="track-card__total">
-                  {{ track.total }} {{ t('pricingSections.packages.totalLabel') }}
-                </p>
+                <UiPriceSwap
+                  as="p"
+                  class="track-card__value"
+                  :value="track.perLesson"
+                  :direction="priceDirection"
+                />
+                <!-- The chip stays in the DOM so the slot can animate its height against
+                     real content; `inert` plus the hidden visibility below keep the
+                     collapsed total out of the a11y tree. -->
+                <div
+                  class="track-card__total-slot"
+                  :class="{ 'track-card__total-slot--collapsed': !track.hasTotal }"
+                  :inert="!track.hasTotal"
+                >
+                  <div class="track-card__total-viewport">
+                    <UiPriceSwap
+                      as="p"
+                      class="track-card__total"
+                      :value="track.totalLine"
+                      :direction="priceDirection"
+                    />
+                  </div>
+                </div>
                 <p class="track-card__desc">{{ track.description }}</p>
               </UiCard>
             </UiReveal>
@@ -426,13 +465,63 @@ onBeforeUnmount(() => {
   @apply font-display text-card-title font-bold text-accent-burgundy;
 }
 
-/* Package total sits in a soft burgundy chip so it reads clearly under the per-lesson price. */
+/* Package total sits in a soft burgundy chip so it reads clearly under the per-lesson price.
+   It fades and lifts behind the closing edge of its slot, so the total doesn't sit at full
+   strength while its room disappears. */
 .track-card__total {
   @apply w-fit rounded-pill bg-accent-subdued px-2.5 py-1 text-small font-semibold text-accent-burgundy-strong;
+
+  transition-property: opacity, transform;
+  transition-duration: var(--transition-duration-medium);
+  transition-timing-function: var(--ease-standard);
 }
 
 .track-card__desc {
   @apply grow text-small text-text-muted;
+}
+
+/* From 4 lessons up the card carries a package total; below that the slot closes.
+   Same mechanism as UiAccordion: one grid row animated from 1fr to 0fr, so the height
+   is interpolated against the real chip instead of a measured max-height. The chip is
+   never unmounted — an `fr` row measures its content, so removing it would snap the
+   card's height in one frame. */
+.track-card__total-slot {
+  @apply grid overflow-hidden;
+
+  grid-template-rows: 1fr;
+  transition-property: grid-template-rows, margin-top, visibility;
+  transition-duration: var(--transition-duration-medium);
+  transition-timing-function: var(--ease-standard);
+}
+
+/* The viewport is the grid item: min-height:0 plus its own clipping let the row reach
+   a true zero. The negative margin swallows the card's flex gap, so a closed slot
+   takes up nothing at all. */
+.track-card__total-viewport {
+  @apply min-h-0 overflow-hidden;
+}
+
+.track-card__total-slot--collapsed {
+  grid-template-rows: 0fr;
+  margin-top: calc(var(--spacing-control-compact) * -1);
+  visibility: hidden;
+}
+
+.track-card__total-slot--collapsed .track-card__total {
+  opacity: 0;
+  transform: scale(0.94) translate3d(0, -0.25rem, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track-card__total-slot,
+  .track-card__total {
+    transition: none;
+  }
+
+  .track-card__total-slot--collapsed .track-card__total {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* The switcher row is the anchor: discount seals sit just outside its left/right edges,
