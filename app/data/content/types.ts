@@ -26,7 +26,22 @@ export type PriceItemId =
   | 'KIDS_SIXTY'
 export type TeacherProfileId = 'catherina' | 'diana' | 'ksenia'
 export type ProofAssetId = 'student-result-ielts' | 'kids-class-snapshot' | 'adult-speaking-note' | 'lesson-format-board'
-export type TestimonialId = 'danylo-exam' | 'olena-parent' | 'marta-adult'
+export type TestimonialId =
+  | 'dmytro-general'
+  | 'iryna-general'
+  | 'anastasiia-nmt'
+  | 'yuliia-cambridge-b2'
+  | 'nicole-nmt'
+  | 'kseniia-speaking-club'
+  | 'kateryna-general'
+  | 'yuliia-speaking-club'
+  | 'sofiia-kids-homework'
+  | 'anastasiia-speaking-club'
+  | 'kateryna-speaking-club'
+  | 'viktoriia-general'
+  | 'kateryna-nmt'
+  | 'inna-general'
+  | 'sofiia-kids-progress'
 export type FaqItemId =
   | 'enrollment'
   | 'consultation-vs-trial'
@@ -45,7 +60,7 @@ export type PageContent = {
 }
 
 export type CtaFormat = 'telegram' | 'anchor' | 'route'
-export type MessageIntent = 'book_consultation' | 'book_trial' | 'ask_program' | 'ask_teacher' | 'ask_price'
+export type MessageIntent = 'book_consultation' | 'book_trial' | 'book_speaking_club' | 'ask_program' | 'ask_teacher' | 'ask_price'
 export type TelegramPathContext = 'general' | 'exam' | 'speaking-club' | 'kids' | 'professional' | 'interview' | 'generic'
 export type TelegramFormatContext = 'individual' | 'speaking-club' | 'mini-group' | 'generic'
 export type CtaSourceRoute = PageRouteId | 'header' | 'footer' | 'section' | 'final-booking'

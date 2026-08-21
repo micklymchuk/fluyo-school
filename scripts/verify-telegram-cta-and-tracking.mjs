@@ -102,7 +102,7 @@ function loadTelegramCtaModule() {
     .replace(/const normalizeFormatContext = \(format: unknown\): TelegramFormatContext =>/, 'const normalizeFormatContext = (format) =>')
     .replace(/const normalizeLocale = \(locale: unknown\): Locale =>/, 'const normalizeLocale = (locale) =>')
     .replace(/const normalizeMessageIntent = \(messageIntent: unknown\): MessageIntent =>/, 'const normalizeMessageIntent = (messageIntent) =>')
-    .replace(/const buildTelegramMessage = \(context: Required<Pick<CtaContext, 'path' \| 'format' \| 'locale' \| 'messageIntent'>>\) =>/, 'const buildTelegramMessage = (context) =>')
+    .replace(/const buildTelegramMessage = \(messageIntent: MessageIntent\) =>/, 'const buildTelegramMessage = (messageIntent) =>')
     .replace(/export const resolveTelegramCta = \(context: CtaContext = \{}, route\?: string\): TelegramCta =>/, 'const resolveTelegramCta = (context = {}, route) =>')
     .replace(/const sourceRoute: CtaSourceRoute \| undefined =/, 'const sourceRoute =')
     .replace(/const trackingContext: TrackingPayload =/, 'const trackingContext =')
@@ -148,7 +148,8 @@ function verifyPackageScript() {
 function verifySharedTypes() {
   const contentTypes = read(files.contentTypes)
 
-  assertPattern(contentTypes, /export type TelegramPathContext = 'exam' \| 'kids' \| 'adult' \| 'generic'/, 'content types must define TelegramPathContext')
+  assertPattern(contentTypes, /export type MessageIntent = 'book_consultation' \| 'book_trial' \| 'book_speaking_club' \| 'ask_program' \| 'ask_teacher' \| 'ask_price'/, 'content types must define MessageIntent')
+  assertPattern(contentTypes, /export type TelegramPathContext = 'general' \| 'exam' \| 'speaking-club' \| 'kids' \| 'professional' \| 'interview' \| 'generic'/, 'content types must define TelegramPathContext')
   assertPattern(contentTypes, /export type TelegramFormatContext = 'individual' \| 'speaking-club' \| 'mini-group' \| 'generic'/, 'content types must define TelegramFormatContext')
   assertPattern(contentTypes, /export type CtaSourceRoute = PageRouteId \| 'header' \| 'footer' \| 'section' \| 'final-booking'/, 'content types must define CtaSourceRoute')
   assertPattern(contentTypes, /export type CtaContext = \{[\s\S]*path\?: TelegramPathContext[\s\S]*format\?: TelegramFormatContext[\s\S]*sourceRoute\?: CtaSourceRoute[\s\S]*locale\?: Locale[\s\S]*messageIntent\?: MessageIntent/s, 'content types must define optional CtaContext fields')
@@ -166,8 +167,9 @@ function verifyTelegramCtaComposable() {
   assertPattern(useTelegramCta, /isTelegramFormatContext\(format\) \? format : 'generic'/, 'unknown format must fall back to generic context')
   assertPattern(useTelegramCta, /isLocale\(locale\) \? locale : DEFAULT_LOCALE/, 'unknown locale must fall back to default locale')
   assertPattern(useTelegramCta, /isMessageIntent\(messageIntent\) \? messageIntent : defaultMessageIntent/, 'unknown message intent must fall back to default intent')
-  assertPattern(useTelegramCta, /exam[\s\S]*kids[\s\S]*adult/s, 'known path contexts must be distinguishable')
-  assertPattern(useTelegramCta, /localeLabels/, 'useTelegramCta must use readable locale labels in Telegram messages')
+  assertPattern(useTelegramCta, /exam[\s\S]*kids[\s\S]*professional/s, 'known path contexts must be distinguishable')
+  assertPattern(useTelegramCta, /const intentMessages: Record<MessageIntent, string>/, 'useTelegramCta must map message intents to prefilled Telegram text')
+  assertPattern(useTelegramCta, /buildTelegramMessage = \(messageIntent: MessageIntent\) => \{\s*return intentMessages\[messageIntent\]/, 'Telegram message must be intent-only, with no path, format, or locale context appended')
   assertPattern(useTelegramCta, /telegram_context/, 'useTelegramCta must expose telegram_context tracking context')
   assertPattern(useTelegramCta, /telegram_click/, 'useTelegramCta must expose telegram_click tracking context')
 }
@@ -183,24 +185,35 @@ function verifyTelegramCtaBehavior() {
   }, '/pricing?path=unknown')
   const genericMessage = decodeURIComponent(new URL(genericCta.url).searchParams.get('text') ?? '')
 
-  assertIncludes(genericMessage, 'book a trial lesson', 'generic Telegram CTA message')
-  assertIncludes(genericMessage, 'English lessons', 'generic Telegram CTA message')
-  assertIncludes(genericMessage, 'trial', 'generic Telegram CTA message')
-  assertIncludes(genericMessage, 'Ukrainian', 'generic Telegram CTA message')
+  assert(genericMessage === 'Вітаю! Хочу записатися на пробний урок.', 'generic Telegram CTA message must be the Ukrainian trial-booking sentence')
   assertNotIncludes(genericMessage, 'undefined', 'generic Telegram CTA message')
-  assertNotIncludes(genericMessage, 'UK', 'generic Telegram CTA message')
+  assertPattern(genericMessage, /^[^A-Za-z]+$/, 'Telegram CTA message must stay Ukrainian, with no latin copy')
   assert(genericCta.trackingContext.path === 'generic', 'unknown path context must normalize to generic')
   assert(genericCta.trackingContext.format === 'generic', 'unknown format context must normalize to generic')
   assert(genericCta.trackingContext.locale === 'uk', 'unknown locale must normalize to uk')
   assert(genericCta.trackingContext.messageIntent === 'book_trial', 'unknown message intent must normalize to book_trial')
 
-  const pathMessages = ['exam', 'kids', 'adult'].map((path) => {
-    const cta = resolveTelegramCta({ path, locale: 'en', messageIntent: 'ask_program' }, '/programs')
+  const pathCtas = ['exam', 'kids', 'professional'].map((path) => {
+    return resolveTelegramCta({ path, format: 'individual', locale: 'en', messageIntent: 'ask_program' }, '/programs')
+  })
+  const pathMessages = pathCtas.map((cta) => decodeURIComponent(new URL(cta.url).searchParams.get('text') ?? ''))
+
+  assert(new Set(pathMessages).size === 1, 'path context must not leak into the Telegram message')
+  assert(pathMessages[0] === 'Вітаю! Хочу дізнатися більше про програми навчання.', 'ask_program must prefill the Ukrainian program question')
+  assert(new Set(pathCtas.map((cta) => cta.trackingContext.path)).size === 3, 'path context must stay distinguishable in the tracking payload')
+
+  const allIntents = ['book_consultation', 'book_trial', 'book_speaking_club', 'ask_program', 'ask_teacher', 'ask_price']
+  const intentMessages = allIntents.map((messageIntent) => {
+    const cta = resolveTelegramCta({ messageIntent }, '/pricing')
 
     return decodeURIComponent(new URL(cta.url).searchParams.get('text') ?? '')
   })
 
-  assert(new Set(pathMessages).size === 3, 'exam, kids, and adult CTA messages must be distinguishable')
+  assert(new Set(intentMessages).size === allIntents.length, 'each message intent must prefill a distinct Telegram message')
+  assert(
+    decodeURIComponent(new URL(resolveTelegramCta({ messageIntent: 'book_speaking_club' }).url).searchParams.get('text') ?? '') === 'Вітаю! Хочу записатися на Speaking Club заняття.',
+    'book_speaking_club must prefill the Speaking Club booking sentence'
+  )
 }
 
 function verifyTrackingComposable() {

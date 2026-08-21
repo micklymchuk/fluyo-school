@@ -145,7 +145,7 @@ function assertHomeSectionMessages(messages, locale) {
   }
 
   const trialPricing = messages.homeSections.trialPricing
-  for (const field of ['eyebrow', 'title', 'description', 'trialBadge', 'trialValue', 'trialUnit', 'formatSignalsAriaLabel', 'pricingCta', 'telegramCta']) {
+  for (const field of ['eyebrow', 'title', 'description', 'trialBadge', 'trialValue', 'trialUnit', 'formatSignalsAriaLabel', 'telegramCta']) {
     assertNonEmptyString(trialPricing?.[field], `${locale}.json homeSections.trialPricing.${field}`)
   }
 

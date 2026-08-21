@@ -12,7 +12,7 @@ const telegramContext = computed<CtaContext>(() => ({
   format: 'speaking-club',
   sourceRoute: 'section',
   locale: locale.value,
-  messageIntent: 'ask_program'
+  messageIntent: 'book_speaking_club'
 }))
 const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramContext)
 </script>

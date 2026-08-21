@@ -50,7 +50,23 @@ const requiredLearningPathIds = ['exam', 'kids', 'adult']
 const requiredPriceItemIds = ['TRIAL', 'EXAM_PREP', 'MINI_GROUP', 'INDIVIDUAL', 'SPEAKING_CLUB']
 const requiredTeacherProfileIds = ['catherina', 'diana', 'ksenia']
 const requiredProofAssetIds = ['student-result-ielts', 'kids-class-snapshot', 'adult-speaking-note', 'lesson-format-board']
-const requiredTestimonialIds = ['danylo-exam', 'olena-parent', 'marta-adult']
+const requiredTestimonialIds = [
+  'dmytro-general',
+  'iryna-general',
+  'anastasiia-nmt',
+  'yuliia-cambridge-b2',
+  'nicole-nmt',
+  'kseniia-speaking-club',
+  'kateryna-general',
+  'yuliia-speaking-club',
+  'sofiia-kids-homework',
+  'anastasiia-speaking-club',
+  'kateryna-speaking-club',
+  'viktoriia-general',
+  'kateryna-nmt',
+  'inna-general',
+  'sofiia-kids-progress'
+]
 const requiredFaqItemIds = ['enrollment', 'consultation-vs-trial', 'subscription-benefit', 'teacher-match', 'online-format', 'format-choice']
 const requiredAssetIds = [
   'brand-logo-full',
@@ -369,7 +385,7 @@ function assertHomeSectionMessages(messages, locale) {
   }
 
   const trialPricing = messages.homeSections.trialPricing
-  for (const field of ['eyebrow', 'title', 'description', 'formatSignalsAriaLabel', 'pricingCta', 'telegramCta']) {
+  for (const field of ['eyebrow', 'title', 'description', 'formatSignalsAriaLabel', 'telegramCta']) {
     assert(typeof trialPricing[field] === 'string' && trialPricing[field].length > 0, `${locale}.json homeSections.trialPricing.${field} must be a non-empty string`)
   }
 

@@ -304,9 +304,6 @@ onBeforeUnmount(() => {
         >
           {{ t('homeSections.trialPricing.telegramCta') }}
         </UiButtonLink>
-        <UiButtonLink to="/pricing" variant="secondary" @click="trackPricingSummaryView">
-          {{ t('homeSections.trialPricing.pricingCta') }}
-        </UiButtonLink>
       </div>
     </div>
   </section>

@@ -140,7 +140,7 @@ function onPointerUp(event: PointerEvent) {
 }
 
 .carousel__dots {
-  @apply flex list-none items-center justify-center gap-control-compact p-0;
+  @apply flex list-none flex-wrap items-center justify-center gap-control-compact p-0;
 }
 
 .carousel__dot {

@@ -17,37 +17,18 @@ import { useTracking } from './useTracking'
 const TELEGRAM_BASE_URL = 'https://t.me/fluyo_manager'
 const telegramPathContexts = ['general', 'exam', 'speaking-club', 'kids', 'professional', 'interview', 'generic'] as const
 const telegramFormatContexts = ['individual', 'speaking-club', 'mini-group', 'generic'] as const
-const messageIntents = ['book_consultation', 'book_trial', 'ask_program', 'ask_teacher', 'ask_price'] as const
+const messageIntents = ['book_consultation', 'book_trial', 'book_speaking_club', 'ask_program', 'ask_teacher', 'ask_price'] as const
 const defaultMessageIntent = 'book_trial' satisfies MessageIntent
 
-const pathLabels: Record<TelegramPathContext, string> = {
-  general: 'general English',
-  exam: 'exam preparation',
-  'speaking-club': 'speaking club',
-  kids: 'kids English',
-  professional: 'professional English',
-  interview: 'interview preparation',
-  generic: 'English lessons'
-}
-
-const formatLabels: Record<TelegramFormatContext, string> = {
-  individual: 'individual',
-  'speaking-club': 'speaking club',
-  'mini-group': 'mini-group',
-  generic: 'trial'
-}
-
-const intentLabels: Record<MessageIntent, string> = {
-  book_consultation: 'book a free consultation',
-  book_trial: 'book a trial lesson',
-  ask_program: 'ask about a program',
-  ask_teacher: 'ask about teachers',
-  ask_price: 'ask about pricing'
-}
-
-const localeLabels: Record<Locale, string> = {
-  uk: 'Ukrainian',
-  en: 'English'
+// Prefilled Telegram text is always Ukrainian and intent-only: the manager reads a
+// clean human sentence, while path/format/locale stay in the tracking payload.
+const intentMessages: Record<MessageIntent, string> = {
+  book_consultation: 'Вітаю! Хочу записатися на безкоштовну консультацію.',
+  book_trial: 'Вітаю! Хочу записатися на пробний урок.',
+  book_speaking_club: 'Вітаю! Хочу записатися на Speaking Club заняття.',
+  ask_program: 'Вітаю! Хочу дізнатися більше про програми навчання.',
+  ask_teacher: 'Вітаю! Хочу дізнатися більше про викладачів.',
+  ask_price: 'Вітаю! Хочу дізнатися про ціни на навчання.'
 }
 
 export type TelegramCta = {
@@ -89,13 +70,8 @@ const normalizeMessageIntent = (messageIntent: unknown): MessageIntent => {
   return isMessageIntent(messageIntent) ? messageIntent : defaultMessageIntent
 }
 
-const buildTelegramMessage = (context: Required<Pick<CtaContext, 'path' | 'format' | 'locale' | 'messageIntent'>>) => {
-  const pathLabel = pathLabels[context.path]
-  const formatLabel = formatLabels[context.format]
-  const intentLabel = intentLabels[context.messageIntent]
-  const localeLabel = localeLabels[context.locale]
-
-  return `Hi Fluyo, I want to ${intentLabel}. Context: ${pathLabel}, ${formatLabel}, ${localeLabel}.`
+const buildTelegramMessage = (messageIntent: MessageIntent) => {
+  return intentMessages[messageIntent]
 }
 
 export const resolveTelegramCta = (context: CtaContext = {}, route?: string): TelegramCta => {
@@ -104,7 +80,7 @@ export const resolveTelegramCta = (context: CtaContext = {}, route?: string): Te
   const locale = normalizeLocale(context.locale)
   const messageIntent = normalizeMessageIntent(context.messageIntent)
   const sourceRoute: CtaSourceRoute | undefined = context.sourceRoute
-  const message = buildTelegramMessage({ path, format, locale, messageIntent })
+  const message = buildTelegramMessage(messageIntent)
   const trackingContext: TrackingPayload = {
     route,
     locale,
