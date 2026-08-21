@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import UiCard from '~/components/ui/UiCard.vue'
+import UiReveal from '~/components/ui/UiReveal.vue'
 import UiSection from '~/components/sections/UiSection.vue'
 import { learningPaths, type LearningPath, type LearningPathId } from '~/data/content'
 
@@ -35,19 +36,23 @@ function formatIndex(index: number) {
   <UiSection id="learning-paths" labelledby="home-paths-title">
     <h2 id="home-paths-title" class="sr-only">{{ t('homeSections.pathCards.title') }}</h2>
     <div class="paths__grid">
-      <NuxtLink
+      <UiReveal
         v-for="(path, index) in learningPaths"
         :key="path.id"
-        class="path-card-link"
-        :to="localizedTo(pathRoutes[path.id])"
-        @click="handlePathClick(path)"
+        :delay="index * 70"
       >
-        <UiCard as="div" interactive class="path-card">
-          <span class="path-card__index" aria-hidden="true">{{ formatIndex(index) }}</span>
-          <h3 class="path-card__title">{{ t(`learningPaths.${path.id}.title`) }}</h3>
-          <p class="path-card__summary">{{ t(`learningPaths.${path.id}.summary`) }}</p>
-        </UiCard>
-      </NuxtLink>
+        <NuxtLink
+          class="path-card-link"
+          :to="localizedTo(pathRoutes[path.id])"
+          @click="handlePathClick(path)"
+        >
+          <UiCard as="div" interactive class="path-card">
+            <span class="path-card__index" aria-hidden="true">{{ formatIndex(index) }}</span>
+            <h3 class="path-card__title">{{ t(`learningPaths.${path.id}.title`) }}</h3>
+            <p class="path-card__summary">{{ t(`learningPaths.${path.id}.summary`) }}</p>
+          </UiCard>
+        </NuxtLink>
+      </UiReveal>
     </div>
   </UiSection>
 </template>
@@ -60,7 +65,7 @@ function formatIndex(index: number) {
 }
 
 .path-card-link {
-  @apply block rounded-card text-text no-underline;
+  @apply block h-full rounded-card text-text no-underline;
 }
 
 .path-card {

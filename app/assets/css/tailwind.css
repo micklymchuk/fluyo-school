@@ -103,4 +103,8 @@
   --transition-duration-short: 160ms;
   --transition-duration-medium: 240ms;
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --transition-duration-long: 480ms;
+
+  /* Scroll-reveal motion (UiReveal): travel distance of an entering element. */
+  --reveal-distance: 1.5rem;
 }

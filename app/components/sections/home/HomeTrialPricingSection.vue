@@ -5,6 +5,7 @@ import UiButtonLink from '~/components/ui/UiButtonLink.vue'
 import UiCard from '~/components/ui/UiCard.vue'
 import UiDiscountBadge from '~/components/ui/UiDiscountBadge.vue'
 import UiLockupHeading from '~/components/ui/UiLockupHeading.vue'
+import UiReveal from '~/components/ui/UiReveal.vue'
 import UiTabSwitch from '~/components/ui/UiTabSwitch.vue'
 import { usePricePackageOptions } from '~/composables/usePricePackageOptions'
 import type { CtaContext, PriceItemId } from '~/data/content'
@@ -141,15 +142,19 @@ onBeforeUnmount(() => {
       <p class="trial-pricing__line">{{ t('homeSections.trialPricing.description') }}</p>
 
       <div class="trial-pricing__start-grid">
-        <PriceSimpleCard
-          v-for="item in startItems"
+        <UiReveal
+          v-for="(item, index) in startItems"
           :key="item.id"
-          :label="t(`priceItems.${item.id}.label`)"
-          :value="priceValue(item.id)"
-          :caption="t(`priceItems.${item.id}.caption`)"
-          :recommended="item.recommended"
-          :recommended-label="item.recommended ? t('homeSections.trialPricing.recommendedBadge') : undefined"
-        />
+          :delay="index * 70"
+        >
+          <PriceSimpleCard
+            :label="t(`priceItems.${item.id}.label`)"
+            :value="priceValue(item.id)"
+            :caption="t(`priceItems.${item.id}.caption`)"
+            :recommended="item.recommended"
+            :recommended-label="item.recommended ? t('homeSections.trialPricing.recommendedBadge') : undefined"
+          />
+        </UiReveal>
       </div>
 
       <div class="trial-pricing__switcher-block">
@@ -174,21 +179,28 @@ onBeforeUnmount(() => {
       </div>
 
       <div class="trial-pricing__grid">
-        <UiCard v-for="track in tracks" :key="track.id" class="track-card">
-          <h3 class="track-card__title">{{ track.title }}</h3>
-          <p class="track-card__value">{{ track.perLesson }}</p>
-          <p v-if="track.lessonCount > 1" class="track-card__total">
-            {{ track.total }} {{ t('pricingSections.packages.totalLabel') }}
-          </p>
-          <p class="track-card__desc">{{ track.description }}</p>
-        </UiCard>
-        <PriceSimpleCard
-          v-for="item in singleFormatItems"
+        <UiReveal v-for="(track, index) in tracks" :key="track.id" :delay="index * 70">
+          <UiCard class="track-card">
+            <h3 class="track-card__title">{{ track.title }}</h3>
+            <p class="track-card__value">{{ track.perLesson }}</p>
+            <p v-if="track.lessonCount > 1" class="track-card__total">
+              {{ track.total }} {{ t('pricingSections.packages.totalLabel') }}
+            </p>
+            <p class="track-card__desc">{{ track.description }}</p>
+          </UiCard>
+        </UiReveal>
+        <!-- Single formats continue the package tracks' stagger, one grid, one wave. -->
+        <UiReveal
+          v-for="(item, index) in singleFormatItems"
           :key="item"
-          :label="t(`priceItems.${item}.label`)"
-          :value="priceValue(item)"
-          :caption="t(`priceItems.${item}.caption`)"
-        />
+          :delay="(tracks.length + index) * 70"
+        >
+          <PriceSimpleCard
+            :label="t(`priceItems.${item}.label`)"
+            :value="priceValue(item)"
+            :caption="t(`priceItems.${item}.caption`)"
+          />
+        </UiReveal>
       </div>
 
       <div class="trial-pricing__actions">
@@ -240,8 +252,9 @@ onBeforeUnmount(() => {
   @apply grid w-full gap-component-gap text-left sm:grid-cols-2 lg:grid-cols-4;
 }
 
+/* h-full: the reveal wrapper is the grid item now, so the card fills the row. */
 .track-card {
-  @apply flex flex-col gap-control-compact;
+  @apply flex h-full flex-col gap-control-compact;
 }
 
 .track-card__title {

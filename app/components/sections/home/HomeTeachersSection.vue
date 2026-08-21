@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import TeacherCard from '~/components/teachers/TeacherCard.vue'
 import UiLockupHeading from '~/components/ui/UiLockupHeading.vue'
+import UiReveal from '~/components/ui/UiReveal.vue'
 import {type TeacherProfile, teacherProfiles} from '~/data/content'
 
 const { t } = useI18n()
@@ -33,17 +34,22 @@ const teachers = computed(() => {
       <p class="teachers__line">{{ t('homeSections.teachers.description') }}</p>
 
       <div class="teachers__row">
-        <TeacherCard
-          v-for="teacher in teachers"
+        <UiReveal
+          v-for="(teacher, index) in teachers"
           :key="teacher.id"
           class="teachers__card"
-          :avatar="teacher.avatar"
-          :avatar-alt="teacher.avatarAlt"
-          :name="teacher.name"
-          :role="teacher.role"
-          :description="teacher.description"
-          :badge="teacher.badge"
-        />
+          :delay="index * 70"
+        >
+          <TeacherCard
+            class="teachers__card-surface"
+            :avatar="teacher.avatar"
+            :avatar-alt="teacher.avatarAlt"
+            :name="teacher.name"
+            :role="teacher.role"
+            :description="teacher.description"
+            :badge="teacher.badge"
+          />
+        </UiReveal>
       </div>
     </div>
   </section>
@@ -71,5 +77,10 @@ const teachers = computed(() => {
 
 .teachers__card {
   @apply w-full md:max-w-sm md:flex-1;
+}
+
+/* The reveal wrapper is the flex item now, so the card fills it to keep the row even. */
+.teachers__card-surface {
+  @apply h-full;
 }
 </style>

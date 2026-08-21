@@ -3,6 +3,7 @@ import { Globe, Group, Heart, MultiBubble } from '@iconoir/vue'
 import { computed } from 'vue'
 import HomeSpeakingClubBody from '~/components/sections/home/HomeSpeakingClubBody.vue'
 import UiInfoBoard from '~/components/ui/UiInfoBoard.vue'
+import UiReveal from '~/components/ui/UiReveal.vue'
 import UiInfoInlineMessage from '~/components/ui/UiInfoInlineMessage.vue'
 import UiSticker from '~/components/ui/UiSticker.vue'
 
@@ -36,7 +37,11 @@ const boardItems = computed(() => boardIcons.map((icon, itemIndex) => ({
         <HomeSpeakingClubBody class="speaking-club__body" />
       </div>
 
-      <UiInfoBoard class="speaking-club__board" :items="boardItems" />
+      <!-- Board reveals as one unit: its dividers are positional (nth-child), so the
+           items must stay direct children of the list. -->
+      <UiReveal class="speaking-club__board">
+        <UiInfoBoard :items="boardItems" />
+      </UiReveal>
 
       <UiInfoInlineMessage class="speaking-club__note">
         <i18n-t keypath="homeSections.speakingClub.noteText" tag="span" scope="global">
@@ -91,7 +96,7 @@ const boardItems = computed(() => boardIcons.map((icon, itemIndex) => ({
 }
 
 .speaking-club__board {
-  @apply mt-8;
+  @apply mt-8 w-full;
 }
 
 /* Board layout is the section's call: a 2x2 quadrant until the row fits four across.

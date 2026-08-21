@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import TeacherPortrait from '~/components/teachers/TeacherPortrait.vue'
 import HomeFactCard from '~/components/home/HomeFactCard.vue'
 import UiLockupHeading from '~/components/ui/UiLockupHeading.vue'
+import UiReveal from '~/components/ui/UiReveal.vue'
 import { founderProfile } from '~/data/content'
 
 const { t } = useI18n()
@@ -36,7 +37,8 @@ const rightFacts = computed(() => facts.value.slice(2))
       />
       <p class="founder__lead">{{ t('homeSections.founder.description') }}</p>
 
-      <!-- Collage layout: portrait centred, facts flanking it from lg where three columns have room. -->
+      <!-- Collage layout: portrait centred, facts flanking it from lg where three columns have room.
+           Each column reveals from its own side, closing in on the portrait. -->
       <div class="founder__layout">
         <div class="founder__portrait">
           <TeacherPortrait
@@ -47,21 +49,25 @@ const rightFacts = computed(() => facts.value.slice(2))
         </div>
 
         <div class="founder__column founder__column--left">
-          <HomeFactCard
+          <UiReveal
             v-for="fact in leftFacts"
             :key="fact.index"
-            :title="fact.title"
-            :body="fact.body"
-          />
+            variant="left"
+            :delay="fact.index * 70"
+          >
+            <HomeFactCard :title="fact.title" :body="fact.body" />
+          </UiReveal>
         </div>
 
         <div class="founder__column founder__column--right">
-          <HomeFactCard
+          <UiReveal
             v-for="fact in rightFacts"
             :key="fact.index"
-            :title="fact.title"
-            :body="fact.body"
-          />
+            variant="right"
+            :delay="fact.index * 70"
+          >
+            <HomeFactCard :title="fact.title" :body="fact.body" />
+          </UiReveal>
         </div>
       </div>
     </div>

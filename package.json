@@ -19,7 +19,8 @@
     "test:teachers-route": "node scripts/verify-teachers-route.mjs",
     "test:pricing-route": "node scripts/verify-pricing-route.mjs",
     "test:production-content": "node scripts/verify-production-content.mjs",
-    "test:brand-ui": "node scripts/verify-brand-ui-components.mjs"
+    "test:brand-ui": "node scripts/verify-brand-ui-components.mjs",
+    "test:scroll-reveal": "node scripts/verify-scroll-reveal.mjs"
   },
   "dependencies": {
     "@iconoir/vue": "^7.11.1",

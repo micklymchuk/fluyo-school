@@ -29,7 +29,11 @@ useSeo('/')
 <style scoped>
 @reference "~/assets/css/tailwind.css";
 
+/* overflow-x-clip: side reveals (UiReveal variant="left"/"right") start their travel
+   outside the page gutter, which would otherwise make the page scroll sideways for as
+   long as they sit un-revealed. `clip` and not `hidden` — it must not become a
+   scroll container. */
 .home-page {
-  @apply bg-page;
+  @apply overflow-x-clip bg-page;
 }
 </style>
