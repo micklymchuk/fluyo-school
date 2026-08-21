@@ -11,8 +11,14 @@
       "programs": "Learning Paths",
       "speakingClub": "Speaking Club",
       "teachers": "Teachers",
-      "pricing": "Consultation & Pricing",
-      "reviews": "Reviews"
+      "founder": "Founder",
+      "pricing": "Pricing",
+      "reviews": "Reviews",
+      "qa": "Questions & Answers"
+    },
+    "groups": {
+      "programs": "Programs",
+      "team": "Team"
     }
   },
   "pages": {

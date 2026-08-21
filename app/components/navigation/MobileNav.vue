@@ -22,6 +22,8 @@ const props = withDefaults(defineProps<{
 const { t } = useI18n()
 // Exclude gated pages from the hamburger dropdown. MobileNav only mounts when
 // showNav is true (parent v-if), so links always has ≥1 non-home entry here.
+// The panel is already an open menu, so header groups are flattened into one
+// plain list — no dropdowns and no group headings.
 const { links } = useNavigationLinks()
 const route = useRoute()
 const isOpen = ref(false)
@@ -199,7 +201,7 @@ function handlePanelTab(event: KeyboardEvent) {
 }
 
 .mobile-panel {
-  @apply fixed inset-x-0 bottom-0 top-16 z-mobile-menu flex w-full flex-col overflow-y-auto bg-surface px-page-gutter pb-page-gutter text-text;
+  @apply fixed inset-x-0 bottom-0 top-16 z-mobile-menu flex w-full flex-col overflow-y-auto bg-page px-page-gutter pb-page-gutter text-text;
 }
 
 .mobile-link-list {

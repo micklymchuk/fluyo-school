@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type HeaderLinkDisplay = 'desktop' | 'mobile'
+type HeaderLinkDisplay = 'desktop' | 'mobile' | 'menu'
 
 const props = withDefaults(defineProps<{
   to: string
@@ -9,25 +9,8 @@ const props = withDefaults(defineProps<{
   display: 'desktop'
 })
 
-const route = useRoute()
 const localizedTo = useLocalizedTo()
-const activeSection = useActiveSection()
-
-function isActiveRoute(to: string) {
-  const hashIndex = to.indexOf('#')
-
-  // Anchor link (e.g. "/#speaking-club"): active follows the scrollspy — the
-  // section currently in view — rather than a static route hash.
-  if (hashIndex !== -1) {
-    return activeSection.value === to.slice(hashIndex + 1)
-  }
-
-  if (to === '/') {
-    return route.path === '/'
-  }
-
-  return route.path === to || route.path.startsWith(`${to}/`)
-}
+const { isActiveDestination } = useNavigationActive()
 </script>
 
 <template>
@@ -35,10 +18,10 @@ function isActiveRoute(to: string) {
     class="header-link"
     :class="[
       `header-link--${display}`,
-      { 'header-link--active': isActiveRoute(props.to) }
+      { 'header-link--active': isActiveDestination(props.to) }
     ]"
     :to="localizedTo(props.to)"
-    :aria-current="isActiveRoute(props.to) ? 'page' : undefined"
+    :aria-current="isActiveDestination(props.to) ? 'page' : undefined"
   >
     {{ label }}
   </NuxtLink>
@@ -47,20 +30,40 @@ function isActiveRoute(to: string) {
 <style scoped>
 @reference "~/assets/css/tailwind.css";
 
+/* Every nav destination is a pill button — no underline rule anywhere. */
 .header-link {
-  @apply inline-flex min-h-8 items-center border-b border-transparent text-small font-medium text-text-muted no-underline transition-colors duration-short ease-standard;
+  @apply inline-flex min-h-8 items-center rounded-pill text-small font-medium text-text-muted no-underline transition-colors duration-short ease-standard;
 }
 
 .header-link--desktop {
-  @apply px-3;
+  @apply min-h-9 px-4;
 }
 
 .header-link--mobile {
-  @apply min-h-11 justify-center px-3 text-center text-body;
+  @apply min-h-11 justify-center px-4 text-center text-body;
+}
+
+/* Row inside a dropdown panel: full-width target. */
+.header-link--menu {
+  @apply min-h-11 w-full justify-start px-4 text-small;
 }
 
 .header-link:hover,
 .header-link--active {
-  @apply border-accent-burgundy text-accent-burgundy;
+  @apply text-accent-burgundy;
+}
+
+/* The chip tone follows the surface underneath: the header and the mobile panel
+   sit on the cream page, the dropdown panel on a white one. */
+.header-link--desktop:hover,
+.header-link--desktop.header-link--active,
+.header-link--mobile:hover,
+.header-link--mobile.header-link--active {
+  @apply bg-surface;
+}
+
+.header-link--menu:hover,
+.header-link--menu.header-link--active {
+  @apply bg-surface-muted;
 }
 </style>

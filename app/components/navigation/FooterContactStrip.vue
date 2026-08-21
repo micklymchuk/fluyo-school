@@ -84,6 +84,9 @@ const year = new Date().getFullYear()
   @apply border-t border-border-hairline bg-page text-text;
 }
 
+.footer-brand {
+  @apply -mt-2;
+}
 .footer-inner {
   @apply mx-auto flex w-full max-w-6xl flex-col gap-component-gap px-page-gutter pt-section-compact pb-component-gap md:flex-row md:items-center;
 }
@@ -103,7 +106,7 @@ const year = new Date().getFullYear()
 /* ml-auto keeps the actions hard right — beside the nav links when they show,
    directly across from the logo when the nav is collapsed (home-only). */
 .footer-actions {
-  @apply flex flex-wrap gap-control-compact md:ml-auto;
+  @apply flex flex-wrap gap-control-compact md:ml-auto min-w-25;
 }
 
 .footer-rights {

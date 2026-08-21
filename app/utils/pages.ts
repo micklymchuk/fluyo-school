@@ -16,8 +16,11 @@ export const ALL_ANCHORS = [
   '/#home',
   '/#learning-paths',
   '/#speaking-club',
+  '/#teachers',
+  '/#founder',
   '/#trial-pricing-summary',
-  '/#student-reviews'
+  '/#student-reviews',
+  '/#questions'
 ] as const
 
 export type KnownPage = (typeof ALL_PAGES)[number]

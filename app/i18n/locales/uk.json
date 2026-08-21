@@ -11,8 +11,14 @@
       "programs": "Навчальні програми",
       "speakingClub": "Speaking Club",
       "teachers": "Викладачі",
-      "pricing": "Консультація та ціни",
-      "reviews": "Відгуки"
+      "founder": "Засновниця",
+      "pricing": "Ціни",
+      "reviews": "Відгуки",
+      "qa": "Питання та відповіді"
+    },
+    "groups": {
+      "programs": "Програми",
+      "team": "Команда"
     }
   },
   "pages": {

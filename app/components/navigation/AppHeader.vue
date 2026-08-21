@@ -2,13 +2,14 @@
 import { Instagram, Telegram } from '@iconoir/vue'
 import { computed } from 'vue'
 import HeaderLink from '~/components/navigation/HeaderLink.vue'
+import HeaderNavGroup from '~/components/navigation/HeaderNavGroup.vue'
 import LanguageControl from '~/components/navigation/LanguageControl.vue'
 import MobileNav from '~/components/navigation/MobileNav.vue'
 import UiIconButton from '~/components/ui/UiIconButton.vue'
 import UiLogo from '~/components/ui/UiLogo.vue'
 import type { CtaContext } from '~/data/content'
 import type { Locale } from '~/data/content'
-import { instagramAction, telegramAction } from './navigationLinks'
+import { instagramAction, isNavigationGroup, telegramAction } from './navigationLinks'
 
 const props = withDefaults(defineProps<{
   instagramHref?: string
@@ -25,7 +26,7 @@ const props = withDefaults(defineProps<{
 const { t } = useI18n()
 // Filter nav to the available-pages allowlist. showNav is false when home is
 // the only available page → the header collapses to logo + inline actions (D4).
-const { links, showNav } = useNavigationLinks()
+const { entries, links, showNav } = useNavigationLinks()
 
 // In anchor mode, scrollspy the sections that have menu items so the active nav
 // item tracks the user's scroll position (one IntersectionObserver, shared).
@@ -56,13 +57,19 @@ function handleLocaleChange(nextLocale: Locale) {
       <UiLogo class="brand-logo brand-logo--full" to="/" variant="full" size="compact" />
 
       <nav v-if="showNav" class="desktop-nav" :aria-label="t('navigation.primary')">
-        <HeaderLink
-          v-for="link in links"
-          :key="link.to"
-          :to="link.to"
-          :label="t(link.labelKey)"
-          display="desktop"
-        />
+        <template v-for="entry in entries" :key="entry.labelKey">
+          <HeaderNavGroup
+            v-if="isNavigationGroup(entry)"
+            :label="t(entry.labelKey)"
+            :items="entry.items.map((item) => ({ to: item.to, label: t(item.labelKey) }))"
+          />
+          <HeaderLink
+            v-else
+            :to="entry.to"
+            :label="t(entry.labelKey)"
+            display="desktop"
+          />
+        </template>
       </nav>
 
       <div
