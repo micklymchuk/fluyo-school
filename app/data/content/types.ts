@@ -14,7 +14,7 @@ export type LocalizedText = string | LocalizedString
 export type PageRouteId = 'home' | 'programs' | 'teachers' | 'pricing'
 export type PagePath = '/' | '/programs' | '/teachers' | '/pricing'
 export type LearningPathId = 'general' | 'exam' | 'speaking-club' | 'kids' | 'professional' | 'interview'
-export type PriceItemId = 'TRIAL' | 'EXAM_PREP' | 'MINI_GROUP' | 'INDIVIDUAL' | 'PAIR'
+export type PriceItemId = 'TRIAL' | 'TRIAL_LESSON' | 'EXAM_PREP' | 'MINI_GROUP' | 'INDIVIDUAL' | 'PAIR'
 export type TeacherProfileId = 'catherina' | 'diana' | 'ksenia'
 export type ProofAssetId = 'student-result-ielts' | 'kids-class-snapshot' | 'adult-speaking-note' | 'lesson-format-board'
 export type TestimonialId = 'danylo-exam' | 'olena-parent' | 'marta-adult'
@@ -36,7 +36,7 @@ export type PageContent = {
 }
 
 export type CtaFormat = 'telegram' | 'anchor' | 'route'
-export type MessageIntent = 'book_trial' | 'ask_program' | 'ask_teacher' | 'ask_price'
+export type MessageIntent = 'book_consultation' | 'book_trial' | 'ask_program' | 'ask_teacher' | 'ask_price'
 export type TelegramPathContext = 'general' | 'exam' | 'speaking-club' | 'kids' | 'professional' | 'interview' | 'generic'
 export type TelegramFormatContext = 'individual' | 'speaking-club' | 'mini-group' | 'generic'
 export type CtaSourceRoute = PageRouteId | 'header' | 'footer' | 'section' | 'final-booking'

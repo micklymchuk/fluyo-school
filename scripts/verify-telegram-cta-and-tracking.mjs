@@ -183,7 +183,7 @@ function verifyTelegramCtaBehavior() {
   }, '/pricing?path=unknown')
   const genericMessage = decodeURIComponent(new URL(genericCta.url).searchParams.get('text') ?? '')
 
-  assertIncludes(genericMessage, 'book a paid trial lesson', 'generic Telegram CTA message')
+  assertIncludes(genericMessage, 'book a trial lesson', 'generic Telegram CTA message')
   assertIncludes(genericMessage, 'English lessons', 'generic Telegram CTA message')
   assertIncludes(genericMessage, 'trial', 'generic Telegram CTA message')
   assertIncludes(genericMessage, 'Ukrainian', 'generic Telegram CTA message')

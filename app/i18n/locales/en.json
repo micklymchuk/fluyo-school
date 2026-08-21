@@ -56,8 +56,8 @@
       },
       "intro": {
         "eyebrow": "Pricing and start",
-        "heading": "Begin with a consultation and a clear format.",
-        "summary": "Compare the consultation, group formats, and individual speaking before booking."
+        "heading": "Start with a consultation or a trial lesson.",
+        "summary": "A free consultation to meet us and choose your format together. A trial lesson to start speaking with your teacher right away."
       }
     }
   },
@@ -127,8 +127,7 @@
     "pathCards": {
       "eyebrow": "Learning paths",
       "title": "Choose your path",
-      "description": "Each card leads to the matching program block and helps you choose the next step quickly.",
-      "cardCta": "View path"
+      "description": "Each card leads to the matching program block and helps you choose the next step quickly."
     },
     "proofSnapshot": {
       "eyebrow": "Trust at a glance",
@@ -165,7 +164,7 @@
       "recommendedBadge": "Recommended",
       "eyebrow": "Consultation and pricing",
       "title": "Your consultation is free",
-      "description": "We meet, check your level, and match the right format. After that — transparent prices with no hidden terms.",
+      "description": "We meet, check your level, and match the right format. The trial lesson is a full lesson, so you feel the real pace right away. After that - transparent prices with no hidden terms.",
       "trialBadge": "Consultation",
       "trialValue": "Free",
       "trialUnit": "30 minutes with a teacher",
@@ -186,7 +185,7 @@
         }
       },
       "pricingCta": "All prices",
-      "telegramCta": "Book a free lesson"
+      "telegramCta": "Book a free consultation"
     }
   },
   "programsSections": {
@@ -258,6 +257,7 @@
     "trial": {
       "includedLabel": "Included:",
       "telegramCta": "Book a consultation",
+      "trialLessonCta": "Book a trial lesson",
       "pathNotes": {
         "generic": "After the consultation, the manager suggests a format and schedule for your goal.",
         "exam": "For exam preparation, the consultation includes a level check and a plan up to your exam date.",
@@ -297,7 +297,7 @@
         "1": "1 lesson",
         "4": "4 lessons",
         "8": "8 lessons",
-        "12": "12 lessons"
+        "16": "16 lessons"
       },
       "tracks": {
         "general": {
@@ -415,13 +415,17 @@
       "label": "Consultation",
       "caption": "Meet the teacher, check your level, and get a format recommendation."
     },
+    "TRIAL_LESSON": {
+      "label": "Trial lesson",
+      "caption": "Meet your teacher and the lesson format, set your level and goals, and get real speaking practice from the very first lesson."
+    },
     "EXAM_PREP": {
       "label": "Exam preparation",
       "caption": "Structured preparation for IELTS, NMT, or school exams."
     },
     "MINI_GROUP": {
       "label": "Mini-group",
-      "caption": "Small-group practice with attention to every learner and clear progress."
+      "caption": "Small-group practice with attention to every learner and clear progress. The price is per learner."
     },
     "INDIVIDUAL": {
       "label": "Individual",

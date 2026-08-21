@@ -17,9 +17,9 @@ useSeo('/')
     <HomeHeroSection />
     <HomePathCardsSection />
     <HomeSpeakingClubSection />
-    <HomeTrialPricingSection />
-    <HomeTeachersSection />
     <HomeFounderSection />
+    <HomeTeachersSection />
+    <HomeTrialPricingSection />
     <!--    <HomeLessonsSection />-->
     <HomeReviewsSection />
     <HomeQaSection />

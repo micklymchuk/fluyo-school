@@ -12,6 +12,9 @@ export const priceItems = [
     id: 'TRIAL'
   },
   {
+    id: 'TRIAL_LESSON'
+  },
+  {
     id: 'EXAM_PREP'
   },
   {
@@ -32,6 +35,12 @@ export const PRICES_CONFIG = {
     unit: 'thirty-minutes',
     isFromPrice: false
   },
+  TRIAL_LESSON: {
+    amount: 350,
+    currency: 'UAH',
+    unit: 'sixty-minutes',
+    isFromPrice: false
+  },
   EXAM_PREP: {
     amount: 675,
     currency: 'UAH',
@@ -45,13 +54,13 @@ export const PRICES_CONFIG = {
     isFromPrice: false
   },
   INDIVIDUAL: {
-    amount: 575,
+    amount: 625,
     currency: 'UAH',
     unit: 'sixty-minutes',
     isFromPrice: false
   },
   PAIR: {
-    amount: 400,
+    amount: 450,
     currency: 'UAH',
     unit: 'sixty-minutes',
     isFromPrice: false
@@ -80,9 +89,9 @@ export const pricePackages = [
     telegramFormat: 'individual',
     telegramPath: 'general',
     tiers: [
-      { lessonCount: 4, totalAmount: 2300, perLessonAmount: 575, currency: 'UAH', isPopular: false },
-      { lessonCount: 8, totalAmount: 4400, perLessonAmount: 550, currency: 'UAH', isPopular: true },
-      { lessonCount: 12, totalAmount: 6300, perLessonAmount: 525, currency: 'UAH', isPopular: false }
+      { lessonCount: 4, totalAmount: 2400, perLessonAmount: 600, currency: 'UAH', isPopular: false },
+      { lessonCount: 8, totalAmount: 4600, perLessonAmount: 575, currency: 'UAH', isPopular: true },
+      { lessonCount: 16, totalAmount: 8800, perLessonAmount: 550, currency: 'UAH', isPopular: false }
     ]
   },
   {
@@ -91,9 +100,9 @@ export const pricePackages = [
     telegramFormat: 'individual',
     telegramPath: 'exam',
     tiers: [
-      { lessonCount: 4, totalAmount: 2700, perLessonAmount: 675, currency: 'UAH', isPopular: false },
-      { lessonCount: 8, totalAmount: 5200, perLessonAmount: 650, currency: 'UAH', isPopular: true },
-      { lessonCount: 12, totalAmount: 7500, perLessonAmount: 625, currency: 'UAH', isPopular: false }
+      { lessonCount: 4, totalAmount: 2600, perLessonAmount: 650, currency: 'UAH', isPopular: false },
+      { lessonCount: 8, totalAmount: 5000, perLessonAmount: 625, currency: 'UAH', isPopular: true },
+      { lessonCount: 16, totalAmount: 9600, perLessonAmount: 600, currency: 'UAH', isPopular: false }
     ]
   }
 ] as const satisfies readonly PricePackageTrack[]

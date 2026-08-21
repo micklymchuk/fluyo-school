@@ -46,10 +46,6 @@ function formatIndex(index: number) {
           <span class="path-card__index" aria-hidden="true">{{ formatIndex(index) }}</span>
           <h3 class="path-card__title">{{ t(`learningPaths.${path.id}.title`) }}</h3>
           <p class="path-card__summary">{{ t(`learningPaths.${path.id}.summary`) }}</p>
-          <span class="path-card__cta">
-            {{ t('homeSections.pathCards.cardCta') }}
-            <span aria-hidden="true">→</span>
-          </span>
         </UiCard>
       </NuxtLink>
     </div>
@@ -79,12 +75,7 @@ function formatIndex(index: number) {
   @apply font-display text-card-title font-bold uppercase leading-compact tracking-display text-text;
 }
 
-/* grow: pins the CTA row to the card's bottom edge across unequal summaries. */
 .path-card__summary {
-  @apply grow text-body text-text-muted;
-}
-
-.path-card__cta {
-  @apply text-eyebrow font-bold uppercase tracking-display text-accent-burgundy;
+  @apply text-body text-text-muted;
 }
 </style>

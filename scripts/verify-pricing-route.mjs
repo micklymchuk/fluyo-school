@@ -7,6 +7,7 @@ const files = {
   pricingPage: resolve(root, 'app/pages/pricing.vue'),
   pathContextComposable: resolve(root, 'app/composables/usePricingPathContext.ts'),
   trialSection: resolve(root, 'app/components/sections/pricing/PricingTrialSection.vue'),
+  startOfferCard: resolve(root, 'app/components/pricing/PricingStartOfferCard.vue'),
   formatsSection: resolve(root, 'app/components/sections/pricing/PricingFormatsSection.vue'),
   formatCard: resolve(root, 'app/components/pricing/PricingFormatCard.vue'),
   packagesSection: resolve(root, 'app/components/sections/pricing/PricingPackagesSection.vue'),
@@ -25,7 +26,7 @@ const files = {
 }
 
 const pricingFormatIds = ['individual', 'mini-group']
-const priceItemIds = ['TRIAL', 'EXAM_PREP', 'MINI_GROUP', 'INDIVIDUAL', 'PAIR']
+const priceItemIds = ['TRIAL', 'TRIAL_LESSON', 'EXAM_PREP', 'MINI_GROUP', 'INDIVIDUAL', 'PAIR']
 const packageTrackIds = ['general', 'exam-prep']
 const specialConditionIds = ['first-package', 'military-family']
 const includedItemIds = ['teacher-matching', 'live-lesson', 'materials', 'feedback-progress']
@@ -187,11 +188,17 @@ function verifySectionComponents() {
   }
 
   assertIncludes(trialSection, 'pricing-page__trial', 'trial section')
-  assertPattern(trialSection, /priceItems\.TRIAL/, 'trial section must render the shared trial price item')
+  assertPattern(trialSection, /priceItemId: 'TRIAL'/, 'trial section must render the shared consultation price item')
+  assertPattern(trialSection, /priceItemId: 'TRIAL_LESSON'/, 'trial section must offer the trial lesson next to the consultation')
+  assertPattern(trialSection, /messageIntent: 'book_consultation'/, 'consultation CTA must carry the consultation intent')
+  assertPattern(trialSection, /messageIntent: 'book_trial'/, 'trial lesson CTA must carry the trial booking intent')
   assertPattern(trialSection, /pathNotes/, 'trial section must adapt its helper note to path context')
   assertPattern(trialSection, /usePricingPathContext\(/, 'trial section must resolve path context through the shared composable')
-  assertPattern(trialSection, /useTelegramCta\(/, 'trial section must build Telegram URLs through useTelegramCta')
-  assertPattern(trialSection, /trackTelegramClick/, 'trial booking CTA must track clicks through the shared contract')
+  assertPattern(trialSection, /resolveTelegramCta\(/, 'trial section must build Telegram URLs through the shared contract')
+  assertPattern(trialSection, /trackEvent\(['"]telegram_context['"]/, 'trial section must emit telegram_context on CTA clicks')
+  assertPattern(trialSection, /trackEvent\(['"]telegram_click['"]/, 'trial section must emit telegram_click on CTA clicks')
+  assertPattern(trialSection, /<PricingStartOfferCard/, 'trial section must compose the start offer card')
+  assertPattern(trialSection, /@cta-click=/, 'trial section must handle the start offer CTA click emit')
 
   assertIncludes(formatsSection, 'pricing-page__formats', 'formats section')
   assertPattern(formatsSection, /pricingFormats/, 'formats section must render from shared pricing formats')
@@ -216,6 +223,16 @@ function verifySectionComponents() {
   assertNotIncludes(formatCard, 'resolveTelegramCta', 'format card (Telegram resolution is business logic)')
   assertNotIncludes(formatCard, 'useTracking', 'format card (tracking is business logic)')
   assertNotIncludes(formatCard, 'usePricingPathContext', 'format card (path context is business logic)')
+
+  const startOfferCard = read(files.startOfferCard)
+
+  assertPattern(startOfferCard, /defineEmits/, 'start offer card must emit its CTA click instead of tracking directly')
+  assertPattern(startOfferCard, /:data-pricing-start-offer="id"/, 'start offer card must be addressable by offer id')
+  assertNotIncludes(startOfferCard, 'useI18n', 'start offer card (translations come from the parent)')
+  assertNotIncludes(startOfferCard, "from '~/data/content'", 'start offer card (content records are resolved by the parent)')
+  assertNotIncludes(startOfferCard, 'resolveTelegramCta', 'start offer card (Telegram resolution is business logic)')
+  assertNotIncludes(startOfferCard, 'useTracking', 'start offer card (tracking is business logic)')
+  assert(!/[А-Яа-яІіЇїЄєҐґ]/.test(startOfferCard), 'start offer card must not hard-code Ukrainian public copy')
 
   const packagesSection = read(files.packagesSection)
   const packageCard = read(files.packageCard)
@@ -305,6 +322,7 @@ function verifyPricingMessages(messages, locale) {
   }
 
   assertNonEmptyString(pricingSections.trial?.telegramCta, `${locale}.json pricingSections.trial.telegramCta`)
+  assertNonEmptyString(pricingSections.trial?.trialLessonCta, `${locale}.json pricingSections.trial.trialLessonCta`)
   assertNonEmptyString(pricingSections.trial?.includedLabel, `${locale}.json pricingSections.trial.includedLabel`)
 
   for (const pathContext of pathContexts) {
@@ -326,7 +344,7 @@ function verifyPricingMessages(messages, locale) {
     assertNonEmptyString(pricingSections.packages?.[field], `${locale}.json pricingSections.packages.${field}`)
   }
 
-  for (const count of ['1', '4', '8', '12']) {
+  for (const count of ['1', '4', '8', '16']) {
     assertNonEmptyString(pricingSections.packages?.lessonLabels?.[count], `${locale}.json pricingSections.packages.lessonLabels.${count}`)
   }
 

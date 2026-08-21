@@ -14,7 +14,7 @@ const telegramContext = computed<CtaContext>(() => ({
   format: recommendedFormat.value,
   sourceRoute: 'final-booking',
   locale: locale.value,
-  messageIntent: 'book_trial'
+  messageIntent: 'book_consultation'
 }))
 const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramContext)
 </script>

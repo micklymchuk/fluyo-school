@@ -11,7 +11,7 @@ const telegramContext = computed<CtaContext>(() => ({
   format: 'generic',
   sourceRoute: 'home',
   locale: locale.value,
-  messageIntent: 'book_trial'
+  messageIntent: 'book_consultation'
 }))
 const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramContext)
 </script>
@@ -66,7 +66,7 @@ const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramConte
 }
 
 /* Hero headline breaks the all-caps lockup on purpose: a warmer mixed-case line
-   with a burgundy tail, matching the reworked hero mock. */
+   with a burgundy tail. */
 .home-hero__headline {
   @apply normal-case tracking-normal;
 }

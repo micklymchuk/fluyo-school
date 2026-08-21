@@ -22,9 +22,15 @@ let pricingSummaryObserver: IntersectionObserver | undefined
 
 const selectedLessonCount = ref(popularLessonCount ?? lessonCounts[0] ?? 1)
 
+/** The two ways to start: the free consultation and the paid trial lesson. */
+const startItems = [
+  { id: 'TRIAL', recommended: true },
+  { id: 'TRIAL_LESSON', recommended: false }
+] as const satisfies readonly { id: PriceItemId, recommended: boolean }[]
+
 const singleFormatItems = ['PAIR', 'MINI_GROUP'] as const satisfies readonly PriceItemId[]
 
-const discountBadgeIds = ['first-package', 'military-family'] as const
+const discountBadgeIds = [] as const; // 'first-package', 'military-family'] as const
 const discountBadges = computed(() =>
   discountBadgeIds.map((id) => ({
     id,
@@ -62,7 +68,7 @@ const telegramContext = computed<CtaContext>(() => ({
   format: 'generic',
   sourceRoute: 'section',
   locale: locale.value,
-  messageIntent: 'book_trial'
+  messageIntent: 'book_consultation'
 }))
 const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramContext)
 
@@ -76,7 +82,7 @@ function trackPricingSummaryView() {
     route: route.fullPath,
     locale: locale.value,
     sourceRoute: 'home',
-    messageIntent: 'book_trial'
+    messageIntent: 'book_consultation'
   })
 }
 
@@ -134,6 +140,18 @@ onBeforeUnmount(() => {
       />
       <p class="trial-pricing__line">{{ t('homeSections.trialPricing.description') }}</p>
 
+      <div class="trial-pricing__start-grid">
+        <PriceSimpleCard
+          v-for="item in startItems"
+          :key="item.id"
+          :label="t(`priceItems.${item.id}.label`)"
+          :value="priceValue(item.id)"
+          :caption="t(`priceItems.${item.id}.caption`)"
+          :recommended="item.recommended"
+          :recommended-label="item.recommended ? t('homeSections.trialPricing.recommendedBadge') : undefined"
+        />
+      </div>
+
       <div class="trial-pricing__switcher-block">
         <p id="home-switcher-label" class="trial-pricing__switcher-heading">
           {{ t('homeSections.trialPricing.switcherHeading') }}
@@ -156,14 +174,6 @@ onBeforeUnmount(() => {
       </div>
 
       <div class="trial-pricing__grid">
-        <PriceSimpleCard
-          class="trial-pricing__consultation"
-          :label="t('priceItems.TRIAL.label')"
-          :value="priceValue('TRIAL')"
-          :caption="t('priceItems.TRIAL.caption')"
-          recommended
-          :recommended-label="t('homeSections.trialPricing.recommendedBadge')"
-        />
         <UiCard v-for="track in tracks" :key="track.id" class="track-card">
           <h3 class="track-card__title">{{ track.title }}</h3>
           <p class="track-card__value">{{ track.perLesson }}</p>
@@ -222,8 +232,12 @@ onBeforeUnmount(() => {
 }
 
 /* pt-3: breathing room for the recommended badge overhanging the consultation card. */
+.trial-pricing__start-grid {
+  @apply grid w-full max-w-3xl gap-component-gap pt-3 text-left sm:grid-cols-2;
+}
+
 .trial-pricing__grid {
-  @apply grid w-full gap-component-gap pt-3 text-left sm:grid-cols-2 lg:grid-cols-5;
+  @apply grid w-full gap-component-gap text-left sm:grid-cols-2 lg:grid-cols-4;
 }
 
 .track-card {
