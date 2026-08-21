@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { Book, GraphUp, TaskList, UserStar } from '@iconoir/vue'
 import { computed } from 'vue'
 import UiButtonLink from '~/components/ui/UiButtonLink.vue'
+import UiInfoBoard from '~/components/ui/UiInfoBoard.vue'
+import UiInfoInlineMessage from '~/components/ui/UiInfoInlineMessage.vue'
 import UiLockupHeading from '~/components/ui/UiLockupHeading.vue'
 import type { CtaContext } from '~/data/content'
 
@@ -14,6 +17,13 @@ const telegramContext = computed<CtaContext>(() => ({
   messageIntent: 'book_consultation'
 }))
 const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramContext)
+
+const boardIcons = [UserStar, Book, TaskList, GraphUp]
+const boardItems = computed(() => boardIcons.map((icon, itemIndex) => ({
+  id: `home-hero-fact-${itemIndex}`,
+  icon,
+  description: t(`homeSections.hero.boardItems[${itemIndex}].description`)
+})))
 </script>
 
 <template>
@@ -49,7 +59,16 @@ const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramConte
         </UiButtonLink>
       </div>
 
-      <p class="home-hero__assurance">{{ t('homeSections.hero.assurance') }}</p>
+      <UiInfoBoard
+        class="home-hero__board"
+        theme="transparent"
+        :items="boardItems"
+        :icon-size="36"
+      />
+
+      <UiInfoInlineMessage class="home-hero__assurance">
+        {{ t('homeSections.hero.assurance') }}
+      </UiInfoInlineMessage>
     </div>
   </section>
 </template>
@@ -83,8 +102,38 @@ const { url: telegramTarget, trackTelegramClick } = useTelegramCta(telegramConte
   @apply flex flex-wrap justify-center gap-control-compact;
 }
 
+/* Fact row under the CTAs. Layout is the hero's call: a 2x2 quadrant on small
+   screens, four across once the row fits, with rules drawn per position. */
+.home-hero__board {
+  @apply w-full max-w-4xl;
+}
+
+.home-hero__board :deep(.info-board__list) {
+  @apply grid-cols-2 gap-0 lg:grid-cols-4;
+}
+
+.home-hero__board :deep(.info-board__item) {
+  @apply px-3 lg:px-5;
+}
+
+.home-hero__board :deep(.info-board__item:nth-child(-n + 2)) {
+  @apply pb-8 lg:pb-0;
+}
+
+.home-hero__board :deep(.info-board__item:nth-child(2n)) {
+  @apply border-l border-border-hairline;
+}
+
+.home-hero__board :deep(.info-board__item:nth-child(2)) {
+  @apply border-t-0 pt-0;
+}
+
+.home-hero__board :deep(.info-board__item:nth-child(n + 3)) {
+  @apply border-t border-border-hairline pt-8 lg:border-t-0 lg:pt-0;
+}
+
 /* Reassurance line under the CTAs: what happens after you book the trial. */
 .home-hero__assurance {
-  @apply text-center text-small text-text-muted;
+  @apply w-full max-w-4xl;
 }
 </style>

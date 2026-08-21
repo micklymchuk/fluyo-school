@@ -91,7 +91,13 @@
       "headingAccent": "without fear of mistakes",
       "trialCta": "Book a consultation",
       "programsCta": "View programs",
-      "assurance": "We'll assess your level and match a program to your goal."
+      "assurance": "We'll assess your level and match a program to your goal.",
+      "boardItems": [
+        { "description": "Personal approach" },
+        { "description": "Up-to-date materials" },
+        { "description": "A clear learning plan" },
+        { "description": "Real results" }
+      ]
     },
     "lessons": {
       "eyebrow": "Our lessons",
@@ -118,7 +124,15 @@
       "bodyEyebrow": "It's time to level up your English",
       "bodyText": "Our {brand} run in small mini-groups, so every member gets the most speaking practice, attention, and joy from learning.",
       "bodyBrand": "Speaking Clubs",
-      "telegramCta": "Join on Telegram"
+      "telegramCta": "Join on Telegram",
+      "boardItems": [
+        { "title": "Mini-groups", "description": "Up to 6 members for maximum practice" },
+        { "title": "Topics that matter", "description": "We talk about what interests you" },
+        { "title": "More confidence", "description": "Practice that helps you speak freely" },
+        { "title": "Friendly atmosphere", "description": "Support, motivation and comfort" }
+      ],
+      "noteText": "Want to improve your English and break through the language barrier? Join the {brand}",
+      "noteBrand": "Speaking Club!"
     },
     "reviews": {
       "title": "Student reviews",

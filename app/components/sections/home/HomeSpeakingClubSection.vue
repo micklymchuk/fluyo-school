@@ -1,8 +1,20 @@
 <script setup lang="ts">
+import { Globe, Group, Heart, MultiBubble } from '@iconoir/vue'
+import { computed } from 'vue'
 import HomeSpeakingClubBody from '~/components/sections/home/HomeSpeakingClubBody.vue'
+import UiInfoBoard from '~/components/ui/UiInfoBoard.vue'
+import UiInfoInlineMessage from '~/components/ui/UiInfoInlineMessage.vue'
 import UiSticker from '~/components/ui/UiSticker.vue'
 
 const { t } = useI18n()
+
+const boardIcons = [Group, MultiBubble, Globe, Heart]
+const boardItems = computed(() => boardIcons.map((icon, itemIndex) => ({
+  id: `speaking-club-fact-${itemIndex}`,
+  icon,
+  title: t(`homeSections.speakingClub.boardItems[${itemIndex}].title`),
+  description: t(`homeSections.speakingClub.boardItems[${itemIndex}].description`)
+})))
 </script>
 
 <template>
@@ -23,6 +35,16 @@ const { t } = useI18n()
         />
         <HomeSpeakingClubBody class="speaking-club__body" />
       </div>
+
+      <UiInfoBoard class="speaking-club__board" :items="boardItems" />
+
+      <UiInfoInlineMessage class="speaking-club__note">
+        <i18n-t keypath="homeSections.speakingClub.noteText" tag="span" scope="global">
+          <template #brand>
+            <strong class="speaking-club__note-brand">{{ t('homeSections.speakingClub.noteBrand') }}</strong>
+          </template>
+        </i18n-t>
+      </UiInfoInlineMessage>
     </div>
   </section>
 </template>
@@ -66,5 +88,40 @@ const { t } = useI18n()
 
 .speaking-club__body {
   @apply lg:flex-1;
+}
+
+.speaking-club__board {
+  @apply mt-8;
+}
+
+/* Board layout is the section's call: a 2x2 quadrant until the row fits four across.
+   Rules are drawn per position so the pair divider and the row divider stay correct.
+   Row breathing room comes from padding, not gap, so the vertical rule crosses unbroken. */
+.speaking-club__board :deep(.info-board__list) {
+  @apply grid-cols-2 gap-0 lg:grid-cols-4;
+}
+
+.speaking-club__board :deep(.info-board__item) {
+  @apply px-3 lg:px-5;
+}
+
+.speaking-club__board :deep(.info-board__item:nth-child(-n + 2)) {
+  @apply pb-8 lg:pb-0;
+}
+
+.speaking-club__board :deep(.info-board__item:nth-child(2n)) {
+  @apply border-l border-border-hairline;
+}
+
+.speaking-club__board :deep(.info-board__item:nth-child(2)) {
+  @apply border-t-0 pt-0;
+}
+
+.speaking-club__board :deep(.info-board__item:nth-child(n + 3)) {
+  @apply border-t border-border-hairline pt-8 lg:border-t-0 lg:pt-0;
+}
+
+.speaking-club__note-brand {
+  @apply font-bold text-accent-burgundy;
 }
 </style>

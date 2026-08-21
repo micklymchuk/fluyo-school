@@ -252,8 +252,9 @@ onBeforeUnmount(() => {
   @apply font-display text-card-title font-bold text-accent-burgundy;
 }
 
+/* Package total sits in a soft burgundy chip so it reads clearly under the per-lesson price. */
 .track-card__total {
-  @apply text-small text-text-muted;
+  @apply w-fit rounded-pill bg-accent-subdued px-2.5 py-1 text-small font-semibold text-accent-burgundy-strong;
 }
 
 .track-card__desc {
