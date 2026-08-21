@@ -155,6 +155,17 @@ const props = withDefaults(defineProps<{
 const grainId = `pencil-grain-${useId()}`
 const shape = computed(() => shapes[props.mark])
 
+// Safari will not size an <svg> that carries no width/height attributes from its
+// left/right offsets: it falls back to the default 300x150 object size, which is
+// how a stretched mark ends up floating loose of the word it should be ringing.
+// Declaring the viewBox ratio in CSS makes the height follow whatever width the
+// caller gives, in every engine. A caller that sets both dimensions still wins,
+// because an explicit height leaves the ratio nothing to solve for.
+const aspectRatio = computed(() => {
+  const [,, width, height] = shape.value.viewBox.split(' ')
+  return `${width} / ${height}`
+})
+
 // Purely decorative, so it must never touch layout: the caller positions it, and
 // `visible` comes from the same shared observer that drives UiReveal.
 const { el, visible } = useReveal()
@@ -175,6 +186,7 @@ function strokeStyle(stroke: PencilStroke) {
     :class="[`pencil-mark--${tone}`, { 'pencil-mark--drawn': visible }]"
     :viewBox="shape.viewBox"
     :preserveAspectRatio="shape.stretch ? 'none' : 'xMidYMid meet'"
+    :style="{ aspectRatio }"
     fill="none"
     aria-hidden="true"
     focusable="false"

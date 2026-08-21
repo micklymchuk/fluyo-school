@@ -133,12 +133,14 @@ const boardItems = computed(() => boardIcons.map((icon, itemIndex) => ({
 }
 
 /* Loops the script word a touch wide of the glyphs, the way you'd ring it by hand.
-   Only the sides and the top do anything: the height comes from the viewBox aspect
-   ratio, because an <svg> is a replaced element. */
+   Width is stated outright rather than left to a left/right pair: an <svg> is a
+   replaced element, and Safari sizes one with no width/height attributes from the
+   default 300x150 object size instead of the offsets, which left the ring adrift
+   of the word. The height still comes from the mark's own viewBox ratio. */
 .speaking-club__circle {
   top: -0.2em;
-  right: -0.46em;
   left: -0.46em;
+  width: calc(100% + 0.92em);
 }
 
 .speaking-club__note-brand {
