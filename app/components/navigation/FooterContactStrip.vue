@@ -3,6 +3,7 @@ import { Instagram, Telegram } from '@iconoir/vue'
 import { computed } from 'vue'
 import UiIconButton from '~/components/ui/UiIconButton.vue'
 import UiLogo from '~/components/ui/UiLogo.vue'
+import UiWatermarkField from '~/components/ui/UiWatermarkField.vue'
 import type { CtaContext } from '~/data/content'
 import { instagramAction, telegramAction } from './navigationLinks'
 
@@ -38,6 +39,7 @@ const year = new Date().getFullYear()
 
 <template>
   <footer class="footer-contact-strip">
+    <UiWatermarkField seed="footer-contact-strip" :count="2" />
     <div class="footer-inner">
       <UiLogo class="footer-brand" to="/" variant="full" size="large" />
 
@@ -81,14 +83,14 @@ const year = new Date().getFullYear()
 @reference "~/assets/css/tailwind.css";
 
 .footer-contact-strip {
-  @apply border-t border-border-hairline bg-page text-text;
+  @apply relative border-t border-border-hairline bg-page text-text;
 }
 
 .footer-brand {
   @apply -mt-2;
 }
 .footer-inner {
-  @apply mx-auto flex w-full max-w-6xl flex-col gap-component-gap px-page-gutter pt-section-compact pb-component-gap md:flex-row md:items-center;
+  @apply relative mx-auto flex w-full max-w-6xl flex-col gap-component-gap px-page-gutter pt-section-compact pb-component-gap md:flex-row md:items-center;
 }
 
 .footer-links {

@@ -59,7 +59,7 @@ function sharedObserver() {
 // leaving content stuck at opacity 0.
 export const useReveal = (options: { once?: boolean } = {}) => {
   const once = options.once ?? true
-  const el = ref<HTMLElement | null>(null)
+  const el = ref<Element | null>(null)
   const visible = ref(false)
 
   onMounted(() => {

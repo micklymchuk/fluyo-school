@@ -2,6 +2,7 @@
 import UiButtonLink from '~/components/ui/UiButtonLink.vue'
 import UiCard from '~/components/ui/UiCard.vue'
 import UiEyebrowPill from '~/components/ui/UiEyebrowPill.vue'
+import UiWatermarkField from '~/components/ui/UiWatermarkField.vue'
 
 interface ProgramPathPanelSignal {
   id: string
@@ -35,6 +36,7 @@ const emit = defineEmits<{
     :data-program-path="id"
     :aria-labelledby="`program-${id}-title`"
   >
+    <UiWatermarkField :seed="`program-path-${id}`" :count="2" />
     <UiCard as="div" class="program-panel__inner">
       <div class="program-panel__copy">
         <UiEyebrowPill class="program-panel__eyebrow" :label="eyebrow" />
@@ -76,11 +78,11 @@ const emit = defineEmits<{
 @reference "~/assets/css/tailwind.css";
 
 .program-panel {
-  @apply scroll-mt-36 bg-page px-page-gutter py-section-compact text-text;
+  @apply relative scroll-mt-36 bg-page px-page-gutter py-section-compact text-text;
 }
 
 .program-panel__inner {
-  @apply mx-auto grid w-full max-w-6xl gap-component-gap lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start;
+  @apply relative mx-auto grid w-full max-w-6xl gap-component-gap lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start;
 }
 
 .program-panel__copy {

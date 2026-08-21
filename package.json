@@ -20,7 +20,9 @@
     "test:pricing-route": "node scripts/verify-pricing-route.mjs",
     "test:production-content": "node scripts/verify-production-content.mjs",
     "test:brand-ui": "node scripts/verify-brand-ui-components.mjs",
-    "test:scroll-reveal": "node scripts/verify-scroll-reveal.mjs"
+    "test:scroll-reveal": "node scripts/verify-scroll-reveal.mjs",
+    "test:pencil-marks": "node scripts/verify-pencil-marks.mjs",
+    "test:watermarks": "node scripts/verify-watermarks.mjs"
   },
   "dependencies": {
     "@iconoir/vue": "^7.11.1",

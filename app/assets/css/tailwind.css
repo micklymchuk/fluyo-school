@@ -103,6 +103,8 @@
   --transition-duration-short: 160ms;
   --transition-duration-medium: 240ms;
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  /* Pencil strokes leave fast and settle slow, the way a hand draws. */
+  --ease-pencil: cubic-bezier(0.25, 0.72, 0.2, 1);
   --transition-duration-long: 480ms;
 
   /* Scroll-reveal motion (UiReveal): travel distance of an entering element. */

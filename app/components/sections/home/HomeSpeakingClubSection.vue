@@ -5,7 +5,9 @@ import HomeSpeakingClubBody from '~/components/sections/home/HomeSpeakingClubBod
 import UiInfoBoard from '~/components/ui/UiInfoBoard.vue'
 import UiReveal from '~/components/ui/UiReveal.vue'
 import UiInfoInlineMessage from '~/components/ui/UiInfoInlineMessage.vue'
+import UiPencilMark from '~/components/ui/UiPencilMark.vue'
 import UiSticker from '~/components/ui/UiSticker.vue'
+import UiWatermarkField from '~/components/ui/UiWatermarkField.vue'
 
 const { t } = useI18n()
 
@@ -20,10 +22,14 @@ const boardItems = computed(() => boardIcons.map((icon, itemIndex) => ({
 
 <template>
   <section id="speaking-club" class="speaking-club" aria-labelledby="home-speaking-club-title">
+    <UiWatermarkField seed="home-speaking-club" :count="3" />
     <div class="speaking-club__container">
       <h2 id="home-speaking-club-title" class="speaking-club__title">
         <span class="speaking-club__caps">{{ t('homeSections.speakingClub.capsWord') }}</span>
-        <span class="speaking-club__script">{{ t('homeSections.speakingClub.scriptWord') }}</span>
+        <span class="speaking-club__script">
+          {{ t('homeSections.speakingClub.scriptWord') }}
+          <UiPencilMark class="speaking-club__circle" mark="circle" :delay="220" />
+        </span>
       </h2>
 
       <!-- Poster layout: cat cutout on the left, the club promise body on the right. -->
@@ -78,7 +84,7 @@ const boardItems = computed(() => boardIcons.map((icon, itemIndex) => ({
 }
 
 .speaking-club__script {
-  @apply font-script text-accent-burgundy;
+  @apply relative font-script text-accent-burgundy;
   @apply text-poster-script sm:text-poster-script-sm lg:text-poster-script-lg;
 }
 
@@ -124,6 +130,15 @@ const boardItems = computed(() => boardIcons.map((icon, itemIndex) => ({
 
 .speaking-club__board :deep(.info-board__item:nth-child(n + 3)) {
   @apply border-t border-border-hairline pt-8 lg:border-t-0 lg:pt-0;
+}
+
+/* Loops the script word a touch wide of the glyphs, the way you'd ring it by hand.
+   Only the sides and the top do anything: the height comes from the viewBox aspect
+   ratio, because an <svg> is a replaced element. */
+.speaking-club__circle {
+  top: -0.2em;
+  right: -0.46em;
+  left: -0.46em;
 }
 
 .speaking-club__note-brand {

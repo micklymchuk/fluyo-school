@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, useId } from 'vue'
 import UiEyebrowPill from '~/components/ui/UiEyebrowPill.vue'
+import UiWatermarkField from '~/components/ui/UiWatermarkField.vue'
 
 type SectionVariant = 'default' | 'compact' | 'spacious' | 'inverse'
 
@@ -11,13 +12,16 @@ const props = withDefaults(defineProps<{
   title?: string
   description?: string
   labelledby?: string
+  /** Decorative marks scattered behind this section; 0 turns the field off. */
+  watermarks?: number
 }>(), {
   as: 'section',
   description: undefined,
   eyebrow: undefined,
   labelledby: undefined,
   title: undefined,
-  variant: 'default'
+  variant: 'default',
+  watermarks: 3
 })
 
 const generatedId = useId()
@@ -32,6 +36,14 @@ const headingId = computed(() => {
 const hasHeader = computed(() => {
   return Boolean(props.eyebrow || props.title || props.description)
 })
+
+// The watermark scatter is a pure function of this string, so a section keeps
+// the same arrangement on every render while no two sections share one. The id
+// alone would do it; the copy is folded in so the layout survives a reorder of
+// the page.
+const watermarkSeed = computed(() => {
+  return [props.title, props.eyebrow, props.labelledby, generatedId].filter(Boolean).join('|')
+})
 </script>
 
 <template>
@@ -41,6 +53,15 @@ const hasHeader = computed(() => {
     :class="`section--${variant}`"
     :aria-labelledby="headingId"
   >
+    <!-- First child on purpose: both this and .section-inner are positioned with
+         an auto z-index, so paint order is DOM order and the marks stay behind
+         the content without a stacking-context fight. -->
+    <UiWatermarkField
+      v-if="watermarks > 0"
+      :seed="watermarkSeed"
+      :count="watermarks"
+      :tone="variant === 'inverse' ? 'inverse' : 'burgundy'"
+    />
     <div class="section-inner">
       <header v-if="hasHeader || $slots.heading" class="section-header">
         <slot name="heading">

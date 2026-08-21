@@ -5,6 +5,8 @@ import UiButtonLink from '~/components/ui/UiButtonLink.vue'
 import UiInfoBoard from '~/components/ui/UiInfoBoard.vue'
 import UiInfoInlineMessage from '~/components/ui/UiInfoInlineMessage.vue'
 import UiLockupHeading from '~/components/ui/UiLockupHeading.vue'
+import UiPencilMark from '~/components/ui/UiPencilMark.vue'
+import UiWatermarkField from '~/components/ui/UiWatermarkField.vue'
 import type { CtaContext } from '~/data/content'
 
 const { locale } = useLocale()
@@ -28,6 +30,7 @@ const boardItems = computed(() => boardIcons.map((icon, itemIndex) => ({
 
 <template>
   <section id="home" class="home-hero" aria-labelledby="home-hero-title">
+    <UiWatermarkField seed="home-hero" :count="4" />
     <div class="home-hero__container">
       <UiLockupHeading
         id="home-hero-title"
@@ -39,7 +42,13 @@ const boardItems = computed(() => boardIcons.map((icon, itemIndex) => ({
         <template #caps>
           <span class="home-hero__headline">
             {{ t('homeSections.hero.headingLead') }}
-            <span class="home-hero__headline-accent">{{ t('homeSections.hero.headingAccent') }}</span>
+            <span class="home-hero__headline-accent">
+              <!-- Inner inline-block so the pencil underline spans the phrase, not the whole line box. -->
+              <span class="home-hero__headline-phrase">
+                {{ t('homeSections.hero.headingAccent') }}
+                <UiPencilMark class="home-hero__underline" mark="underline" :delay="260" />
+              </span>
+            </span>
           </span>
         </template>
       </UiLockupHeading>
@@ -92,6 +101,17 @@ const boardItems = computed(() => boardIcons.map((icon, itemIndex) => ({
 
 .home-hero__headline-accent {
   @apply block text-accent-burgundy;
+}
+
+.home-hero__headline-phrase {
+  @apply relative inline-block;
+}
+
+/* em units so the mark tracks the headline through every breakpoint. */
+.home-hero__underline {
+  @apply left-0 w-full;
+  bottom: -0.24em;
+  height: 0.38em;
 }
 
 .home-hero__summary {

@@ -5,8 +5,10 @@ import UiButtonLink from '~/components/ui/UiButtonLink.vue'
 import UiCard from '~/components/ui/UiCard.vue'
 import UiDiscountBadge from '~/components/ui/UiDiscountBadge.vue'
 import UiLockupHeading from '~/components/ui/UiLockupHeading.vue'
+import UiPencilMark from '~/components/ui/UiPencilMark.vue'
 import UiReveal from '~/components/ui/UiReveal.vue'
 import UiTabSwitch from '~/components/ui/UiTabSwitch.vue'
+import UiWatermarkField from '~/components/ui/UiWatermarkField.vue'
 import { usePricePackageOptions } from '~/composables/usePricePackageOptions'
 import type { CtaContext, PriceItemId } from '~/data/content'
 
@@ -131,6 +133,7 @@ onBeforeUnmount(() => {
 
 <template>
   <section id="trial-pricing-summary" class="trial-pricing" aria-labelledby="home-trial-pricing-title">
+    <UiWatermarkField seed="home-trial-pricing" :count="4" />
     <div ref="observerTarget" class="trial-pricing__container">
       <UiLockupHeading
         id="home-trial-pricing-title"
@@ -145,6 +148,7 @@ onBeforeUnmount(() => {
         <UiReveal
           v-for="(item, index) in startItems"
           :key="item.id"
+          class="trial-pricing__start-cell"
           :delay="index * 70"
         >
           <PriceSimpleCard
@@ -153,6 +157,14 @@ onBeforeUnmount(() => {
             :caption="t(`priceItems.${item.id}.caption`)"
             :recommended="item.recommended"
             :recommended-label="item.recommended ? t('homeSections.trialPricing.recommendedBadge') : undefined"
+          />
+          <!-- Emphasis rays flick out past the trial-lesson card's corner once it
+               has faded in. -->
+          <UiPencilMark
+            v-if="item.id === 'TRIAL_LESSON'"
+            class="trial-pricing__spark"
+            mark="burst"
+            :delay="420"
           />
         </UiReveal>
       </div>
@@ -246,6 +258,21 @@ onBeforeUnmount(() => {
 /* pt-3: breathing room for the recommended badge overhanging the consultation card. */
 .trial-pricing__start-grid {
   @apply grid w-full max-w-3xl gap-component-gap pt-3 text-left sm:grid-cols-2;
+}
+
+/* Anchors the pencil mark to the card, without touching the grid's own maths. */
+.trial-pricing__start-cell {
+  @apply relative;
+}
+
+/* Sits just off the card's top-right corner, outside the card, in the gap the
+   grid already leaves. Both axes explicit: an <svg> is a replaced element and
+   would otherwise derive one from its viewBox ratio. */
+.trial-pricing__spark {
+  top: -0.96rem;
+  right: -1rem;
+  width: 3.60rem;
+  height: 3.31rem;
 }
 
 .trial-pricing__grid {
