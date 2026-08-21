@@ -10,20 +10,32 @@ import UiReveal from '~/components/ui/UiReveal.vue'
 import UiTabSwitch from '~/components/ui/UiTabSwitch.vue'
 import UiWatermarkField from '~/components/ui/UiWatermarkField.vue'
 import { usePricePackageOptions } from '~/composables/usePricePackageOptions'
-import type { CtaContext, PriceItemId } from '~/data/content'
+import { priceAudienceIds, type CtaContext, type PriceAudienceId, type PriceItemId } from '~/data/content'
 
 const route = useRoute()
 const { locale } = useLocale()
 const { t } = useI18n()
 const { priceValue, packageTotal, packagePerLesson } = usePriceValue()
 const { trackEvent } = useTracking()
-const { trackOptions, lessonCounts, popularLessonCount } = usePricePackageOptions()
+/** Both rate cards are resolved once — the switch only picks which one is on screen. */
+const packagesByAudience: Record<PriceAudienceId, ReturnType<typeof usePricePackageOptions>> = {
+  adults: usePricePackageOptions('adults'),
+  kids: usePricePackageOptions('kids')
+}
 
 const observerTarget = ref<HTMLElement | null>(null)
 const hasTrackedPricingSummary = ref(false)
 let pricingSummaryObserver: IntersectionObserver | undefined
 
-const selectedLessonCount = ref(popularLessonCount ?? lessonCounts[0] ?? 1)
+const selectedAudience = ref<PriceAudienceId>('adults')
+/** Cards enter with a scroll-reveal stagger once; after a swap the swap animation carries them. */
+const hasSwappedAudience = ref(false)
+
+const activePackages = computed(() => packagesByAudience[selectedAudience.value])
+
+const selectedLessonCount = ref(
+  packagesByAudience.adults.popularLessonCount ?? packagesByAudience.adults.lessonCounts[0] ?? 1
+)
 
 /** The two ways to start: the free consultation and the paid trial lesson. */
 const startItems = [
@@ -42,28 +54,42 @@ const discountBadges = computed(() =>
   }))
 )
 
+const audienceOptions = computed(() =>
+  priceAudienceIds.map((audience) => ({
+    value: audience,
+    label: t(`homeSections.trialPricing.audiences.${audience}.label`),
+    shortLabel: t(`homeSections.trialPricing.audiences.${audience}.shortLabel`)
+  }))
+)
+
 const switcherOptions = computed(() =>
-  lessonCounts.map((count) => ({
+  activePackages.value.lessonCounts.map((count) => ({
     value: count,
     label: t(`pricingSections.packages.lessonLabels.${count}`),
     shortLabel: String(count),
-    badge: count === popularLessonCount
+    badge: count === activePackages.value.popularLessonCount
   }))
 )
 
 const tracks = computed(() =>
-  trackOptions.map((track) => {
+  activePackages.value.trackOptions.map((track) => {
     const option = track.options.find((item) => item.lessonCount === selectedLessonCount.value) ?? track.options[0]!
 
     return {
       id: track.id,
       title: t(`pricingSections.packages.tracks.${track.id}.title`),
       description: t(`priceItems.${track.priceItemId}.caption`),
-      perLesson: packagePerLesson(option),
+      perLesson: packagePerLesson(option, track.unit),
       total: packageTotal(option),
       lessonCount: option.lessonCount
     }
   })
+)
+
+/** Desktop columns follow the card count, so a shorter rate card still centres
+    under the switcher instead of leaving an empty column. */
+const gridCardCount = computed(() =>
+  tracks.value.length + (selectedAudience.value === 'adults' ? singleFormatItems.length : 0)
 )
 
 const telegramContext = computed<CtaContext>(() => ({
@@ -86,6 +112,35 @@ function trackPricingSummaryView() {
     locale: locale.value,
     sourceRoute: 'home',
     messageIntent: 'book_consultation'
+  })
+}
+
+function revealDelay(index: number) {
+  return hasSwappedAudience.value ? 0 : index * 70
+}
+
+function onAudienceChange(value: string | number) {
+  const audience = priceAudienceIds.find((id) => id === value)
+
+  if (!audience || audience === selectedAudience.value) {
+    return
+  }
+
+  selectedAudience.value = audience
+  hasSwappedAudience.value = true
+
+  // Lesson counts match across audiences today; fall back if a rate card ever drops one.
+  if (!activePackages.value.lessonCounts.includes(selectedLessonCount.value)) {
+    selectedLessonCount.value =
+      activePackages.value.popularLessonCount ?? activePackages.value.lessonCounts[0] ?? 1
+  }
+
+  trackPricingSummaryView()
+  trackEvent('pricing_switcher_change', {
+    route: route.fullPath,
+    locale: locale.value,
+    sourceRoute: 'home',
+    path: audience === 'kids' ? 'kids' : 'general'
   })
 }
 
@@ -170,6 +225,18 @@ onBeforeUnmount(() => {
       </div>
 
       <div class="trial-pricing__switcher-block">
+        <p id="home-audience-label" class="trial-pricing__switcher-heading">
+          {{ t('homeSections.trialPricing.audienceHeading') }}
+        </p>
+        <UiTabSwitch
+          :model-value="selectedAudience"
+          :options="audienceOptions"
+          :aria-label="t('homeSections.trialPricing.audienceAria')"
+          @update:model-value="onAudienceChange"
+        />
+      </div>
+
+      <div class="trial-pricing__switcher-block">
         <p id="home-switcher-label" class="trial-pricing__switcher-heading">
           {{ t('homeSections.trialPricing.switcherHeading') }}
         </p>
@@ -190,29 +257,42 @@ onBeforeUnmount(() => {
         </div>
       </div>
 
-      <div class="trial-pricing__grid">
-        <UiReveal v-for="(track, index) in tracks" :key="track.id" :delay="index * 70">
-          <UiCard class="track-card">
-            <h3 class="track-card__title">{{ track.title }}</h3>
-            <p class="track-card__value">{{ track.perLesson }}</p>
-            <p v-if="track.lessonCount > 1" class="track-card__total">
-              {{ track.total }} {{ t('pricingSections.packages.totalLabel') }}
-            </p>
-            <p class="track-card__desc">{{ track.description }}</p>
-          </UiCard>
-        </UiReveal>
-        <!-- Single formats continue the package tracks' stagger, one grid, one wave. -->
-        <UiReveal
-          v-for="(item, index) in singleFormatItems"
-          :key="item"
-          :delay="(tracks.length + index) * 70"
-        >
-          <PriceSimpleCard
-            :label="t(`priceItems.${item}.label`)"
-            :value="priceValue(item)"
-            :caption="t(`priceItems.${item}.caption`)"
-          />
-        </UiReveal>
+      <!-- Swapping the audience drops the old rate card downwards, then the new one
+           arrives from above: out-in, so the two never overlap. -->
+      <div class="trial-pricing__swap">
+        <Transition name="audience-swap" mode="out-in">
+          <div
+            :key="selectedAudience"
+            class="trial-pricing__grid"
+            :class="`trial-pricing__grid--${gridCardCount}`"
+          >
+            <UiReveal v-for="(track, index) in tracks" :key="track.id" :delay="revealDelay(index)">
+              <UiCard class="track-card">
+                <h3 class="track-card__title">{{ track.title }}</h3>
+                <p class="track-card__value">{{ track.perLesson }}</p>
+                <p v-if="track.lessonCount > 1" class="track-card__total">
+                  {{ track.total }} {{ t('pricingSections.packages.totalLabel') }}
+                </p>
+                <p class="track-card__desc">{{ track.description }}</p>
+              </UiCard>
+            </UiReveal>
+            <!-- Pair and mini-group are adult formats; the children's card is priced by age.
+                 Single formats continue the package tracks' stagger, one grid, one wave. -->
+            <template v-if="selectedAudience === 'adults'">
+              <UiReveal
+                v-for="(item, index) in singleFormatItems"
+                :key="item"
+                :delay="revealDelay(tracks.length + index)"
+              >
+                <PriceSimpleCard
+                  :label="t(`priceItems.${item}.label`)"
+                  :value="priceValue(item)"
+                  :caption="t(`priceItems.${item}.caption`)"
+                />
+              </UiReveal>
+            </template>
+          </div>
+        </Transition>
       </div>
 
       <div class="trial-pricing__actions">
@@ -275,8 +355,65 @@ onBeforeUnmount(() => {
   height: 3.31rem;
 }
 
+.trial-pricing__swap {
+  @apply w-full;
+}
+
 .trial-pricing__grid {
-  @apply grid w-full gap-component-gap text-left sm:grid-cols-2 lg:grid-cols-4;
+  @apply grid w-full gap-component-gap text-left sm:grid-cols-2;
+}
+
+.trial-pricing__grid--3 {
+  @apply lg:grid-cols-3;
+}
+
+/* Two columns can't split three cards evenly, so the trailing card takes the row
+   instead of leaving a gap beside it. */
+.trial-pricing__grid--3 > *:last-child {
+  @apply sm:col-span-2 lg:col-span-1;
+}
+
+.trial-pricing__grid--4 {
+  @apply lg:grid-cols-4;
+}
+
+/* Audience swap: the outgoing rate card sinks and fades, the incoming one drops in
+   from above. `mode="out-in"` keeps the two moves sequential. */
+.audience-swap-enter-active,
+.audience-swap-leave-active {
+  transition-property: opacity, transform;
+  transition-timing-function: var(--ease-standard);
+}
+
+.audience-swap-enter-active {
+  transition-duration: var(--transition-duration-medium);
+}
+
+.audience-swap-leave-active {
+  transition-duration: var(--transition-duration-short);
+}
+
+.audience-swap-enter-from {
+  opacity: 0;
+  transform: translate3d(0, calc(var(--reveal-distance) * -1), 0);
+}
+
+.audience-swap-leave-to {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-distance), 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .audience-swap-enter-active,
+  .audience-swap-leave-active {
+    transition: none;
+  }
+
+  .audience-swap-enter-from,
+  .audience-swap-leave-to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* h-full: the reveal wrapper is the grid item now, so the card fills the row. */

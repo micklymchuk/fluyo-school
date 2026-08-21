@@ -16,8 +16,7 @@ const teachers = computed(() => {
     avatarAlt: t(`assets.avatar-${teacher.id}.alt`),
     name: t(`teacherProfiles.${teacher.id}.name`),
     role: t(`teacherProfiles.${teacher.id}.role`),
-    description: t(`teacherProfiles.${teacher.id}.description`),
-    badge: teacher.isFounder ? t('teachersSections.founder.badge') : undefined
+    description: t(`teacherProfiles.${teacher.id}.description`)
   }))
 })
 </script>
@@ -49,7 +48,6 @@ const teachers = computed(() => {
             :name="teacher.name"
             :role="teacher.role"
             :description="teacher.description"
-            :badge="teacher.badge"
           />
         </UiReveal>
       </div>

@@ -51,7 +51,7 @@ const requiredPriceItemIds = ['TRIAL', 'EXAM_PREP', 'MINI_GROUP', 'INDIVIDUAL', 
 const requiredTeacherProfileIds = ['catherina', 'diana', 'ksenia']
 const requiredProofAssetIds = ['student-result-ielts', 'kids-class-snapshot', 'adult-speaking-note', 'lesson-format-board']
 const requiredTestimonialIds = ['danylo-exam', 'olena-parent', 'marta-adult']
-const requiredFaqItemIds = ['trial-booking', 'format-choice', 'teacher-match', 'pricing-policy', 'schedule-policy', 'english-switch']
+const requiredFaqItemIds = ['enrollment', 'consultation-vs-trial', 'subscription-benefit', 'teacher-match', 'online-format', 'format-choice']
 const requiredAssetIds = [
   'brand-logo-full',
   'brand-logo-short',

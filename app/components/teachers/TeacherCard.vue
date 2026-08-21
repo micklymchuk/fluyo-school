@@ -1,17 +1,13 @@
 <script setup lang="ts">
 import UiCard from '~/components/ui/UiCard.vue'
-import UiEyebrowPill from '~/components/ui/UiEyebrowPill.vue'
 
-withDefaults(defineProps<{
+defineProps<{
   avatar: string
   avatarAlt: string
   name: string
   role: string
   description: string
-  badge?: string
-}>(), {
-  badge: undefined
-})
+}>()
 </script>
 
 <template>
@@ -28,11 +24,8 @@ withDefaults(defineProps<{
     </div>
 
     <div class="teacher-card__body">
-      <!-- Badge rides beside the name on its own line, so text baselines stay level across cards. -->
-      <div class="teacher-card__name-row">
-        <h3 class="teacher-card__name">{{ name }}</h3>
-        <UiEyebrowPill v-if="badge" compact :label="badge" />
-      </div>
+      <h3 class="teacher-card__name">{{ name }}</h3>
+      <!-- The role line carries the founder wording, so no separate badge sits beside the name. -->
       <p class="teacher-card__role">{{ role }}</p>
       <p class="teacher-card__description">{{ description }}</p>
     </div>
@@ -56,10 +49,6 @@ withDefaults(defineProps<{
 
 .teacher-card__body {
   @apply flex grow flex-col gap-2;
-}
-
-.teacher-card__name-row {
-  @apply flex flex-wrap items-center justify-center gap-2;
 }
 
 .teacher-card__name {

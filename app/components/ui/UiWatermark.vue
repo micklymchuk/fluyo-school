@@ -33,10 +33,19 @@ const props = withDefaults(defineProps<{
   /** Vertical centre of the mark, in % of the positioned parent. */
   y?: number
   opacity?: number
+  /** Seconds for one leg of the ping-pong. 0 keeps the mark still. */
+  breathe?: number
+  /** Seconds of phase offset; negative starts the mark part-way through a leg. */
+  phase?: number
+  /** Fraction of full size the mark grows in from. */
+  fromScale?: number
   tone?: WatermarkTone
 }>(), {
+  breathe: 0,
+  fromScale: 0.55,
   inset: 1.5,
   opacity: 0.12,
+  phase: 0,
   shape: 'star',
   side: 'right',
   size: 4,
@@ -44,10 +53,19 @@ const props = withDefaults(defineProps<{
   y: 50
 })
 
-// A mark must never be cut off by the edge of the section it decorates: the next
-// section paints its own opaque background over anything that bleeds out, so a
-// mark crossing the boundary reads as sliced in half rather than as bleeding.
-// Nothing here measures the box, so it holds on the server too:
+// A mark must never sit under the copy, and never be cut off by the edge of the
+// section either. Both are geometry, not luck, and neither measures anything —
+// so both hold on the server and at every viewport width.
+//
+// Horizontally the mark is confined to the empty gutter beside the centred
+// content column: it hangs off its own edge and may grow no wider than
+// (section - content) / 2 minus its offset. Wide screens give it the full size,
+// a narrowing window shrinks it, and once the content column fills the section
+// the width reaches zero and the mark is simply not there. That is why the width
+// is CSS math rather than a JS number: the page has no fixed width to solve for.
+//
+// Vertically it has the whole section to itself, because the gutter it lives in
+// holds no content at any height:
 //  - the horizontal anchor is an offset from one edge, not a centred percentage,
 //    so the mark's own width can never carry it past that edge;
 //  - the vertical position is the wanted centre, clamped into the range where
@@ -57,20 +75,40 @@ const props = withDefaults(defineProps<{
 //    taller than its box, which `mask-size: contain` handles without drift.
 const style = computed(() => {
   const height = props.size / aspects[props.shape]
+  // A still mark carries no timing variables at all, so the markup says plainly
+  // which marks move.
+  const motion = props.breathe > 0
+    ? {
+        '--watermark-breathe': `${props.breathe.toFixed(2)}s`,
+        '--watermark-from-scale': props.fromScale.toFixed(3),
+        '--watermark-phase': `${props.phase.toFixed(2)}s`
+      }
+    : undefined
 
   return {
+    // The peak opacity is a variable, not a declaration: a running animation
+    // outranks any inline `opacity`, so the keyframes have to be able to read the
+    // per-mark value or every mark would breathe to the same strength.
+    '--watermark-opacity': props.opacity.toFixed(3),
+    ...motion,
     '--watermark-src': `url("/images/svg/${props.shape}.svg")`,
     [props.side]: `${props.inset.toFixed(2)}rem`,
     height: `${height.toFixed(3)}rem`,
-    opacity: props.opacity.toFixed(3),
-    top: `clamp(${edge}rem, calc(${props.y.toFixed(2)}% - ${(height / 2).toFixed(3)}rem), max(${edge}rem, calc(100% - ${height.toFixed(3)}rem - ${edge}rem)))`,
-    width: `${props.size.toFixed(3)}rem`
+    // min()/max() clamp this into [0, gutter - inset]; a negative result would be
+    // an invalid width, which CSS resolves to 0 — exactly the wanted outcome.
+    width: `min(${props.size.toFixed(3)}rem, max(0rem, (100% - var(--watermark-content, 72rem)) / 2 - ${props.inset.toFixed(2)}rem))`,
+    top: `clamp(${edge}rem, calc(${props.y.toFixed(2)}% - ${(height / 2).toFixed(3)}rem), max(${edge}rem, calc(100% - ${height.toFixed(3)}rem - ${edge}rem)))`
   }
 })
 </script>
 
 <template>
-  <span class="watermark" :class="`watermark--${tone}`" :style="style" aria-hidden="true" />
+  <span
+    class="watermark"
+    :class="[`watermark--${tone}`, { 'watermark--breathing': breathe > 0 }]"
+    :style="style"
+    aria-hidden="true"
+  />
 </template>
 
 <style scoped>
@@ -81,11 +119,12 @@ const style = computed(() => {
    colour comes from `background`, which the mask then cuts the shape out of. */
 .watermark {
   @apply pointer-events-none absolute block select-none;
-  /* Never wider or taller than the box it decorates, so it cannot be clipped by
-     the section edge. `mask-size: contain` keeps the shape's ratio when this
-     bites. */
+  /* Never taller than the box it decorates, so it cannot be clipped by the
+     section edge; the width is already held inside the gutter. `mask-size:
+     contain` keeps the shape's ratio whenever either cap bites, and centres it
+     in the box, so a shrunk mark stays on the band it was placed on. */
   max-height: calc(100% - 1rem);
-  max-width: calc(100% - 1rem);
+  opacity: var(--watermark-opacity, 0.12);
   mask-image: var(--watermark-src);
   mask-position: center;
   mask-repeat: no-repeat;
@@ -96,6 +135,34 @@ const style = computed(() => {
   -webkit-mask-position: center;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-size: contain;
+}
+
+/* Ping-pong, not a loop: one leg grows the mark in from small and then holds it,
+   and `alternate` replays the same keyframes backwards for the way out — so
+   appearing and disappearing are mirror images of each other rather than two
+   animations that have to be kept in sync.
+   Only opacity and transform move, both compositor properties, so a page-worth
+   of marks breathing at once costs no layout or paint work. Scaling is safe next
+   to the no-crop geometry above: the mark scales about its own centre and never
+   past 1, so it can only ever pull further inside its box. */
+.watermark--breathing {
+  animation: watermark-breathe var(--watermark-breathe) var(--ease-standard) var(--watermark-phase) infinite alternate;
+}
+
+@keyframes watermark-breathe {
+  from {
+    opacity: 0;
+    transform: scale(var(--watermark-from-scale));
+  }
+
+  /* The hold is what stops this reading as a blink: each leg spends most of its
+     back half at rest, so the eye meets a settled mark far more often than a
+     moving one. */
+  55%,
+  100% {
+    opacity: var(--watermark-opacity);
+    transform: scale(1);
+  }
 }
 
 .watermark--burgundy {
@@ -113,5 +180,13 @@ const style = computed(() => {
 /* For marks on the burgundy band, where a burgundy mark is invisible. */
 .watermark--inverse {
   @apply bg-text-inverse;
+}
+
+/* Must outrank the rules above, so it stays last. Reduce ⇒ every mark simply
+   sits at its full size and strength; the base rule already puts it there. */
+@media (prefers-reduced-motion: reduce) {
+  .watermark--breathing {
+    animation: none;
+  }
 }
 </style>

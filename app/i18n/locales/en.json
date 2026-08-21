@@ -71,23 +71,23 @@
     "founder": {
       "capsWord": "Founder of",
       "scriptWord": "Fluyo school",
-      "description": "My name is Catherina. It all started with one teacher and a simple idea: English comes alive the moment you speak it.",
+      "description": "My name is Kateryna — I am the founder of Fluyo School and an English teacher. I built a school where learning is meant to be comfortable, modern and genuinely useful for every student.",
       "items": [
         {
           "title": "Education",
-          "body": "A degree in English philology — and constant practice with students from A1 to C1."
+          "body": "A degree in English philology, qualified as a referent-translator of English. I work with students at levels A1–C1."
         },
         {
-          "title": "4 years of teaching",
-          "body": "From first phrases to confident conversation: one-to-one, in mini-groups and at Speaking Club."
+          "title": "My path",
+          "body": "I scored 184 in the ZNO English exam, went on to study translation, and in 2022, while travelling the world, I began teaching."
         },
         {
-          "title": "Exam preparation",
-          "body": "NMT, EVI and English interviews — with a plan, clear steps and feedback after every lesson."
+          "title": "Communicative method",
+          "body": "I chose the communicative approach at the very start of my teaching, and today it is the foundation of our lessons: less dry theory, more live English and practice."
         },
         {
-          "title": "Why Fluyo",
-          "body": "I built Fluyo because I kept meeting people who knew the rules but were afraid to speak. Here English is learned out loud — in conversation, without fear of mistakes."
+          "title": "Why Fluyo School",
+          "body": "Fluyo School is about growth, support and confidence in yourself. It is a place where your potential opens up, and where teachers make the path to a result comfortable, vivid and meaningful."
         }
       ]
     },
@@ -190,6 +190,18 @@
       "trialUnit": "30 minutes with a teacher",
       "formatSignals": ["Individual", "Mini-group"],
       "formatSignalsAriaLabel": "Learning format signals",
+      "audienceHeading": "Who are the lessons for?",
+      "audienceAria": "Choose who the lessons are for",
+      "audiences": {
+        "adults": {
+          "label": "Adults",
+          "shortLabel": "Adults"
+        },
+        "kids": {
+          "label": "Children",
+          "shortLabel": "Kids"
+        }
+      },
       "switcherHeading": "How many lessons?",
       "switcherAria": "Choose number of lessons",
       "discounts": {
@@ -327,6 +339,18 @@
         "exam-prep": {
           "title": "Exam preparation",
           "telegramCta": "Ask about a package"
+        },
+        "kids-five-six": {
+          "title": "Ages 5-6",
+          "telegramCta": "Ask about a package"
+        },
+        "kids-seven-nine": {
+          "title": "Ages 7-9",
+          "telegramCta": "Ask about a package"
+        },
+        "kids-ten-plus": {
+          "title": "Ages 10+",
+          "telegramCta": "Ask about a package"
         }
       }
     },
@@ -454,6 +478,18 @@
     "PAIR": {
       "label": "Pair lesson",
       "caption": "An individual program for two - you learn together at your own pace."
+    },
+    "KIDS_THIRTY": {
+      "label": "30-minute lesson",
+      "caption": "A short lesson for the youngest learners: games, songs, and first English phrases while attention holds."
+    },
+    "KIDS_FORTY_FIVE": {
+      "label": "45-minute lesson",
+      "caption": "A lesson for school kids: we read, we speak, and we reinforce what they cover at school."
+    },
+    "KIDS_SIXTY": {
+      "label": "60-minute lesson",
+      "caption": "A full lesson for teens: live conversation, grammar, and exam preparation."
     }
   },
   "priceFormat": {
@@ -466,6 +502,7 @@
     },
     "units": {
       "thirty-minutes": "30 min",
+      "forty-five-minutes": "45 min",
       "sixty-minutes": "60 min",
       "seventy-five-minutes": "75 min",
       "lesson": "lesson"
@@ -473,22 +510,22 @@
   },
   "teacherProfiles": {
     "catherina": {
-      "name": "Catherina",
+      "name": "Kateryna",
       "role": "founder & english teacher",
-      "description": "Four years of experience, levels A1–C1. I help students move from studying rules to speaking with confidence, with a plan shaped around your goals and pace.",
-      "focus": ["General English", "Speaking Practice", "English for Travel", "English for Kids and Teens", "Everyday English", "Interview Preparation", "NMT preparation", "EVI preparation", "Speaking Club"]
+      "description": "Kateryna works across several directions: general English, NMT and EVI preparation, speaking clubs and lessons for children from age 5. She has over four years of teaching experience, and her lessons are known for a warm, friendly atmosphere.",
+      "focus": ["General English", "NMT preparation", "EVI preparation", "Speaking Club", "English for children from age 5"]
     },
     "diana": {
       "name": "Diana",
-      "role": "Exam preparation teacher",
-      "description": "I prepare students for NMT, EVI and IELTS: the syllabus broken into clear steps, plus test strategy, academic writing and error review.",
-      "focus": ["NMT preparation", "EVI preparation", "IELTS", "Academic writing", "Test strategy", "Error review"]
+      "role": "english teacher",
+      "description": "Diana works with Business, Legal and Medical English, and prepares students for NMT, EVI and job interviews. She teaches students from age 16. Her goal is to help every student uncover their strengths and use English confidently at work and in everyday life.",
+      "focus": ["Business English", "Legal English", "Medical English", "NMT preparation", "EVI preparation", "Interview preparation"]
     },
     "ksenia": {
       "name": "Ksenia",
-      "role": "Kids and teens teacher",
-      "description": "I guide younger learners and teens at a calm pace — short active tasks, plenty of games, and a focus on live speaking. Parents get honest feedback on a regular basis.",
-      "focus": ["English for Kids and Teens", "Speaking Practice", "Playful tasks", "Speaking confidence", "Parent feedback", "Gentle start"]
+      "role": "english teacher",
+      "description": "Ksenia works with children from age 5, teaches general English, helps sharpen speaking skills and prepares students for NMT and EVI. Her goal is to help students build confidence in what they know and lose the fear of speaking English.",
+      "focus": ["English for children from age 5", "General English", "Speaking skills", "NMT preparation", "EVI preparation"]
     }
   },
   "proofAssets": {
@@ -514,41 +551,41 @@
     }
   },
   "faqItems": {
-    "trial-booking": {
-      "question": "How do I book a consultation?",
-      "answer": "Use the Telegram CTA, and the message will carry page and language context."
+    "enrollment": {
+      "question": "How do I sign up for lessons?",
+      "answer": "On our site you can press the «Book a consultation» button and message our manager about starting lessons. You can also reach us through Instagram Direct — the manager will help you pick a format and a teacher, and will answer every organisational question."
     },
-    "format-choice": {
-      "question": "How do I know which format fits me?",
-      "answer": "Start with the programs page: it separates exams, kids, and adult goals."
+    "consultation-vs-trial": {
+      "question": "Which is better: a consultation or a trial lesson?",
+      "answer": "At our school you can book a free consultation of up to 30 minutes. You will meet the teacher, get a feel for the atmosphere and how comfortable the conversation is, talk through your goals and organisational questions, and the teacher will get to know your level of English. A trial lesson is a full 60-minute class for 350 UAH: you join the learning process straight away, work with the materials and tasks, and see in practice whether the format and the teacher suit you. A consultation is for getting acquainted; a trial lesson is for trying the learning itself right away."
+    },
+    "subscription-benefit": {
+      "question": "What is the advantage of learning on a package?",
+      "answer": "We work with lesson packages, because regularity is one of the foundations of learning a language effectively. A package helps you lock in a steady schedule, study without long breaks, reach results faster and get a better price per lesson. Learning becomes more systematic, more regular and easier to plan around."
     },
     "teacher-match": {
-      "question": "Can I choose a teacher?",
-      "answer": "Yes. The manager checks the learner goal, age, level, and preferred format, then suggests a teacher for that context."
-    },
-    "pricing-policy": {
-      "question": "Are the website prices final?",
-      "answer": "Yes. Current formats and starting prices are shown on the pricing page, and the manager can help choose the right option."
-    },
-    "payment-method": {
-      "question": "How do I pay for lessons?",
-      "answer": "Payment is online: once your schedule is confirmed, the manager sends payment details in Telegram."
-    },
-    "schedule-policy": {
-      "question": "When are lessons available?",
-      "answer": "The manager offers available slots after the consultation and matches them with the chosen format."
-    },
-    "reschedule-policy": {
-      "question": "What if I need to reschedule a lesson?",
-      "answer": "Tell the manager at least 24 hours ahead, and the lesson moves to another convenient slot without losing your payment."
+      "question": "Can I choose my teacher?",
+      "answer": "Of course. On our site and on Instagram you can read the teachers’ profiles in advance and pick the one who suits you best. Or you can leave it to us — we will match a teacher to your request, your goals and your expectations."
     },
     "online-format": {
-      "question": "How do online lessons work?",
-      "answer": "Lessons run in Zoom or Google Meet with an interactive board. You only need stable internet and headphones."
+      "question": "How do online lessons run?",
+      "answer": "Before lessons start, our manager creates a shared group with the student and the teacher. A day before each lesson you get a reminder, so your schedule is easy to keep track of. Lessons run online in Zoom or Google Meet, with the interactive Miro board and the learning materials."
     },
-    "english-switch": {
-      "question": "Can I view the site in English?",
-      "answer": "Yes. Tap EN in the menu and the site switches to English right away — you stay on the same page."
+    "why-miro": {
+      "question": "Why Miro?",
+      "answer": "Miro is not only about interactive tasks — above all it is a convenient workspace for the student and the teacher. On the board the teacher builds the lesson around your goals and your request, combining coursebooks, presentations, exercises and extra materials. Everything is kept in one place, so it is easy to come back to during your studies."
+    },
+    "progress-time": {
+      "question": "How long does it take to raise my level of English?",
+      "answer": "It is individual, and it depends on how regular your lessons are, on doing the homework, on systematic work and on your motivation. On our side we stay with you at every stage and do everything we can to keep your learning consistent and effective."
+    },
+    "pair-lessons": {
+      "question": "Can I study together with a friend or a family member?",
+      "answer": "Absolutely. That is what our pair lessons are for — you can study together with a friend, a partner or a family member. This format makes learning more engaging, gives you more room for speaking practice, and at the same time keeps the cost per person lower."
+    },
+    "format-choice": {
+      "question": "How do I know which format suits me?",
+      "answer": "It all depends on your goals, your pace and how you are most comfortable working. One-to-one lessons suit those who want a fully personalised programme, pair lessons those who want more interactive practice, and group lessons those for whom live communication and learning alongside others matter most. If you are not sure, we will help you choose a format that matches your level, your goals and your preferences."
     }
   },
   "assets": {
@@ -559,7 +596,7 @@
       "alt": "Short Fluyo School logo."
     },
     "avatar-catherina": {
-      "alt": "Close-up portrait of founder and teacher Catherina."
+      "alt": "Close-up portrait of founder and teacher Kateryna."
     },
     "avatar-diana": {
       "alt": "Close-up portrait of teacher Diana."
@@ -568,10 +605,10 @@
       "alt": "Close-up portrait of teacher Ksenia."
     },
     "portrait-catherina": {
-      "alt": "Portrait of founder and teacher Catherina."
+      "alt": "Portrait of founder and teacher Kateryna."
     },
     "portrait-catherina-founder": {
-      "alt": "Catherina, founder of Fluyo School, full length."
+      "alt": "Kateryna, founder of Fluyo School, full length."
     },
     "portrait-diana": {
       "alt": "Portrait of teacher Diana."

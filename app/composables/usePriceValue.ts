@@ -1,4 +1,4 @@
-import { PRICES_CONFIG, type PriceCurrency, type PriceItemId, type PricePackageTier } from '~/data/content'
+import { PRICES_CONFIG, type PriceCurrency, type PriceItemId, type PricePackageTier, type PriceUnit } from '~/data/content'
 
 export const usePriceValue = () => {
   const { t } = useI18n()
@@ -28,10 +28,11 @@ export const usePriceValue = () => {
 
   const packageTotal = (tier: PricePackageTier): string => amountLabel(tier.totalAmount, tier.currency)
 
-  const packagePerLesson = (tier: PricePackageTier): string =>
+  /** `unit` names what one lesson is — pass the track's lesson length to price by duration. */
+  const packagePerLesson = (tier: PricePackageTier, unit: PriceUnit = 'lesson'): string =>
     t('priceFormat.value', {
       price: amountLabel(tier.perLessonAmount, tier.currency),
-      unit: t('priceFormat.units.lesson')
+      unit: t(`priceFormat.units.${unit}`)
     })
 
   return { priceValue, packageTotal, packagePerLesson }

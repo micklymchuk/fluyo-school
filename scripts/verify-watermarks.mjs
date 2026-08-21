@@ -26,10 +26,23 @@ const hosts = [
   { path: 'app/components/navigation/FooterContactStrip.vue', content: 'footer-inner' }
 ]
 
+// Tailwind's max-w-* scale, in rem. A field has to be told how wide the content
+// column it sits behind can get, and this is how that claim gets checked.
+const containerWidths = {
+  'max-w-2xl': 42,
+  'max-w-3xl': 48,
+  'max-w-4xl': 56,
+  'max-w-5xl': 64,
+  'max-w-6xl': 72,
+  'max-w-7xl': 80
+}
+
 const checks = {
   assets: verifyAssetsAndRatios,
   determinism: verifyDeterministicScatter,
   edges: verifyEdgeSafety,
+  overlap: verifyNoOverlap,
+  motion: verifyMotion,
   decorative: verifyDecorativeContract,
   recolor: verifyMaskRecolouring,
   layering: verifyLayeringContract,
@@ -161,11 +174,89 @@ function verifyEdgeSafety() {
   assert(!/translate\(-50%/.test(script), 'UiWatermark must not centre a mark on its own box — half of it would hang outside the anchor')
   assert(/top: `clamp\(/.test(script), 'UiWatermark must clamp the vertical position into the range where the whole mark fits')
   assert(/max\(\$\{edge\}rem/.test(script), 'the clamp ceiling must be floored with max() — in a box shorter than the mark, clamp() flips otherwise')
-  assert(/max-height: calc\(100% - /.test(styles) && /max-width: calc\(100% - /.test(styles), 'UiWatermark must cap a mark to its box so an oversized one shrinks instead of being clipped')
+  assert(/max-height: calc\(100% - /.test(styles), 'UiWatermark must cap a mark to its box height so an oversized one shrinks instead of being clipped')
 
   const field = withoutComments(read(files.uiWatermarkField))
   assert(!/x:\s/.test(field), 'UiWatermarkField must place marks by side and inset, not by a centred x percentage')
   assert(/inset: /.test(field) && /side,/.test(field), 'UiWatermarkField must hand each mark a side and an inset')
+}
+
+// The marks ping-pong: grow in from small, hold, then play the same keyframes
+// backwards on the way out, each on its own seeded clock.
+function verifyMotion() {
+  const source = read(files.uiWatermark)
+  const styles = styleBlock(source, 'UiWatermark')
+  const script = withoutComments(source.match(/<script[^>]*>([\s\S]*?)<\/script>/)?.[1] ?? '')
+  const keyframes = styles.match(/@keyframes watermark-breathe \{([\s\S]*?)\n\}/)
+  assert(keyframes, 'UiWatermark must define the watermark-breathe keyframes')
+
+  const animation = styles.match(/\.watermark--breathing \{([\s\S]*?)\}/)
+  assert(animation, 'UiWatermark must define the breathing state')
+  assert(/\balternate\b/.test(animation[1]), 'the animation must run alternate — that is what makes appearing and disappearing mirror images instead of two animations to keep in sync')
+  assert(/\binfinite\b/.test(animation[1]), 'the animation must repeat')
+  assert(/var\(--watermark-breathe\)/.test(animation[1]) && /var\(--watermark-phase\)/.test(animation[1]), 'duration and phase must come from the per-mark custom properties')
+
+  // Compositor-only, or 40-odd marks animating at once would relayout the page
+  // on every frame.
+  const animatable = withoutComments(keyframes[1]).match(/^\s*([a-z-]+):/gm) ?? []
+  for (const property of animatable) {
+    const name = property.trim().replace(':', '')
+    assert(['opacity', 'transform'].includes(name), `watermark-breathe must animate only opacity and transform — ${name} would cost layout or paint on every frame`)
+  }
+
+  assert(/from \{[\s\S]*?transform: scale\(var\(--watermark-from-scale\)\)/.test(keyframes[1]), 'a mark must grow in from its from-scale, not appear at full size')
+  assert(/opacity: var\(--watermark-opacity\)/.test(keyframes[1]), 'the animation must peak at the per-mark opacity — a running animation outranks any inline opacity, so a literal here would flatten every mark to one strength')
+  const styleObject = script.match(/const style = computed\(\(\) => \{([\s\S]*?)\n\}\)/)
+  assert(styleObject, 'UiWatermark must build its inline style in a computed')
+  assert(!/^\s*opacity:/m.test(styleObject[1]), 'UiWatermark must pass its opacity in as a custom property, not as an inline opacity declaration the animation would override')
+
+  // Equal specificity ⇒ source order decides, so the fallback stays last.
+  assert(styles.lastIndexOf('@media (prefers-reduced-motion: reduce)') > styles.indexOf('.watermark--breathing {'), 'the reduced-motion block must follow the breathing rule so it outranks it')
+  const reduce = styles.slice(styles.lastIndexOf('@media (prefers-reduced-motion: reduce)'))
+  assert(/animation: none/.test(reduce), 'prefers-reduced-motion must stop the marks breathing')
+  assert(!/opacity: 0/.test(reduce), 'the reduced-motion fallback must leave marks visible, at the strength the base rule already gives them')
+
+  const field = withoutComments(read(files.uiWatermarkField))
+  assert(/const breathe = still \? 0 : /.test(field), 'UiWatermarkField must give each mark its own seeded leg duration, and keep some marks still')
+  assert(/const phase = still \? 0 : -/.test(field), 'phases must be negative so the page opens mid-scatter instead of breathing in as one')
+  assert(/fromScale: /.test(field), 'each mark must get its own start scale')
+}
+
+// The one thing a watermark must never do is sit under the copy. Marks are
+// confined to the empty gutters beside the centred content column, which only
+// works if every field is told how wide that column can actually get: claim
+// 72rem in a section whose container is max-w-7xl and the marks slide 4rem under
+// the text on a wide screen.
+function verifyNoOverlap() {
+  const script = withoutComments(read(files.uiWatermark).match(/<script[^>]*>([\s\S]*?)<\/script>/)?.[1] ?? '')
+  const width = script.match(/width: `([^`]*)`/)
+  assert(width, 'UiWatermark must compute its width')
+  assert(/var\(--watermark-content/.test(width[1]), "a mark's width must be solved against the content column, so no viewport width can put it under the copy")
+  assert(/\(100% - var\(--watermark-content[^)]*\)?\) \/ 2/.test(width[1]), 'the width must be bounded by the gutter: (section - content) / 2')
+  assert(/^min\(/.test(width[1]) && /max\(0rem/.test(width[1]), 'the width must clamp into [0, gutter] so a section with no gutter simply shows no marks')
+  const fieldStyles = withoutComments(styleBlock(read(files.uiWatermarkField), 'UiWatermarkField'))
+  assert(/--watermark-content/.test(read(files.uiWatermarkField)), 'UiWatermarkField must publish the content width its marks solve against')
+  assert(/@media \(max-width: 72rem\)[\s\S]*?display: none/.test(fieldStyles), 'UiWatermarkField must drop out where no gutter is left, so phones do not run a page of invisible animations')
+
+  for (const host of hosts) {
+    const source = read(resolve(root, host.path))
+    const styles = styleBlock(source, host.path)
+    const declared = withoutComments(source).match(/<UiWatermarkField[\s\S]*?\/>/)?.[0] ?? ''
+    const claimed = Number(declared.match(/:content-width="(\d+)"/)?.[1] ?? 72)
+
+    const widest = Object.entries(containerWidths)
+      .filter(([name]) => new RegExp(`\\b${name}\\b`).test(styles))
+      .reduce((max, [, value]) => Math.max(max, value), 0)
+
+    if (widest === 0) {
+      continue
+    }
+
+    assert(
+      claimed >= widest,
+      `${host.path} lets its content reach ${widest}rem but tells the watermark field ${claimed}rem — pass :content-width="${widest}" or the marks land under the copy`
+    )
+  }
 }
 
 function verifyDecorativeContract() {
@@ -284,6 +375,8 @@ function verifyAcceptance() {
   verifyAssetsAndRatios()
   verifyDeterministicScatter()
   verifyEdgeSafety()
+  verifyNoOverlap()
+  verifyMotion()
   verifyDecorativeContract()
   verifyMaskRecolouring()
   verifyLayeringContract()

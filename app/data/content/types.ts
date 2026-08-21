@@ -14,20 +14,29 @@ export type LocalizedText = string | LocalizedString
 export type PageRouteId = 'home' | 'programs' | 'teachers' | 'pricing'
 export type PagePath = '/' | '/programs' | '/teachers' | '/pricing'
 export type LearningPathId = 'general' | 'exam' | 'speaking-club' | 'kids' | 'professional' | 'interview'
-export type PriceItemId = 'TRIAL' | 'TRIAL_LESSON' | 'EXAM_PREP' | 'MINI_GROUP' | 'INDIVIDUAL' | 'PAIR'
+export type PriceItemId =
+  | 'TRIAL'
+  | 'TRIAL_LESSON'
+  | 'EXAM_PREP'
+  | 'MINI_GROUP'
+  | 'INDIVIDUAL'
+  | 'PAIR'
+  | 'KIDS_THIRTY'
+  | 'KIDS_FORTY_FIVE'
+  | 'KIDS_SIXTY'
 export type TeacherProfileId = 'catherina' | 'diana' | 'ksenia'
 export type ProofAssetId = 'student-result-ielts' | 'kids-class-snapshot' | 'adult-speaking-note' | 'lesson-format-board'
 export type TestimonialId = 'danylo-exam' | 'olena-parent' | 'marta-adult'
 export type FaqItemId =
-  | 'trial-booking'
-  | 'format-choice'
+  | 'enrollment'
+  | 'consultation-vs-trial'
+  | 'subscription-benefit'
   | 'teacher-match'
-  | 'pricing-policy'
-  | 'payment-method'
-  | 'schedule-policy'
-  | 'reschedule-policy'
   | 'online-format'
-  | 'english-switch'
+  | 'why-miro'
+  | 'progress-time'
+  | 'pair-lessons'
+  | 'format-choice'
 
 export type PageContent = {
   routeId: PageRouteId
@@ -83,7 +92,7 @@ export type PriceItem = {
 }
 
 export type PriceCurrency = 'UAH'
-export type PriceUnit = 'thirty-minutes' | 'sixty-minutes' | 'seventy-five-minutes' | 'lesson'
+export type PriceUnit = 'thirty-minutes' | 'forty-five-minutes' | 'sixty-minutes' | 'seventy-five-minutes' | 'lesson'
 
 export type PriceConfig = {
   amount: number
@@ -101,7 +110,15 @@ export type PricingFormat = {
   pathFit: readonly LearningPathId[]
 }
 
-export type PricePackageTrackId = 'general' | 'exam-prep'
+/** Who the package tracks are priced for; drives the audience switch on the home pricing block. */
+export type PriceAudienceId = 'adults' | 'kids'
+
+export type PricePackageTrackId =
+  | 'general'
+  | 'exam-prep'
+  | 'kids-five-six'
+  | 'kids-seven-nine'
+  | 'kids-ten-plus'
 
 export type PricePackageTier = {
   lessonCount: number

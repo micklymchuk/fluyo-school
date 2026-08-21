@@ -42,12 +42,22 @@ const props = withDefaults(defineProps<{
   count?: number
   /** Extra marks for the right gutter, on top of `count`. */
   rightExtra?: number
+  /**
+   * Width in rem of the widest content column in this section — its max-w-*.
+   * Marks are confined to the gutters outside it, so a section whose content is
+   * wider than this would have marks under its copy.
+   */
+  contentWidth?: number
   tone?: WatermarkTone
 }>(), {
+  contentWidth: 72,
   count: 3,
   rightExtra: 2,
   tone: 'burgundy'
 })
+
+// Inherited by every mark in the field; each one solves its own width against it.
+const fieldStyle = computed(() => ({ '--watermark-content': `${props.contentWidth}rem` }))
 
 // FNV-1a over the seed, then mulberry32. Every number in a field comes from its
 // seed string and nothing else, so the scatter looks random yet renders
@@ -87,10 +97,26 @@ const marks = computed(() => {
     const shape = pool[Math.floor(next() * pool.length)] ?? 'star'
     const spec = shapeSpecs[shape]
 
+    // One mark in four stays put, so a section always keeps a settled base of
+    // marks under the ones that come and go.
+    const still = next() < 0.25
+    // One leg of the ping-pong, in seconds. Long: the mark should be something
+    // the visitor notices has changed, never something they watch move.
+    const breathe = still ? 0 : 7 + next() * 6
+    // A negative delay drops the mark part-way into its own leg, so the page
+    // opens mid-scatter — some marks already up, some faded out, some on the way
+    // — instead of every mark in the field breathing in together.
+    const phase = still ? 0 : -next() * breathe * 2
+
     return {
+      breathe,
+      fromScale: 0.4 + next() * 0.25,
       id,
-      inset: 0.75 + next() * 3.5,
+      // Kept small: the inset comes out of the same gutter the mark's width is
+      // solved against, so a big offset just makes the mark shrink sooner.
+      inset: 0.5 + next() * 2,
       opacity: 0.07 + next() * 0.08,
+      phase,
       shape,
       side,
       size: spec.minSize + next() * (spec.maxSize - spec.minSize),
@@ -128,6 +154,7 @@ const { el, visible } = useReveal()
     ref="el"
     class="watermark-field"
     :class="{ 'watermark-field--visible': visible }"
+    :style="fieldStyle"
     aria-hidden="true"
   >
     <UiWatermark
@@ -139,6 +166,9 @@ const { el, visible } = useReveal()
       :inset="mark.inset"
       :y="mark.y"
       :opacity="mark.opacity"
+      :breathe="mark.breathe"
+      :phase="mark.phase"
+      :from-scale="mark.fromScale"
       :tone="tone"
     />
   </div>
@@ -148,24 +178,28 @@ const { el, visible } = useReveal()
 @reference "~/assets/css/tailwind.css";
 
 /* Fills its positioned parent without touching layout. overflow-clip and not
-   overflow-hidden: marks are placed to bleed past the section edges, and a
-   scroll container here would let a wide mark push the page sideways. */
+   overflow-hidden: the marks are sized to stay inside this box, and a scroll
+   container here would let any future overshoot push the page sideways. */
 .watermark-field {
   @apply pointer-events-none absolute inset-0 select-none overflow-clip;
   opacity: 0;
   transition: opacity var(--transition-duration-long) var(--ease-standard);
 }
 
-/* Narrow screens have no gutter to hide in, so the marks sit behind the copy —
-   held back further there to keep the text the strongest thing on the page. */
-@media (max-width: 40rem) {
-  .watermark-field {
-    --watermark-field-opacity: 0.55;
-  }
+.watermark-field--visible {
+  opacity: 1;
 }
 
-.watermark-field--visible {
-  opacity: var(--watermark-field-opacity, 1);
+/* Under the width of the content column there is no gutter left, so every mark
+   in the field has already solved to zero width. Dropping the field outright
+   here also stops a page-worth of invisible animations from running on phones,
+   where the battery cost is real. The threshold is the widest column a field
+   currently declares; give a field a narrower one and its marks appear from
+   this width rather than from its own. */
+@media (max-width: 72rem) {
+  .watermark-field {
+    display: none;
+  }
 }
 
 /* Both fallbacks must outrank the rules above, so they stay last. */
@@ -173,7 +207,7 @@ const { el, visible } = useReveal()
 /* Reduce ⇒ the marks are simply there. */
 @media (prefers-reduced-motion: reduce) {
   .watermark-field {
-    opacity: var(--watermark-field-opacity, 1);
+    opacity: 1;
     transition: none;
   }
 }
@@ -181,7 +215,7 @@ const { el, visible } = useReveal()
 /* No scripting ⇒ nothing will ever add the visible class, so never hide them. */
 @media (scripting: none) {
   .watermark-field {
-    opacity: var(--watermark-field-opacity, 1);
+    opacity: 1;
   }
 }
 </style>

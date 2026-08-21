@@ -8,7 +8,7 @@ export const founderProfile = {
   photo: '/images/teachers/catherina-web.png',
   avatar: '/images/teachers/catherina-avatar.png',
   founderPhoto: '/images/teachers/catherina-founder.png',
-  audienceFit: ['general', 'speaking-club', 'professional', 'interview'],
+  audienceFit: ['general', 'exam', 'speaking-club', 'kids'],
   isFounder: true
 } as const satisfies TeacherProfile
 
@@ -21,13 +21,13 @@ export const teacherProfiles = [
     scriptName: 'Ksenia',
     photo: '/images/teachers/ksenia-web.png',
     avatar: '/images/teachers/ksenia-avatar.png',
-    audienceFit: ['kids']
+    audienceFit: ['kids', 'general', 'exam']
   },
   {
     id: 'diana',
     scriptName: 'Diana',
     photo: '/images/teachers/diana-web.png',
     avatar: '/images/teachers/diana-avatar.png',
-    audienceFit: ['exam']
+    audienceFit: ['professional', 'interview', 'exam']
   }
 ] as const satisfies readonly TeacherProfile[]

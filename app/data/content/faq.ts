@@ -2,42 +2,42 @@ import type { FaqItem } from './types'
 
 export const faqItems = [
   {
-    id: 'trial-booking'
+    id: 'enrollment'
   },
   {
-    id: 'format-choice'
+    id: 'consultation-vs-trial'
+  },
+  {
+    id: 'subscription-benefit'
   },
   {
     id: 'teacher-match'
   },
   {
-    id: 'pricing-policy'
-  },
-  {
-    id: 'payment-method'
-  },
-  {
-    id: 'schedule-policy'
-  },
-  {
-    id: 'reschedule-policy'
-  },
-  {
     id: 'online-format'
   },
   {
-    id: 'english-switch'
+    id: 'why-miro'
+  },
+  {
+    id: 'progress-time'
+  },
+  {
+    id: 'pair-lessons'
+  },
+  {
+    id: 'format-choice'
   }
 ] as const satisfies readonly FaqItem[]
 
-// Home keeps the shortest path through the same answers: how to start, which format,
-// who teaches, how online lessons run and what a lesson costs.
+// Home keeps the shortest path through the same answers: how to start, which first
+// step to take, who teaches, how online lessons run and how to pick a format.
 export const homeFaqItems = [
   {
-    id: 'trial-booking'
+    id: 'enrollment'
   },
   {
-    id: 'format-choice'
+    id: 'consultation-vs-trial'
   },
   {
     id: 'teacher-match'
@@ -46,6 +46,6 @@ export const homeFaqItems = [
     id: 'online-format'
   },
   {
-    id: 'pricing-policy'
+    id: 'format-choice'
   }
 ] as const satisfies readonly FaqItem[]

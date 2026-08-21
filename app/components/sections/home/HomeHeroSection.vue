@@ -30,7 +30,7 @@ const boardItems = computed(() => boardIcons.map((icon, itemIndex) => ({
 
 <template>
   <section id="home" class="home-hero" aria-labelledby="home-hero-title">
-    <UiWatermarkField seed="home-hero" :count="4" />
+    <UiWatermarkField seed="home-hero" :count="4" :content-width="80" />
     <div class="home-hero__container">
       <UiLockupHeading
         id="home-hero-title"

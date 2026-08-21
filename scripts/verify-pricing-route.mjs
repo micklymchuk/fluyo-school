@@ -31,15 +31,15 @@ const packageTrackIds = ['general', 'exam-prep']
 const specialConditionIds = ['first-package', 'military-family']
 const includedItemIds = ['teacher-matching', 'live-lesson', 'materials', 'feedback-progress']
 const faqItemIds = [
-  'trial-booking',
-  'format-choice',
+  'enrollment',
+  'consultation-vs-trial',
+  'subscription-benefit',
   'teacher-match',
-  'pricing-policy',
-  'payment-method',
-  'schedule-policy',
-  'reschedule-policy',
   'online-format',
-  'english-switch'
+  'why-miro',
+  'progress-time',
+  'pair-lessons',
+  'format-choice'
 ]
 const pathContexts = ['generic', 'exam', 'kids', 'adult']
 
