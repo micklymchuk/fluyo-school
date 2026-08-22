@@ -7,7 +7,6 @@ import UiReveal from '~/components/ui/UiReveal.vue'
 import UiInfoInlineMessage from '~/components/ui/UiInfoInlineMessage.vue'
 import UiPencilMark from '~/components/ui/UiPencilMark.vue'
 import UiSticker from '~/components/ui/UiSticker.vue'
-import UiWatermarkField from '~/components/ui/UiWatermarkField.vue'
 
 const { t } = useI18n()
 
@@ -22,7 +21,6 @@ const boardItems = computed(() => boardIcons.map((icon, itemIndex) => ({
 
 <template>
   <section id="speaking-club" class="speaking-club" aria-labelledby="home-speaking-club-title">
-    <UiWatermarkField seed="home-speaking-club" :count="3" />
     <div class="speaking-club__container">
       <h2 id="home-speaking-club-title" class="speaking-club__title">
         <span class="speaking-club__caps">{{ t('homeSections.speakingClub.capsWord') }}</span>

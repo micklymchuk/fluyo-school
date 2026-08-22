@@ -25,8 +25,8 @@ const files = {
   tracking: resolve(root, 'app/composables/useTracking.ts')
 }
 
-const pricingFormatIds = ['individual', 'mini-group']
-const priceItemIds = ['TRIAL', 'TRIAL_LESSON', 'EXAM_PREP', 'MINI_GROUP', 'INDIVIDUAL', 'PAIR']
+const pricingFormatIds = ['individual', 'mini-group', 'kids-group']
+const priceItemIds = ['TRIAL', 'TRIAL_LESSON', 'EXAM_PREP', 'MINI_GROUP', 'KIDS_GROUP', 'INDIVIDUAL', 'PAIR']
 const packageTrackIds = ['general', 'exam-prep']
 const specialConditionIds = ['first-package', 'military-family']
 const includedItemIds = ['teacher-matching', 'live-lesson', 'materials', 'feedback-progress']

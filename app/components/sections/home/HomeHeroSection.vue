@@ -6,7 +6,6 @@ import UiInfoBoard from '~/components/ui/UiInfoBoard.vue'
 import UiInfoInlineMessage from '~/components/ui/UiInfoInlineMessage.vue'
 import UiLockupHeading from '~/components/ui/UiLockupHeading.vue'
 import UiPencilMark from '~/components/ui/UiPencilMark.vue'
-import UiWatermarkField from '~/components/ui/UiWatermarkField.vue'
 import type { CtaContext } from '~/data/content'
 
 const { locale } = useLocale()
@@ -30,7 +29,6 @@ const boardItems = computed(() => boardIcons.map((icon, itemIndex) => ({
 
 <template>
   <section id="home" class="home-hero" aria-labelledby="home-hero-title">
-    <UiWatermarkField seed="home-hero" :count="4" :content-width="80" />
     <div class="home-hero__container">
       <UiLockupHeading
         id="home-hero-title"

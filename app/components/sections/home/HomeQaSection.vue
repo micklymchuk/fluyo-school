@@ -18,7 +18,7 @@ const questions = computed(() => {
 </script>
 
 <template>
-  <UiSection id="questions" class="qa" labelledby="home-qa-title">
+  <UiSection id="questions" class="qa" labelledby="home-qa-title" :watermarks="0">
     <template #heading>
       <UiLockupHeading
         id="home-qa-title"

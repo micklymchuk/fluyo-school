@@ -23,6 +23,7 @@ const testimonialItems = computed(() => {
     id="student-reviews"
     variant="inverse"
     labelledby="home-reviews-title"
+    :watermarks="0"
   >
     <template #heading>
       <UiLockupHeading

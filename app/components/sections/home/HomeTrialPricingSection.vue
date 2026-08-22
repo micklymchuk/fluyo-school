@@ -9,7 +9,6 @@ import UiPencilMark from '~/components/ui/UiPencilMark.vue'
 import UiPriceSwap from '~/components/ui/UiPriceSwap.vue'
 import UiReveal from '~/components/ui/UiReveal.vue'
 import UiTabSwitch from '~/components/ui/UiTabSwitch.vue'
-import UiWatermarkField from '~/components/ui/UiWatermarkField.vue'
 import { usePricePackageOptions } from '~/composables/usePricePackageOptions'
 import { priceAudienceIds, type CtaContext, type PriceAudienceId, type PriceItemId } from '~/data/content'
 
@@ -56,7 +55,15 @@ const startItems = [
   { id: 'TRIAL_LESSON', recommended: false }
 ] as const satisfies readonly { id: PriceItemId, recommended: boolean }[]
 
-const singleFormatItems = ['PAIR', 'MINI_GROUP'] as const satisfies readonly PriceItemId[]
+/** Formats priced per lesson rather than per package, shown beside the audience's rate card. */
+const singleFormatItemsByAudience = {
+  adults: ['PAIR', 'MINI_GROUP'],
+  kids: ['KIDS_GROUP']
+} as const satisfies Record<PriceAudienceId, readonly PriceItemId[]>
+
+const singleFormatItems = computed<readonly PriceItemId[]>(
+  () => singleFormatItemsByAudience[selectedAudience.value]
+)
 
 const discountBadgeIds = [] as const; // 'first-package', 'military-family'] as const
 const discountBadges = computed(() =>
@@ -103,9 +110,7 @@ const tracks = computed(() =>
 
 /** Desktop columns follow the card count, so a shorter rate card still centres
     under the switcher instead of leaving an empty column. */
-const gridCardCount = computed(() =>
-  tracks.value.length + (selectedAudience.value === 'adults' ? singleFormatItems.length : 0)
-)
+const gridCardCount = computed(() => tracks.value.length + singleFormatItems.value.length)
 
 const telegramContext = computed<CtaContext>(() => ({
   path: 'generic',
@@ -208,7 +213,6 @@ onBeforeUnmount(() => {
 
 <template>
   <section id="trial-pricing-summary" class="trial-pricing" aria-labelledby="home-trial-pricing-title">
-    <UiWatermarkField seed="home-trial-pricing" :count="4" />
     <div ref="observerTarget" class="trial-pricing__container">
       <UiLockupHeading
         id="home-trial-pricing-title"
@@ -315,21 +319,20 @@ onBeforeUnmount(() => {
                 <p class="track-card__desc">{{ track.description }}</p>
               </UiCard>
             </UiReveal>
-            <!-- Pair and mini-group are adult formats; the children's card is priced by age.
-                 Single formats continue the package tracks' stagger, one grid, one wave. -->
-            <template v-if="selectedAudience === 'adults'">
-              <UiReveal
-                v-for="(item, index) in singleFormatItems"
-                :key="item"
-                :delay="revealDelay(tracks.length + index)"
-              >
-                <PriceSimpleCard
-                  :label="t(`priceItems.${item}.label`)"
-                  :value="priceValue(item)"
-                  :caption="t(`priceItems.${item}.caption`)"
-                />
-              </UiReveal>
-            </template>
+            <!-- Pair and mini-group price adults per lesson, group lessons do the same for
+                 children; the age tracks stay on the package rates above. Single formats
+                 continue the package tracks' stagger, one grid, one wave. -->
+            <UiReveal
+              v-for="(item, index) in singleFormatItems"
+              :key="item"
+              :delay="revealDelay(tracks.length + index)"
+            >
+              <PriceSimpleCard
+                :label="t(`priceItems.${item}.label`)"
+                :value="priceValue(item)"
+                :caption="t(`priceItems.${item}.caption`)"
+              />
+            </UiReveal>
           </div>
         </Transition>
       </div>

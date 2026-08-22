@@ -4,7 +4,6 @@ import TeacherPortrait from '~/components/teachers/TeacherPortrait.vue'
 import HomeFactCard from '~/components/home/HomeFactCard.vue'
 import UiLockupHeading from '~/components/ui/UiLockupHeading.vue'
 import UiReveal from '~/components/ui/UiReveal.vue'
-import UiWatermarkField from '~/components/ui/UiWatermarkField.vue'
 import { founderProfile } from '~/data/content'
 
 const { t } = useI18n()
@@ -26,7 +25,6 @@ const rightFacts = computed(() => facts.value.slice(2))
 
 <template>
   <section id="founder" class="founder" aria-labelledby="home-founder-title">
-    <UiWatermarkField seed="home-founder" :count="3" />
     <div class="founder__container">
       <UiLockupHeading
         id="home-founder-title"

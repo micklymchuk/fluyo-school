@@ -35,6 +35,9 @@ export const priceItems = [
   },
   {
     id: 'KIDS_SIXTY'
+  },
+  {
+    id: 'KIDS_GROUP'
   }
 ] as const satisfies readonly PriceItem[]
 
@@ -92,6 +95,12 @@ export const PRICES_CONFIG = {
     currency: 'UAH',
     unit: 'sixty-minutes',
     isFromPrice: false
+  },
+  KIDS_GROUP: {
+    amount: 300,
+    currency: 'UAH',
+    unit: 'sixty-minutes',
+    isFromPrice: false
   }
 } as const satisfies Record<PriceItemId, PriceConfig>
 
@@ -106,6 +115,12 @@ export const pricingFormats = [
     id: 'mini-group',
     telegramFormat: 'mini-group',
     priceItemIds: ['MINI_GROUP'],
+    pathFit: ['general', 'professional']
+  },
+  {
+    id: 'kids-group',
+    telegramFormat: 'mini-group',
+    priceItemIds: ['KIDS_GROUP'],
     pathFit: ['kids']
   }
 ] as const satisfies readonly PricingFormat[]

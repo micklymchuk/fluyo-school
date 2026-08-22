@@ -3,7 +3,6 @@ import { computed } from 'vue'
 import TeacherCard from '~/components/teachers/TeacherCard.vue'
 import UiLockupHeading from '~/components/ui/UiLockupHeading.vue'
 import UiReveal from '~/components/ui/UiReveal.vue'
-import UiWatermarkField from '~/components/ui/UiWatermarkField.vue'
 import {type TeacherProfile, teacherProfiles} from '~/data/content'
 
 const { t } = useI18n()
@@ -23,7 +22,6 @@ const teachers = computed(() => {
 
 <template>
   <section id="teachers" class="teachers" aria-labelledby="home-teachers-title">
-    <UiWatermarkField seed="home-teachers" :count="3" />
     <div class="teachers__container">
       <UiLockupHeading
         id="home-teachers-title"

@@ -24,6 +24,7 @@ export type PriceItemId =
   | 'KIDS_THIRTY'
   | 'KIDS_FORTY_FIVE'
   | 'KIDS_SIXTY'
+  | 'KIDS_GROUP'
 export type TeacherProfileId = 'catherina' | 'diana' | 'ksenia'
 export type ProofAssetId = 'student-result-ielts' | 'kids-class-snapshot' | 'adult-speaking-note' | 'lesson-format-board'
 export type TestimonialId =
@@ -116,7 +117,7 @@ export type PriceConfig = {
   isFromPrice: boolean
 }
 
-export type PricingFormatId = 'individual' | 'mini-group'
+export type PricingFormatId = 'individual' | 'mini-group' | 'kids-group'
 
 export type PricingFormat = {
   id: PricingFormatId

@@ -17,13 +17,7 @@ const files = {
 // and the content wrapper that follows it is itself positioned.
 const hosts = [
   { path: 'app/components/sections/UiSection.vue', content: 'section-inner' },
-  { path: 'app/components/sections/home/HomeHeroSection.vue', content: 'home-hero__container' },
-  { path: 'app/components/sections/home/HomeSpeakingClubSection.vue', content: 'speaking-club__container' },
-  { path: 'app/components/sections/home/HomeFounderSection.vue', content: 'founder__container' },
-  { path: 'app/components/sections/home/HomeTeachersSection.vue', content: 'teachers__container' },
-  { path: 'app/components/sections/home/HomeTrialPricingSection.vue', content: 'trial-pricing__container' },
-  { path: 'app/components/programs/ProgramPathPanel.vue', content: 'program-panel__inner' },
-  { path: 'app/components/navigation/FooterContactStrip.vue', content: 'footer-inner' }
+  { path: 'app/components/programs/ProgramPathPanel.vue', content: 'program-panel__inner' }
 ]
 
 // Tailwind's max-w-* scale, in rem. A field has to be told how wide the content
@@ -330,8 +324,13 @@ function verifyNoJsAndReducedMotion() {
   assert(styles.indexOf('.watermark-field--visible {') < styles.lastIndexOf('@media (prefers-reduced-motion: reduce)'), 'the visible-state rule must precede the fallbacks so the fallbacks outrank it')
 }
 
+// The home page is deliberately watermark-free: its sections carry the scatter's
+// job themselves, so nothing there mounts a field.
+const watermarkFreePages = new Set(['index.vue'])
+
 // Every section a route actually renders must end up with a field, whether it
 // gets one from UiSection, mounts one itself, or delegates to a child that does.
+// Routes listed above opt out wholesale.
 function verifyRouteCoverage() {
   const resolveImports = (source, fromDir) => {
     return [...source.matchAll(/from '([~@]\/components\/[\w/-]+\.vue)'/g)].map((match) => {
@@ -357,6 +356,10 @@ function verifyRouteCoverage() {
   assert(pages.length > 0, 'app/pages must contain route pages')
 
   for (const page of pages) {
+    if (watermarkFreePages.has(page)) {
+      continue
+    }
+
     const pagePath = resolve(files.pagesDir, page)
     const source = read(pagePath)
     const rendered = [...withoutComments(source).matchAll(/<(\w+Section)\b/g)].map((match) => match[1])

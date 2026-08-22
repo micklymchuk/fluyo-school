@@ -312,9 +312,15 @@
         },
         "mini-group": {
           "title": "Mini-group",
-          "fit": "Kids and adults who enjoy learning in a small group: a steady pace and supportive peers.",
+          "fit": "Adults and teens who enjoy learning in a small group: a steady pace and supportive peers.",
           "terms": "Up to 4 learners per group, 75-minute lessons, a stable schedule, and a term plan.",
           "telegramCta": "Ask about mini-groups"
+        },
+        "kids-group": {
+          "title": "Group lessons for kids",
+          "fit": "Children from 7 years who enjoy learning alongside peers in a small group.",
+          "terms": "Up to 4 children per group, 60-minute lessons, a stable schedule, and a term plan.",
+          "telegramCta": "Ask about group lessons for kids"
         }
       }
     },
@@ -489,6 +495,10 @@
     "KIDS_SIXTY": {
       "label": "60-minute lesson",
       "caption": "A full lesson for teens: live conversation, grammar, and exam preparation."
+    },
+    "KIDS_GROUP": {
+      "label": "Group lessons",
+      "caption": "A format for children from 7 years: up to 4 kids per group, live practice and peer support. The price is per child."
     }
   },
   "priceFormat": {

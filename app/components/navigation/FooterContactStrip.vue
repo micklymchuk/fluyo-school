@@ -3,7 +3,6 @@ import { Instagram, Telegram } from '@iconoir/vue'
 import { computed } from 'vue'
 import UiIconButton from '~/components/ui/UiIconButton.vue'
 import UiLogo from '~/components/ui/UiLogo.vue'
-import UiWatermarkField from '~/components/ui/UiWatermarkField.vue'
 import type { CtaContext } from '~/data/content'
 import { instagramAction, telegramAction } from './navigationLinks'
 
@@ -39,7 +38,6 @@ const year = new Date().getFullYear()
 
 <template>
   <footer class="footer-contact-strip">
-    <UiWatermarkField seed="footer-contact-strip" :count="2" />
     <div class="footer-inner">
       <UiLogo class="footer-brand" to="/" variant="full" size="large" />
 

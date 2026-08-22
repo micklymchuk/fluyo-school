@@ -32,7 +32,7 @@ export const learningPaths = [
   {
     id: 'kids',
     anchorId: 'kids-parents',
-    priceHintIds: ['TRIAL', 'MINI_GROUP'],
+    priceHintIds: ['TRIAL', 'KIDS_GROUP'],
     ctaIntent: ctaIntent('/programs', 'programs', 'book_trial'),
     telegramFormat: 'mini-group'
   },
